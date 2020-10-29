@@ -1,0 +1,21 @@
+### Todas las especialidades
+
+GET http://localhost:8008/api/v1/specialties
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Todos los doctores de una especialidad
+
+GET http://localhost:8008/api/v1/specialties/3
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+###
