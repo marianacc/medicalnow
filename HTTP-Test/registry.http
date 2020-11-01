@@ -1,0 +1,23 @@
+### Registrar a un paciente
+
+POST http://localhost:8008/api/v1/user/registry
+Content-Type: application/json
+Accept: application/json
+
+{
+  "idNumber": "5951335",
+  "firstName": "Mariana",
+  "firstSurname": "Cardozo",
+  "secondSurname": "Costa",
+  "birthDate": "1998/04/05",
+  "city": "La Paz",
+  "email": "m.cardozo@hotmail.com",
+  "password": "12345",
+  "phoneNumber": "77784124"
+}
+
+
+###
+
+
+

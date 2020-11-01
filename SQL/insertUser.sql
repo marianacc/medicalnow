@@ -87,3 +87,7 @@ values (29, 'jmccreerys@last.fm', '9OqizPGxh', '258-903-3419', 'http://dummyimag
 
 insert into user (person_id, email, password, phone_number, user_image, status, tx_id, tx_username, tx_host, tx_date)
 values (30, 'challwellt@csmonitor.com', 'byNyFxJOWQeM', '653-954-6774', 'http://dummyimage.com/146x186.jpg/ff4444/ffffff', 1, 0, 'root', '127.0.0.1', now());
+
+-- Actualización de la contraseña del user 1 con hash 256 + salt
+
+update user set password = 'aec6a12a4f0ded02e28e1611fa0cc26a1757397a6de9f67b35ef0804085daebf' where status = 1;

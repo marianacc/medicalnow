@@ -12,3 +12,8 @@ spring:
     hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
 
+medicalnow:
+  security:
+    salt: qwertyuiop
+    secretJwt: 1234567890
+

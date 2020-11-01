@@ -25,4 +25,9 @@ AND qua.status = 1
 AND spe.specialty_id = 5
 GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname
 
+-- Devolver el Id segun un email y contraseña
+SELECT user_id FROM user WHERE email = 'ahentzer0@wisc.edu' and password = 'aG6xyB4Ss';
+
+-- Seleccionar el último paciente registrado
+SELECT MAX(person_id) FROM patient WHERE status = 1;
 

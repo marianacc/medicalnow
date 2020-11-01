@@ -37,5 +37,4 @@ public class SpecialtyController {
     public ResponseEntity<ArrayList<DoctorSpecialtyModel>> returnDoctorsBySpecialty (@PathVariable("specialtyId") Integer specialtyId){
         return new ResponseEntity<>(this.specialtyBl.returnDoctorsBySpecialty(specialtyId), HttpStatus.OK);
     }
-
 }

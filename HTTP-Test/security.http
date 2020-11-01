@@ -1,0 +1,21 @@
+###
+POST http://localhost:8008/api/v1/security/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "ahentzer0@wisc.edu",
+  "password": "12345"
+}
+
+###
+
+POST http://localhost:8008/api/v1/security/refresh
+Content-Type: application/json
+Accept: application/json
+
+{
+  "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiUGlyYXRlQmF5IiwidHlwZSI6IlJFRlJFU0giLCJleHAiOjE2MDQxNTg3NDl9.4WSl144gMAPmQbl8Lh6wR9BMAtKz5JWK3tJpRnfrNPU"
+}
+
+###

@@ -16,10 +16,7 @@ public class SpecialtyBl {
     @Autowired
     public SpecialtyBl(SpecialtyDao specialtyDao){ this.specialtyDao = specialtyDao;}
 
-    public ArrayList<SpecialtyModel> returnAllSpecialties () {
-        return this.specialtyDao.returnAllSpecialties();
-    }
+    public ArrayList<SpecialtyModel> returnAllSpecialties () { return this.specialtyDao.returnAllSpecialties(); }
 
     public ArrayList<DoctorSpecialtyModel> returnDoctorsBySpecialty (int specialtyId) { return this.specialtyDao.returnDoctorsBySpecialty(specialtyId); }
-
 }

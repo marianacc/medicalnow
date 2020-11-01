@@ -10,7 +10,7 @@ Accept: application/json
 
 ### Todos los doctores de una especialidad
 
-GET http://localhost:8008/api/v1/specialties/3
+GET http://localhost:8008/api/v1/specialties/2
 Content-Type: application/json
 Accept: application/json
 
