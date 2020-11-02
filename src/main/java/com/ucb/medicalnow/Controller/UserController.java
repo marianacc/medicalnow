@@ -8,6 +8,7 @@ import com.ucb.medicalnow.BL.RegistryBl;
 import com.ucb.medicalnow.BL.UserBl;
 import com.ucb.medicalnow.Model.NewUserModel;
 import com.ucb.medicalnow.Model.UserAvatarModel;
+import com.ucb.medicalnow.Model.UserConfigurationModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -74,6 +75,27 @@ public class UserController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.userBl.returnUserNameByPatientId(patientId), HttpStatus.OK);
+        return new ResponseEntity<>(this.userBl.returnUserNameByUserId(patientId), HttpStatus.OK);
     }
+
+    @RequestMapping(
+            value = "config/{patientId}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArrayList<UserConfigurationModel>> returnUserConfigurationByUserId(@RequestHeader("Authorization") String authorization,
+                                                                                             @PathVariable("patientId") Integer patientId){
+
+        //Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+        return new ResponseEntity<>(this.userBl.returnUserConfigurationByUserId(patientId), HttpStatus.OK);
+    }
+
 }

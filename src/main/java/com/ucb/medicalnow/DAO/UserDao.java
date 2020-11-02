@@ -1,7 +1,9 @@
 package com.ucb.medicalnow.DAO;
 
+import com.ucb.medicalnow.Model.LaboratoryOrderModel;
 import com.ucb.medicalnow.Model.PrescriptionModel;
 import com.ucb.medicalnow.Model.UserAvatarModel;
+import com.ucb.medicalnow.Model.UserConfigurationModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -95,18 +97,16 @@ public class UserDao {
         return result;
     }
 
-    public ArrayList<UserAvatarModel> returnUserNameByPatientId (int patientId){
+    public ArrayList<UserAvatarModel> returnUserNameByUserId (int userId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
                         "FROM person per\n" +
-                        "    JOIN user u on per.person_id = u.person_id\n" +
-                        "        JOIN patient pat on u.user_id = pat.user_id\n" +
-                        "WHERE pat.patient_id = ? \n" +
+                        "    JOIN user usr on per.person_id = usr.person_id\n" +
+                        "WHERE usr.user_id = ? \n" +
                         "AND per.status = 1\n" +
-                        "AND u.status = 1\n" +
-                        "AND pat.status = 1;";
+                        "AND usr.status = 1;";
         ArrayList<UserAvatarModel> userAvatar= null;
         try {
-            userAvatar = (ArrayList<UserAvatarModel>) jdbcTemplate.query(query, new Object[]{patientId},
+            userAvatar = (ArrayList<UserAvatarModel>) jdbcTemplate.query(query, new Object[]{userId},
                     new RowMapper<UserAvatarModel>(){
                         @Override
                         public UserAvatarModel mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -120,5 +120,40 @@ public class UserDao {
             throw new RuntimeException(exception);
         }
         return userAvatar;
+    }
+
+    public ArrayList<UserConfigurationModel> returnUserConfigurationByPatientId (int patientId){
+        String query = "SELECT per.first_name, per.first_surname, per.second_surname, usr.phone_number, per.birthdate, pat.weight, pat.height, per.city, usr.email, usr.password\n" +
+                        "FROM person per\n" +
+                        "    JOIN user usr on per.person_id = usr.person_id\n" +
+                        "        JOIN patient pat on usr.user_id = pat.user_id\n" +
+                        "WHERE pat.patient_id = ? \n" +
+                        "AND per.status = 1\n" +
+                        "AND usr.status = 1\n" +
+                        "AND pat.status = 1;";
+
+        ArrayList<UserConfigurationModel> information = null;
+        try{
+            information = (ArrayList<UserConfigurationModel>) jdbcTemplate.query(query, new Object[]{patientId},
+                    new RowMapper<UserConfigurationModel>() {
+                        @Override
+                        public UserConfigurationModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new UserConfigurationModel(resultSet.getString(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4),
+                                    resultSet.getDate(5),
+                                    resultSet.getDouble(6),
+                                    resultSet.getDouble(7),
+                                    resultSet.getString(8),
+                                    resultSet.getString(9),
+                                    resultSet.getString(10));
+                        }
+                    });
+        } catch (Exception e){
+            System.out.print(e);
+            throw new RuntimeException();
+        }
+        return information;
     }
 }

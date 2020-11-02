@@ -82,11 +82,20 @@ AND pat.status = 1;
 
 SELECT per.first_name, per.first_surname, per.second_surname
 FROM person per
-    JOIN user u on per.person_id = u.person_id
-        JOIN patient pat on u.user_id = pat.user_id
+    JOIN user usr on per.person_id = usr.person_id
+WHERE usr.user_id = 16
+AND per.status = 1
+AND usr.status = 1;
+
+-- Seleccionar los datos del usuario para que los visualice
+
+SELECT per.first_name, per.first_surname, per.second_surname, usr.phone_number, per.birthdate, pat.weight, pat.height, per.city, usr.email, usr.password
+FROM person per
+    JOIN user usr on per.person_id = usr.person_id
+        JOIN patient pat on usr.user_id = pat.user_id
 WHERE pat.patient_id = 1
 AND per.status = 1
-AND u.status = 1
+AND usr.status = 1
 AND pat.status = 1;
 
 
