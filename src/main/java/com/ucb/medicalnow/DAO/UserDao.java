@@ -1,5 +1,7 @@
 package com.ucb.medicalnow.DAO;
 
+import com.ucb.medicalnow.Model.PrescriptionModel;
+import com.ucb.medicalnow.Model.UserAvatarModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,7 +31,6 @@ public class UserDao {
     }
 
     public ArrayList<String> findAllFeatureCodeByUserId(int userId){
-        ArrayList<String> features =null;
         String query = "SELECT DISTINCT fea.feature_code\n" +
                         "FROM user usr\n" +
                         "JOIN user_role uro ON usr.user_id = uro.user_id\n" +
@@ -42,6 +43,7 @@ public class UserDao {
                         "AND rle.status = 1\n" +
                         "AND rfe.status = 1\n" +
                         "AND fea.status = 1";
+        ArrayList<String> features =null;
         try {
             features = (ArrayList<String>) jdbcTemplate.query(query, new Object[]{userId},
                     new RowMapper<String>(){
@@ -54,7 +56,6 @@ public class UserDao {
         catch (Exception exception){
             throw new RuntimeException(exception);
         }
-
         return features;
     }
 
@@ -92,5 +93,32 @@ public class UserDao {
             throw new RuntimeException();
         }
         return result;
+    }
+
+    public ArrayList<UserAvatarModel> returnUserNameByPatientId (int patientId){
+        String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
+                        "FROM person per\n" +
+                        "    JOIN user u on per.person_id = u.person_id\n" +
+                        "        JOIN patient pat on u.user_id = pat.user_id\n" +
+                        "WHERE pat.patient_id = ? \n" +
+                        "AND per.status = 1\n" +
+                        "AND u.status = 1\n" +
+                        "AND pat.status = 1;";
+        ArrayList<UserAvatarModel> userAvatar= null;
+        try {
+            userAvatar = (ArrayList<UserAvatarModel>) jdbcTemplate.query(query, new Object[]{patientId},
+                    new RowMapper<UserAvatarModel>(){
+                        @Override
+                        public UserAvatarModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new UserAvatarModel(resultSet.getString(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3));
+                        }
+                    });
+        }
+        catch (Exception exception){
+            throw new RuntimeException(exception);
+        }
+        return userAvatar;
     }
 }

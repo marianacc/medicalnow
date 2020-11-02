@@ -78,7 +78,16 @@ AND doc.status = 1
 AND per.status = 1
 AND pat.status = 1;
 
+-- Seleccionar el nombre de un usuario según su id de paciente
 
+SELECT per.first_name, per.first_surname, per.second_surname
+FROM person per
+    JOIN user u on per.person_id = u.person_id
+        JOIN patient pat on u.user_id = pat.user_id
+WHERE pat.patient_id = 1
+AND per.status = 1
+AND u.status = 1
+AND pat.status = 1;
 
 
 
