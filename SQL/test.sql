@@ -23,7 +23,7 @@ AND spe.specialty_id = 5
 GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname;
 
 -- Devolver el Id segun un email y contraseña
-SELECT user_id FROM user WHERE email = 'ahentzer0@wisc.edu' and password = 'aG6xyB4Ss';
+SELECT user_id FROM user WHERE email = 'ahentzer0@wisc.edu' and password = '12345';
 
 -- Seleccionar el último paciente registrado
 SELECT MAX(person_id) FROM patient WHERE status = 1;
@@ -61,10 +61,25 @@ AND doc.status = 1
 AND per.status = 1
 AND pat.status = 1;
 
+-- Seleccionar todas las prescripciones de un paciente
+SELECT pre.prescription_id, med_his.diagnosis, per.first_name, per.first_surname, pre.prescription_date
+FROM prescription pre
+    JOIN medical_history med_his on pre.medical_history_id = med_his.medical_history_id
+        JOIN consult con on med_his.medical_history_id = con.medical_history_id
+            JOIN doctor_specialty doc_spec on con.doctor_specialty_id = doc_spec.doctor_specialty_id
+                JOIN doctor doc on doc_spec.doctor_id = doc.doctor_id
+                    JOIN person per on doc.person_id = per.person_id
+                        JOIN patient pat on con.patient_id = pat.patient_id
+WHERE pat.patient_id = 16
+AND pre.status = 1
+AND med_his.status = 1
+AND doc_spec.status = 1
+AND doc.status = 1
+AND per.status = 1
+AND pat.status = 1;
 
 
 
 
-    PACIENTE 4
 
 

@@ -1,0 +1,10 @@
+GET http://localhost:8008/api/v1/prescription/2
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0MjgzOTMxfQ.DKyhLnuG2vuLwKjrXFPjxazBIf8AKl6Wt1nHbb9bNwQ
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+###
