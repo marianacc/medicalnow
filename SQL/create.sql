@@ -320,3 +320,8 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (
     REFERENCES user (user_id);
 
 -- End of file.
+
+-- ALTER TABLE MARIANA
+
+ALTER TABLE laboratory ADD laboratory_name varchar (100);
+ALTER TABLE laboratory ADD lab_order_date date;

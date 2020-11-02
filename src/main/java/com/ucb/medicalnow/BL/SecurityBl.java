@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +42,8 @@ public class SecurityBl {
                 .toString();
         Integer userId = userDao.findUserByEmailAndPassword(username,sha256hex);
         if(userId != null){
-            result.put("authentication", generateJwt(userId,2,"AUTHN"));
-            result.put("refresh", generateJwt(userId, 4, "REFRESH"));
+            result.put("authentication",generateJwt(userId,2,"AUTHN", userDao.findAllFeatureCodeByUserId(userId)));
+            result.put("refresh", generateJwt(userId, 4, "REFRESH", null));
             return result;
         }else{
             return null;
@@ -60,25 +61,38 @@ public class SecurityBl {
         // Validación de si el token es bueno y además si es un token de autenticación
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm)
-                .withIssuer("PirateBay")
+                .withIssuer("Medicalnow")
                 .build();
         verifier.verify(tokenJwt);
-        result.put("authentication", generateJwt(Integer.parseInt(userId),2,"AUTHN"));
-        result.put("refresh", generateJwt(Integer.parseInt(userId),4,"REFRESH"));
+        Integer userIdAsInt = Integer.parseInt(userId);
+        result.put("authentication",generateJwt(Integer.parseInt(userId),1,"AUTHN", userDao.findAllFeatureCodeByUserId(userIdAsInt)));
+        result.put("refresh",generateJwt(Integer.parseInt(userId),2,"REFRESH", null));
         return result;
     }
 
-    private String generateJwt(int userId, int minutes, String type){
+    private String generateJwt(int userId, int minutes, String type, ArrayList<String> features){
         LocalDateTime expiresAt = LocalDateTime.now(ZoneId.systemDefault()).plusMinutes(minutes);
         String token =null;
         try{
             Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-            token = JWT.create()
-                    .withIssuer("PirateBay")
-                    .withClaim("type",type)
-                    .withSubject(Integer.toString(userId))
-                    .withExpiresAt(Date.from(expiresAt.atZone(ZoneId.systemDefault()).toInstant()))
-                    .sign(algorithm);
+            if(features!=null){
+                token = JWT.create()
+                        .withIssuer("Medicalnow")
+                        .withClaim("type",type)
+                        .withArrayClaim("features",features.toArray(new String[0]))
+                        .withSubject(Integer.toString(userId))
+                        .withExpiresAt(Date.from(expiresAt.atZone(ZoneId.systemDefault()).toInstant()))
+                        .sign(algorithm);
+
+            }else{
+                token = JWT.create()
+                        .withIssuer("Medicalnow")
+                        .withClaim("type",type)
+                        .withSubject(Integer.toString(userId))
+                        .withExpiresAt(Date.from(expiresAt.atZone(ZoneId.systemDefault()).toInstant()))
+                        .sign(algorithm);
+            }
+
         }catch (JWTCreationException exception){
             throw new RuntimeException(exception);
         }

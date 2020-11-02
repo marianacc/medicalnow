@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PatientDao {
+
     private JdbcTemplate jdbcTemplate;
 
     @Autowired

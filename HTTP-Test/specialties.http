@@ -1,6 +1,7 @@
 ### Todas las especialidades
 
 GET http://localhost:8008/api/v1/specialties
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0Mjc1NjYyfQ.WP_Tiub-oERUEIkzkKlNzB25mTWV2Vsmc661P9_wXk4
 Content-Type: application/json
 Accept: application/json
 

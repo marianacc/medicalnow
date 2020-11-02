@@ -22,11 +22,11 @@ public class SpecialtyDao {
 
     public ArrayList<SpecialtyModel> returnAllSpecialties(){
         String query = "SELECT sp.specialty_id, sp.specialty_name, count(doc_sp.specialty_id), sp.specialty_image\n" +
-                        "FROM specialty sp JOIN doctor_specialty doc_sp\n" +
-                        "    on sp.specialty_id = doc_sp.specialty_id\n" +
+                        "FROM specialty sp \n" +
+                        "    JOIN doctor_specialty doc_sp on sp.specialty_id = doc_sp.specialty_id\n" +
                         "WHERE sp.status = 1\n" +
                         "and doc_sp.status = 1\n" +
-                        "GROUP BY sp.specialty_name, doc_sp.specialty_id, sp.specialty_image";
+                        "GROUP BY sp.specialty_name, doc_sp.specialty_id, sp.specialty_image;";
         ArrayList<SpecialtyModel> specialties = null;
         try{
             specialties = (ArrayList<SpecialtyModel>) jdbcTemplate.query(query, new Object[]{},
@@ -47,20 +47,17 @@ public class SpecialtyDao {
 
     public ArrayList<DoctorSpecialtyModel> returnDoctorsBySpecialty (int specialtyId){
         String query = "SELECT doc.doctor_id, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification)\n" +
-                        "FROM person per JOIN doctor doc\n" +
-                        "    on per.person_id = doc.person_id\n" +
-                        "        JOIN doctor_specialty doc_spec\n" +
-                        "        on doc.doctor_id = doc_spec.doctor_id\n" +
-                        "            JOIN qualification qua\n" +
-                        "            on doc_spec.doctor_specialty_id = qua.doctor_specialty_id\n" +
-                        "                JOIN specialty spe\n" +
-                        "                on spe.specialty_id = doc_spec.specialty_id\n" +
+                        "FROM person per \n" +
+                        "    JOIN doctor doc on per.person_id = doc.person_id\n" +
+                        "        JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
+                        "            JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id\n" +
+                        "                JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id\n" +
                         "WHERE doc.status = 1\n" +
                         "AND per.status = 1\n" +
                         "AND doc_spec.status = 1\n" +
                         "AND qua.status = 1\n" +
-                        "AND spe.specialty_id = ? \n" +
-                        "GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname";
+                        "AND spe.specialty_id = 5\n" +
+                        "GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname;";
 
         ArrayList<DoctorSpecialtyModel> doctorSpecialty = null;
         try{

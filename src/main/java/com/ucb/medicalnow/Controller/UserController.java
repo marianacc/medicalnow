@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +33,6 @@ public class UserController {
         Boolean registryUpdated = registryBl.newPatientRegistry(newUserModel.getIdNumber(), newUserModel.getFirstName(),
                 newUserModel.getFirstSurname(), newUserModel.getSecondSurname(), newUserModel.getBirthDate(),
                 newUserModel.getCity(), newUserModel.getEmail(), newUserModel.getPassword(), newUserModel.getPhoneNumber());
-
         if(registryUpdated == true){
             response.put("Message","Patient added succesfully");
             return new ResponseEntity<>(response, HttpStatus.OK);
