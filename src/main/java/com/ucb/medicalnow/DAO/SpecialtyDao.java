@@ -56,7 +56,7 @@ public class SpecialtyDao {
                         "AND per.status = 1\n" +
                         "AND doc_spec.status = 1\n" +
                         "AND qua.status = 1\n" +
-                        "AND spe.specialty_id = 5\n" +
+                        "AND spe.specialty_id = ?\n" +
                         "GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname;";
 
         ArrayList<DoctorSpecialtyModel> doctorSpecialty = null;

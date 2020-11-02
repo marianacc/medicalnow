@@ -1,2 +1,2 @@
-INSERT INTO laboratory (medical_history_id, lab_exam_order, status, tx_id, tx_username, tx_host, tx_date)
-VALUES (5, 'https://www.google.com/search?q=orden+de+tomografia+panoramica&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiNx46KvuLsAhX0ErkGHSjABuwQ_AUoAXoECAUQAw&biw=1536&bih=754#imgrc=Cj-sGtbGBDx13M', 1, 1, 'admin', 'localhost', now());
+INSERT INTO laboratory (medical_history_id, lab_exam_order, status, tx_id, tx_username, tx_host, tx_date, laboratory_name, lab_order_date)
+VALUES (5, 'https://www.google.com/search?q=orden+de+tomografia+panoramica&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiNx46KvuLsAhX0ErkGHSjABuwQ_AUoAXoECAUQAw&biw=1536&bih=754#imgrc=Cj-sGtbGBDx13M', 1, 1, 'admin', 'localhost', now(), 'Tomografia panoramica', '2020/10/14');
