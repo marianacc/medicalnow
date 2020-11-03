@@ -20,7 +20,7 @@ public class LaboratoryDao {
     public LaboratoryDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
     public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByUserId (int userId){
-        String query = "SELECT lab.laboratory_exams_id, lab.laboratory_name, per.first_name, per.first_surname, spec.specialty_name, lab.lab_order_date\n" +
+        String query = "SELECT lab.laboratory_exams_id, lab.laboratory_name, per.first_name, per.first_surname, spec.specialty_name, lab.lab_order_date, lab.lab_exam_order\n" +
                         "FROM laboratory lab\n" +
                         "    JOIN medical_history med_his on lab.medical_history_id = med_his.medical_history_id\n" +
                         "        JOIN consult con on med_his.medical_history_id = con.medical_history_id\n" +
@@ -51,7 +51,8 @@ public class LaboratoryDao {
                                     resultSet.getString(3),
                                     resultSet.getString(4),
                                     resultSet.getString(5),
-                                    resultSet.getDate(6));
+                                    resultSet.getDate(6),
+                                    resultSet.getString(7));
                         }
                     });
         } catch (Exception e){

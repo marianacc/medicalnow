@@ -10,17 +10,19 @@ public class LaboratoryOrderModel {
     private String doctorFirstSurname;
     private String specialtyName;
     private Date laboratoryOrderDate;
+    private String labExamOrder;
 
     public LaboratoryOrderModel() {
     }
 
-    public LaboratoryOrderModel(String laboratoryExamsId, String laboratoryName, String doctorFirstName, String doctorFirstSurname, String specialtyName, Date laboratoryOrderDate) {
+    public LaboratoryOrderModel(String laboratoryExamsId, String laboratoryName, String doctorFirstName, String doctorFirstSurname, String specialtyName, Date laboratoryOrderDate, String labExamOrder) {
         this.laboratoryExamsId = laboratoryExamsId;
         this.laboratoryName = laboratoryName;
         this.doctorFirstName = doctorFirstName;
         this.doctorFirstSurname = doctorFirstSurname;
         this.specialtyName = specialtyName;
         this.laboratoryOrderDate = laboratoryOrderDate;
+        this.labExamOrder = labExamOrder;
     }
 
     public String getLaboratoryExamsId() {
@@ -71,6 +73,14 @@ public class LaboratoryOrderModel {
         this.laboratoryOrderDate = laboratoryOrderDate;
     }
 
+    public String getLabExamOrder() {
+        return labExamOrder;
+    }
+
+    public void setLabExamOrder(String labExamOrder) {
+        this.labExamOrder = labExamOrder;
+    }
+
     @Override
     public String toString() {
         return "LaboratoryOrderModel{" +
@@ -80,6 +90,7 @@ public class LaboratoryOrderModel {
                 ", doctorFirstSurname='" + doctorFirstSurname + '\'' +
                 ", specialtyName='" + specialtyName + '\'' +
                 ", laboratoryOrderDate=" + laboratoryOrderDate +
+                ", labExamOrder='" + labExamOrder + '\'' +
                 '}';
     }
 }
