@@ -1,7 +1,7 @@
 ### Obtener el avatar del usuario
 
-GET http://localhost:8008/api/v1/user/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQyNDg3fQ.kDi7rGSPzcW1_A-slYcgYaxi4fUZGeCuk0q_36ym2C8
+GET http://localhost:8008/api/v1/user/16
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ2MjM2fQ.p59_8U5gii4vySzFMDbmLjvCRKk-TKvKkamr5GNu-uc
 Content-Type: application/json
 Accept: application/json
 
@@ -12,7 +12,7 @@ Accept: application/json
 ### Obtener toda la información de un usuario
 
 GET http://localhost:8008/api/v1/user/config/16
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ0NTU4fQ._BoP03mR9iG5LbjtNOl8TL4g0NIA6xa_U5qZObQBNec
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ2MjM2fQ.p59_8U5gii4vySzFMDbmLjvCRKk-TKvKkamr5GNu-uc
 Content-Type: application/json
 Accept: application/json
 
@@ -22,13 +22,13 @@ Accept: application/json
 
 ###
 
-PUT http://localhost:8008/api/v1/user/config/update/16
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ0NTU4fQ._BoP03mR9iG5LbjtNOl8TL4g0NIA6xa_U5qZObQBNec
+PATCH http://localhost:8008/api/v1/user/config/update/16
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ2MjM2fQ.p59_8U5gii4vySzFMDbmLjvCRKk-TKvKkamr5GNu-uc
 Content-Type: application/json
 Accept: application/json
 
 {
-  "firstName": "Alicia",
+  "firstName": "Brennan",
   "firstSurname": "Romaines",
   "secondSurname": "Connew",
   "phoneNumber": "770-152-7782",
