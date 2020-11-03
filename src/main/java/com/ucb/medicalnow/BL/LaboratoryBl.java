@@ -16,5 +16,7 @@ public class LaboratoryBl {
     @Autowired
     public LaboratoryBl (LaboratoryDao laboratoryDao) {this.laboratoryDao = laboratoryDao; }
 
-    public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByPatient(int patientId) { return this.laboratoryDao.returnAllLaboratoriesByPatient(patientId); }
+    public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByUserId(int userId) {
+        return this.laboratoryDao.returnAllLaboratoriesByUserId(userId);
+    }
 }

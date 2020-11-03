@@ -52,14 +52,16 @@ FROM laboratory lab
                     JOIN doctor doc on doc_spec.doctor_id = doc.doctor_id
                         JOIN person per on doc.person_id = per.person_id
                             JOIN patient pat on con.patient_id = pat.patient_id
-WHERE pat.patient_id = 4
+                                JOIN user usr on pat.user_id = usr.user_id
+WHERE usr.user_id = 20
 AND lab.status = 1
 AND med_his.status = 1
 AND doc_spec.status = 1
 AND spec.status = 1
 AND doc.status = 1
 AND per.status = 1
-AND pat.status = 1;
+AND pat.status = 1
+AND usr.status = 1;
 
 -- Seleccionar todas las prescripciones de un paciente
 SELECT pre.prescription_id, med_his.diagnosis, per.first_name, per.first_surname, pre.prescription_date

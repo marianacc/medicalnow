@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class PrescriptionModel {
 
-    private Integer prescription_id;
+    private Integer prescriptionId;
     private String diagnosis;
     private String doctorFirstName;
     private String doctorFirstSurname;
@@ -13,20 +13,20 @@ public class PrescriptionModel {
     public PrescriptionModel() {
     }
 
-    public PrescriptionModel(Integer prescription_id, String diagnosis, String doctorFirstName, String doctorFirstSurname, Date prescriptionDate) {
-        this.prescription_id = prescription_id;
+    public PrescriptionModel(Integer prescriptionId, String diagnosis, String doctorFirstName, String doctorFirstSurname, Date prescriptionDate) {
+        this.prescriptionId = prescriptionId;
         this.diagnosis = diagnosis;
         this.doctorFirstName = doctorFirstName;
         this.doctorFirstSurname = doctorFirstSurname;
         this.prescriptionDate = prescriptionDate;
     }
 
-    public Integer getPrescription_id() {
-        return prescription_id;
+    public Integer getPrescriptionId() {
+        return prescriptionId;
     }
 
-    public void setPrescription_id(Integer prescription_id) {
-        this.prescription_id = prescription_id;
+    public void setPrescriptionId(Integer prescriptionId) {
+        this.prescriptionId = prescriptionId;
     }
 
     public String getDiagnosis() {
@@ -64,7 +64,7 @@ public class PrescriptionModel {
     @Override
     public String toString() {
         return "PrescriptionModel{" +
-                "prescription_id=" + prescription_id +
+                "prescriptionId=" + prescriptionId +
                 ", diagnosis='" + diagnosis + '\'' +
                 ", doctorFirstName='" + doctorFirstName + '\'' +
                 ", doctorFirstSurname='" + doctorFirstSurname + '\'' +

@@ -9,7 +9,6 @@ public class UserConfigurationModel {
     private String secondSurname;
     private String phoneNumber;
     private Date birthDate;
-    private String birdthDate;
     private Double weight;
     private Double height;
     private String city;
@@ -25,19 +24,6 @@ public class UserConfigurationModel {
         this.secondSurname = secondSurname;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
-        this.weight = weight;
-        this.height = height;
-        this.city = city;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserConfigurationModel(String firstName, String firstSurname, String secondSurname, String phoneNumber, String birdthDate, Double weight, Double height, String city, String email, String password) {
-        this.firstName = firstName;
-        this.firstSurname = firstSurname;
-        this.secondSurname = secondSurname;
-        this.phoneNumber = phoneNumber;
-        this.birdthDate = birdthDate;
         this.weight = weight;
         this.height = height;
         this.city = city;
@@ -123,14 +109,6 @@ public class UserConfigurationModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getBirdthDate() {
-        return birdthDate;
-    }
-
-    public void setBirdthDate(String birdthDate) {
-        this.birdthDate = birdthDate;
     }
 
     @Override

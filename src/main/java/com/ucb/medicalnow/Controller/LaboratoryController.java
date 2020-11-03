@@ -28,12 +28,12 @@ public class LaboratoryController {
     public LaboratoryController (LaboratoryBl laboratoryBl) { this.laboratoryBl = laboratoryBl; }
 
     @RequestMapping(
-            value="{patientId}",
+            value="{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<ArrayList<LaboratoryOrderModel>> returnAllLaboratoriesByPatient (@RequestHeader("Authorization") String authorization,
-                                                                                           @PathVariable("patientId") Integer patientId){
+    public ResponseEntity<ArrayList<LaboratoryOrderModel>> returnAllLaboratoriesByUserId (@RequestHeader("Authorization") String authorization,
+                                                                                           @PathVariable("userId") Integer userId){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -44,6 +44,6 @@ public class LaboratoryController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.laboratoryBl.returnAllLaboratoriesByPatient(patientId), HttpStatus.OK);
+        return new ResponseEntity<>(this.laboratoryBl.returnAllLaboratoriesByUserId(userId), HttpStatus.OK);
     }
 }

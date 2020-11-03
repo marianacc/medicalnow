@@ -19,7 +19,7 @@ public class LaboratoryDao {
     @Autowired
     public LaboratoryDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByPatient (int patientId){
+    public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByUserId (int userId){
         String query = "SELECT lab.laboratory_exams_id, lab.laboratory_name, per.first_name, per.first_surname, spec.specialty_name, lab.lab_order_date\n" +
                         "FROM laboratory lab\n" +
                         "    JOIN medical_history med_his on lab.medical_history_id = med_his.medical_history_id\n" +
@@ -29,18 +29,20 @@ public class LaboratoryDao {
                         "                    JOIN doctor doc on doc_spec.doctor_id = doc.doctor_id\n" +
                         "                        JOIN person per on doc.person_id = per.person_id\n" +
                         "                            JOIN patient pat on con.patient_id = pat.patient_id\n" +
-                        "WHERE pat.patient_id = ?\n" +
+                        "                                JOIN user usr on pat.user_id = usr.user_id\n" +
+                        "WHERE usr.user_id = ? \n" +
                         "AND lab.status = 1\n" +
                         "AND med_his.status = 1\n" +
                         "AND doc_spec.status = 1\n" +
                         "AND spec.status = 1\n" +
                         "AND doc.status = 1\n" +
                         "AND per.status = 1\n" +
-                        "AND pat.status = 1;";
+                        "AND pat.status = 1\n" +
+                        "AND usr.status = 1;";
 
         ArrayList<LaboratoryOrderModel> laboratories = null;
         try{
-            laboratories = (ArrayList<LaboratoryOrderModel>) jdbcTemplate.query(query, new Object[]{patientId},
+            laboratories = (ArrayList<LaboratoryOrderModel>) jdbcTemplate.query(query, new Object[]{userId},
                     new RowMapper<LaboratoryOrderModel>() {
                         @Override
                         public LaboratoryOrderModel mapRow(ResultSet resultSet, int i) throws SQLException {
