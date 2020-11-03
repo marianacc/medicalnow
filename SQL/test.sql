@@ -9,7 +9,7 @@ GROUP BY sp.specialty_name, doc_sp.specialty_id, sp.specialty_image;
 
 -- Seleccionar los doctores por especialidad
 
-SELECT doc.doctor_id, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification)
+SELECT spe.specialty_name, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification), doc.doctor_id
 FROM person per
     JOIN doctor doc on per.person_id = doc.person_id
         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id
@@ -19,7 +19,7 @@ WHERE doc.status = 1
 AND per.status = 1
 AND doc_spec.status = 1
 AND qua.status = 1
-AND spe.specialty_id = 5
+AND spe.specialty_id = 2
 GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname;
 
 -- Devolver el Id segun un email y contraseña

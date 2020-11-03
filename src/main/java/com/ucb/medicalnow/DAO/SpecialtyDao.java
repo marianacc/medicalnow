@@ -46,18 +46,18 @@ public class SpecialtyDao {
     }
 
     public ArrayList<DoctorSpecialtyModel> returnDoctorsBySpecialty (int specialtyId){
-        String query = "SELECT doc.doctor_id, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification)\n" +
-                        "FROM person per \n" +
-                        "    JOIN doctor doc on per.person_id = doc.person_id\n" +
-                        "        JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
-                        "            JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id\n" +
-                        "                JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id\n" +
-                        "WHERE doc.status = 1\n" +
-                        "AND per.status = 1\n" +
-                        "AND doc_spec.status = 1\n" +
-                        "AND qua.status = 1\n" +
-                        "AND spe.specialty_id = ?\n" +
-                        "GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname;";
+        String query = "SELECT spe.specialty_name, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification), doc.doctor_id\n" +
+                "FROM person per\n" +
+                "    JOIN doctor doc on per.person_id = doc.person_id\n" +
+                "        JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
+                "            JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id\n" +
+                "                JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id\n" +
+                "WHERE doc.status = 1\n" +
+                "AND per.status = 1\n" +
+                "AND doc_spec.status = 1\n" +
+                "AND qua.status = 1\n" +
+                "AND spe.specialty_id = ?\n" +
+                "GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname;";
 
         ArrayList<DoctorSpecialtyModel> doctorSpecialty = null;
         try{
@@ -65,11 +65,12 @@ public class SpecialtyDao {
                     new RowMapper<DoctorSpecialtyModel>() {
                         @Override
                         public DoctorSpecialtyModel mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new DoctorSpecialtyModel(resultSet.getInt(1),
+                            return new DoctorSpecialtyModel(resultSet.getString(1),
                                     resultSet.getString(2),
                                     resultSet.getString(3),
                                     resultSet.getString(4),
-                                    resultSet.getDouble(5));
+                                    resultSet.getDouble(5),
+                                    resultSet.getInt(6));
                         }
                     });
         } catch (Exception e){
