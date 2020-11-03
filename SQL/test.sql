@@ -72,13 +72,15 @@ FROM prescription pre
                 JOIN doctor doc on doc_spec.doctor_id = doc.doctor_id
                     JOIN person per on doc.person_id = per.person_id
                         JOIN patient pat on con.patient_id = pat.patient_id
-WHERE pat.patient_id = 16
+                            JOIN user usr on pat.user_id = usr.user_id
+WHERE usr.user_id = 16
 AND pre.status = 1
 AND med_his.status = 1
 AND doc_spec.status = 1
 AND doc.status = 1
 AND per.status = 1
-AND pat.status = 1;
+AND pat.status = 1
+AND usr.status = 1;
 
 -- Seleccionar el nombre de un usuario según su id de paciente
 

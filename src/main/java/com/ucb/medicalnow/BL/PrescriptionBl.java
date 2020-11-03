@@ -14,5 +14,7 @@ public class PrescriptionBl {
 
     public PrescriptionBl (PrescriptionDao prescriptionDao) { this.prescriptionDao = prescriptionDao; }
 
-    public ArrayList<PrescriptionModel> returnAllPrescriptionsByPatientId(int patientId) { return this.prescriptionDao.returnAllPrescriptionsByPatientId(patientId); }
+    public ArrayList<PrescriptionModel> returnAllPrescriptionsByUserId (int userId) {
+        return this.prescriptionDao.returnAllPrescriptionsByUserId(userId);
+    }
 }
