@@ -7,18 +7,18 @@ public class LaboratoryOrderModel {
     private String laboratoryExamsId;
     private String laboratoryName;
     private String doctorFirstName;
-    private String doctorFirstsurname;
+    private String doctorFirstSurname;
     private String specialtyName;
     private Date laboratoryOrderDate;
 
     public LaboratoryOrderModel() {
     }
 
-    public LaboratoryOrderModel(String laboratoryExamsId, String laboratoryName, String doctorFirstName, String doctorFirstsurname, String specialtyName, Date laboratoryOrderDate) {
+    public LaboratoryOrderModel(String laboratoryExamsId, String laboratoryName, String doctorFirstName, String doctorFirstSurname, String specialtyName, Date laboratoryOrderDate) {
         this.laboratoryExamsId = laboratoryExamsId;
         this.laboratoryName = laboratoryName;
         this.doctorFirstName = doctorFirstName;
-        this.doctorFirstsurname = doctorFirstsurname;
+        this.doctorFirstSurname = doctorFirstSurname;
         this.specialtyName = specialtyName;
         this.laboratoryOrderDate = laboratoryOrderDate;
     }
@@ -47,12 +47,12 @@ public class LaboratoryOrderModel {
         this.doctorFirstName = doctorFirstName;
     }
 
-    public String getDoctorFirstsurname() {
-        return doctorFirstsurname;
+    public String getDoctorFirstSurname() {
+        return doctorFirstSurname;
     }
 
-    public void setDoctorFirstsurname(String doctorFirstsurname) {
-        this.doctorFirstsurname = doctorFirstsurname;
+    public void setDoctorFirstSurname(String doctorFirstSurname) {
+        this.doctorFirstSurname = doctorFirstSurname;
     }
 
     public String getSpecialtyName() {
@@ -77,7 +77,7 @@ public class LaboratoryOrderModel {
                 "laboratoryExamsId='" + laboratoryExamsId + '\'' +
                 ", laboratoryName='" + laboratoryName + '\'' +
                 ", doctorFirstName='" + doctorFirstName + '\'' +
-                ", doctorFirstsurname='" + doctorFirstsurname + '\'' +
+                ", doctorFirstSurname='" + doctorFirstSurname + '\'' +
                 ", specialtyName='" + specialtyName + '\'' +
                 ", laboratoryOrderDate=" + laboratoryOrderDate +
                 '}';

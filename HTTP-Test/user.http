@@ -11,13 +11,11 @@ Accept: application/json
 
 ### Obtener toda la información de un usuario
 
-GET http://localhost:8008/api/v1/user/config/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0MzUwMjQwfQ.Mt2tqc4zZ_ZIPANyWf_1NXsxZ4HvrhUdK4BmDv0jTNE
+GET http://localhost:8008/api/v1/user/config/16
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0MzY4OTIxfQ.O0AIhY4ESfT9q7YZ_qOuG5X1X7Wl7_2BSnEOp95xYLM
 Content-Type: application/json
 Accept: application/json
 
 {
 
 }
-
-###

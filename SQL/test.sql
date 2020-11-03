@@ -97,7 +97,7 @@ SELECT per.first_name, per.first_surname, per.second_surname, usr.phone_number, 
 FROM person per
     JOIN user usr on per.person_id = usr.person_id
         JOIN patient pat on usr.user_id = pat.user_id
-WHERE pat.patient_id = 1
+WHERE usr.user_id = 16
 AND per.status = 1
 AND usr.status = 1
 AND pat.status = 1;

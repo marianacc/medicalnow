@@ -2,42 +2,42 @@ package com.ucb.medicalnow.Model;
 
 public class DoctorSpecialtyModel {
 
-    private String specialtyName;
     private char firstLetter;
     private String firstName;
     private String firstSurname;
     private String secondSurname;
+    private String specialtyName;
     private Double qualification;
     private Integer doctorId;
 
     public DoctorSpecialtyModel() {
     }
 
-    public DoctorSpecialtyModel(String specialtyName, char firstLetter, String firstName, String firstSurname, String secondSurname, Double qualification, Integer doctorId) {
-        this.specialtyName = specialtyName;
+    public DoctorSpecialtyModel(Integer doctorId, char firstLetter, String firstName, String firstSurname, String secondSurname, Double qualification, String specialtyName) {
+        this.doctorId = doctorId;
         this.firstLetter = firstLetter;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
         this.qualification = qualification;
-        this.doctorId = doctorId;
+        this.specialtyName = specialtyName;
     }
 
-    public DoctorSpecialtyModel(String specialtyName, String firstName, String firstSurname, String secondSurname, Double qualification, Integer doctorId) {
-        this.specialtyName = specialtyName;
+    public DoctorSpecialtyModel(String firstName, String firstSurname, String secondSurname, String specialtyName, Double qualification, Integer doctorId) {
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
+        this.specialtyName = specialtyName;
         this.qualification = qualification;
         this.doctorId = doctorId;
     }
 
-    public String getSpecialtyName() {
-        return specialtyName;
+    public Integer getDoctorId() {
+        return doctorId;
     }
 
-    public void setSpecialtyName(String specialtyName) {
-        this.specialtyName = specialtyName;
+    public void setDoctorId(Integer doctorId) {
+        this.doctorId = doctorId;
     }
 
     public char getFirstLetter() {
@@ -80,24 +80,24 @@ public class DoctorSpecialtyModel {
         this.qualification = qualification;
     }
 
-    public Integer getDoctorId() {
-        return doctorId;
+    public String getSpecialtyName() {
+        return specialtyName;
     }
 
-    public void setDoctorId(Integer doctorId) {
-        this.doctorId = doctorId;
+    public void setSpecialtyName(String specialtyName) {
+        this.specialtyName = specialtyName;
     }
 
     @Override
     public String toString() {
         return "DoctorSpecialtyModel{" +
-                "specialtyName='" + specialtyName + '\'' +
+                "doctorId=" + doctorId +
                 ", firstLetter=" + firstLetter +
                 ", firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
                 ", qualification=" + qualification +
-                ", doctorId=" + doctorId +
+                ", specialtyName='" + specialtyName + '\'' +
                 '}';
     }
 }

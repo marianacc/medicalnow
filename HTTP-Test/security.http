@@ -1,4 +1,5 @@
-###
+### Login
+
 POST http://localhost:8008/api/v1/security/login
 Content-Type: application/json
 Accept: application/json
@@ -8,7 +9,7 @@ Accept: application/json
   "password": "12345"
 }
 
-###
+### Refresh de tokens
 
 POST http://localhost:8008/api/v1/security/refresh
 Content-Type: application/json
