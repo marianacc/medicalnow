@@ -59,11 +59,11 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "{patientId}",
+            value = "{userId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<UserAvatarModel>> returnUserNameByPatientId (@RequestHeader("Authorization") String authorization,
-                                                                 @PathVariable("patientId") Integer patientId){
+                                                                                 @PathVariable("userId") Integer userId){
 
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -75,7 +75,7 @@ public class UserController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.userBl.returnUserNameByUserId(patientId), HttpStatus.OK);
+        return new ResponseEntity<>(this.userBl.returnUserNameByUserId(userId), HttpStatus.OK);
     }
 
     @RequestMapping(
