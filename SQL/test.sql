@@ -98,6 +98,23 @@ AND per.status = 1
 AND usr.status = 1
 AND pat.status = 1;
 
+-- Recuperar el id de la persona segun su id de paciente
+SELECT per.person_id
+FROM person per
+    JOIN patient pat on per.person_id = pat.person_id
+WHERE pat.patient_id = 1;
+
+-- Recuperar el id del usuario segun su id de paciente
+SELECT usr.user_id
+FROM user usr
+         JOIN patient pat on usr.user_id = pat.user_id
+WHERE pat.patient_id = 1;
+
+UPDATE person
+SET first_name = 'Brennen', first_surname = 'Romaines', second_surname = 'Connew', birthdate = '2000/06/19', city = 'La Paz'
+WHERE person_id = 1
+
+
 
 
 

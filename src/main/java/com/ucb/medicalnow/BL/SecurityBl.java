@@ -42,6 +42,7 @@ public class SecurityBl {
                 .toString();
         Integer userId = userDao.findUserByEmailAndPassword(username,sha256hex);
         if(userId != null){
+            result.put("userId", userId.toString());
             result.put("authentication",generateJwt(userId,2,"AUTHN", userDao.findAllFeatureCodeByUserId(userId)));
             result.put("refresh", generateJwt(userId, 4, "REFRESH", null));
             return result;
@@ -65,6 +66,7 @@ public class SecurityBl {
                 .build();
         verifier.verify(tokenJwt);
         Integer userIdAsInt = Integer.parseInt(userId);
+        result.put("userId", userId);
         result.put("authentication",generateJwt(Integer.parseInt(userId),1,"AUTHN", userDao.findAllFeatureCodeByUserId(userIdAsInt)));
         result.put("refresh",generateJwt(Integer.parseInt(userId),2,"REFRESH", null));
         return result;

@@ -26,5 +26,16 @@ public class UserBl {
         return userAvatarResponse;
     }
 
-    public ArrayList<UserConfigurationModel> returnUserConfigurationByUserId(int patientId){ return this.userDao.returnUserConfigurationByPatientId(patientId); }
+    public ArrayList<UserConfigurationModel> returnUserConfigurationByUserId(int patientId){
+        return this.userDao.returnUserConfigurationByPatientId(patientId);
+    }
+
+    /*
+    public (){
+
+
+
+
+    }*/
+
 }

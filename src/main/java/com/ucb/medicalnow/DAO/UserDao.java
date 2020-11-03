@@ -1,7 +1,5 @@
 package com.ucb.medicalnow.DAO;
 
-import com.ucb.medicalnow.Model.LaboratoryOrderModel;
-import com.ucb.medicalnow.Model.PrescriptionModel;
 import com.ucb.medicalnow.Model.UserAvatarModel;
 import com.ucb.medicalnow.Model.UserConfigurationModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,4 +154,21 @@ public class UserDao {
         }
         return information;
     }
+
+    public Integer returnUserIdByPatientId (int patientId){
+        String query = "SELECT usr.user_id\n" +
+                        "FROM user usr\n" +
+                        "         JOIN patient pat on usr.user_id = pat.user_id\n" +
+                        "WHERE pat.patient_id = ?;";
+        Integer userId = null;
+        try {
+            userId = jdbcTemplate.queryForObject(query, new Object[]{patientId}, Integer.class);
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return userId;
+    }
 }
+
+
+

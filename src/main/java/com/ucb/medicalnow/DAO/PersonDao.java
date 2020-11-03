@@ -37,5 +37,19 @@ public class PersonDao {
         }
         return personId;
     }
+
+    public Integer returnPersonIdByPatientId (int patientId){
+        String query = "SELECT per.person_id\n" +
+                        "FROM person per\n" +
+                        "    JOIN patient pat on per.person_id = pat.person_id\n" +
+                        "WHERE pat.patient_id = ?;";
+        Integer personId = null;
+        try {
+            personId = jdbcTemplate.queryForObject(query, new Object[]{patientId}, Integer.class);
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return personId;
+    }
 }
 

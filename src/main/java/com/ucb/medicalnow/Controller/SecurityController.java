@@ -32,6 +32,7 @@ public class SecurityController {
         if(tokens != null){
             Map <String,Object> response = new HashMap();
             response.put("Message","Authentication OK");
+            response.put("userId", tokens.get("userId"));
             response.put("authentication",tokens.get("authentication"));
             response.put("refresh",tokens.get("refresh"));
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -53,6 +54,7 @@ public class SecurityController {
         Map<String,String> tokens = securityBl.refresh(tokenRefreshModel);
         Map<String,String> response= new HashMap<>();
         response.put("Message","Authentication OK");
+        response.put("userId", tokens.get("userId"));
         response.put("authentication", tokens.get("authentication"));
         response.put("refresh", tokens.get("refresh"));
         return new ResponseEntity (response, HttpStatus.OK);
