@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,10 +34,10 @@ public class UserDao {
     public ArrayList<String> findAllFeatureCodeByUserId(int userId){
         String query = "SELECT DISTINCT fea.feature_code\n" +
                         "FROM user usr\n" +
-                        "JOIN user_role uro ON usr.user_id = uro.user_id\n" +
-                        "JOIN role rle ON rle.role_id = uro.role_id\n" +
-                        "JOIN role_feature rfe ON rfe.role_id = rle.role_id\n" +
-                        "JOIN feature fea ON fea.feature_id = rfe.feature_id\n" +
+                        "   JOIN user_role uro ON usr.user_id = uro.user_id\n" +
+                        "       JOIN role rle ON rle.role_id = uro.role_id\n" +
+                        "           JOIN role_feature rfe ON rfe.role_id = rle.role_id\n" +
+                        "               JOIN feature fea ON fea.feature_id = rfe.feature_id\n" +
                         "WHERE usr.user_id = ? \n" +
                         "AND usr.status = 1\n" +
                         "AND uro.status = 1\n" +
@@ -155,18 +156,17 @@ public class UserDao {
         return information;
     }
 
-    public Integer returnUserIdByPatientId (int patientId){
-        String query = "SELECT usr.user_id\n" +
-                        "FROM user usr\n" +
-                        "         JOIN patient pat on usr.user_id = pat.user_id\n" +
-                        "WHERE pat.patient_id = ?;";
-        Integer userId = null;
+    public Integer updateUser (String email, String password, String phoneNumber, int userId){
+        String query="UPDATE user\n" +
+                    "SET email = ?, password = ?, phone_number = ?\n" +
+                    "WHERE user_id = ?;";
+        Integer result = null;
         try {
-            userId = jdbcTemplate.queryForObject(query, new Object[]{patientId}, Integer.class);
-        } catch (Exception e){
+            result = jdbcTemplate.update(query, new Object[]{email, password, phoneNumber, userId});
+        } catch (Exception e) {
             throw new RuntimeException();
         }
-        return userId;
+        return result;
     }
 }
 

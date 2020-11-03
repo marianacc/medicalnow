@@ -102,23 +102,30 @@ AND per.status = 1
 AND usr.status = 1
 AND pat.status = 1;
 
--- Recuperar el id de la persona segun su id de paciente
+-- Obtener el id de la persona segun su user id
 SELECT per.person_id
 FROM person per
-    JOIN patient pat on per.person_id = pat.person_id
-WHERE pat.patient_id = 1;
+    JOIN user usr on per.person_id = usr.person_id
+AND user_id = 16;
 
--- Recuperar el id del usuario segun su id de paciente
-SELECT usr.user_id
-FROM user usr
-         JOIN patient pat on usr.user_id = pat.user_id
-WHERE pat.patient_id = 1;
-
+-- Actualizar los datos de una persona segun su id de persona
 UPDATE person
 SET first_name = 'Brennen', first_surname = 'Romaines', second_surname = 'Connew', birthdate = '2000/06/19', city = 'La Paz'
-WHERE person_id = 1
+WHERE person_id = 1;
 
+-- Actualizar los datos de usuario de una persona segun su id de usuario
+UPDATE user
+SET email = '', password = '', phone_number = ''
+WHERE user_id = 1;
 
+-- Obtener el id del paciente segun el id del usuario
+SELECT pat.patient_id
+FROM patient pat
+         JOIN user usr on pat.user_id = usr.user_id
+AND patient_id = 16;
 
-
+-- Actualizar datos de un paciente
+UPDATE patient
+SET weight = '', height = ''
+WHERE patient_id = 1;
 

@@ -40,7 +40,7 @@ public class SecurityController {
         else{
             Map <String,Object> response = new HashMap();
             response.put("Message","User or password invalid");
-            return new ResponseEntity<>(response,HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
         }
     }
 

@@ -20,7 +20,6 @@ public class PersonDao {
         Integer result = null;
         try {
             result = jdbcTemplate.update(query, new Object[]{idNumber, firstName, firstSurname, secondSurname, birthDate, city});
-            System.out.print(result);
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -38,18 +37,31 @@ public class PersonDao {
         return personId;
     }
 
-    public Integer returnPersonIdByPatientId (int patientId){
+    public Integer returnPersonIdByUserId (int userId){
         String query = "SELECT per.person_id\n" +
-                        "FROM person per\n" +
-                        "    JOIN patient pat on per.person_id = pat.person_id\n" +
-                        "WHERE pat.patient_id = ?;";
+                        "FROM user usr\n" +
+                        "    JOIN person per on usr.person_id = per.person_id\n" +
+                        "AND user_id = ? ;";
         Integer personId = null;
         try {
-            personId = jdbcTemplate.queryForObject(query, new Object[]{patientId}, Integer.class);
+            personId = jdbcTemplate.queryForObject(query, new Object[]{userId}, Integer.class);
         } catch (Exception e){
             throw new RuntimeException();
         }
         return personId;
+    }
+
+    public Integer updatePerson (String firstName, String firstSurname, String secondSurname, Date birthDate, String city, int personId){
+        String query = "UPDATE person\n" +
+                        "SET first_name = ?, first_surname = ?, second_surname = ?, birthdate = ?, city = ?\n" +
+                        "WHERE person_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{firstName, firstSurname, secondSurname, birthDate, city, personId});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
     }
 }
 

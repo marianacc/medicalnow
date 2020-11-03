@@ -53,5 +53,4 @@ public class PrescriptionDao {
         }
         return prescriptions;
     }
-
 }

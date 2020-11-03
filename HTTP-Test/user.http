@@ -1,7 +1,7 @@
 ### Obtener el avatar del usuario
 
 GET http://localhost:8008/api/v1/user/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0MzY1NDgwfQ.ukC9iD5-SKZMSJ_5b44o8HzPB3oLsggHhOCIjqGIURQ
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQyNDg3fQ.kDi7rGSPzcW1_A-slYcgYaxi4fUZGeCuk0q_36ym2C8
 Content-Type: application/json
 Accept: application/json
 
@@ -12,10 +12,32 @@ Accept: application/json
 ### Obtener toda la información de un usuario
 
 GET http://localhost:8008/api/v1/user/config/16
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0MzY4OTIxfQ.O0AIhY4ESfT9q7YZ_qOuG5X1X7Wl7_2BSnEOp95xYLM
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ0NTU4fQ._BoP03mR9iG5LbjtNOl8TL4g0NIA6xa_U5qZObQBNec
 Content-Type: application/json
 Accept: application/json
 
 {
 
 }
+
+###
+
+PUT http://localhost:8008/api/v1/user/config/update/16
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ0NTU4fQ._BoP03mR9iG5LbjtNOl8TL4g0NIA6xa_U5qZObQBNec
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Alicia",
+  "firstSurname": "Romaines",
+  "secondSurname": "Connew",
+  "phoneNumber": "770-152-7782",
+  "birthDate": "2020-10-19",
+  "weight": 43.7,
+  "height": 1.78,
+  "city": "La Paz",
+  "email": "radmansf@ted.com",
+  "password": "aec6a12a4f0ded02e28e1611fa0cc26a1757397a6de9f67b35ef0804085daebf"
+}
+
+###

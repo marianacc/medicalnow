@@ -62,8 +62,8 @@ public class UserController {
             value = "{userId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<UserAvatarModel>> returnUserNameByPatientId (@RequestHeader("Authorization") String authorization,
-                                                                                 @PathVariable("userId") Integer userId){
+    public ResponseEntity<UserAvatarModel> returnUserNameByPatientId (@RequestHeader("Authorization") String authorization,
+                                                                      @PathVariable("userId") Integer userId){
 
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -98,4 +98,33 @@ public class UserController {
         return new ResponseEntity<>(this.userBl.returnUserConfigurationByUserId(userId), HttpStatus.OK);
     }
 
+    @RequestMapping(
+            value = "config/update/{userId}",
+            method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> updateConfigurationById(@RequestHeader("Authorization") String authorization,
+                                                                       @PathVariable("userId") Integer userId,
+                                                                       @RequestBody UserConfigurationModel UserConfigurationModel) {
+
+        //Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if (!"AUTHN".equals(decodedJWT.getClaim("type").asString())) {
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+
+        Map<String, String> response = new HashMap();
+        Boolean registryUpdated = userBl.updateConfigurationByUserId(UserConfigurationModel, userId);
+        if (registryUpdated == true) {
+            response.put("Message", "Patient updated succesfully");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response.put("Message", "Error. The patient wasn't updated");
+            return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+        }
+    }
 }
