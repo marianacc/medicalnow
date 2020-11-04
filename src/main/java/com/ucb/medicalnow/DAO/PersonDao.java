@@ -27,7 +27,7 @@ public class PersonDao {
     }
 
     public Integer returnMaxPersonId (){
-        String query = "SELECT MAX(person_id) FROM patient WHERE status = 1;";
+        String query = "SELECT MAX(person_id) FROM person WHERE status = 1;";
         Integer personId = null;
         try {
             personId = jdbcTemplate.queryForObject(query, new Object[]{}, Integer.class);

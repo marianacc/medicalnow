@@ -5,16 +5,18 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "idNumber": "5951335",
-  "firstName": "Mariana",
-  "firstSurname": "Cardozo",
-  "secondSurname": "Costa",
-  "birthDate": "1998/04/05",
+  "idNumber": "6758231",
+  "firstName": "Jose",
+  "firstSurname": "Teran",
+  "secondSurname": "Orsini",
+  "birthDate": "1998/10/14",
   "city": "La Paz",
-  "email": "m.cardozo@hotmail.com",
+  "email": "jteran@gmail.com",
   "password": "12345",
-  "phoneNumber": "77784124"
+  "phoneNumber": "7212953"
 }
+
+###
 
 
 
