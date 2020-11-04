@@ -1,5 +1,6 @@
 package com.ucb.medicalnow.DAO;
 
+import com.ucb.medicalnow.Model.PrescriptionDetailModel;
 import com.ucb.medicalnow.Model.PrescriptionModel;
 import com.ucb.medicalnow.Model.SpecialtyModel;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -53,4 +54,30 @@ public class PrescriptionDao {
         }
         return prescriptions;
     }
+
+    public ArrayList<PrescriptionDetailModel> returnPrescriptionDetailByPresctiptionId (int prescriptionId){
+        String query = "SELECT pre.treatment_prescription, pro.product_name, pro.product_detail, pro.product_quantity\n" +
+                        "FROM prescription pre\n" +
+                        "    JOIN product pro on pre.prescription_id = pro.prescription_id\n" +
+                        "WHERE pre.prescription_id = ?\n" +
+                        "AND pre.status = 1\n" +
+                        "AND pro.status = 1;";
+        ArrayList<PrescriptionDetailModel> prescriptionDetail = null;
+        try{
+            prescriptionDetail = (ArrayList<PrescriptionDetailModel>) jdbcTemplate.query(query, new Object[]{prescriptionId},
+                    new RowMapper<PrescriptionDetailModel>() {
+                        @Override
+                        public PrescriptionDetailModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new PrescriptionDetailModel(resultSet.getString(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return prescriptionDetail;
+    }
+
 }

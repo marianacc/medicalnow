@@ -32,7 +32,6 @@ public class SpecialtyController {
     @RequestMapping(
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-
     public ResponseEntity<ArrayList<SpecialtyModel>> returnAllSpecialties (@RequestHeader("Authorization") String authorization){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -51,7 +50,6 @@ public class SpecialtyController {
             path = "/{specialtyId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-
     public ResponseEntity<ArrayList<DoctorSpecialtyModel>> returnDoctorsBySpecialty (@RequestHeader("Authorization") String authorization,
                                                                                      @PathVariable("specialtyId") Integer specialtyId){
         //Decodificando el token

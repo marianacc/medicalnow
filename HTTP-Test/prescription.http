@@ -1,7 +1,7 @@
 ### Todas las prescripciones de un paciente
 
 GET http://localhost:8008/api/v1/prescription/16
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0MzY4MTM0fQ.tY0WBij4AUMKRE5NmL4z5ZshO7mOvE1LU3v9kNJU8WU
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTk4ODh9.cui-Pmr9AtO35rRWfMwqjm9f8q9_oPiCMaIeVCqJvR0
 Content-Type: application/json
 Accept: application/json
 
@@ -9,3 +9,15 @@ Accept: application/json
 
 }
 
+### Los detalles de la prescripcion de un paciente
+
+GET http://localhost:8008/api/v1/prescription/1/detail
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTk4ODh9.cui-Pmr9AtO35rRWfMwqjm9f8q9_oPiCMaIeVCqJvR0
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+###

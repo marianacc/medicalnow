@@ -31,7 +31,6 @@ public class LaboratoryController {
             value="{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-
     public ResponseEntity<ArrayList<LaboratoryOrderModel>> returnAllLaboratoriesByUserId (@RequestHeader("Authorization") String authorization,
                                                                                            @PathVariable("userId") Integer userId){
         //Decodificando el token

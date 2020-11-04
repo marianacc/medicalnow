@@ -102,6 +102,8 @@ AND per.status = 1
 AND usr.status = 1
 AND pat.status = 1;
 
+-- AGREGAR STATUS -----------------------------------------------------------------------------
+
 -- Obtener el id de la persona segun su user id
 SELECT per.person_id
 FROM person per
@@ -127,5 +129,15 @@ AND patient_id = 16;
 -- Actualizar datos de un paciente
 UPDATE patient
 SET weight = '', height = ''
-WHERE patient_id = 1;
+WHERE patient_id = 1
+AND patient.status = 1;
 
+-- AGREGAR STATUS -----------------------------------------------------------------------------
+
+-- Obtener el detalle de la prescripción
+SELECT pre.treatment_prescription, pro.product_name, pro.product_detail, pro.product_quantity
+FROM prescription pre
+    JOIN product pro on pre.prescription_id = pro.prescription_id
+WHERE pre.prescription_id = 1
+AND pre.status = 1
+AND pro.status = 1;

@@ -42,7 +42,6 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-
     public ResponseEntity<Map<String, String>> newPatientRegistry (@RequestBody NewUserModel newUserModel) throws ParseException {
         Map <String, String> response = new HashMap();
         Boolean registryUpdated = registryBl.newPatientRegistry(newUserModel.getIdNumber(), newUserModel.getFirstName(),
