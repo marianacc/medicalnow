@@ -102,29 +102,33 @@ AND per.status = 1
 AND usr.status = 1
 AND pat.status = 1;
 
--- AGREGAR STATUS -----------------------------------------------------------------------------
-
 -- Obtener el id de la persona segun su user id
 SELECT per.person_id
 FROM person per
     JOIN user usr on per.person_id = usr.person_id
-AND user_id = 16;
+AND user_id = 16
+AND per.status = 1
+AND usr.status = 1;
 
 -- Actualizar los datos de una persona segun su id de persona
 UPDATE person
 SET first_name = 'Brennen', first_surname = 'Romaines', second_surname = 'Connew', birthdate = '2000/06/19', city = 'La Paz'
-WHERE person_id = 1;
+WHERE person_id = 1
+AND person.status = 1;
 
 -- Actualizar los datos de usuario de una persona segun su id de usuario
 UPDATE user
 SET email = '', password = '', phone_number = ''
-WHERE user_id = 1;
+WHERE user_id = 1
+AND user.status = 1;
 
 -- Obtener el id del paciente segun el id del usuario
 SELECT pat.patient_id
 FROM patient pat
          JOIN user usr on pat.user_id = usr.user_id
-AND patient_id = 16;
+WHERE pat.patient_id = 16
+AND pat.status = 1
+AND usr.status = 1;
 
 -- Actualizar datos de un paciente
 UPDATE patient
@@ -132,7 +136,6 @@ SET weight = '', height = ''
 WHERE patient_id = 1
 AND patient.status = 1;
 
--- AGREGAR STATUS -----------------------------------------------------------------------------
 
 -- Obtener el detalle de la prescripción
 SELECT pre.treatment_prescription, pro.product_name, pro.product_detail, pro.product_quantity
@@ -141,3 +144,15 @@ FROM prescription pre
 WHERE pre.prescription_id = 1
 AND pre.status = 1
 AND pro.status = 1;
+
+-- Verificar si el userId tiene un historial medico o no
+SELECT med.medical_history_id
+FROM medical_history med
+    JOIN patient pat on med.patient_id = pat.patient_id
+        JOIN user usr on pat.user_id = usr.user_id
+WHERE usr.user_id = 16
+AND med.status = 1
+AND pat.status = 1
+AND usr.status = 1;
+
+SELECT MAX(medical_history_id) from medical_history where medical_history.status = 1;

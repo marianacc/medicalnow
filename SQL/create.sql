@@ -325,3 +325,13 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (
 
 ALTER TABLE laboratory ADD laboratory_name varchar (100);
 ALTER TABLE laboratory ADD lab_order_date date;
+
+ALTER TABLE resource ADD COLUMN resource_name varchar(100);
+ALTER TABLE resource RENAME COLUMN patient_resource_id to resource_id;
+ALTER TABLE resource RENAME COLUMN image to file;
+ALTER TABLE resource MODIFY COLUMN file mediumblob;
+
+
+ALTER TABLE medical_history ADD COLUMN patient_id int;
+ALTER TABLE medical_history ADD CONSTRAINT patient FOREIGN KEY patient (patient_id)
+    REFERENCES patient (patient_id);

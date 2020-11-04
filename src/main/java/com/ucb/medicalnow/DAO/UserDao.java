@@ -60,7 +60,7 @@ public class UserDao {
         return features;
     }
 
-    public Integer registerNewUser (int personId, String email, String password, String phoneNumber) {
+    public Integer addNewUser (int personId, String email, String password, String phoneNumber) {
         String query = "INSERT INTO user (person_id, email, password, phone_number, user_image, status, tx_id, tx_username, tx_host, tx_date)\n" +
                         "values (?, ?, ?, ?, 'http://dummyimage.com/227x147.png/ff4444/ffffff', 1, 0, 'root', '127.0.0.1', now());";
         Integer result = null;
@@ -83,7 +83,7 @@ public class UserDao {
         return userId;
     }
 
-    public Integer registerNewUserRole (int userId) {
+    public Integer addNewUserRole (int userId) {
         String query = "INSERT INTO user_role ( user_id, role_id, status, tx_id, tx_username, tx_host, tx_date)\n" +
                         "VALUES (?, 2, 1,  1, 'admin', 'localhost', now());";
 
@@ -159,7 +159,8 @@ public class UserDao {
     public Integer updateUser (String email, String password, String phoneNumber, int userId){
         String query="UPDATE user\n" +
                     "SET email = ?, password = ?, phone_number = ?\n" +
-                    "WHERE user_id = ?;";
+                    "WHERE user_id = ?\n" +
+                    "AND user.status = 1;";
         Integer result = null;
         try {
             result = jdbcTemplate.update(query, new Object[]{email, password, phoneNumber, userId});

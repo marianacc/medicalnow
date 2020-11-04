@@ -12,7 +12,7 @@ public class PatientDao {
     @Autowired
     public PatientDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Integer registerNewPatient (int personId, int userId) {
+    public Integer addNewPatient (int personId, int userId) {
         String query = "INSERT INTO patient (person_id, user_id, gender, height, weight, blood_group, status, tx_id, tx_username, tx_host, tx_date)\n" +
                         "VALUES (?, ?, 'N/N', 0, 0, 'N/N', 1, 0, 'root', '127.0.0.1', now());";
         Integer result = null;
@@ -37,9 +37,11 @@ public class PatientDao {
 
     public Integer returnPatientIdByUserId (int userId) {
         String query = "SELECT pat.patient_id\n" +
-                        "    FROM patient pat\n" +
-                        "    JOIN user usr on pat.user_id = usr.user_id\n" +
-                        "    AND usr.user_id = ?;";
+                        "FROM patient pat\n" +
+                        "         JOIN user usr on pat.user_id = usr.user_id\n" +
+                        "WHERE usr.user_id = ?\n" +
+                        "AND pat.status = 1\n" +
+                        "AND usr.status = 1;";
         Integer patientId = null;
         try {
             patientId = jdbcTemplate.queryForObject(query, new Object[]{userId}, Integer.class);
@@ -52,7 +54,8 @@ public class PatientDao {
     public Integer updatePatient (Double weight, Double height, int patientId){
         String query = "UPDATE patient\n" +
                         "SET weight = ?, height = ?\n" +
-                        "WHERE patient_id = ?;";
+                        "WHERE patient_id = ?\n" +
+                        "AND patient.status = 1;";
         Integer result = null;
         try {
             result = jdbcTemplate.update(query, new Object[]{weight, height, patientId});

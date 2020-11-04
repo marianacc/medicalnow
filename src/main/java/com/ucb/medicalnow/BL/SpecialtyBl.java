@@ -25,16 +25,9 @@ public class SpecialtyBl {
         ArrayList<DoctorSpecialtyModel> doctorSpecialtyResponse = specialtyDao.returnDoctorsBySpecialty(specialtyId);
         for (int i=0; i<doctorSpecialtyResponse.size(); i++){
             DoctorSpecialtyModel doctorSpecialtyModel = doctorSpecialtyResponse.get(i);
-            System.out.println(doctorSpecialtyModel);
-
             String firstName = doctorSpecialtyModel.getFirstName();
-            System.out.println(doctorSpecialtyModel.getFirstName());
-
             char firstLetter = firstName.charAt(0);
-            System.out.println(firstLetter);
-
             doctorSpecialtyModel.setFirstLetter(firstLetter);
-
         }
         return doctorSpecialtyResponse;
     }

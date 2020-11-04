@@ -44,7 +44,7 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> newPatientRegistry (@RequestBody NewUserModel newUserModel) throws ParseException {
         Map <String, String> response = new HashMap();
-        Boolean registryUpdated = registryBl.newPatientRegistry(newUserModel.getIdNumber(), newUserModel.getFirstName(),
+        Boolean registryUpdated = registryBl.addNewPatient(newUserModel.getIdNumber(), newUserModel.getFirstName(),
                 newUserModel.getFirstSurname(), newUserModel.getSecondSurname(), newUserModel.getBirthDate(),
                 newUserModel.getCity(), newUserModel.getEmail(), newUserModel.getPassword(), newUserModel.getPhoneNumber());
         if(registryUpdated == true){
@@ -99,7 +99,7 @@ public class UserController {
 
     @RequestMapping(
             value = "config/update/{userId}",
-            method = RequestMethod.PATCH,
+            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> updateConfigurationById(@RequestHeader("Authorization") String authorization,
                                                                        @PathVariable("userId") Integer userId,

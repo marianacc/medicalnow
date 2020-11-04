@@ -22,7 +22,7 @@ Accept: application/json
 
 ###
 
-PATCH http://localhost:8008/api/v1/user/config/update/29
+POST http://localhost:8008/api/v1/user/config/update/29
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTczOTV9.s_6VHOFu5q4qci4QcxEQ-NnKemcyrK2Gt9_Gf_wR-uc
 Content-Type: application/json
 Accept: application/json

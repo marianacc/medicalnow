@@ -1,0 +1,12 @@
+### Todos los laboratorios de un paciente
+
+GET http://localhost:8008/api/v1/medical_history/16
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1Mjg3NTh9.DxFmTwK0mYhLqvMSRGk_NtI_jS0v83rBqroDsEU-YNE
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+###

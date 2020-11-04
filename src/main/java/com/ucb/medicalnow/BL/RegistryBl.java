@@ -28,7 +28,7 @@ public class RegistryBl {
         this.patientDao = patientDao;
     }
 
-    public Boolean newPatientRegistry (String idNumber, String firstName, String firstSurname, String secondSurname,
+    public Boolean addNewPatient (String idNumber, String firstName, String firstSurname, String secondSurname,
                                     String birthDate, String city, String email, String password, String phoneNumber)
             throws ParseException {
         // Parsear la fecha guardada en String a Date
@@ -38,15 +38,15 @@ public class RegistryBl {
                 .hashString(password+salt, StandardCharsets.UTF_8)
                 .toString();
         Boolean registryUpdated = null;
-        Integer personResponse = personDao.registerNewPerson(idNumber, firstName, firstSurname, secondSurname, birthdate, city);
+        Integer personResponse = personDao.addNewPerson(idNumber, firstName, firstSurname, secondSurname, birthdate, city);
         if (personResponse > 0){
             Integer personId = personDao.returnMaxPersonId();
-            Integer userResponse = userDao.registerNewUser(personId, email, sha256hex, phoneNumber);
+            Integer userResponse = userDao.addNewUser(personId, email, sha256hex, phoneNumber);
             if (userResponse > 0){
                 Integer userId = userDao.returnMaxUserId();
-                Integer userRoleResponse = userDao.registerNewUserRole(userId);
+                Integer userRoleResponse = userDao.addNewUserRole(userId);
                 if (userRoleResponse > 0){
-                    Integer patientResponse = patientDao.registerNewPatient(personId, userId);
+                    Integer patientResponse = patientDao.addNewPatient(personId, userId);
                     if (patientResponse > 0){
                         registryUpdated = true;
                     } else {
