@@ -39,10 +39,10 @@ public class PatientDao {
         String query = "SELECT pat.patient_id\n" +
                         "    FROM patient pat\n" +
                         "    JOIN user usr on pat.user_id = usr.user_id\n" +
-                        "    AND usr.user_id = 16;";
+                        "    AND usr.user_id = ?;";
         Integer patientId = null;
         try {
-            patientId = jdbcTemplate.queryForObject(query, new Object[]{}, Integer.class);
+            patientId = jdbcTemplate.queryForObject(query, new Object[]{userId}, Integer.class);
         } catch (Exception e){
             throw new RuntimeException();
         }

@@ -11,8 +11,8 @@ Accept: application/json
 
 ### Obtener toda la información de un usuario
 
-GET http://localhost:8008/api/v1/user/config/16
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ2MjM2fQ.p59_8U5gii4vySzFMDbmLjvCRKk-TKvKkamr5GNu-uc
+GET http://localhost:8008/api/v1/user/config/29
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTczOTV9.s_6VHOFu5q4qci4QcxEQ-NnKemcyrK2Gt9_Gf_wR-uc
 Content-Type: application/json
 Accept: application/json
 
@@ -22,21 +22,21 @@ Accept: application/json
 
 ###
 
-PATCH http://localhost:8008/api/v1/user/config/update/16
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0NDQ2MjM2fQ.p59_8U5gii4vySzFMDbmLjvCRKk-TKvKkamr5GNu-uc
+PATCH http://localhost:8008/api/v1/user/config/update/29
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTczOTV9.s_6VHOFu5q4qci4QcxEQ-NnKemcyrK2Gt9_Gf_wR-uc
 Content-Type: application/json
 Accept: application/json
 
 {
-  "firstName": "Brennan",
-  "firstSurname": "Romaines",
-  "secondSurname": "Connew",
-  "phoneNumber": "770-152-7782",
-  "birthDate": "2020-10-19",
-  "weight": 43.7,
-  "height": 1.78,
+  "firstName": "Joss",
+  "firstSurname": "Morrilly",
+  "secondSurname": "La Torre",
+  "phoneNumber": "258-903-3419",
+  "birthDate": "2009-11-16",
+  "weight": 80.63,
+  "height": 1.71,
   "city": "La Paz",
-  "email": "radmansf@ted.com",
+  "email": "jmccreerys@last.fm",
   "password": "aec6a12a4f0ded02e28e1611fa0cc26a1757397a6de9f67b35ef0804085daebf"
 }
 

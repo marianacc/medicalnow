@@ -105,7 +105,6 @@ public class UserController {
     public ResponseEntity<Map<String, String>> updateConfigurationById(@RequestHeader("Authorization") String authorization,
                                                                        @PathVariable("userId") Integer userId,
                                                                        @RequestBody UserConfigurationModel UserConfigurationModel) {
-
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);

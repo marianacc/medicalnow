@@ -5,6 +5,7 @@ import com.ucb.medicalnow.DAO.PersonDao;
 import com.ucb.medicalnow.DAO.UserDao;
 import com.ucb.medicalnow.Model.UserAvatarModel;
 import com.ucb.medicalnow.Model.UserConfigurationModel;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
