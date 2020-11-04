@@ -1,12 +1,15 @@
 ### Todos los laboratorios de un paciente
 
-GET http://localhost:8008/api/v1/medical_history/16
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1Mjg3NTh9.DxFmTwK0mYhLqvMSRGk_NtI_jS0v83rBqroDsEU-YNE
+GET http://localhost:8008/api/v1/medical_history/39
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1MzE5ODZ9.HdgI3a0SVls9_siQwqGSsL89a98dyKLeHs80UTN2DnU
 Content-Type: application/json
 Accept: application/json
 
 {
-
+  "doctorId": "1",
+  "message": "Doctor he estado teniendo manchas rojas en mis manos desde anteayer.",
+  "consultDate": "2020/11/4",
+  "resource": null
 }
 
 ###

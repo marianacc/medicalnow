@@ -1,30 +1,23 @@
 package com.ucb.medicalnow.Model;
 
+import java.sql.Date;
 import java.util.Arrays;
 
-public class ConsultModel {
+public class PatientConsultModel {
 
-    private Integer userId;
     private Integer doctorId;
     private String message;
+    private String consultDate;
     private byte[] resource;
 
-    public ConsultModel() {
+    public PatientConsultModel() {
     }
 
-    public ConsultModel(Integer userId, Integer doctorId, String message, byte[] resource) {
-        this.userId = userId;
+    public PatientConsultModel(Integer doctorId, String message, String consultDate, byte[] resource) {
         this.doctorId = doctorId;
         this.message = message;
+        this.consultDate = consultDate;
         this.resource = resource;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public Integer getDoctorId() {
@@ -43,6 +36,14 @@ public class ConsultModel {
         this.message = message;
     }
 
+    public String getConsultDate() {
+        return consultDate;
+    }
+
+    public void setConsultDate(String consultDate) {
+        this.consultDate = consultDate;
+    }
+
     public byte[] getResource() {
         return resource;
     }
@@ -53,10 +54,10 @@ public class ConsultModel {
 
     @Override
     public String toString() {
-        return "ConsultModel{" +
-                "userId=" + userId +
+        return "PatientConsultModel{" +
                 ", doctorId=" + doctorId +
                 ", message='" + message + '\'' +
+                ", consultDate='" + consultDate + '\'' +
                 ", resource=" + Arrays.toString(resource) +
                 '}';
     }

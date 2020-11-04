@@ -5,15 +5,15 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "idNumber": "2055599",
-  "firstName": "Claudia",
-  "firstSurname": "Costa",
-  "secondSurname": "Salinas",
-  "birthDate": "1995/10/14",
+  "idNumber": "4930112",
+  "firstName": "Camila",
+  "firstSurname": "Gardeazabal",
+  "secondSurname": "Cruz",
+  "birthDate": "1989/12/24",
   "city": "La Paz",
-  "email": "ccosta@gmail.com",
+  "email": "cgc@gmail.com",
   "password": "12345",
-  "phoneNumber": "6753843"
+  "phoneNumber": "67288172"
 }
 
 ###

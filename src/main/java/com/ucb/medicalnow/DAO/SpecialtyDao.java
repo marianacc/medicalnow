@@ -78,4 +78,20 @@ public class SpecialtyDao {
         }
         return doctorSpecialty;
     }
+
+    public Integer returnDoctorSpecialtyIdByDoctorId(int doctorId){
+        String query = "SELECT doc_spec.doctor_specialty_id\n" +
+                        "FROM doctor_specialty doc_spec\n" +
+                        "    JOIN doctor doc on doc_spec.doctor_id = doc.doctor_id\n" +
+                        "WHERE doc.doctor_id = ?\n" +
+                        "AND doc_spec.status = 1\n" +
+                        "AND doc.status = 1;";
+        Integer doctorSpecialtyId = null;
+        try {
+            doctorSpecialtyId = jdbcTemplate.queryForObject(query, new Object[]{doctorId}, Integer.class);
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return doctorSpecialtyId;
+    }
 }

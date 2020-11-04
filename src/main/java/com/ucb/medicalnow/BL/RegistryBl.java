@@ -1,6 +1,7 @@
 package com.ucb.medicalnow.BL;
 
 import com.google.common.hash.Hashing;
+import com.ucb.medicalnow.DAO.MedicalHistoryDao;
 import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.DAO.PersonDao;
 import com.ucb.medicalnow.DAO.UserDao;
@@ -18,14 +19,16 @@ public class RegistryBl {
     private UserDao userDao;
     private PersonDao personDao;
     private PatientDao patientDao;
+    private MedicalHistoryDao medicalHistoryDao;
 
     @Value("${medicalnow.security.salt}")
     private String salt;
 
-    public RegistryBl(UserDao userDao, PersonDao personDao, PatientDao patientDao) {
+    public RegistryBl(UserDao userDao, PersonDao personDao, PatientDao patientDao, MedicalHistoryDao medicalHistoryDao) {
         this.userDao = userDao;
         this.personDao = personDao;
         this.patientDao = patientDao;
+        this.medicalHistoryDao = medicalHistoryDao;
     }
 
     public Boolean addNewPatient (String idNumber, String firstName, String firstSurname, String secondSurname,
@@ -48,9 +51,13 @@ public class RegistryBl {
                 if (userRoleResponse > 0){
                     Integer patientResponse = patientDao.addNewPatient(personId, userId);
                     if (patientResponse > 0){
-                        registryUpdated = true;
-                    } else {
-                        registryUpdated = false;
+                        Integer patientId = patientDao.returnMaxUserId();
+                        Integer medicalHistoryResponse = medicalHistoryDao.newMedicalHistoryByPatientId(patientId);
+                        if(medicalHistoryResponse> 0){
+                            registryUpdated = true;
+                        } else {
+                            registryUpdated = false;
+                        }
                     }
                 }
             }
