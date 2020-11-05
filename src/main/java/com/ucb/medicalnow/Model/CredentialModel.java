@@ -28,12 +28,4 @@ public class CredentialModel {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Override
-    public String toString() {
-        return "CredentialModel{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

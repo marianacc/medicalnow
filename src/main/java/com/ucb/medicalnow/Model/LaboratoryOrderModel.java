@@ -80,17 +80,4 @@ public class LaboratoryOrderModel {
     public void setLabExamOrder(String labExamOrder) {
         this.labExamOrder = labExamOrder;
     }
-
-    @Override
-    public String toString() {
-        return "LaboratoryOrderModel{" +
-                "laboratoryExamsId='" + laboratoryExamsId + '\'' +
-                ", laboratoryName='" + laboratoryName + '\'' +
-                ", doctorFirstName='" + doctorFirstName + '\'' +
-                ", doctorFirstSurname='" + doctorFirstSurname + '\'' +
-                ", specialtyName='" + specialtyName + '\'' +
-                ", laboratoryOrderDate=" + laboratoryOrderDate +
-                ", labExamOrder='" + labExamOrder + '\'' +
-                '}';
-    }
 }

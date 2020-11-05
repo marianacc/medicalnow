@@ -60,15 +60,4 @@ public class PrescriptionModel {
     public void setPrescriptionDate(Date prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
     }
-
-    @Override
-    public String toString() {
-        return "PrescriptionModel{" +
-                "prescriptionId=" + prescriptionId +
-                ", diagnosis='" + diagnosis + '\'' +
-                ", doctorFirstName='" + doctorFirstName + '\'' +
-                ", doctorFirstSurname='" + doctorFirstSurname + '\'' +
-                ", prescriptionDate=" + prescriptionDate +
-                '}';
-    }
 }

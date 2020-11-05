@@ -51,14 +51,4 @@ public class PatientConsultModel {
     public void setResource(byte[] resource) {
         this.resource = resource;
     }
-
-    @Override
-    public String toString() {
-        return "PatientConsultModel{" +
-                ", doctorId=" + doctorId +
-                ", message='" + message + '\'' +
-                ", consultDate='" + consultDate + '\'' +
-                ", resource=" + Arrays.toString(resource) +
-                '}';
-    }
 }

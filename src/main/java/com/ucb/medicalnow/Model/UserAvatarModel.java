@@ -54,14 +54,4 @@ public class UserAvatarModel {
     public void setFirstLetter(char firstLetter) {
         this.firstLetter = firstLetter;
     }
-
-    @Override
-    public String toString() {
-        return "UserAvatarModel{" +
-                "userFirstName='" + userFirstName + '\'' +
-                ", userFirstSurname='" + userFirstSurname + '\'' +
-                ", userSecondSurname='" + userSecondSurname + '\'' +
-                ", firstLetter='" + firstLetter + '\'' +
-                '}';
-    }
 }

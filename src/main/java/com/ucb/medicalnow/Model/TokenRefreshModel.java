@@ -18,11 +18,4 @@ public class TokenRefreshModel {
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
-
-    @Override
-    public String toString() {
-        return "TokenRefreshModel{" +
-                "refreshToken='" + refreshToken + '\'' +
-                '}';
-    }
 }

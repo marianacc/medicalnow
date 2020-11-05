@@ -110,20 +110,4 @@ public class UserConfigurationModel {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Override
-    public String toString() {
-        return "UserConfigurationModel{" +
-                "firstName='" + firstName + '\'' +
-                ", firstSurname='" + firstSurname + '\'' +
-                ", secondSurname='" + secondSurname + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", birthDate=" + birthDate +
-                ", weight=" + weight +
-                ", height=" + height +
-                ", city='" + city + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

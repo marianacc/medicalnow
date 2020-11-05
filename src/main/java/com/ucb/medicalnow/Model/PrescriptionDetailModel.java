@@ -48,14 +48,4 @@ public class PrescriptionDetailModel {
     public void setProductQtty(String productQtty) {
         this.productQtty = productQtty;
     }
-
-    @Override
-    public String toString() {
-        return "PrescriptionDetailModel{" +
-                "treatmentPrescription='" + treatmentPrescription + '\'' +
-                ", productName='" + productName + '\'' +
-                ", productDetail='" + productDetail + '\'' +
-                ", productQtty='" + productQtty + '\'' +
-                '}';
-    }
 }

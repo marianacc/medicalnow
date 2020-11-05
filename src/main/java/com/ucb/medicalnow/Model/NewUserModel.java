@@ -99,19 +99,4 @@ public class NewUserModel {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    @Override
-    public String toString() {
-        return "NewUserModel{" +
-                "idNumber='" + idNumber + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", firstSurname='" + firstSurname + '\'' +
-                ", secondSurname='" + secondSurname + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", city='" + city + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
-    }
 }

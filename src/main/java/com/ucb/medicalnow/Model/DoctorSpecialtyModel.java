@@ -87,17 +87,4 @@ public class DoctorSpecialtyModel {
     public void setSpecialtyName(String specialtyName) {
         this.specialtyName = specialtyName;
     }
-
-    @Override
-    public String toString() {
-        return "DoctorSpecialtyModel{" +
-                "doctorId=" + doctorId +
-                ", firstLetter=" + firstLetter +
-                ", firstName='" + firstName + '\'' +
-                ", firstSurname='" + firstSurname + '\'' +
-                ", secondSurname='" + secondSurname + '\'' +
-                ", qualification=" + qualification +
-                ", specialtyName='" + specialtyName + '\'' +
-                '}';
-    }
 }
