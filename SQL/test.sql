@@ -164,4 +164,3 @@ FROM doctor_specialty doc_spec
 WHERE doc.doctor_id = 1
 AND doc_spec.status = 1
 AND doc.status = 1;
-

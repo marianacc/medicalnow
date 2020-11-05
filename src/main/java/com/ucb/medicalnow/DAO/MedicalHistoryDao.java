@@ -41,20 +41,4 @@ public class MedicalHistoryDao {
         }
         return medicalHistoryId;
     }
-
-
-/*
-
-    public Integer returnMaxMedicalHistoryId (){
-        String query = "SELECT MAX(medical_history_id) from medical_history where medical_history.status = 1;";
-        Integer medicalHistoryId = null;
-        try {
-            medicalHistoryId = jdbcTemplate.update(query, new Object[]{});
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-        return medicalHistoryId;
-    }
-*/
-
 }

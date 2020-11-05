@@ -328,7 +328,7 @@ ALTER TABLE laboratory ADD lab_order_date date;
 
 ALTER TABLE resource ADD COLUMN resource_name varchar(100);
 ALTER TABLE resource RENAME COLUMN patient_resource_id to resource_id;
-ALTER TABLE resource RENAME COLUMN image to file;
+ALTER TABLE resource RENAME COLUMN file to image;
 ALTER TABLE resource MODIFY COLUMN file mediumblob;
 
 

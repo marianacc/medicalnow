@@ -21,8 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/medical_history")
-public class MedicalHistoryController {
+@RequestMapping("api/v1/consult")
+public class ConsultController {
 
     private MedicalHistoryBl medicalHistoryBl;
 
@@ -30,11 +30,11 @@ public class MedicalHistoryController {
     private String secretJwt;
 
     @Autowired
-    public MedicalHistoryController (MedicalHistoryBl medicalHistoryBl) { this.medicalHistoryBl = medicalHistoryBl; }
+    public ConsultController(MedicalHistoryBl medicalHistoryBl) { this.medicalHistoryBl = medicalHistoryBl; }
 
     @RequestMapping(
             value="{userId}",
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> addToMedicalHistory (@RequestHeader("Authorization") String authorization,
                                                                     @RequestBody PatientConsultModel patientConsultModel,

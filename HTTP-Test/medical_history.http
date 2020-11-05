@@ -1,6 +1,6 @@
 ### Todos los laboratorios de un paciente
 
-GET http://localhost:8008/api/v1/medical_history/39
+POST http://localhost:8008/api/v1/medical_history/39
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1MzE5ODZ9.HdgI3a0SVls9_siQwqGSsL89a98dyKLeHs80UTN2DnU
 Content-Type: application/json
 Accept: application/json
