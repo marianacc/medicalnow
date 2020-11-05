@@ -96,16 +96,16 @@ public class UserDao {
         return result;
     }
 
-    public ArrayList<UserAvatarModel> returnUserNameByUserId (int userId){
+    public UserAvatarModel returnUserNameByUserId (int userId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
                         "FROM person per\n" +
                         "    JOIN user usr on per.person_id = usr.person_id\n" +
                         "WHERE usr.user_id = ? \n" +
                         "AND per.status = 1\n" +
                         "AND usr.status = 1;";
-        ArrayList<UserAvatarModel> userAvatar= null;
+        UserAvatarModel userAvatar= null;
         try {
-            userAvatar = (ArrayList<UserAvatarModel>) jdbcTemplate.query(query, new Object[]{userId},
+            userAvatar = (UserAvatarModel) jdbcTemplate.queryForObject(query, new Object[]{userId},
                     new RowMapper<UserAvatarModel>(){
                         @Override
                         public UserAvatarModel mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -145,8 +145,7 @@ public class UserDao {
                                     resultSet.getDouble(6),
                                     resultSet.getDouble(7),
                                     resultSet.getString(8),
-                                    resultSet.getString(9),
-                                    resultSet.getString(10));
+                                    resultSet.getString(9));
                         }
                     });
         } catch (Exception e){
@@ -156,14 +155,14 @@ public class UserDao {
         return information;
     }
 
-    public Integer updateUser (String email, String password, String phoneNumber, int userId){
+    public Integer updateUser (String email, String phoneNumber, int userId){
         String query="UPDATE user\n" +
                     "SET email = ?, password = ?, phone_number = ?\n" +
                     "WHERE user_id = ?\n" +
                     "AND user.status = 1;";
         Integer result = null;
         try {
-            result = jdbcTemplate.update(query, new Object[]{email, password, phoneNumber, userId});
+            result = jdbcTemplate.update(query, new Object[]{email, phoneNumber, userId});
         } catch (Exception e) {
             throw new RuntimeException();
         }

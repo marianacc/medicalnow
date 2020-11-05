@@ -164,3 +164,17 @@ FROM doctor_specialty doc_spec
 WHERE doc.doctor_id = 1
 AND doc_spec.status = 1
 AND doc.status = 1;
+
+-- Devolver a los doctores de medicina general
+SELECT spe.specialty_name, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification), doc.doctor_id
+FROM person per
+         JOIN doctor doc on per.person_id = doc.person_id
+         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id
+         JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id
+         JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id
+WHERE doc.status = 1
+  AND per.status = 1
+  AND doc_spec.status = 1
+  AND qua.status = 1
+  AND spe.specialty_id = 4
+GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname;

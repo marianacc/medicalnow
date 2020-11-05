@@ -13,12 +13,11 @@ public class UserConfigurationModel {
     private Double height;
     private String city;
     private String email;
-    private String password;
 
     public UserConfigurationModel() {
     }
 
-    public UserConfigurationModel(String firstName, String firstSurname, String secondSurname, String phoneNumber, Date birthDate, Double weight, Double height, String city, String email, String password) {
+    public UserConfigurationModel(String firstName, String firstSurname, String secondSurname, String phoneNumber, Date birthDate, Double weight, Double height, String city, String email) {
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
@@ -28,7 +27,6 @@ public class UserConfigurationModel {
         this.height = height;
         this.city = city;
         this.email = email;
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -101,13 +99,5 @@ public class UserConfigurationModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

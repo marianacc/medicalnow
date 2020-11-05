@@ -9,6 +9,7 @@ import com.ucb.medicalnow.BL.UserBl;
 import com.ucb.medicalnow.Model.NewUserModel;
 import com.ucb.medicalnow.Model.UserAvatarModel;
 import com.ucb.medicalnow.Model.UserConfigurationModel;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,7 +105,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> updateConfigurationById(@RequestHeader("Authorization") String authorization,
                                                                        @PathVariable("userId") Integer userId,
-                                                                       @RequestBody UserConfigurationModel UserConfigurationModel) {
+                                                                       @RequestBody UserConfigurationModel userConfigurationModel) {
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -116,7 +118,10 @@ public class UserController {
         verifier.verify(tokenJwt);
 
         Map<String, String> response = new HashMap();
-        Boolean registryUpdated = userBl.updateConfigurationByUserId(UserConfigurationModel, userId);
+        Boolean registryUpdated = userBl.updateConfigurationByUserId(userConfigurationModel.getFirstName(), userConfigurationModel.getFirstSurname(),
+                userConfigurationModel.getSecondSurname(), userConfigurationModel.getPhoneNumber(), userConfigurationModel.getBirthDate(),
+                userConfigurationModel.getWeight(), userConfigurationModel.getHeight(), userConfigurationModel.getCity(),
+                userConfigurationModel.getEmail(), userId);
         if (registryUpdated == true) {
             response.put("Message", "Patient updated succesfully");
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -126,3 +131,4 @@ public class UserController {
         }
     }
 }
+

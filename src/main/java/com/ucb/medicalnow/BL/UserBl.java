@@ -1,5 +1,6 @@
 package com.ucb.medicalnow.BL;
 
+import com.google.common.hash.Hashing;
 import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.DAO.PersonDao;
 import com.ucb.medicalnow.DAO.UserDao;
@@ -9,6 +10,8 @@ import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.util.ArrayList;
 
 @Service
@@ -26,8 +29,7 @@ public class UserBl {
     }
 
     public UserAvatarModel returnUserNameByUserId(int userId){
-        ArrayList<UserAvatarModel> userAvatarResponse = userDao.returnUserNameByUserId(userId);
-        UserAvatarModel userAvatarModel = userAvatarResponse.get(0);
+        UserAvatarModel userAvatarModel = userDao.returnUserNameByUserId(userId);
         String firstName = userAvatarModel.getUserFirstName();
         char firstLetter = firstName.charAt(0);
         userAvatarModel.setFirstLetter(firstLetter);
@@ -38,17 +40,15 @@ public class UserBl {
         return this.userDao.returnUserConfigurationByUserId(userId);
     }
 
-    public Boolean updateConfigurationByUserId (UserConfigurationModel UserConfigurationModel, int userId){
+    public Boolean updateConfigurationByUserId (String firstName, String firstSurname, String secondSurname, String phoneNumber, Date birthDate, Double weight, Double height, String city, String email, int userId){
         Boolean configUpdated = null;
         Integer personId = personDao.returnPersonIdByUserId(userId);
-        Integer personResponse = personDao.updatePerson(UserConfigurationModel.getFirstName(), UserConfigurationModel.getFirstSurname(),
-                UserConfigurationModel.getSecondSurname(), UserConfigurationModel.getBirthDate(), UserConfigurationModel.getCity(), personId);
+        Integer personResponse = personDao.updatePerson(firstName, firstSurname, secondSurname, birthDate, city, personId);
         if (personResponse > 0){
-            Integer userResponse = userDao.updateUser(UserConfigurationModel.getEmail(), UserConfigurationModel.getPassword(),
-                    UserConfigurationModel.getPhoneNumber(), userId);
+            Integer userResponse = userDao.updateUser(email, phoneNumber, userId);
             if (userResponse > 0){
                 Integer patientId = patientDao.returnPatientIdByUserId(userId);
-                Integer patientResponse = patientDao.updatePatient(UserConfigurationModel.getWeight(), UserConfigurationModel.getHeight(), patientId);
+                Integer patientResponse = patientDao.updatePatient(weight, height, patientId);
                 if (patientResponse > 0){
                     configUpdated = true;
                 } else {

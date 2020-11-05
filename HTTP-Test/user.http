@@ -1,7 +1,7 @@
 ### Obtener el avatar del usuario
 
 GET http://localhost:8008/api/v1/user/30
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTI4NzB9.A7xEkAnrQMgCBBVSFqayvk_dLQa6GE33hC9bGBBKjtE
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1NDg2NzN9.MVsfyeU5cGoW6UT-J7Gk-dao0ub-6ZIndtpoIJqEeVU
 Content-Type: application/json
 Accept: application/json
 

@@ -21,3 +21,14 @@ Accept: application/json
 }
 
 ###
+
+GET http://localhost:8008/api/v1/specialties/general_medicine
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0Njc2NDV9.DQ-QdsTouVYjZ7nJ6Xph_PUYSRaqrNjWo7RkO5Tyl4A
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+###

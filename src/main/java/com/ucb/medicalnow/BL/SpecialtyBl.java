@@ -31,4 +31,15 @@ public class SpecialtyBl {
         }
         return doctorSpecialtyResponse;
     }
+
+    public ArrayList<DoctorSpecialtyModel> returnGeneralMedicineDoctors () {
+        ArrayList<DoctorSpecialtyModel> doctorSpecialtyResponse = specialtyDao.returnGeneralMedicineDoctors();
+        for (int i=0; i<doctorSpecialtyResponse.size(); i++){
+            DoctorSpecialtyModel doctorSpecialtyModel = doctorSpecialtyResponse.get(i);
+            String firstName = doctorSpecialtyModel.getFirstName();
+            char firstLetter = firstName.charAt(0);
+            doctorSpecialtyModel.setFirstLetter(firstLetter);
+        }
+        return doctorSpecialtyResponse;
+    }
 }
