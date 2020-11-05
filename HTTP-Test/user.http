@@ -11,8 +11,8 @@ Accept: application/json
 
 ### Obtener toda la información de un usuario
 
-GET http://localhost:8008/api/v1/user/config/29
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTczOTV9.s_6VHOFu5q4qci4QcxEQ-NnKemcyrK2Gt9_Gf_wR-uc
+GET http://localhost:8008/api/v1/user/29/config
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1NDg5OTl9.tJkh4K3nxFwNgLBT1CBMV66gFGhk576RHgQ1Wp7MIXU
 Content-Type: application/json
 Accept: application/json
 

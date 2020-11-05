@@ -121,7 +121,7 @@ public class UserDao {
         return userAvatar;
     }
 
-    public ArrayList<UserConfigurationModel> returnUserConfigurationByUserId (int userId){
+    public UserConfigurationModel returnUserConfigurationByUserId (int userId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname, usr.phone_number, per.birthdate, pat.weight, pat.height, per.city, usr.email, usr.password\n" +
                         "FROM person per\n" +
                         "    JOIN user usr on per.person_id = usr.person_id\n" +
@@ -131,9 +131,9 @@ public class UserDao {
                         "AND usr.status = 1\n" +
                         "AND pat.status = 1;";
 
-        ArrayList<UserConfigurationModel> information = null;
+        UserConfigurationModel information = null;
         try{
-            information = (ArrayList<UserConfigurationModel>) jdbcTemplate.query(query, new Object[]{userId},
+            information = (UserConfigurationModel) jdbcTemplate.queryForObject(query, new Object[]{userId},
                     new RowMapper<UserConfigurationModel>() {
                         @Override
                         public UserConfigurationModel mapRow(ResultSet resultSet, int i) throws SQLException {

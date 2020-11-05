@@ -36,7 +36,7 @@ public class UserBl {
         return userAvatarModel;
     }
 
-    public ArrayList<UserConfigurationModel> returnUserConfigurationByUserId(int userId){
+    public UserConfigurationModel returnUserConfigurationByUserId(int userId){
         return this.userDao.returnUserConfigurationByUserId(userId);
     }
 

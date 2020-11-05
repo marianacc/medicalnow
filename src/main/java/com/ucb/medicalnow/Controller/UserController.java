@@ -80,10 +80,10 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "config/{userId}",
+            value = "{userId}/config",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<UserConfigurationModel>> returnUserConfigurationByUserId(@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<UserConfigurationModel> returnUserConfigurationByUserId(@RequestHeader("Authorization") String authorization,
                                                                                              @PathVariable("userId") Integer userId){
 
         //Decodificando el token
