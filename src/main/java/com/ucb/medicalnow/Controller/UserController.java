@@ -121,7 +121,7 @@ public class UserController {
         Boolean registryUpdated = userBl.updateConfigurationByUserId(userConfigurationModel.getFirstName(), userConfigurationModel.getFirstSurname(),
                 userConfigurationModel.getSecondSurname(), userConfigurationModel.getPhoneNumber(), userConfigurationModel.getBirthDate(),
                 userConfigurationModel.getWeight(), userConfigurationModel.getHeight(), userConfigurationModel.getCity(),
-                userConfigurationModel.getEmail(), userId);
+                userConfigurationModel.getEmail(), userConfigurationModel.getPassword(), userId);
         if (registryUpdated == true) {
             response.put("Message", "Patient updated succesfully");
             return new ResponseEntity<>(response, HttpStatus.OK);

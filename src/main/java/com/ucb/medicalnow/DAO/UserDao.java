@@ -155,14 +155,14 @@ public class UserDao {
         return information;
     }
 
-    public Integer updateUser (String email, String phoneNumber, int userId){
+    public Integer updateUser (String email, String password, String phoneNumber, int userId){
         String query="UPDATE user\n" +
                     "SET email = ?, password = ?, phone_number = ?\n" +
                     "WHERE user_id = ?\n" +
                     "AND user.status = 1;";
         Integer result = null;
         try {
-            result = jdbcTemplate.update(query, new Object[]{email, phoneNumber, userId});
+            result = jdbcTemplate.update(query, new Object[]{email, password, phoneNumber, userId});
         } catch (Exception e) {
             throw new RuntimeException();
         }

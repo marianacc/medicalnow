@@ -11,8 +11,8 @@ Accept: application/json
 
 ### Obtener toda la información de un usuario
 
-GET http://localhost:8008/api/v1/user/17/config
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1NDk3Nzd9.Bcf3qe04m8UGG24tEwc0SLPkcK_tUF9Ylsa3nddq2Og
+GET http://localhost:8008/api/v1/user/16/config
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1NTE4OTd9.JHwgq2HyxR-aXnBJSocbzIQysxestOE_SGCR9Hgqgr0
 Content-Type: application/json
 Accept: application/json
 
@@ -22,22 +22,22 @@ Accept: application/json
 
 ###
 
-PUT http://localhost:8008/api/v1/user/29/config/update
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTczOTV9.s_6VHOFu5q4qci4QcxEQ-NnKemcyrK2Gt9_Gf_wR-uc
+PUT http://localhost:8008/api/v1/user/17/config/update
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1NTE4OTd9.JHwgq2HyxR-aXnBJSocbzIQysxestOE_SGCR9Hgqgr0
 Content-Type: application/json
 Accept: application/json
 
 {
-  "firstName": "Joss",
-  "firstSurname": "Morrilly",
-  "secondSurname": "La Torre",
-  "phoneNumber": "258-903-3419",
-  "birthDate": "2009-11-16",
-  "weight": 80.63,
+  "firstName": "Brenda",
+  "firstSurname": "Roman",
+  "secondSurname": "Alban",
+  "phoneNumber": "770-152-7782",
+  "birthDate": "2020-10-18",
+  "weight": 70.63,
   "height": 1.71,
   "city": "La Paz",
-  "email": "jmccreerys@last.fm",
-  "password": "aec6a12a4f0ded02e28e1611fa0cc26a1757397a6de9f67b35ef0804085daebf"
+  "email": "radmansf@ted.com",
+  "password": "12345"
 }
 
 ###

@@ -8,6 +8,7 @@ import com.ucb.medicalnow.Model.UserAvatarModel;
 import com.ucb.medicalnow.Model.UserConfigurationModel;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -20,6 +21,9 @@ public class UserBl {
     private UserDao userDao;
     private PersonDao personDao;
     private PatientDao patientDao;
+
+    @Value("${medicalnow.security.salt}")
+    private String salt;
 
     @Autowired
     public UserBl (UserDao userDao, PersonDao personDao, PatientDao patientDao) {
@@ -40,12 +44,16 @@ public class UserBl {
         return this.userDao.returnUserConfigurationByUserId(userId);
     }
 
-    public Boolean updateConfigurationByUserId (String firstName, String firstSurname, String secondSurname, String phoneNumber, Date birthDate, Double weight, Double height, String city, String email, int userId){
+    public Boolean updateConfigurationByUserId (String firstName, String firstSurname, String secondSurname, String phoneNumber, Date birthDate, Double weight, Double height, String city, String email, String password, int userId){
         Boolean configUpdated = null;
+        // Agregarle la Salt y aplicar el algoritmo hash256 a la contraseña para guardarla en la base de datos
+        String sha256hex= Hashing.sha256()
+                .hashString(password+salt, StandardCharsets.UTF_8)
+                .toString();
         Integer personId = personDao.returnPersonIdByUserId(userId);
         Integer personResponse = personDao.updatePerson(firstName, firstSurname, secondSurname, birthDate, city, personId);
         if (personResponse > 0){
-            Integer userResponse = userDao.updateUser(email, phoneNumber, userId);
+            Integer userResponse = userDao.updateUser(email, sha256hex, phoneNumber, userId);
             if (userResponse > 0){
                 Integer patientId = patientDao.returnPatientIdByUserId(userId);
                 Integer patientResponse = patientDao.updatePatient(weight, height, patientId);

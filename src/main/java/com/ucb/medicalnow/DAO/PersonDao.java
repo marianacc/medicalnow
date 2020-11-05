@@ -56,7 +56,7 @@ public class PersonDao {
     public Integer updatePerson (String firstName, String firstSurname, String secondSurname, Date birthDate, String city, int personId){
         String query = "UPDATE person\n" +
                         "SET first_name = ?, first_surname = ?, second_surname = ?, birthdate = ?, city = ?\n" +
-                        "WHERE person_id = 1\n" +
+                        "WHERE person_id = ?\n" +
                         "AND person.status = 1;";
         Integer result = null;
         try {
