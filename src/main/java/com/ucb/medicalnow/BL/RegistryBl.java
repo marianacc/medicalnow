@@ -51,13 +51,9 @@ public class RegistryBl {
                 if (userRoleResponse > 0){
                     Integer patientResponse = patientDao.addNewPatient(personId, userId);
                     if (patientResponse > 0){
-                        Integer patientId = patientDao.returnMaxUserId();
-                        Integer medicalHistoryResponse = medicalHistoryDao.newMedicalHistoryByPatientId(patientId);
-                        if(medicalHistoryResponse> 0){
                             registryUpdated = true;
-                        } else {
+                    } else {
                             registryUpdated = false;
-                        }
                     }
                 }
             }

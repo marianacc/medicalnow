@@ -21,6 +21,7 @@ public class ConsultDao {
         try {
             result = jdbcTemplate.update(query, new Object[]{medicalHistoryId, patientId, doctorSpecialtyId, message, consultDate});
         } catch (Exception e) {
+            System.out.print(e);
             throw new RuntimeException();
         }
         return result;

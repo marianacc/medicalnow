@@ -1,13 +1,13 @@
 ### Todos los laboratorios de un paciente
 
-POST http://localhost:8008/api/v1/medical_history/39
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1MzE5ODZ9.HdgI3a0SVls9_siQwqGSsL89a98dyKLeHs80UTN2DnU
+POST http://localhost:8008/api/v1/consult/39
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1NDYxNzZ9.wsqiXJO9KJIaYI2JfAS25TmV6Cn0tkUVIuzQXuhAKMg
 Content-Type: application/json
 Accept: application/json
 
 {
   "doctorId": "1",
-  "message": "Doctor he estado teniendo manchas rojas en mis manos desde anteayer.",
+  "message": "Hola doctor. Estoy con alergia en mi cara despues de haber estado en el sol. Que pomada me aconseja?",
   "consultDate": "2020/11/4",
   "resource": null
 }

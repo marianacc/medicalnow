@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ucb.medicalnow.BL.ConsultBl;
 import com.ucb.medicalnow.BL.MedicalHistoryBl;
 import com.ucb.medicalnow.BL.PrescriptionBl;
 import com.ucb.medicalnow.Model.PatientConsultModel;
@@ -22,21 +23,25 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/consult")
-public class ConsultController {
+public class MedicalHistoryController {
 
     private MedicalHistoryBl medicalHistoryBl;
+    private ConsultBl consultBl;
 
     @Value("${medicalnow.security.secretJwt}")
     private String secretJwt;
 
     @Autowired
-    public ConsultController(MedicalHistoryBl medicalHistoryBl) { this.medicalHistoryBl = medicalHistoryBl; }
+    public MedicalHistoryController(MedicalHistoryBl medicalHistoryBl, ConsultBl consultBl) {
+        this.medicalHistoryBl = medicalHistoryBl;
+        this.consultBl = consultBl;
+    }
 
     @RequestMapping(
             value="{userId}",
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> addToMedicalHistory (@RequestHeader("Authorization") String authorization,
+    public void addToMedicalHistory (@RequestHeader("Authorization") String authorization,
                                                                     @RequestBody PatientConsultModel patientConsultModel,
                                                                     @PathVariable("userId") Integer userId) throws ParseException {
         //Decodificando el token
@@ -50,14 +55,13 @@ public class ConsultController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
 
-        Map<String, String> response = new HashMap();
-        Boolean registryUpdated = medicalHistoryBl.addConsultToMedicalHistory(patientConsultModel, userId);
-        if (registryUpdated == true) {
-            response.put("Message", "Consult sent succesfully");
-            return new ResponseEntity<>(response, HttpStatus.OK);
+        Boolean medicalHistoryUpdated = medicalHistoryBl.createMedicalHistory(userId);
+        Boolean consultUpdated = consultBl.addConsultToMedicalHistory(patientConsultModel, userId);
+
+        if (medicalHistoryUpdated && consultUpdated){
+            System.out.print("ya esta");
         } else {
-            response.put("Message", "Error. The consult wasn't sent");
-            return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+            System.out.print("error");
         }
     }
 }
