@@ -100,7 +100,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "config/update/{userId}",
+            value = "{userId}/config/update",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> updateConfigurationById(@RequestHeader("Authorization") String authorization,
