@@ -12,7 +12,7 @@ Accept: application/json
 ### Todos los medicos generales
 
 GET http://localhost:8008/api/v1/specialties/general_medicine
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcxMjE1NX0.tDkr5_RnHSqlDymtWRN4C5jPiyiStEbBAqen3iRKlZs
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcxNTYzMH0._2Qlmjy0A9I2idBGI0SikfB5vjKIUrd1CgXrfUuYs_8
 Content-Type: application/json
 Accept: application/json
 
@@ -23,7 +23,7 @@ Accept: application/json
 ### Todos los doctores de una especialidad
 
 GET http://localhost:8008/api/v1/specialties/2
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcxMjE1NX0.tDkr5_RnHSqlDymtWRN4C5jPiyiStEbBAqen3iRKlZs
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcxNTczMn0.BLRHcnxnHNvqrluvtbC8gpAtM_OYqbU_sumO3AzpZm4
 Content-Type: application/json
 Accept: application/json
 
