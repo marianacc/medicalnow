@@ -9,6 +9,8 @@ import com.ucb.medicalnow.Model.ConsultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class ConsultBl {
 
@@ -25,31 +27,10 @@ public class ConsultBl {
         this.medicalHistoryBl = medicalHistoryBl;
     }
 
-    public Boolean addConsultToMedicalHistory(int doctorSpecialtyId, String message, byte[] image, int userId) {
-        Boolean consultUpdated = null;
-        Boolean medicalHistoryExists = medicalHistoryBl.returnMedicalHistoryId(doctorSpecialtyId, userId);
-        if (medicalHistoryExists){
-            // Introducir una consulta nueva
-        } else {
-            // crear la historia medica
-            // Introducir la consulta
-        }
+    public void addConsultToMedicalHistory(int doctorSpecialtyId, String message, byte[] image, int userId) {
+        Map medicalHistoryResponse = medicalHistoryBl.medicalHistoryExists(doctorSpecialtyId, userId);
 
-
-        /*Date consultDate = new SimpleDateFormat("yyyy/MM/dd").parse(patientConsultModel.getConsultDate());
-        Boolean consultUpdated = null;
-        Integer medicalHistoryId = medicalHistoryDao.returnMaxMedicalHistoryId();
-        System.out.print(medicalHistoryId);
-        Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        System.out.print(patientId);
-        Integer doctorSpecialtyId = specialtyDao.returnDoctorSpecialtyIdByDoctorId(patientConsultModel.getDoctorId());
-        System.out.print(doctorSpecialtyId);
-        Integer consultResponse = consultDao.addConsult(medicalHistoryId, patientId, doctorSpecialtyId, patientConsultModel.getMessage(), consultDate);
-        if (consultResponse > 0){
-            consultUpdated = true;
-        } else {
-            consultUpdated = false;
-        }*/
-        return consultUpdated;
+//        System.out.println("ID del usuario"+medicalHistoryResponse.get("id"));
+//        System.out.println("Existe?"+medicalHistoryResponse.get("exists"));
     }
 }

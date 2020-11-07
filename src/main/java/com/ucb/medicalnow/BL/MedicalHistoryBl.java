@@ -8,6 +8,9 @@ import com.ucb.medicalnow.DAO.SpecialtyDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class MedicalHistoryBl {
 
@@ -20,16 +23,19 @@ public class MedicalHistoryBl {
         this.patientDao = patientDao;
     }
 
-    public Boolean returnMedicalHistoryId(int doctorSpecialtyId, int userId){
+    public Map medicalHistoryExists(int doctorSpecialtyId, int userId){
+        Map result = new HashMap();
         Boolean medicalHistoryResponse = null;
         Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        Long medicalHistoryId = medicalHistoryDao.returnMedicalHistoryIdByPatientIdAndDoctorSpecialtyId(patientId, doctorSpecialtyId);
+        Long medicalHistoryId = medicalHistoryDao.returnMedicalHistoryId(patientId, doctorSpecialtyId);
         if (medicalHistoryId == null){
             medicalHistoryResponse = false;
         } else {
             medicalHistoryResponse = true;
         }
-        return medicalHistoryResponse;
+        result.put("id", medicalHistoryId);
+        result.put("exists", medicalHistoryResponse);
+        return result;
     }
 
     /*

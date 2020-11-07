@@ -34,25 +34,26 @@ public class SecurityBl {
     @Autowired
     public SecurityBl (UserDao userDao) { this.userDao = userDao; }
 
-    public Map<String,String> authenticate (String username, String password){
-        Map<String, String> result = new HashMap<>();
+    public Map authenticate (String username, String password){
+        Map result = new HashMap<>();
         // Función para aplicar el salt y la función hash a la contraseña
         String sha256hex= Hashing.sha256()
                 .hashString(password+salt, StandardCharsets.UTF_8)
                 .toString();
         Integer userId = userDao.findUserByEmailAndPassword(username,sha256hex);
         if(userId != null){
-            result.put("userId", userId.toString());
             result.put("authentication",generateJwt(userId,10,"AUTHN", userDao.findRoleByUserId(userId)));
             result.put("refresh", generateJwt(userId, 20, "REFRESH", null));
+            result.put("userId", userId.toString());
+            result.put("message", "Authentication OK");
             return result;
         }else{
             return null;
         }
     }
 
-    public Map<String,String> refresh (TokenRefreshModel tokenRefreshModel){
-        Map<String,String> result = new HashMap<>();
+    public Map refresh (TokenRefreshModel tokenRefreshModel){
+        Map result = new HashMap<>();
         String tokenJwt = tokenRefreshModel.getRefreshToken();
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         String userId = decodedJWT.getSubject();
@@ -66,9 +67,10 @@ public class SecurityBl {
                 .build();
         verifier.verify(tokenJwt);
         Integer userIdAsInt = Integer.parseInt(userId);
-        result.put("userId", userId);
         result.put("authentication",generateJwt(Integer.parseInt(userId),1,"AUTHN", userDao.findRoleByUserId(userIdAsInt)));
         result.put("refresh",generateJwt(Integer.parseInt(userId),2,"REFRESH", null));
+        result.put("message", "Authentication OK");
+        result.put("userId", userId);
         return result;
     }
 

@@ -12,7 +12,7 @@ public class MedicalHistoryDao {
     @Autowired
     public MedicalHistoryDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Long returnMedicalHistoryIdByPatientIdAndDoctorSpecialtyId(int patientId, int doctorSpecialtyId) {
+    public Long returnMedicalHistoryId(int patientId, int doctorSpecialtyId) {
         String query = "SELECT med.medical_history_id\n" +
                 "FROM medical_history med\n" +
                 "    JOIN patient pat on med.patient_id = pat.patient_id\n" +

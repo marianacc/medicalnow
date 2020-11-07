@@ -45,12 +45,9 @@ public class ConsultController {
         verifier.verify(tokenJwt);
 
 
-        Boolean consultResponse = consultBl.addConsultToMedicalHistory(consultModel.getDoctorSpecialtyId(), consultModel.getMessage(),
+        consultBl.addConsultToMedicalHistory(consultModel.getDoctorSpecialtyId(), consultModel.getMessage(),
                 consultModel.getImage(), userId);
 
-        if(consultResponse){
-            System.out.print("hola");
-        }
 
     }
 }

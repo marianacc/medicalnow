@@ -46,7 +46,7 @@ public class SpecialtyDao {
     }
 
     public ArrayList<DoctorSpecialtyModel> returnGeneralMedicineDoctors (){
-        String query = "SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, spe.name, avg(qua.qualification)\n" +
+        String query = "SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification)\n" +
                         "FROM person per\n" +
                         "         JOIN doctor doc on per.person_id = doc.person_id\n" +
                         "         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
@@ -69,8 +69,7 @@ public class SpecialtyDao {
                                     resultSet.getString(2),
                                     resultSet.getString(3),
                                     resultSet.getString(4),
-                                    resultSet.getString(5),
-                                    resultSet.getDouble(6));
+                                    resultSet.getDouble(5));
                         }
                     });
         } catch (Exception e){
@@ -80,7 +79,7 @@ public class SpecialtyDao {
     }
 
     public ArrayList<DoctorSpecialtyModel> returnDoctorsBySpecialty (int specialtyId){
-        String query = "SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, spe.name, avg(qua.qualification)\n" +
+        String query = "SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification)\n" +
                         "FROM person per\n" +
                         "         JOIN doctor doc on per.person_id = doc.person_id\n" +
                         "         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
@@ -103,8 +102,7 @@ public class SpecialtyDao {
                                     resultSet.getString(2),
                                     resultSet.getString(3),
                                     resultSet.getString(4),
-                                    resultSet.getString(5),
-                                    resultSet.getDouble(6));
+                                    resultSet.getDouble(5));
                         }
                     });
         } catch (Exception e){
@@ -116,7 +114,7 @@ public class SpecialtyDao {
     public String returnSpecialtyNameBySpecialtyId (int specialtyId){
         String query = "SELECT name\n" +
                 "FROM specialty\n" +
-                "WHERE specialty_id = 1\n" +
+                "WHERE specialty_id = ?\n" +
                 "AND status = 1;";
         String specialtyName = null;
         try {

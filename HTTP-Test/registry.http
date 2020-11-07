@@ -5,13 +5,13 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "firstName": "Ariel",
-  "firstSurname": "Colque",
-  "secondSurname": "Herrera",
+  "firstName": "Camila",
+  "firstSurname": "Gardeazabal",
+  "secondSurname": "Cruz",
   "birthDate": "1998-07-25",
-  "email": "acolque@gmail.com",
+  "email": "cgarde@gmail.com",
   "password": "12345",
-  "phoneNumber": "7812212"
+  "phoneNumber": "6772122"
 }
 
 ###

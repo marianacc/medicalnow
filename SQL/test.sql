@@ -25,7 +25,15 @@ WHERE specialty_id = 1
 AND status = 1;
 
 
-
+SELECT mh.medical_history_id
+FROM medical_history mh
+    JOIN patient pat on mh.patient_id = pat.patient_id
+        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+WHERE mh.patient_id = 1
+AND ds.doctor_specialty_id = 1
+AND mh.status = 1
+AND pat.status = 1
+AND ds.status = 1;
 
 -- Seleccionar todas las especialidades
 

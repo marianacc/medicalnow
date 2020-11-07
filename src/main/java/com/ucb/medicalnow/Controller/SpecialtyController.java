@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/specialties")
@@ -50,7 +52,7 @@ public class SpecialtyController {
             path = "general_medicine",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<DoctorSpecialtyModel>> returnAllGeneralMedicineDoctors (@RequestHeader("Authorization") String authorization){
+    public ResponseEntity<Map> returnAllGeneralMedicineDoctors (@RequestHeader("Authorization") String authorization){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -61,14 +63,15 @@ public class SpecialtyController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.specialtyBl.returnAllGeneralMedicineDoctors(), HttpStatus.OK);
+        Map result = specialtyBl.returnAllGeneralMedicineDoctors();
+        return new ResponseEntity (result, HttpStatus.OK);
     }
 
     @RequestMapping(
             path = "{specialtyId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<DoctorSpecialtyModel>> returnDoctorsBySpecialty (@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<Map> returnDoctorsBySpecialty (@RequestHeader("Authorization") String authorization,
                                                                                      @PathVariable("specialtyId") Integer specialtyId){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -80,8 +83,7 @@ public class SpecialtyController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-
-
-        return new ResponseEntity<>(this.specialtyBl.returnDoctorsBySpecialty(specialtyId), HttpStatus.OK);
+        Map result = specialtyBl.returnDoctorsBySpecialty(specialtyId);
+        return new ResponseEntity (result, HttpStatus.OK);
     }
 }

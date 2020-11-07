@@ -26,15 +26,10 @@ public class SecurityController {
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String,Object>> authenticate (@RequestBody CredentialModel credentialModel){
-        Map <String,String> tokens = securityBl.authenticate(credentialModel.getEmail(), credentialModel.getPassword());
+    public ResponseEntity<Map> authenticate (@RequestBody CredentialModel credentialModel){
+        Map tokens = securityBl.authenticate(credentialModel.getEmail(), credentialModel.getPassword());
         if(tokens != null){
-            Map <String,Object> response = new HashMap();
-            response.put("Message","Authentication OK");
-            response.put("userId", tokens.get("userId"));
-            response.put("authentication",tokens.get("authentication"));
-            response.put("refresh",tokens.get("refresh"));
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(tokens, HttpStatus.OK);
         }
         else{
             Map <String,Object> response = new HashMap();
@@ -48,13 +43,8 @@ public class SecurityController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String,Object>> authenticate (@RequestBody TokenRefreshModel tokenRefreshModel){
-        Map<String,String> tokens = securityBl.refresh(tokenRefreshModel);
-        Map<String,String> response= new HashMap<>();
-        response.put("Message","Authentication OK");
-        response.put("userId", tokens.get("userId"));
-        response.put("authentication", tokens.get("authentication"));
-        response.put("refresh", tokens.get("refresh"));
-        return new ResponseEntity (response, HttpStatus.OK);
+    public ResponseEntity<Map> authenticate (@RequestBody TokenRefreshModel tokenRefreshModel){
+        Map tokens = securityBl.refresh(tokenRefreshModel);
+        return new ResponseEntity (tokens, HttpStatus.OK);
     }
 }

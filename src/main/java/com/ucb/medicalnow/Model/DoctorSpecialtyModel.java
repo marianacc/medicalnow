@@ -7,28 +7,25 @@ public class DoctorSpecialtyModel {
     private String firstName;
     private String firstSurname;
     private String secondSurname;
-    private String specialtyName;
     private Double qualification;
 
     public DoctorSpecialtyModel() {
     }
 
-    public DoctorSpecialtyModel(Integer doctorSpecialtyId, char firstLetter, String firstName, String firstSurname, String secondSurname, String specialtyName, Double qualification) {
+    public DoctorSpecialtyModel(Integer doctorSpecialtyId, char firstLetter, String firstName, String firstSurname, String secondSurname, Double qualification) {
         this.doctorSpecialtyId = doctorSpecialtyId;
         this.firstLetter = firstLetter;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
-        this.specialtyName = specialtyName;
         this.qualification = qualification;
     }
 
-    public DoctorSpecialtyModel(Integer doctorSpecialtyId, String firstName, String firstSurname, String secondSurname, String specialtyName, Double qualification) {
+    public DoctorSpecialtyModel(Integer doctorSpecialtyId, String firstName, String firstSurname, String secondSurname, Double qualification) {
         this.doctorSpecialtyId = doctorSpecialtyId;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
-        this.specialtyName = specialtyName;
         this.qualification = qualification;
     }
 
@@ -72,14 +69,6 @@ public class DoctorSpecialtyModel {
         this.secondSurname = secondSurname;
     }
 
-    public String getSpecialtyName() {
-        return specialtyName;
-    }
-
-    public void setSpecialtyName(String specialtyName) {
-        this.specialtyName = specialtyName;
-    }
-
     public Double getQualification() {
         return qualification;
     }
@@ -96,7 +85,6 @@ public class DoctorSpecialtyModel {
                 ", firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
-                ", specialtyName='" + specialtyName + '\'' +
                 ", qualification=" + qualification +
                 '}';
     }

@@ -11,21 +11,17 @@ public class ConsultDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    /*
     @Autowired
     public ConsultDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Integer addConsult (int medicalHistoryId, int patientId, int doctorSpecialtyId, String message, Date consultDate){
-        String query = "INSERT INTO consult (medical_history_id, patient_id, doctor_specialty_id, message, consult_date, status, tx_id, tx_username, tx_host, tx_date)\n" +
-                        "VALUES (?, ?, ?, ?, ?, 1, 0, 'root', '127.0.0.1', now());";
-        Integer result = null;
+    /*public Long consultExists (int medicalHistoryId){
+        String query = "";
+        Long consultId = null;
         try {
-            result = jdbcTemplate.update(query, new Object[]{medicalHistoryId, patientId, doctorSpecialtyId, message, consultDate});
+            consultId = jdbcTemplate.queryForObject(query, new Object[]{medicalHistoryId});
         } catch (Exception e) {
-            System.out.print(e);
             throw new RuntimeException();
         }
-        return result;
+        return consultId;
     }*/
-
 }

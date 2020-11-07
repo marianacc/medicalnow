@@ -45,9 +45,7 @@ public class PatientDao {
         Integer patientId = null;
         try {
             patientId = jdbcTemplate.queryForObject(query, new Object[]{userId}, Integer.class);
-            System.out.print(patientId);
         } catch (Exception e){
-            System.out.print(e);
             throw new RuntimeException();
         }
         return patientId;
