@@ -24,7 +24,7 @@ public class SpecialtyBl {
         return this.specialtyDao.returnAllSpecialties();
     }
 
-    public Map returnAllGeneralMedicineDoctors () {
+    public Map<String, Object> returnAllGeneralMedicineDoctors () {
         ArrayList<DoctorSpecialtyModel> doctorSpecialtyResponse = specialtyDao.returnGeneralMedicineDoctors();
         for (int i=0; i<doctorSpecialtyResponse.size(); i++){
             DoctorSpecialtyModel doctorSpecialtyModel = doctorSpecialtyResponse.get(i);
@@ -32,13 +32,13 @@ public class SpecialtyBl {
             char firstLetter = firstName.charAt(0);
             doctorSpecialtyModel.setFirstLetter(firstLetter);
         }
-        Map result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         result.put("body", doctorSpecialtyResponse);
         result.put("specialtyName", "Medicina General");
         return result;
     }
 
-    public Map returnDoctorsBySpecialty (int specialtyId) {
+    public Map<String, Object> returnDoctorsBySpecialty (int specialtyId) {
         String specialtyName = specialtyDao.returnSpecialtyNameBySpecialtyId(specialtyId);
         ArrayList<DoctorSpecialtyModel> doctorSpecialtyResponse = specialtyDao.returnDoctorsBySpecialty(specialtyId);
         for (int i=0; i<doctorSpecialtyResponse.size(); i++){
@@ -47,7 +47,7 @@ public class SpecialtyBl {
             char firstLetter = firstName.charAt(0);
             doctorSpecialtyModel.setFirstLetter(firstLetter);
         }
-        Map result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         result.put("body", doctorSpecialtyResponse);
         result.put("specialtyName", specialtyName);
         return result;

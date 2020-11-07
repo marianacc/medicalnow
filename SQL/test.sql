@@ -35,6 +35,9 @@ AND mh.status = 1
 AND pat.status = 1
 AND ds.status = 1;
 
+-- nombre especialidad fecha de inicio
+SELECT con.consult_id, per.first_name, per.second_surname, spe.name, state
+
 -- Seleccionar todas las especialidades
 
 SELECT sp.specialty_id, sp.specialty_name, count(doc_sp.specialty_id), sp.specialty_image

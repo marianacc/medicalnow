@@ -13,21 +13,21 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1")
-public class ConsultController {
+@RequestMapping("api/v1/chat")
+public class MedicalHistoryController {
 
-    private ConsultBl consultBl;
+    private MedicalHistoryBl medicalHistoryBl;
+
+    @Autowired
+    public MedicalHistoryController(MedicalHistoryBl medicalHistoryBl) {
+        this.medicalHistoryBl = medicalHistoryBl;
+    }
 
     @Value("${medicalnow.security.secretJwt}")
     private String secretJwt;
 
-    @Autowired
-    public ConsultController(ConsultBl consultBl) {
-        this.consultBl = consultBl;
-    }
-
-    @RequestMapping(
-            value="{userId}/consults",
+   /*@RequestMapping(
+            value="{userId}",
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public void addToMedicalHistory (@RequestHeader("Authorization") String authorization,
@@ -45,6 +45,9 @@ public class ConsultController {
         verifier.verify(tokenJwt);
 
 
+        consultBl.addConsultToMedicalHistory(consultModel.getDoctorSpecialtyId(), consultModel.getMessage(),
+                consultModel.getImage(), userId);
 
-    }
+
+    }*/
 }

@@ -52,7 +52,7 @@ public class SpecialtyController {
             path = "general_medicine",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map> returnAllGeneralMedicineDoctors (@RequestHeader("Authorization") String authorization){
+    public ResponseEntity<Map<String, Object>> returnAllGeneralMedicineDoctors (@RequestHeader("Authorization") String authorization){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -63,7 +63,7 @@ public class SpecialtyController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        Map result = specialtyBl.returnAllGeneralMedicineDoctors();
+        Map<String, Object> result = specialtyBl.returnAllGeneralMedicineDoctors();
         return new ResponseEntity (result, HttpStatus.OK);
     }
 
@@ -71,7 +71,7 @@ public class SpecialtyController {
             path = "{specialtyId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map> returnDoctorsBySpecialty (@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<Map<String, Object>> returnDoctorsBySpecialty (@RequestHeader("Authorization") String authorization,
                                                                                      @PathVariable("specialtyId") Integer specialtyId){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -83,7 +83,7 @@ public class SpecialtyController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        Map result = specialtyBl.returnDoctorsBySpecialty(specialtyId);
+        Map<String, Object> result = specialtyBl.returnDoctorsBySpecialty(specialtyId);
         return new ResponseEntity (result, HttpStatus.OK);
     }
 }
