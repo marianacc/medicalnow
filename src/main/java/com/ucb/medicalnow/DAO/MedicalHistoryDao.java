@@ -31,28 +31,15 @@ public class MedicalHistoryDao {
         return medicalHistoryId;
     }
 
-    public Integer newMedicalHistoryByPatientId (int patientId){
-        String query = "INSERT INTO medical_history (, patient_id, status, tx_id, tx_username, tx_host, tx_date)\n" +
-                        "VALUES ('', ?, 1, 0, 'root', '127.0.0.1', now());";
+    public Integer createMedicalHistory (int patientId, int doctorSpecialtyId){
+        String query = "INSERT INTO medical_history (patient_id, doctor_specialty_id, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                        "VALUES (?, ?, 1, 0, 'root', '127.0.0.1', now());";
         Integer result = null;
         try {
-            result = jdbcTemplate.update(query, new Object[]{patientId});
+            result = jdbcTemplate.update(query, new Object[]{patientId, doctorSpecialtyId});
         } catch (Exception e) {
             throw new RuntimeException();
         }
         return result;
     }
-
-    /*
-    public Integer returnMaxMedicalHistoryId(){
-        String query = "SELECT MAX(medical_history_id) from medical_history where medical_history.status = 1;";
-        Integer medicalHistoryId = null;
-        try {
-            medicalHistoryId = jdbcTemplate.queryForObject(query, new Object[]{}, Integer.class);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-        return medicalHistoryId;
-    }
-    }*/
 }

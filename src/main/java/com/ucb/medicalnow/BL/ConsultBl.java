@@ -1,11 +1,7 @@
 package com.ucb.medicalnow.BL;
 
-import com.mysql.cj.log.Log;
 import com.ucb.medicalnow.DAO.ConsultDao;
-import com.ucb.medicalnow.DAO.MedicalHistoryDao;
 import com.ucb.medicalnow.DAO.PatientDao;
-import com.ucb.medicalnow.DAO.SpecialtyDao;
-import com.ucb.medicalnow.Model.ConsultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +11,41 @@ import java.util.Map;
 @Service
 public class ConsultBl {
 
-    /*
-    public Map<String, Object> consultExists(int doctorSpecialtyId, int userId){
+    private PatientDao patientDao;
+    private ConsultDao consultDao;
+
+    @Autowired
+    public ConsultBl (PatientDao patientDao, ConsultDao consultDao){
+        this.patientDao = patientDao;
+        this.consultDao = consultDao;
+    }
+
+    public Map<String, Object> consultExists(int medicalHistoryId){
         Map<String, Object> result = new HashMap();
-        Boolean medicalHistoryResponse = null;
-        Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        Long medicalHistoryId = medicalHistoryDao.returnMedicalHistoryId(patientId, doctorSpecialtyId);
-        if (medicalHistoryId == null){
-            medicalHistoryResponse = false;
+        Boolean consultResponse = null;
+        Long consultId = consultDao.returnConsultId(medicalHistoryId);
+        if (consultId == null){
+            consultResponse = false;
         } else {
-            medicalHistoryResponse = true;
+            consultResponse = true;
         }
-        result.put("id", medicalHistoryId);
-        result.put("exists", medicalHistoryResponse);
+        result.put("id", consultId);
+        result.put("exists", consultResponse);
         return result;
-    }*/
+    }
+
+    public Boolean createNewConsult (int medicalHistoryId){
+        Boolean consultResponse = null;
+        Integer result = consultDao.createNewConsult(medicalHistoryId);
+        if (result > 0){
+            consultResponse = true;
+        } else {
+            consultResponse = false;
+        }
+        return consultResponse;
+    }
+
+    public Long returnConsultId (int medicalHistory){
+        return this.consultDao.returnConsultId(medicalHistory);
+    }
 }

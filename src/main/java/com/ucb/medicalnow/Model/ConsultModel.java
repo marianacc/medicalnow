@@ -7,15 +7,13 @@ public class ConsultModel {
 
     private Integer doctorSpecialtyId;
     private String message;
-    private byte[] image;
 
     public ConsultModel() {
     }
 
-    public ConsultModel(Integer doctorSpecialtyId, String message, byte[] image) {
+    public ConsultModel(Integer doctorSpecialtyId, String message) {
         this.doctorSpecialtyId = doctorSpecialtyId;
         this.message = message;
-        this.image = image;
     }
 
     public Integer getDoctorSpecialtyId() {
@@ -34,20 +32,11 @@ public class ConsultModel {
         this.message = message;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     @Override
     public String toString() {
         return "ConsultModel{" +
                 "doctorSpecialtyId=" + doctorSpecialtyId +
                 ", message='" + message + '\'' +
-                ", image=" + Arrays.toString(image) +
                 '}';
     }
 }

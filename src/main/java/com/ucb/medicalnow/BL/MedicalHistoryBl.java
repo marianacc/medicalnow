@@ -38,17 +38,20 @@ public class MedicalHistoryBl {
         return result;
     }
 
-    /*
-    public Boolean createMedicalHistory (int userId) {
+    public Boolean createMedicalHistory (int userId, int doctorSpecialtyId) {
         Boolean medicalHistoryUpdated = null;
         Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        Integer medicalHistoryResponse = medicalHistoryDao.newMedicalHistoryByPatientId(patientId, );
+        Integer medicalHistoryResponse = medicalHistoryDao.createMedicalHistory(patientId, doctorSpecialtyId);
         if(medicalHistoryResponse>0){
             medicalHistoryUpdated = true;
         } else {
             medicalHistoryUpdated = false;
         }
         return medicalHistoryUpdated;
-    }*/
+    }
 
+    public Long returnMedicalHistoryId (int doctorSpecialtyId, int userId){
+        Integer patientId = patientDao.returnPatientIdByUserId(userId);
+        return this.medicalHistoryDao.returnMedicalHistoryId(patientId, doctorSpecialtyId);
+    }
 }

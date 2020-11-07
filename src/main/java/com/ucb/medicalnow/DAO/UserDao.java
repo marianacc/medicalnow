@@ -47,7 +47,6 @@ public class UserDao {
     public Integer insertNewUserRole (int userId) {
         String query = "INSERT INTO user_role (user_id, role_id, status, tx_id, tx_username, tx_host, tx_date)\n" +
                 "VALUES (?, 2, 1,  1, 'admin', 'localhost', now());";
-
         Integer result = null;
         try {
             result = jdbcTemplate.update(query, new Object[]{userId});

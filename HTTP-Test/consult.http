@@ -1,14 +1,13 @@
 ### Todos los laboratorios de un paciente
 
 POST http://localhost:8008/api/v1/1/chat
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcxOTk3NH0.yXUxi5wm8mNrdZysxSToM2xSmtnTUwMnVd57pnbl4Vo
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDc2MTI5Nn0.wgaYUlWBCF9GxavfgIXe0LaSuGeaMlJfgPm7Piq9isI
 Content-Type: application/json
 Accept: application/json
 
 {
-  "doctorSpecialtyId": "1",
-  "message": "Hola",
-  "resource": null
+  "doctorSpecialtyId": "18",
+  "message": "Hola doctor, estoy con taquicardia, que me recomienda?"
 }
 
 ###

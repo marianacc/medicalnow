@@ -1,0 +1,2 @@
+INSERT INTO conversation (consult_id, message, status, tx_id, tx_username, tx_host, tx_date)
+VALUES (1, 'Buenos dias doctor, no dejo de estornudar tras abrazar al perro de mi hermana.', 1, 1, 'root', '127.0.0.1', now());

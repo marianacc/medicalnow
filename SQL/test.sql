@@ -35,8 +35,18 @@ AND mh.status = 1
 AND pat.status = 1
 AND ds.status = 1;
 
--- nombre especialidad fecha de inicio
-SELECT con.consult_id, per.first_name, per.second_surname, spe.name, state
+-- Seleccionar si existe una consulta activa entre el paciente y el doctor de la especialidad
+SELECT con.consult_id
+FROM consult con
+    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+WHERE mh.medical_history_id = 1
+AND con.status = 1
+AND mh.status = 1;
+
+SELECT consult_id
+FROM consult
+WHERE medical_history_id = 1
+AND status = 1;
 
 -- Seleccionar todas las especialidades
 
