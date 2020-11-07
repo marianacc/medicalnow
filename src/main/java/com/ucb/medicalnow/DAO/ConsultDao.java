@@ -11,6 +11,7 @@ public class ConsultDao {
 
     private JdbcTemplate jdbcTemplate;
 
+    /*
     @Autowired
     public ConsultDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
@@ -25,6 +26,6 @@ public class ConsultDao {
             throw new RuntimeException();
         }
         return result;
-    }
+    }*/
 
 }

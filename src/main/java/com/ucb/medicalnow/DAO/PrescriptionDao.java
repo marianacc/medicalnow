@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class PrescriptionDao {
 
     private JdbcTemplate jdbcTemplate;
-
+/*
     public PrescriptionDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
     public ArrayList<PrescriptionModel> returnAllPrescriptionsByUserId (int userId){
@@ -79,5 +79,5 @@ public class PrescriptionDao {
         }
         return prescriptionDetail;
     }
-
+*/
 }

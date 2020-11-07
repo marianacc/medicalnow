@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
@@ -31,29 +30,29 @@ public class RegistryBl {
         this.medicalHistoryDao = medicalHistoryDao;
     }
 
-    public Boolean addNewPatient (String idNumber, String firstName, String firstSurname, String secondSurname,
-                                    String birthDate, String city, String email, String password, String phoneNumber)
+    public Boolean addNewPatient (String firstName, String firstSurname, String secondSurname, Date birthDate,
+                               String email, String password, String phoneNumber)
             throws ParseException {
-        // Parsear la fecha guardada en String a Date
-        Date birthdate = new SimpleDateFormat("yyyy/MM/dd").parse(birthDate);
-        // Agregarle la Salt y aplicar el algoritmo hash256 a la contraseña para guardarla en la base de datos
-        String sha256hex= Hashing.sha256()
+
+        Boolean registryUpdated = null;
+        // Se aplica el hash 256 a la contraseña para guardarla en la base de datos
+        String sha256hex = Hashing.sha256()
                 .hashString(password+salt, StandardCharsets.UTF_8)
                 .toString();
-        Boolean registryUpdated = null;
-        Integer personResponse = personDao.addNewPerson(idNumber, firstName, firstSurname, secondSurname, birthdate, city);
+
+        Integer personResponse = personDao.insertNewPerson(firstName, firstSurname, secondSurname, birthDate);
         if (personResponse > 0){
             Integer personId = personDao.returnMaxPersonId();
-            Integer userResponse = userDao.addNewUser(personId, email, sha256hex, phoneNumber);
+            Integer userResponse = userDao.insertNewUser(personId, email, sha256hex, phoneNumber);
             if (userResponse > 0){
                 Integer userId = userDao.returnMaxUserId();
-                Integer userRoleResponse = userDao.addNewUserRole(userId);
+                Integer userRoleResponse = userDao.insertNewUserRole(userId);
                 if (userRoleResponse > 0){
-                    Integer patientResponse = patientDao.addNewPatient(personId, userId);
+                    Integer patientResponse = patientDao.inserNewPatient(personId, userId);
                     if (patientResponse > 0){
-                            registryUpdated = true;
+                        registryUpdated = true;
                     } else {
-                            registryUpdated = false;
+                        registryUpdated = false;
                     }
                 }
             }

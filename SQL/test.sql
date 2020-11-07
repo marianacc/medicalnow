@@ -1,3 +1,32 @@
+-- Selecionar el rol del usuario
+SELECT rol.role_name
+FROM role rol
+    JOIN user_role urol on rol.role_id = urol.role_id
+        JOIN user usr on urol.user_id = usr.user_id
+AND usr.user_id = 1
+AND rol.status = 1
+AND urol.status = 1;
+
+-- Verificar si el paciente tiene un historial medico con el doctor de la especialidad
+SELECT COUNT(med.medical_history_id)
+FROM medical_history med
+    JOIN patient pat on med.patient_id = pat.patient_id
+         JOIN doctor_specialty ds on med.doctor_specialty_id = ds.doctor_specialty_id
+WHERE pat.patient_id = 1
+  AND ds.doctor_specialty_id = 10
+  AND med.status = 1
+  AND pat.status = 1
+  AND ds.status = 1
+GROUP BY medical_history_id;
+
+SELECT name
+FROM specialty
+WHERE specialty_id = 1
+AND status = 1;
+
+
+
+
 -- Seleccionar todas las especialidades
 
 SELECT sp.specialty_id, sp.specialty_name, count(doc_sp.specialty_id), sp.specialty_image

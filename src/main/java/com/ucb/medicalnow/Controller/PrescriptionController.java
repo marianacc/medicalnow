@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class PrescriptionController {
 
     private PrescriptionBl prescriptionBl;
-
+/*
     @Value("${medicalnow.security.secretJwt}")
     private String secretJwt;
 
@@ -65,5 +65,5 @@ public class PrescriptionController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.prescriptionBl.returnPrescriptionDetailByPresctiptionId(prescriptionId), HttpStatus.OK);
-    }
+    }*/
 }

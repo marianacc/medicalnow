@@ -43,7 +43,7 @@ public class SecurityBl {
         Integer userId = userDao.findUserByEmailAndPassword(username,sha256hex);
         if(userId != null){
             result.put("userId", userId.toString());
-            result.put("authentication",generateJwt(userId,10,"AUTHN", userDao.findAllFeatureCodeByUserId(userId)));
+            result.put("authentication",generateJwt(userId,10,"AUTHN", userDao.findRoleByUserId(userId)));
             result.put("refresh", generateJwt(userId, 20, "REFRESH", null));
             return result;
         }else{
@@ -67,21 +67,21 @@ public class SecurityBl {
         verifier.verify(tokenJwt);
         Integer userIdAsInt = Integer.parseInt(userId);
         result.put("userId", userId);
-        result.put("authentication",generateJwt(Integer.parseInt(userId),1,"AUTHN", userDao.findAllFeatureCodeByUserId(userIdAsInt)));
+        result.put("authentication",generateJwt(Integer.parseInt(userId),1,"AUTHN", userDao.findRoleByUserId(userIdAsInt)));
         result.put("refresh",generateJwt(Integer.parseInt(userId),2,"REFRESH", null));
         return result;
     }
 
-    private String generateJwt(int userId, int minutes, String type, ArrayList<String> features){
+    private String generateJwt(int userId, int minutes, String type, String role){
         LocalDateTime expiresAt = LocalDateTime.now(ZoneId.systemDefault()).plusMinutes(minutes);
         String token =null;
         try{
             Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-            if(features!=null){
+            if(role!=null){
                 token = JWT.create()
                         .withIssuer("Medicalnow")
                         .withClaim("type",type)
-                        .withArrayClaim("features",features.toArray(new String[0]))
+                        .withClaim("role", role)
                         .withSubject(Integer.toString(userId))
                         .withExpiresAt(Date.from(expiresAt.atZone(ZoneId.systemDefault()).toInstant()))
                         .sign(algorithm);

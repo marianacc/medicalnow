@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class LaboratoryDao {
 
     private JdbcTemplate jdbcTemplate;
-
+/*
     @Autowired
     public LaboratoryDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
@@ -59,5 +59,5 @@ public class LaboratoryDao {
             throw new RuntimeException();
         }
         return laboratories;
-    }
+    }*/
 }

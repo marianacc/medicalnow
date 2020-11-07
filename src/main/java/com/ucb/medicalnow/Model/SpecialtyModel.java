@@ -50,4 +50,14 @@ public class SpecialtyModel {
     public void setSpecialtyImage(String specialtyImage) {
         this.specialtyImage = specialtyImage;
     }
+
+    @Override
+    public String toString() {
+        return "SpecialtyModel{" +
+                "specialtyId=" + specialtyId +
+                ", specialtyName='" + specialtyName + '\'' +
+                ", specialtyQuantity=" + specialtyQuantity +
+                ", specialtyImage='" + specialtyImage + '\'' +
+                '}';
+    }
 }

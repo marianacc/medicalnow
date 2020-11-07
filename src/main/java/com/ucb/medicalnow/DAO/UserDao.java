@@ -20,53 +20,14 @@ public class UserDao {
     @Autowired
     public UserDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Integer findUserByEmailAndPassword (String email, String password){
-        String query = "SELECT user_id FROM user WHERE email = ? AND UPPER(password) = UPPER(?)";
-        Integer userId = null;
-        try{
-            userId = jdbcTemplate.queryForObject(query, new Object[]{ email, password }, Integer.class);
-        }catch(Exception e){
-            throw new RuntimeException();
-        }
-        return userId;
-    }
-
-    public ArrayList<String> findAllFeatureCodeByUserId(int userId){
-        String query = "SELECT DISTINCT fea.feature_code\n" +
-                        "FROM user usr\n" +
-                        "   JOIN user_role uro ON usr.user_id = uro.user_id\n" +
-                        "       JOIN role rle ON rle.role_id = uro.role_id\n" +
-                        "           JOIN role_feature rfe ON rfe.role_id = rle.role_id\n" +
-                        "               JOIN feature fea ON fea.feature_id = rfe.feature_id\n" +
-                        "WHERE usr.user_id = ? \n" +
-                        "AND usr.status = 1\n" +
-                        "AND uro.status = 1\n" +
-                        "AND rle.status = 1\n" +
-                        "AND rfe.status = 1\n" +
-                        "AND fea.status = 1";
-        ArrayList<String> features =null;
-        try {
-            features = (ArrayList<String>) jdbcTemplate.query(query, new Object[]{userId},
-                    new RowMapper<String>(){
-                        @Override
-                        public String mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return resultSet.getString(1);
-                        }
-                    });
-        }
-        catch (Exception exception){
-            throw new RuntimeException(exception);
-        }
-        return features;
-    }
-
-    public Integer addNewUser (int personId, String email, String password, String phoneNumber) {
-        String query = "INSERT INTO user (person_id, email, password, phone_number, user_image, status, tx_id, tx_username, tx_host, tx_date)\n" +
-                        "values (?, ?, ?, ?, 'http://dummyimage.com/227x147.png/ff4444/ffffff', 1, 0, 'root', '127.0.0.1', now());";
+    public Integer insertNewUser (int personId, String email, String password, String phoneNumber) {
+        String query = "INSERT INTO user (person_id, email, password, phone_number, profile_picture, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "values (?, ?, ?, ?, 'shorturl.at/gluR7', 1, 0, 'root', '127.0.0.1', now());";
         Integer result = null;
         try {
             result = jdbcTemplate.update(query, new Object[]{personId, email, password, phoneNumber});
         } catch (Exception e) {
+            System.out.print(e);
             throw new RuntimeException();
         }
         return result;
@@ -83,9 +44,9 @@ public class UserDao {
         return userId;
     }
 
-    public Integer addNewUserRole (int userId) {
-        String query = "INSERT INTO user_role ( user_id, role_id, status, tx_id, tx_username, tx_host, tx_date)\n" +
-                        "VALUES (?, 2, 1,  1, 'admin', 'localhost', now());";
+    public Integer insertNewUserRole (int userId) {
+        String query = "INSERT INTO user_role (user_id, role_id, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, 2, 1,  1, 'admin', 'localhost', now());";
 
         Integer result = null;
         try {
@@ -96,13 +57,42 @@ public class UserDao {
         return result;
     }
 
+    public Integer findUserByEmailAndPassword (String email, String password){
+        String query = "SELECT user_id FROM user WHERE email = ? AND UPPER(password) = UPPER(?)";
+        Integer userId = null;
+        try{
+            userId = jdbcTemplate.queryForObject(query, new Object[]{ email, password }, Integer.class);
+        }catch(Exception e){
+            throw new RuntimeException();
+        }
+        return userId;
+    }
+
+    public String findRoleByUserId(int userId){
+        String query = "SELECT rol.role_name\n" +
+                "FROM role rol\n" +
+                "    JOIN user_role urol on rol.role_id = urol.role_id\n" +
+                "        JOIN user usr on urol.user_id = usr.user_id\n" +
+                "AND usr.user_id = ?\n" +
+                "AND rol.status = 1\n" +
+                "AND urol.status = 1;";
+        String role = null;
+        try {
+            role = jdbcTemplate.queryForObject(query, new Object[]{userId}, String.class);
+        }
+        catch (Exception exception){
+            throw new RuntimeException(exception);
+        }
+        return role;
+    }
+
     public UserAvatarModel returnUserNameByUserId (int userId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
-                        "FROM person per\n" +
-                        "    JOIN user usr on per.person_id = usr.person_id\n" +
-                        "WHERE usr.user_id = ? \n" +
-                        "AND per.status = 1\n" +
-                        "AND usr.status = 1;";
+                "FROM person per\n" +
+                "    JOIN user usr on per.person_id = usr.person_id\n" +
+                "WHERE usr.user_id = ? \n" +
+                "AND per.status = 1\n" +
+                "AND usr.status = 1;";
         UserAvatarModel userAvatar= null;
         try {
             userAvatar = (UserAvatarModel) jdbcTemplate.queryForObject(query, new Object[]{userId},
@@ -121,6 +111,7 @@ public class UserDao {
         return userAvatar;
     }
 
+    /*
     public UserConfigurationModel returnUserConfigurationByUserId (int userId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname, usr.phone_number, per.birthdate, pat.weight, pat.height, per.city, usr.email, usr.password\n" +
                         "FROM person per\n" +
@@ -167,7 +158,7 @@ public class UserDao {
             throw new RuntimeException();
         }
         return result;
-    }
+    }*/
 }
 
 

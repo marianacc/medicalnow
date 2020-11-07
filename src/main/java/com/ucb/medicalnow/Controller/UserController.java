@@ -40,26 +40,6 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "registry",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> newPatientRegistry (@RequestBody NewUserModel newUserModel) throws ParseException {
-        Map <String, String> response = new HashMap();
-        Boolean registryUpdated = registryBl.addNewPatient(newUserModel.getIdNumber(), newUserModel.getFirstName(),
-                newUserModel.getFirstSurname(), newUserModel.getSecondSurname(), newUserModel.getBirthDate(),
-                newUserModel.getCity(), newUserModel.getEmail(), newUserModel.getPassword(), newUserModel.getPhoneNumber());
-        if(registryUpdated == true){
-            response.put("Message","Patient added succesfully");
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        else{
-            response.put("Message","Error. The patient wasn't added");
-            return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
-        }
-    }
-
-    @RequestMapping(
             value = "{userId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -79,6 +59,7 @@ public class UserController {
         return new ResponseEntity<>(this.userBl.returnUserNameByUserId(userId), HttpStatus.OK);
     }
 
+    /*
     @RequestMapping(
             value = "{userId}/config",
             method = RequestMethod.GET,
@@ -129,6 +110,6 @@ public class UserController {
             response.put("Message", "Error. The patient wasn't updated");
             return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
         }
-    }
+    }*/
 }
 

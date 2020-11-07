@@ -34,12 +34,13 @@ public class UserBl {
 
     public UserAvatarModel returnUserNameByUserId(int userId){
         UserAvatarModel userAvatarModel = userDao.returnUserNameByUserId(userId);
-        String firstName = userAvatarModel.getUserFirstName();
+        String firstName = userAvatarModel.getFirstName();
         char firstLetter = firstName.charAt(0);
         userAvatarModel.setFirstLetter(firstLetter);
         return userAvatarModel;
     }
 
+    /*
     public UserConfigurationModel returnUserConfigurationByUserId(int userId){
         return this.userDao.returnUserConfigurationByUserId(userId);
     }
@@ -65,5 +66,5 @@ public class UserBl {
             }
         }
         return configUpdated;
-    }
+    }*/
 }

@@ -22,10 +22,10 @@ public class SecurityController {
     public SecurityController (SecurityBl securityBl) { this.securityBl = securityBl; }
 
     @RequestMapping(
-            value="login",
+            value = "login",
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE,
-            consumes =MediaType.APPLICATION_JSON_VALUE)
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String,Object>> authenticate (@RequestBody CredentialModel credentialModel){
         Map <String,String> tokens = securityBl.authenticate(credentialModel.getEmail(), credentialModel.getPassword());
         if(tokens != null){

@@ -1,35 +1,42 @@
 package com.ucb.medicalnow.BL;
 
+import com.mysql.cj.log.Log;
 import com.ucb.medicalnow.DAO.ConsultDao;
 import com.ucb.medicalnow.DAO.MedicalHistoryDao;
 import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.DAO.SpecialtyDao;
-import com.ucb.medicalnow.Model.PatientConsultModel;
+import com.ucb.medicalnow.Model.ConsultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 @Service
 public class ConsultBl {
 
     private ConsultDao consultDao;
-    private MedicalHistoryDao medicalHistoryDao;
     private PatientDao patientDao;
     private SpecialtyDao specialtyDao;
+    private MedicalHistoryBl medicalHistoryBl;
 
     @Autowired
-    public ConsultBl (ConsultDao consultDao, MedicalHistoryDao medicalHistoryDao, PatientDao patientDao, SpecialtyDao specialtyDao) {
+    public ConsultBl (ConsultDao consultDao, PatientDao patientDao, SpecialtyDao specialtyDao, MedicalHistoryBl medicalHistoryBl) {
         this.consultDao = consultDao;
-        this.medicalHistoryDao = medicalHistoryDao;
         this.patientDao = patientDao;
         this.specialtyDao = specialtyDao;
+        this.medicalHistoryBl = medicalHistoryBl;
     }
 
-    public Boolean addConsultToMedicalHistory(PatientConsultModel patientConsultModel, int userId) throws ParseException {
-        Date consultDate = new SimpleDateFormat("yyyy/MM/dd").parse(patientConsultModel.getConsultDate());
+    public Boolean addConsultToMedicalHistory(int doctorSpecialtyId, String message, byte[] image, int userId) {
+        Boolean consultUpdated = null;
+        Boolean medicalHistoryExists = medicalHistoryBl.returnMedicalHistoryId(doctorSpecialtyId, userId);
+        if (medicalHistoryExists){
+            // Introducir una consulta nueva
+        } else {
+            // crear la historia medica
+            // Introducir la consulta
+        }
+
+
+        /*Date consultDate = new SimpleDateFormat("yyyy/MM/dd").parse(patientConsultModel.getConsultDate());
         Boolean consultUpdated = null;
         Integer medicalHistoryId = medicalHistoryDao.returnMaxMedicalHistoryId();
         System.out.print(medicalHistoryId);
@@ -42,7 +49,7 @@ public class ConsultBl {
             consultUpdated = true;
         } else {
             consultUpdated = false;
-        }
+        }*/
         return consultUpdated;
     }
 }

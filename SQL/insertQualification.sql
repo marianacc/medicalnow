@@ -2,44 +2,92 @@ insert into qualification (doctor_specialty_id, patient_id, qualification, statu
 values (1, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (1, 2, 4.5, 1, 0, 'root', '127.0.0.1', now());
+values (2, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (1, 3, 4.8, 1, 0, 'root', '127.0.0.1', now());
+values (3, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (2, 4, 5.0, 1, 0, 'root', '127.0.0.1', now());
+values (4, 1, 3.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (2, 5, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (5, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (3, 6, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (6, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (3, 7, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (7, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (3, 8, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (8, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (4, 9, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (9, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (5, 10, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (10, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (6, 11, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (11, 1, 3.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (6, 12, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (12, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (7, 13, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (13, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (8, 14, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (14, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
 
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (9, 15, 4.0, 1, 0, 'root', '127.0.0.1', now());
+values (15, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (16, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (17, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (18, 1, 3.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (19, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (20, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (21, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (22, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (23, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (24, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (25, 1, 3.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (26, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (27, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (28, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (29, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (30, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
+
+insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
+values (31, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 

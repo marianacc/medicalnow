@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class PrescriptionBl {
 
     private PrescriptionDao prescriptionDao;
-
+/*
     public PrescriptionBl (PrescriptionDao prescriptionDao) { this.prescriptionDao = prescriptionDao; }
 
     public ArrayList<PrescriptionModel> returnAllPrescriptionsByUserId (int userId) {
@@ -21,5 +21,5 @@ public class PrescriptionBl {
 
     public ArrayList<PrescriptionDetailModel> returnPrescriptionDetailByPresctiptionId (int prescriptionId){
         return this.prescriptionDao.returnPrescriptionDetailByPresctiptionId(prescriptionId);
-    }
+    }*/
 }

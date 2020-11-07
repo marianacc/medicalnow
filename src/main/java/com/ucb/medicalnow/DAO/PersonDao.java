@@ -14,12 +14,12 @@ public class PersonDao {
     @Autowired
     public PersonDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Integer addNewPerson (String idNumber, String firstName, String firstSurname, String secondSurname, Date birthDate, String city) {
-        String query = "INSERT INTO person (id_number, first_name, first_surname, second_surname, birthdate, city, status, tx_id, tx_username, tx_host, tx_date)\n" +
-                "VALUES (?, ?, ?, ?, ?, ?, 1, 0, 'root', '127.0.0.1', now());";
+    public Integer insertNewPerson (String firstName, String firstSurname, String secondSurname, Date birthDate) {
+        String query = "INSERT INTO person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, ?, ?, 1, 0, 'root', '127.0.0.1', now());";
         Integer result = null;
         try {
-            result = jdbcTemplate.update(query, new Object[]{idNumber, firstName, firstSurname, secondSurname, birthDate, city});
+            result = jdbcTemplate.update(query, new Object[]{firstName, firstSurname, secondSurname, birthDate});
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -37,7 +37,7 @@ public class PersonDao {
         return personId;
     }
 
-    public Integer returnPersonIdByUserId (int userId){
+/*    public Integer returnPersonIdByUserId (int userId){
         String query = "SELECT per.person_id\n" +
                         "FROM person per\n" +
                         "    JOIN user usr on per.person_id = usr.person_id\n" +
@@ -65,6 +65,6 @@ public class PersonDao {
             throw new RuntimeException();
         }
         return result;
-    }
+    }*/
 }
 

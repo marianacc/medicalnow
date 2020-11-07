@@ -12,8 +12,27 @@ public class MedicalHistoryDao {
     @Autowired
     public MedicalHistoryDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
+    public Long returnMedicalHistoryIdByPatientIdAndDoctorSpecialtyId(int patientId, int doctorSpecialtyId) {
+        String query = "SELECT med.medical_history_id\n" +
+                "FROM medical_history med\n" +
+                "    JOIN patient pat on med.patient_id = pat.patient_id\n" +
+                "         JOIN doctor_specialty ds on med.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "WHERE pat.patient_id = ?\n" +
+                "  AND ds.doctor_specialty_id = ?\n" +
+                "  AND med.status = 1\n" +
+                "  AND pat.status = 1\n" +
+                "  AND ds.status = 1;";
+        Long medicalHistoryId = null;
+        try {
+            medicalHistoryId = jdbcTemplate.queryForObject(query, new Object[]{patientId, doctorSpecialtyId}, Long.class);
+        } catch (Exception e) {
+            medicalHistoryId = null;
+        }
+        return medicalHistoryId;
+    }
+
     public Integer newMedicalHistoryByPatientId (int patientId){
-        String query = "INSERT INTO medical_history (diagnosis, patient_id, status, tx_id, tx_username, tx_host, tx_date)\n" +
+        String query = "INSERT INTO medical_history (, patient_id, status, tx_id, tx_username, tx_host, tx_date)\n" +
                         "VALUES ('', ?, 1, 0, 'root', '127.0.0.1', now());";
         Integer result = null;
         try {
@@ -24,6 +43,7 @@ public class MedicalHistoryDao {
         return result;
     }
 
+    /*
     public Integer returnMaxMedicalHistoryId(){
         String query = "SELECT MAX(medical_history_id) from medical_history where medical_history.status = 1;";
         Integer medicalHistoryId = null;
@@ -34,22 +54,5 @@ public class MedicalHistoryDao {
         }
         return medicalHistoryId;
     }
-
-    public Integer returnMedicalHistoryIdByPatientId(int patientId){
-        String query = "SELECT med.medical_history_id\n" +
-                        "FROM medical_history med\n" +
-                        "    JOIN patient pat on med.patient_id = pat.patient_id\n" +
-                        "        JOIN user usr on pat.user_id = usr.user_id\n" +
-                        "WHERE pat.patient_id = ?\n" +
-                        "AND med.status = 1\n" +
-                        "AND pat.status = 1\n" +
-                        "AND usr.status = 1;";
-        Integer medicalHistoryId = null;
-        try {
-            medicalHistoryId = jdbcTemplate.queryForObject(query, new Object[]{patientId}, Integer.class);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-        return medicalHistoryId;
-    }
+    }*/
 }

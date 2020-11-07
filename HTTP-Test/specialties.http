@@ -1,7 +1,18 @@
 ### Todas las especialidades
 
 GET http://localhost:8008/api/v1/specialties
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJNRURJQ0FMX0hJU1RPUllfTUFOQUdNRU5UIiwiUFJFU0NSSVBUSU9OX01BTkFHTUVOVCIsIlNFTkRfUEhPVE9TIl0sInN1YiI6IjEiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA0MzMxMjQ4fQ.aHEZq-ByG_sn351QRkEu8pVlNOpFFFxm6SbOgeLb834
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcwOTA4N30.sWZzgq8WrpyZMWGKVz3FQ52PNjeHN_9oYSmwgxwqaDY
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Todos los medicos generales
+
+GET http://localhost:8008/api/v1/specialties/general_medicine
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcwOTA4N30.sWZzgq8WrpyZMWGKVz3FQ52PNjeHN_9oYSmwgxwqaDY
 Content-Type: application/json
 Accept: application/json
 
@@ -12,18 +23,7 @@ Accept: application/json
 ### Todos los doctores de una especialidad
 
 GET http://localhost:8008/api/v1/specialties/2
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0Njc2NDV9.DQ-QdsTouVYjZ7nJ6Xph_PUYSRaqrNjWo7RkO5Tyl4A
-Content-Type: application/json
-Accept: application/json
-
-{
-
-}
-
-###
-
-GET http://localhost:8008/api/v1/specialties/general_medicine
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0Njc2NDV9.DQ-QdsTouVYjZ7nJ6Xph_PUYSRaqrNjWo7RkO5Tyl4A
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcwOTA4N30.sWZzgq8WrpyZMWGKVz3FQ52PNjeHN_9oYSmwgxwqaDY
 Content-Type: application/json
 Accept: application/json
 

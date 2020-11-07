@@ -5,7 +5,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "jmccreerys@last.fm",
+  "email": "acolque@gmail.com",
   "password": "12345"
 }
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiUGlyYXRlQmF5IiwidHlwZSI6IlJFRlJFU0giLCJleHAiOjE2MDQxNTg3NDl9.4WSl144gMAPmQbl8Lh6wR9BMAtKz5JWK3tJpRnfrNPU"
+  "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNjA0Njk3NzU0fQ.xg7VxK4AO2hcIM2d1ZBLWWvCeRCKcC4JnDbBRV50uLo"
 }
 
 ###
