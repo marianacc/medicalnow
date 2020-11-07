@@ -48,6 +48,27 @@ FROM consult
 WHERE medical_history_id = 1
 AND status = 1;
 
+
+SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date)
+FROM consult con
+    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+            JOIN specialty spe on ds.specialty_id = spe.specialty_id
+                JOIN doctor doc on ds.doctor_id = doc.doctor_id
+                    JOIN person per on doc.person_id = per.person_id
+                        JOIN patient pat on mh.patient_id = pat.patient_id
+WHERE pat.patient_id = 1
+AND con.status = 1
+AND mh.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND doc.status = 1
+AND per.status = 1
+AND pat.status = 1
+GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;
+
+
+
 -- Seleccionar todas las especialidades
 
 SELECT sp.specialty_id, sp.specialty_name, count(doc_sp.specialty_id), sp.specialty_image

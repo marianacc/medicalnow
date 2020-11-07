@@ -5,12 +5,16 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ucb.medicalnow.BL.ConsultBl;
-import com.ucb.medicalnow.BL.MedicalHistoryBl;
-import com.ucb.medicalnow.Model.ConsultModel;
+import com.ucb.medicalnow.Model.ConsultsPatientModel;
+import com.ucb.medicalnow.Model.MessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("api/v1")
@@ -28,11 +32,10 @@ public class ConsultController {
 
     @RequestMapping(
             value="{userId}/consults",
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public void addToMedicalHistory (@RequestHeader("Authorization") String authorization,
-                                     @RequestBody ConsultModel consultModel,
-                                     @PathVariable("userId") Integer userId) {
+    public ResponseEntity<ArrayList<ConsultsPatientModel>> addToMedicalHistory (@RequestHeader("Authorization") String authorization,
+                                                                                @PathVariable("userId") Integer userId) {
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -43,8 +46,6 @@ public class ConsultController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-
-
-
+        return new ResponseEntity<>(this.consultBl.returnAllConsultsByPatientId(userId), HttpStatus.OK);
     }
 }

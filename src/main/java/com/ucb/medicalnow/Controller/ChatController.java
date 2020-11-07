@@ -7,13 +7,14 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ucb.medicalnow.BL.ConsultBl;
 import com.ucb.medicalnow.BL.ConversationBl;
 import com.ucb.medicalnow.BL.MedicalHistoryBl;
-import com.ucb.medicalnow.DAO.PatientDao;
-import com.ucb.medicalnow.Model.ConsultModel;
+import com.ucb.medicalnow.Model.MessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -38,8 +39,8 @@ public class ChatController {
             value = "{userId}/chat",
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public void addToMedicalHistory (@RequestHeader("Authorization") String authorization,
-                                     @RequestBody ConsultModel consultModel,
+    public Map<String, Object> addToMedicalHistory (@RequestHeader("Authorization") String authorization,
+                                     @RequestBody MessageModel messageModel,
                                      @PathVariable("userId") Integer userId) {
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -52,8 +53,9 @@ public class ChatController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
 
+        Map<String, Object> response = new HashMap<>();
         // Verifica si es que existe una historia medica con el cliente o no
-        Map<String, Object> medicalHistoryResult = medicalHistoryBl.medicalHistoryExists(consultModel.getDoctorSpecialtyId(), userId);
+        Map<String, Object> medicalHistoryResult = medicalHistoryBl.medicalHistoryExists(messageModel.getDoctorSpecialtyId(), userId);
         if (medicalHistoryResult.get("exists").equals(true)){
             int medicalHistoryId = Integer.parseInt(medicalHistoryResult.get("id").toString());
 
@@ -63,11 +65,13 @@ public class ChatController {
                 int consultId = Integer.parseInt(consultResult.get("id").toString());
 
                 // Añadir el mensaje
-                Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, consultModel.getMessage(), userId);
+                Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
                 if (conversationResponse){
-                    System.out.print("Mensaje añadido");
+                    response.put("response", "The message was added succesfully");
+                    response.put("code", HttpStatus.OK);
                 } else {
-                    System.out.print("Mensaje no añadido");
+                    response.put("response", "The message wasn't added succesfully");
+                    response.put("code", HttpStatus.UNAUTHORIZED);
                 }
             } else {
                 // Crear una nueva consulta y agregar el mensaje
@@ -75,22 +79,25 @@ public class ChatController {
                 Boolean consultResponse = consultBl.createNewConsult(medicalHistoryId);
                 int consultId = Integer.parseInt(consultBl.returnConsultId(medicalHistoryId).toString());
                 if(consultResponse){
-                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, consultModel.getMessage(), userId);
+                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
                     if (conversationResponse){
-                        System.out.print("Mensaje añadido");
+                        response.put("response", "The message was added succesfully");
+                        response.put("code", HttpStatus.OK);
                     } else {
-                        System.out.print("Mensaje no añadido");
+                        response.put("response", "The message wasn't added succesfully");
+                        response.put("code", HttpStatus.UNAUTHORIZED);
                     }
                 } else {
-                    System.out.print("Consulta no creada");
+                    response.put("response", "Consult not created");
+                    response.put("code", HttpStatus.UNAUTHORIZED);
                 }
             }
         } else {
 
             // Crear una historia medica
-            Boolean medicalHistoryResponse = medicalHistoryBl.createMedicalHistory(userId, consultModel.getDoctorSpecialtyId());
+            Boolean medicalHistoryResponse = medicalHistoryBl.createMedicalHistory(userId, messageModel.getDoctorSpecialtyId());
             if (medicalHistoryResponse){
-                int medicalHistoryId = Integer.parseInt(medicalHistoryBl.returnMedicalHistoryId(consultModel.getDoctorSpecialtyId(), userId).toString());
+                int medicalHistoryId = Integer.parseInt(medicalHistoryBl.returnMedicalHistoryId(messageModel.getDoctorSpecialtyId(), userId).toString());
 
                 // Crear una consulta
                 Boolean consultResponse = consultBl.createNewConsult(medicalHistoryId);
@@ -98,19 +105,25 @@ public class ChatController {
                 if(consultResponse){
 
                     // Agregar el mensaje
-                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, consultModel.getMessage(), userId);
+                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
                     if (conversationResponse){
-                        System.out.print("Mensaje añadido");
+                        response.put("response", "The message wasn added succesfully");
+                        response.put("code", HttpStatus.OK);
                     } else {
-                        System.out.print("Mensaje no añadido");
+                        response.put("response", "The message wasn't added succesfully");
+                        response.put("code", HttpStatus.UNAUTHORIZED);
                     }
                 } else {
-                    System.out.print("Consulta no creada");
+                    response.put("response", "Consult not created");
+                    response.put("code", HttpStatus.UNAUTHORIZED);
                 }
 
             } else {
-                System.out.print("Historia medica no añadida");
+                response.put("response", "Medical history not created");
+                response.put("code", HttpStatus.UNAUTHORIZED);
             }
         }
+
+        return response;
     }
 }

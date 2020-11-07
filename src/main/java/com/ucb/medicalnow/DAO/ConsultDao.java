@@ -1,9 +1,15 @@
 package com.ucb.medicalnow.DAO;
 
+import com.ucb.medicalnow.Model.ConsultsPatientModel;
+import com.ucb.medicalnow.Model.DoctorSpecialtyModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Service
@@ -40,5 +46,43 @@ public class ConsultDao {
             throw new RuntimeException();
         }
         return result;
+    }
+
+    public ArrayList<ConsultsPatientModel> returnAllConsultsByPatientId(int patientId){
+        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date)\n" +
+                "FROM consult con\n" +
+                "    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
+                "        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "            JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
+                "                JOIN doctor doc on ds.doctor_id = doc.doctor_id\n" +
+                "                    JOIN person per on doc.person_id = per.person_id\n" +
+                "                        JOIN patient pat on mh.patient_id = pat.patient_id\n" +
+                "WHERE pat.patient_id = ?\n" +
+                "AND con.status = 1\n" +
+                "AND mh.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND spe.status = 1\n" +
+                "AND doc.status = 1\n" +
+                "AND per.status = 1\n" +
+                "AND pat.status = 1\n" +
+                "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;";
+        ArrayList<ConsultsPatientModel> consults = null;
+        try{
+            consults = (ArrayList<ConsultsPatientModel>) jdbcTemplate.query(query, new Object[]{patientId},
+                    new RowMapper<ConsultsPatientModel>() {
+                        @Override
+                        public ConsultsPatientModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new ConsultsPatientModel(resultSet.getInt(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4),
+                                    resultSet.getString(5),
+                                    resultSet.getDate(6));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return consults;
     }
 }

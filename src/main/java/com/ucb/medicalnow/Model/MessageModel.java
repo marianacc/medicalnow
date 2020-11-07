@@ -3,15 +3,15 @@ package com.ucb.medicalnow.Model;
 import java.sql.Date;
 import java.util.Arrays;
 
-public class ConsultModel {
+public class MessageModel {
 
     private Integer doctorSpecialtyId;
     private String message;
 
-    public ConsultModel() {
+    public MessageModel() {
     }
 
-    public ConsultModel(Integer doctorSpecialtyId, String message) {
+    public MessageModel(Integer doctorSpecialtyId, String message) {
         this.doctorSpecialtyId = doctorSpecialtyId;
         this.message = message;
     }

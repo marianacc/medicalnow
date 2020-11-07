@@ -2,9 +2,11 @@ package com.ucb.medicalnow.BL;
 
 import com.ucb.medicalnow.DAO.ConsultDao;
 import com.ucb.medicalnow.DAO.PatientDao;
+import com.ucb.medicalnow.Model.ConsultsPatientModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,5 +49,10 @@ public class ConsultBl {
 
     public Long returnConsultId (int medicalHistory){
         return this.consultDao.returnConsultId(medicalHistory);
+    }
+
+    public ArrayList<ConsultsPatientModel> returnAllConsultsByPatientId (int userId){
+        Integer patientId = patientDao.returnPatientIdByUserId(userId);
+        return this.consultDao.returnAllConsultsByPatientId(patientId);
     }
 }
