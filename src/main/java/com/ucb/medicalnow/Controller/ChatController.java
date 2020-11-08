@@ -7,7 +7,9 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ucb.medicalnow.BL.ConsultBl;
 import com.ucb.medicalnow.BL.ConversationBl;
 import com.ucb.medicalnow.BL.MedicalHistoryBl;
-import com.ucb.medicalnow.Model.MessageModel;
+import com.ucb.medicalnow.Model.ConsultIdModel;
+import com.ucb.medicalnow.Model.DoctorMessageModel;
+import com.ucb.medicalnow.Model.PatientMessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -37,11 +39,12 @@ public class ChatController {
     private String secretJwt;
 
     @RequestMapping(
-            value = "{consultId}/messages",
+            value = "patient/{consultId}/messages",
             method = RequestMethod.GET,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> getChat (@RequestHeader("Authorization") String authorization,
-                                                        @PathVariable("consultId") Integer consultId) {
+    public ResponseEntity<Map<String, Object>> getChatForPatient (@RequestHeader("Authorization") String authorization,
+                                                                  @PathVariable("consultId") Integer consultId) {
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -52,7 +55,26 @@ public class ChatController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.conversationBl.returnConversationByConsultId(consultId), HttpStatus.OK);
+        return new ResponseEntity<>(this.conversationBl.returnPatientConversationByConsultId(consultId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "doctor/{consultId}/messages",
+            method = RequestMethod.GET,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Object>> getChatForDoctor (@RequestHeader("Authorization") String authorization,
+                                                                 @PathVariable("consultId") Integer consultId) {
+        //Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if (!"AUTHN".equals(decodedJWT.getClaim("type").asString())) {
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+        return new ResponseEntity<>(this.conversationBl.returnDoctorConversationByConsultId(consultId), HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -60,7 +82,7 @@ public class ChatController {
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> addMessageFromPatient (@RequestHeader("Authorization") String authorization,
-                                                                      @RequestBody MessageModel messageModel,
+                                                                      @RequestBody PatientMessageModel patientMessageModel,
                                                                       @PathVariable("userId") Integer userId) {
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -75,7 +97,7 @@ public class ChatController {
 
         Map<String, Object> response = new HashMap<>();
         // Verifica si es que existe una historia medica con el cliente o no
-        Map<String, Object> medicalHistoryResult = medicalHistoryBl.medicalHistoryExists(messageModel.getDoctorSpecialtyId(), userId);
+        Map<String, Object> medicalHistoryResult = medicalHistoryBl.medicalHistoryExists(patientMessageModel.getDoctorSpecialtyId(), userId);
         if (medicalHistoryResult.get("exists").equals(true)){
             int medicalHistoryId = Integer.parseInt(medicalHistoryResult.get("id").toString());
             // Verifica si existe una consulta abierta con el doctor
@@ -83,7 +105,7 @@ public class ChatController {
             if(consultResult.get("exists").equals(true)){
                 int consultId = Integer.parseInt(consultResult.get("id").toString());
                 // Añadir el mensaje
-                Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
+                Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, patientMessageModel.getMessage(), userId);
                 if (conversationResponse){
                     response.put("response", "The message was added succesfully");
                 } else {
@@ -94,7 +116,7 @@ public class ChatController {
                 Boolean consultResponse = consultBl.createNewConsult(medicalHistoryId);
                 int consultId = Integer.parseInt(consultBl.returnConsultId(medicalHistoryId).toString());
                 if(consultResponse){
-                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
+                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, patientMessageModel.getMessage(), userId);
                     if (conversationResponse){
                         response.put("response", "The message was added succesfully");
                     } else {
@@ -106,15 +128,15 @@ public class ChatController {
             }
         } else {
             // Crear una historia medica
-            Boolean medicalHistoryResponse = medicalHistoryBl.createMedicalHistory(userId, messageModel.getDoctorSpecialtyId());
+            Boolean medicalHistoryResponse = medicalHistoryBl.createMedicalHistory(userId, patientMessageModel.getDoctorSpecialtyId());
             if (medicalHistoryResponse){
-                int medicalHistoryId = Integer.parseInt(medicalHistoryBl.returnMedicalHistoryId(messageModel.getDoctorSpecialtyId(), userId).toString());
+                int medicalHistoryId = Integer.parseInt(medicalHistoryBl.returnMedicalHistoryId(patientMessageModel.getDoctorSpecialtyId(), userId).toString());
                 // Crear una consulta
                 Boolean consultResponse = consultBl.createNewConsult(medicalHistoryId);
                 int consultId = Integer.parseInt(consultBl.returnConsultId(medicalHistoryId).toString());
                 if(consultResponse){
                     // Agregar el mensaje
-                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
+                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, patientMessageModel.getMessage(), userId);
                     if (conversationResponse){
                         response.put("response", "The message wasn added succesfully");
                     } else {
@@ -135,7 +157,7 @@ public class ChatController {
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> addMessageFromDoctor (@RequestHeader("Authorization") String authorization,
-                                                                     @RequestBody MessageModel messageModel,
+                                                                     @RequestBody DoctorMessageModel doctorMessageModel,
                                                                      @PathVariable("userId") Integer userId) {
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -149,13 +171,12 @@ public class ChatController {
         verifier.verify(tokenJwt);
 
         Map<String, Object> response = new HashMap<>();
-        Boolean conversationResponse = conversationBl.addMessageToConversation(messageModel.getConsultId(), messageModel.getMessage(), userId);
+        Boolean conversationResponse = conversationBl.addMessageToConversation(doctorMessageModel.getConsultId(), doctorMessageModel.getMessage(), userId);
         if (conversationResponse){
             response.put("response", "The message was added succesfully");
         } else {
             response.put("response", "The message wasn't added succesfully");
         }
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

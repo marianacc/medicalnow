@@ -85,6 +85,25 @@ public class UserDao {
         return role;
     }
 
+    public int findRoleIdByUserId(int userId){
+        String query = "SELECT rol.role_id\n" +
+                "FROM role rol\n" +
+                "    JOIN user_role usr on rol.role_id = usr.role_id\n" +
+                "        JOIN user u on usr.user_id = u.user_id\n" +
+                "WHERE u.user_id = ?\n" +
+                "AND rol.status = 1\n" +
+                "AND usr.status = 1\n" +
+                "AND u.status = 1;";
+        Integer role = null;
+        try {
+            role = jdbcTemplate.queryForObject(query, new Object[]{userId}, Integer.class);
+        }
+        catch (Exception exception){
+            throw new RuntimeException(exception);
+        }
+        return role;
+    }
+
     public UserAvatarModel returnUserNameByUserId (int userId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
                 "FROM person per\n" +
@@ -109,6 +128,8 @@ public class UserDao {
         }
         return userAvatar;
     }
+
+
 
     /*
     public UserConfigurationModel returnUserConfigurationByUserId (int userId){

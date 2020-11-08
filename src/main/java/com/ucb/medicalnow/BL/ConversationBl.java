@@ -1,10 +1,9 @@
 package com.ucb.medicalnow.BL;
 
-import com.ucb.medicalnow.DAO.ConversationDao;
-import com.ucb.medicalnow.DAO.SpecialtyDao;
+import com.ucb.medicalnow.DAO.*;
 import com.ucb.medicalnow.Model.ConversationModel;
-import com.ucb.medicalnow.Model.DoctorSpecialtyModel;
-import com.ucb.medicalnow.Model.DoctorSpecialtyNameModel;
+import com.ucb.medicalnow.Model.DoctorNameModel;
+import com.ucb.medicalnow.Model.PatientNameModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +15,16 @@ import java.util.Map;
 public class ConversationBl {
 
     private ConversationDao conversationDao;
-    private SpecialtyDao specialtyDao;
+    private DoctorDao doctorDao;
+    private PatientDao patientDao;
+    private UserDao userDao;
 
     @Autowired
-    public ConversationBl (ConversationDao conversationDao, SpecialtyDao specialtyDao) {
+    public ConversationBl (ConversationDao conversationDao, DoctorDao doctorDao, PatientDao patientDao, UserDao userDao) {
         this.conversationDao = conversationDao;
-        this.specialtyDao = specialtyDao;
+        this.doctorDao = doctorDao;
+        this.patientDao = patientDao;
+        this.userDao = userDao;
     }
 
     public Boolean addMessageToConversation (int consultId, String message, int userId){
@@ -35,12 +38,29 @@ public class ConversationBl {
         return conversationResponse;
     }
 
-    public Map<String, Object> returnConversationByConsultId (int consultId){
+    public Map<String, Object> returnPatientConversationByConsultId (int consultId){
         ArrayList<ConversationModel> conversation = conversationDao.returnConversationByConsultId(consultId);
-        DoctorSpecialtyNameModel doctorSpecialtyName = specialtyDao.returnDoctorAndSpecialtyNameByConsultId(consultId);
+        for (int i = 0; i<conversation.size(); i++){
+            int roleId = userDao.findRoleIdByUserId(conversation.get(i).getRoleId());
+            conversation.get(i).setRoleId(roleId);
+        }
+        DoctorNameModel doctorName = doctorDao.returnDoctorAndSpecialtyNameByConsultId(consultId);
         Map <String, Object> chat = new HashMap<>();
         chat.put("content", conversation);
-        chat.put("doctorInfo", doctorSpecialtyName);
+        chat.put("doctorInfo", doctorName);
+        return chat;
+    }
+
+    public Map<String, Object> returnDoctorConversationByConsultId (int consultId){
+        ArrayList<ConversationModel> conversation = conversationDao.returnConversationByConsultId(consultId);
+        for (int i = 0; i<conversation.size(); i++){
+            int roleId = userDao.findRoleIdByUserId(conversation.get(i).getRoleId());
+            conversation.get(i).setRoleId(roleId);
+        }
+        PatientNameModel patientName = patientDao.returnPatientNameByConsultId(consultId);
+        Map <String, Object> chat = new HashMap<>();
+        chat.put("content", conversation);
+        chat.put("patientInfo", patientName);
         return chat;
     }
 }

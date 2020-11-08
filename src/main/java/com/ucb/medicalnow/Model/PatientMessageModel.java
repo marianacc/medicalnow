@@ -3,32 +3,17 @@ package com.ucb.medicalnow.Model;
 import java.sql.Date;
 import java.util.Arrays;
 
-public class MessageModel {
+public class PatientMessageModel {
 
-    private Integer consultId;
     private Integer doctorSpecialtyId;
     private String message;
 
-    public MessageModel() {
+    public PatientMessageModel() {
     }
 
-    public MessageModel(Integer consultId, String message) {
-        this.consultId = consultId;
-        this.message = message;
-    }
-
-    public MessageModel(Integer consultId, Integer doctorSpecialtyId, String message) {
-        this.consultId = consultId;
+    public PatientMessageModel(Integer doctorSpecialtyId, String message) {
         this.doctorSpecialtyId = doctorSpecialtyId;
         this.message = message;
-    }
-
-    public Integer getConsultId() {
-        return consultId;
-    }
-
-    public void setConsultId(Integer consultId) {
-        this.consultId = consultId;
     }
 
     public Integer getDoctorSpecialtyId() {
@@ -49,9 +34,8 @@ public class MessageModel {
 
     @Override
     public String toString() {
-        return "MessageModel{" +
-                "consultId=" + consultId +
-                ", doctorSpecialtyId=" + doctorSpecialtyId +
+        return "PatientMessageModel{" +
+                "doctorSpecialtyId=" + doctorSpecialtyId +
                 ", message='" + message + '\'' +
                 '}';
     }

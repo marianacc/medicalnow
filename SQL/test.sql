@@ -84,7 +84,22 @@ WHERE doc.doctor_id = 4
   AND doc.status = 1
 GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, con.tx_date;
 
-SELECT rol.role_id, conv.message
+SELECT conv.tx_id, conv.message
+FROM conversation conv
+    JOIN consult cons on conv.consult_id = cons.consult_id
+WHERE conv.consult_id = 7
+AND conv.status = 1
+AND cons.status = 1;
+
+SELECT rol.role_id
+FROM role rol
+    JOIN user_role usr on rol.role_id = usr.role_id
+        JOIN user u on usr.user_id = u.user_id
+WHERE u.user_id = 25
+AND rol.status = 1
+AND usr.status = 1
+AND u.status = 1;
+
 FROM role rol
     JOIN user_role ur on rol.role_id = ur.role_id
         JOIN user usr on ur.user_id = usr.user_id
@@ -92,8 +107,7 @@ FROM role rol
                 JOIN medical_history mh on p.patient_id = mh.patient_id
                     JOIN consult con on mh.medical_history_id = con.medical_history_id
                         JOIN conversation conv on con.consult_id = conv.consult_id
-WHERE usr.user_id = 1
-AND con.consult_id = 5
+WHERE con.consult_id = 5
 AND rol.status = 1
 AND ur.status = 1
 AND usr.status = 1
@@ -125,6 +139,19 @@ WHERE usr.user_id = 2
 AND doc.status = 1
 AND usr.status = 1;
 
+
+SELECT per.first_name, per.first_surname, per.second_surname
+FROM person per
+    JOIN user usr on per.person_id = usr.person_id
+        JOIN patient pat on per.person_id = pat.person_id
+            JOIN medical_history mh on pat.patient_id = mh.patient_id
+                JOIN consult con on mh.medical_history_id = con.medical_history_id
+WHERE con.consult_id = 5
+AND per.status = 1
+AND usr.status = 1
+AND pat.status = 1
+AND mh.status = 1
+AND con.status = 1;
 
 -- Seleccionar todas las especialidades
 

@@ -33,22 +33,12 @@ public class ConversationDao {
     }
 
     public ArrayList<ConversationModel> returnConversationByConsultId (int consultId){
-        String query = "SELECT rol.role_id, conv.message\n" +
-                "FROM role rol\n" +
-                "    JOIN user_role ur on rol.role_id = ur.role_id\n" +
-                "        JOIN user usr on ur.user_id = usr.user_id\n" +
-                "            JOIN patient p on usr.user_id = p.user_id\n" +
-                "                JOIN medical_history mh on p.patient_id = mh.patient_id\n" +
-                "                    JOIN consult con on mh.medical_history_id = con.medical_history_id\n" +
-                "                        JOIN conversation conv on con.consult_id = conv.consult_id\n" +
-                "WHERE usr.user_id = 1\n" +
-                "AND con.consult_id = ?\n" +
-                "AND rol.status = 1\n" +
-                "AND ur.status = 1\n" +
-                "AND usr.status = 1\n" +
-                "AND mh.status = 1\n" +
-                "AND con.status = 1\n" +
-                "AND conv.status = 1;";
+        String query = "SELECT conv.tx_id, conv.message\n" +
+                "FROM conversation conv\n" +
+                "    JOIN consult cons on conv.consult_id = cons.consult_id\n" +
+                "WHERE conv.consult_id = ?\n" +
+                "AND conv.status = 1\n" +
+                "AND cons.status = 1;";
         ArrayList<ConversationModel> conversation = null;
         try{
             conversation = (ArrayList<ConversationModel>) jdbcTemplate.query(query, new Object[]{consultId},

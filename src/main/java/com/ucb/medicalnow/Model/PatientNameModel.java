@@ -1,20 +1,18 @@
 package com.ucb.medicalnow.Model;
 
-public class DoctorSpecialtyNameModel {
+public class PatientNameModel {
 
     private String firstName;
     private String firstSurname;
     private String secondSurname;
-    private String specialtyName;
 
-    public DoctorSpecialtyNameModel() {
+    public PatientNameModel() {
     }
 
-    public DoctorSpecialtyNameModel(String firstName, String firstSurname, String secondSurname, String specialtyName) {
+    public PatientNameModel(String firstName, String firstSurname, String secondSurname) {
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
-        this.specialtyName = specialtyName;
     }
 
     public String getFirstName() {
@@ -41,21 +39,12 @@ public class DoctorSpecialtyNameModel {
         this.secondSurname = secondSurname;
     }
 
-    public String getSpecialtyName() {
-        return specialtyName;
-    }
-
-    public void setSpecialtyName(String specialtyName) {
-        this.specialtyName = specialtyName;
-    }
-
     @Override
     public String toString() {
-        return "DoctorSpecialtyNameModel{" +
+        return "PatientNameModel{" +
                 "firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
-                ", specialtyName='" + specialtyName + '\'' +
                 '}';
     }
 }

@@ -1,8 +1,14 @@
 package com.ucb.medicalnow.DAO;
 
+import com.ucb.medicalnow.Model.DoctorNameModel;
+import com.ucb.medicalnow.Model.PatientNameModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Service
 public class PatientDao {
@@ -50,6 +56,37 @@ public class PatientDao {
         }
         return patientId;
     }
+
+    public PatientNameModel returnPatientNameByConsultId (int consultId){
+        String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
+                "FROM person per\n" +
+                "    JOIN user usr on per.person_id = usr.person_id\n" +
+                "        JOIN patient pat on per.person_id = pat.person_id\n" +
+                "            JOIN medical_history mh on pat.patient_id = mh.patient_id\n" +
+                "                JOIN consult con on mh.medical_history_id = con.medical_history_id\n" +
+                "WHERE con.consult_id = ?\n" +
+                "AND per.status = 1\n" +
+                "AND usr.status = 1\n" +
+                "AND pat.status = 1\n" +
+                "AND mh.status = 1\n" +
+                "AND con.status = 1;";
+        PatientNameModel patientName = null;
+        try{
+            patientName = (PatientNameModel) jdbcTemplate.queryForObject(query, new Object[]{consultId},
+                    new RowMapper<PatientNameModel>() {
+                        @Override
+                        public PatientNameModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new PatientNameModel(resultSet.getString(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return patientName;
+    }
+
 
  /*
     public Integer updatePatient (Double weight, Double height, int patientId){
