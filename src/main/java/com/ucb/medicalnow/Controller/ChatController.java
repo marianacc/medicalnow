@@ -41,7 +41,6 @@ public class ChatController {
     @RequestMapping(
             value = "patient/{consultId}/messages",
             method = RequestMethod.GET,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> getChatForPatient (@RequestHeader("Authorization") String authorization,
                                                                   @PathVariable("consultId") Integer consultId) {

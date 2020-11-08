@@ -34,7 +34,7 @@ public class DoctorDao {
     }
 
     public DoctorNameModel returnDoctorAndSpecialtyNameByConsultId (int consultId){
-        String query = "SELECT per.first_name, per.first_surname, per.second_surname, s.name\n" +
+        String query = "SELECT per.first_name, per.first_surname, per.second_surname, s.name, ds.doctor_specialty_id\n" +
                 "FROM person per\n" +
                 "    JOIN doctor doc on per.person_id = doc.person_id\n" +
                 "        JOIN doctor_specialty ds on doc.doctor_id = ds.doctor_id\n" +
@@ -57,7 +57,8 @@ public class DoctorDao {
                             return new DoctorNameModel(resultSet.getString(1),
                                     resultSet.getString(2),
                                     resultSet.getString(3),
-                                    resultSet.getString(4));
+                                    resultSet.getString(4),
+                                    resultSet.getInt(5));
                         }
                     });
         } catch (Exception e){
