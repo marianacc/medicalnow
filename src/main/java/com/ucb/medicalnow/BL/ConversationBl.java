@@ -41,7 +41,7 @@ public class ConversationBl {
         Map <String, Object> chat = new HashMap<>();
         String name = doctorSpecialtyName.getFirstName()+" "+doctorSpecialtyName.getFirstSurname()+" "+doctorSpecialtyName.getSecondSurname();
         chat.put("content", conversation);
-        chat.put("doctor", name);
+        chat.put("doctor", doctorSpecialtyName.getFirstName());
         chat.put("specialty", doctorSpecialtyName.getSpecialtyName());
         return chat;
     }

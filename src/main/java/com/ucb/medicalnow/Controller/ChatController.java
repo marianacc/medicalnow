@@ -131,7 +131,6 @@ public class ChatController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    /*
     @RequestMapping(
             value = "send/message/doctor/{userId}",
             method = RequestMethod.POST,
@@ -151,66 +150,13 @@ public class ChatController {
         verifier.verify(tokenJwt);
 
         Map<String, Object> response = new HashMap<>();
-        // Verifica si es que existe una historia medica con el cliente o no
-        Map<String, Object> medicalHistoryResult = medicalHistoryBl.medicalHistoryExists(messageModel.getDoctorSpecialtyId(), userId);
-        if (medicalHistoryResult.get("exists").equals(true)){
-            int medicalHistoryId = Integer.parseInt(medicalHistoryResult.get("id").toString());
-
-            // Verifica si existe una consulta abierta con el doctor
-            Map<String, Object> consultResult = consultBl.consultExists(medicalHistoryId);
-            if(consultResult.get("exists").equals(true)){
-                int consultId = Integer.parseInt(consultResult.get("id").toString());
-
-                // Añadir el mensaje
-                Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
-                if (conversationResponse){
-                    response.put("response", "The message was added succesfully");
-                } else {
-                    response.put("response", "The message wasn't added succesfully");
-                }
-            } else {
-                // Crear una nueva consulta y agregar el mensaje
-
-                Boolean consultResponse = consultBl.createNewConsult(medicalHistoryId);
-                int consultId = Integer.parseInt(consultBl.returnConsultId(medicalHistoryId).toString());
-                if(consultResponse){
-                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
-                    if (conversationResponse){
-                        response.put("response", "The message was added succesfully");
-                    } else {
-                        response.put("response", "The message wasn't added succesfully");
-                    }
-                } else {
-                    response.put("response", "Consult not created");
-                }
-            }
+        Boolean conversationResponse = conversationBl.addMessageToConversation(messageModel.getConsultId(), messageModel.getMessage(), userId);
+        if (conversationResponse){
+            response.put("response", "The message was added succesfully");
         } else {
-
-            // Crear una historia medica
-            Boolean medicalHistoryResponse = medicalHistoryBl.createMedicalHistory(userId, messageModel.getDoctorSpecialtyId());
-            if (medicalHistoryResponse){
-                int medicalHistoryId = Integer.parseInt(medicalHistoryBl.returnMedicalHistoryId(messageModel.getDoctorSpecialtyId(), userId).toString());
-
-                // Crear una consulta
-                Boolean consultResponse = consultBl.createNewConsult(medicalHistoryId);
-                int consultId = Integer.parseInt(consultBl.returnConsultId(medicalHistoryId).toString());
-                if(consultResponse){
-
-                    // Agregar el mensaje
-                    Boolean conversationResponse = conversationBl.addMessageToConversation(consultId, messageModel.getMessage(), userId);
-                    if (conversationResponse){
-                        response.put("response", "The message wasn added succesfully");
-                    } else {
-                        response.put("response", "The message wasn't added succesfully");
-                    }
-                } else {
-                    response.put("response", "Consult not created");
-                }
-
-            } else {
-                response.put("response", "Medical history not created");
-            }
+            response.put("response", "The message wasn't added succesfully");
         }
+
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
+    }
 }
