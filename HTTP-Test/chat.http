@@ -1,7 +1,7 @@
 ### Mostrar todos los mensajes de una consulta
 
 GET http://localhost:8008/api/v1/chat/5/messages
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg0NjcwMn0.awcWQkC9tqq-tTzvkQmE7U0rywGa9HHifjY5fWtn-O4
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg1NDY2MX0.2mfulHH3e9jSlABS7DhlEseqMzNP9Ajf5b39aAgMH2Q
 Content-Type: application/json
 
 {

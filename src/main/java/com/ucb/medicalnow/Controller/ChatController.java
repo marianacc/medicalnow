@@ -41,7 +41,6 @@ public class ChatController {
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> getChat (@RequestHeader("Authorization") String authorization,
-                                                        @RequestBody MessageModel messageModel,
                                                         @PathVariable("consultId") Integer consultId) {
         //Decodificando el token
         String tokenJwt = authorization.substring(7);

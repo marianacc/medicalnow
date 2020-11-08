@@ -39,10 +39,8 @@ public class ConversationBl {
         ArrayList<ConversationModel> conversation = conversationDao.returnConversationByConsultId(consultId);
         DoctorSpecialtyNameModel doctorSpecialtyName = specialtyDao.returnDoctorAndSpecialtyNameByConsultId(consultId);
         Map <String, Object> chat = new HashMap<>();
-        String name = doctorSpecialtyName.getFirstName()+" "+doctorSpecialtyName.getFirstSurname()+" "+doctorSpecialtyName.getSecondSurname();
         chat.put("content", conversation);
-        chat.put("doctor", doctorSpecialtyName.getFirstName());
-        chat.put("specialty", doctorSpecialtyName.getSpecialtyName());
+        chat.put("doctorInfo", doctorSpecialtyName);
         return chat;
     }
 }
