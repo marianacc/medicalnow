@@ -1,7 +1,9 @@
 package com.ucb.medicalnow.BL;
 
 import com.ucb.medicalnow.DAO.ConsultDao;
+import com.ucb.medicalnow.DAO.DoctorDao;
 import com.ucb.medicalnow.DAO.PatientDao;
+import com.ucb.medicalnow.Model.ConsultsDoctorModel;
 import com.ucb.medicalnow.Model.ConsultsPatientModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,13 @@ public class ConsultBl {
 
     private PatientDao patientDao;
     private ConsultDao consultDao;
+    private DoctorDao doctorDao;
 
     @Autowired
-    public ConsultBl (PatientDao patientDao, ConsultDao consultDao){
+    public ConsultBl (PatientDao patientDao, ConsultDao consultDao, DoctorDao doctorDao){
         this.patientDao = patientDao;
         this.consultDao = consultDao;
+        this.doctorDao = doctorDao;
     }
 
     public Map<String, Object> consultExists(int medicalHistoryId){
@@ -54,5 +58,10 @@ public class ConsultBl {
     public ArrayList<ConsultsPatientModel> returnAllConsultsByPatientId (int userId){
         Integer patientId = patientDao.returnPatientIdByUserId(userId);
         return this.consultDao.returnAllConsultsByPatientId(patientId);
+    }
+
+    public ArrayList<ConsultsDoctorModel> returnAllConsultsByDoctorId (int userId){
+        Integer doctorId = doctorDao.returnDoctorIdByUserId(userId);
+        return this.consultDao.returnAllConsultsByDoctorId(doctorId);
     }
 }

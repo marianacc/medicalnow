@@ -1,5 +1,6 @@
 package com.ucb.medicalnow.DAO;
 
+import com.ucb.medicalnow.Model.ConsultsDoctorModel;
 import com.ucb.medicalnow.Model.ConsultsPatientModel;
 import com.ucb.medicalnow.Model.DoctorSpecialtyModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,41 @@ public class ConsultDao {
                                     resultSet.getString(4),
                                     resultSet.getString(5),
                                     resultSet.getDate(6));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return consults;
+    }
+
+    public ArrayList<ConsultsDoctorModel> returnAllConsultsByDoctorId (int doctorId){
+        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, MIN(con.tx_date)\n" +
+                "FROM consult con\n" +
+                "    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
+                "        JOIN patient pat on mh.patient_id = pat.patient_id\n" +
+                "            JOIN person per on pat.person_id = per.person_id\n" +
+                "                JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "                    JOIN doctor doc on ds.doctor_id = doc.doctor_id\n" +
+                "WHERE doc.doctor_id = ?\n" +
+                "  AND con.status = 1\n" +
+                "  AND mh.status = 1\n" +
+                "  AND per.status = 1\n" +
+                "  AND pat.status = 1\n" +
+                "  AND ds.status = 1\n" +
+                "  AND doc.status = 1\n" +
+                "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, con.tx_date;";
+        ArrayList<ConsultsDoctorModel> consults = null;
+        try{
+            consults = (ArrayList<ConsultsDoctorModel>) jdbcTemplate.query(query, new Object[]{doctorId},
+                    new RowMapper<ConsultsDoctorModel>() {
+                        @Override
+                        public ConsultsDoctorModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new ConsultsDoctorModel(resultSet.getInt(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4),
+                                    resultSet.getDate(5));
                         }
                     });
         } catch (Exception e){

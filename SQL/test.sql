@@ -48,7 +48,7 @@ FROM consult
 WHERE medical_history_id = 1
 AND status = 1;
 
-
+-- Seleccionar todas las consultas por paciente
 SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date)
 FROM consult con
     JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
@@ -66,6 +66,23 @@ AND doc.status = 1
 AND per.status = 1
 AND pat.status = 1
 GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;
+
+-- Seleccionar todas las consultas por doctor
+SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, MIN(con.tx_date)
+FROM consult con
+    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+        JOIN patient pat on mh.patient_id = pat.patient_id
+            JOIN person per on pat.person_id = per.person_id
+                JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+                    JOIN doctor doc on ds.doctor_id = doc.doctor_id
+WHERE doc.doctor_id = 4
+  AND con.status = 1
+  AND mh.status = 1
+  AND per.status = 1
+  AND pat.status = 1
+  AND ds.status = 1
+  AND doc.status = 1
+GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, con.tx_date;
 
 SELECT rol.role_id, conv.message
 FROM role rol
@@ -99,6 +116,14 @@ AND s.status = 1
 AND mh.status = 1
 AND c.status = 1;
 
+-- Seleccionar el id del doctor segun el id del usuario
+
+SELECT doc.doctor_id
+FROM doctor doc
+        JOIN user usr on doc.user_id = usr.user_id
+WHERE usr.user_id = 2
+AND doc.status = 1
+AND usr.status = 1;
 
 
 -- Seleccionar todas las especialidades
