@@ -26,7 +26,7 @@ public class SecurityController {
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map> authenticate (@RequestBody CredentialModel credentialModel){
+    public ResponseEntity<Map<String, Object>> authenticate (@RequestBody CredentialModel credentialModel){
         Map tokens = securityBl.authenticate(credentialModel.getEmail(), credentialModel.getPassword());
         if(tokens != null){
             return new ResponseEntity<>(tokens, HttpStatus.OK);
@@ -43,7 +43,7 @@ public class SecurityController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map> authenticate (@RequestBody TokenRefreshModel tokenRefreshModel){
+    public ResponseEntity<Map<String, Object>> authenticate (@RequestBody TokenRefreshModel tokenRefreshModel){
         Map tokens = securityBl.refresh(tokenRefreshModel);
         return new ResponseEntity (tokens, HttpStatus.OK);
     }

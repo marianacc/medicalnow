@@ -67,6 +67,38 @@ AND per.status = 1
 AND pat.status = 1
 GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;
 
+SELECT rol.role_id, conv.message
+FROM role rol
+    JOIN user_role ur on rol.role_id = ur.role_id
+        JOIN user usr on ur.user_id = usr.user_id
+            JOIN patient p on usr.user_id = p.user_id
+                JOIN medical_history mh on p.patient_id = mh.patient_id
+                    JOIN consult con on mh.medical_history_id = con.medical_history_id
+                        JOIN conversation conv on con.consult_id = conv.consult_id
+WHERE usr.user_id = 1
+AND con.consult_id = 5
+AND rol.status = 1
+AND ur.status = 1
+AND usr.status = 1
+AND mh.status = 1
+AND con.status = 1
+AND conv.status = 1;
+
+SELECT per.first_name, per.first_surname, per.second_surname, s.name
+FROM person per
+    JOIN doctor doc on per.person_id = doc.person_id
+        JOIN doctor_specialty ds on doc.doctor_id = ds.doctor_id
+            JOIN specialty s on ds.specialty_id = s.specialty_id
+                JOIN medical_history mh on ds.doctor_specialty_id = mh.doctor_specialty_id
+                    JOIN consult c on mh.medical_history_id = c.medical_history_id
+WHERE c.consult_id = 1
+AND per.status = 1
+AND doc.status = 1
+AND ds.status = 1
+AND s.status = 1
+AND mh.status = 1
+AND c.status = 1;
+
 
 
 -- Seleccionar todas las especialidades
