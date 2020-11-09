@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class LaboratoryController {
 
     private LaboratoryBl laboratoryBl;
-/*
+
     @Value("${medicalnow.security.secretJwt}")
     private String secretJwt;
 
@@ -28,7 +28,7 @@ public class LaboratoryController {
     public LaboratoryController (LaboratoryBl laboratoryBl) { this.laboratoryBl = laboratoryBl; }
 
     @RequestMapping(
-            value="{userId}",
+            value = "{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<LaboratoryOrderModel>> returnAllLaboratoriesByUserId (@RequestHeader("Authorization") String authorization,
@@ -44,5 +44,5 @@ public class LaboratoryController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.laboratoryBl.returnAllLaboratoriesByUserId(userId), HttpStatus.OK);
-    }*/
+    }
 }

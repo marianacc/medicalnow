@@ -15,30 +15,30 @@ import java.util.ArrayList;
 public class LaboratoryDao {
 
     private JdbcTemplate jdbcTemplate;
-/*
+
     @Autowired
     public LaboratoryDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
     public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByUserId (int userId){
-        String query = "SELECT lab.laboratory_exams_id, lab.laboratory_name, per.first_name, per.first_surname, spec.specialty_name, lab.lab_order_date, lab.lab_exam_order\n" +
-                        "FROM laboratory lab\n" +
-                        "    JOIN medical_history med_his on lab.medical_history_id = med_his.medical_history_id\n" +
-                        "        JOIN consult con on med_his.medical_history_id = con.medical_history_id\n" +
-                        "            JOIN doctor_specialty doc_spec on con.doctor_specialty_id = doc_spec.doctor_specialty_id\n" +
-                        "                JOIN specialty spec on doc_spec.specialty_id = spec.specialty_id\n" +
-                        "                    JOIN doctor doc on doc_spec.doctor_id = doc.doctor_id\n" +
-                        "                        JOIN person per on doc.person_id = per.person_id\n" +
-                        "                            JOIN patient pat on con.patient_id = pat.patient_id\n" +
-                        "                                JOIN user usr on pat.user_id = usr.user_id\n" +
-                        "WHERE usr.user_id = ? \n" +
-                        "AND lab.status = 1\n" +
-                        "AND med_his.status = 1\n" +
-                        "AND doc_spec.status = 1\n" +
-                        "AND spec.status = 1\n" +
-                        "AND doc.status = 1\n" +
-                        "AND per.status = 1\n" +
-                        "AND pat.status = 1\n" +
-                        "AND usr.status = 1;";
+        String query = "SELECT lab.laboratory_id, lab.name, per.first_name, per.first_surname, per.second_surname, spe.name, DATE(lab.tx_date)\n" +
+                "FROM laboratory lab\n" +
+                "    JOIN consult con on lab.consult_id = con.consult_id\n" +
+                "        JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
+                "            JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "                JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
+                "                    JOIN doctor doc on ds.doctor_id = doc.doctor_id\n" +
+                "                        JOIN person per on doc.person_id = per.person_id\n" +
+                "                            JOIN patient p on mh.patient_id = p.patient_id\n" +
+                "                                JOIN user usr on p.user_id = usr.user_id\n" +
+                "WHERE usr.user_id = ?\n" +
+                "AND lab.status = 1\n" +
+                "AND con.status = 1\n" +
+                "AND mh.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND spe.status = 1\n" +
+                "AND doc.status = 1\n" +
+                "AND per.status = 1\n" +
+                "AND usr.status = 1;";
 
         ArrayList<LaboratoryOrderModel> laboratories = null;
         try{
@@ -46,18 +46,19 @@ public class LaboratoryDao {
                     new RowMapper<LaboratoryOrderModel>() {
                         @Override
                         public LaboratoryOrderModel mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new LaboratoryOrderModel(resultSet.getString(1),
+                            return new LaboratoryOrderModel(resultSet.getInt(1),
                                     resultSet.getString(2),
                                     resultSet.getString(3),
                                     resultSet.getString(4),
                                     resultSet.getString(5),
-                                    resultSet.getDate(6),
-                                    resultSet.getString(7));
+                                    resultSet.getString(6),
+                                    resultSet.getDate(7));
                         }
                     });
         } catch (Exception e){
+            laboratories = null;
             throw new RuntimeException();
         }
         return laboratories;
-    }*/
+    }
 }

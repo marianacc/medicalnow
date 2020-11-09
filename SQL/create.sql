@@ -78,7 +78,7 @@ CREATE TABLE laboratory (
                             tx_host varchar(100) NOT NULL,
                             tx_date timestamp NOT NULL,
                             CONSTRAINT laboratory_pk PRIMARY KEY (laboratory_id)
-) COMMENT 'La his';
+)
 
 -- Table: medical_history
 CREATE TABLE medical_history (
@@ -316,3 +316,7 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (
     REFERENCES user (user_id);
 
 -- End of file.
+
+
+-- PARA CORRER
+ALTER TABLE laboratory ADD COLUMN name varchar(100);

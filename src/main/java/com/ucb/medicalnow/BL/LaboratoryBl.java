@@ -13,11 +13,10 @@ public class LaboratoryBl {
 
     private LaboratoryDao laboratoryDao;
 
-    /*
     @Autowired
     public LaboratoryBl (LaboratoryDao laboratoryDao) {this.laboratoryDao = laboratoryDao; }
 
     public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByUserId(int userId) {
         return this.laboratoryDao.returnAllLaboratoriesByUserId(userId);
-    }*/
+    }
 }

@@ -1,7 +1,7 @@
 ### Todos los laboratorios de un paciente
 
-GET http://localhost:8008/api/v1/laboratory/20
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTUxMzN9.Oho3taqbgGbSIBcs27EidfC0WyOwZFa2P0kEe75QywA
+GET http://localhost:8008/api/v1/laboratory/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg4ODg0MX0.tPIAVUo-OG0RJ_X7xT_8Ce74xgwzK-2WS_N-doFf2NM
 Content-Type: application/json
 Accept: application/json
 

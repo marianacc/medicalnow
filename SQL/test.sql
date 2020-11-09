@@ -100,6 +100,26 @@ AND rol.status = 1
 AND usr.status = 1
 AND u.status = 1;
 
+SELECT lab.laboratory_id, lab.name, per.first_name, per.first_surname, per.second_surname, spe.name, DATE(lab.tx_date)
+FROM laboratory lab
+    JOIN consult con on lab.consult_id = con.consult_id
+        JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+            JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+                JOIN specialty spe on ds.specialty_id = spe.specialty_id
+                    JOIN doctor doc on ds.doctor_id = doc.doctor_id
+                        JOIN person per on doc.person_id = per.person_id
+                            JOIN patient p on mh.patient_id = p.patient_id
+                                JOIN user usr on p.user_id = usr.user_id
+WHERE usr.user_id = ?
+AND lab.status = 1
+AND con.status = 1
+AND mh.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND doc.status = 1
+AND per.status = 1
+AND usr.status = 1;
+
 FROM role rol
     JOIN user_role ur on rol.role_id = ur.role_id
         JOIN user usr on ur.user_id = usr.user_id
