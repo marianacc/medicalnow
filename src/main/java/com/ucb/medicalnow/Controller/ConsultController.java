@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/consults")
@@ -66,5 +68,32 @@ public class ConsultController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.consultBl.returnAllConsultsByDoctorId(userId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "discharge/{consultId}",
+            method = RequestMethod.GET,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> dischargeUser (@RequestHeader("Authorization") String authorization,
+                                                                         @PathVariable("consultId") Integer consultId) {
+        //Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+
+        Map<String, String> response = new HashMap();
+        Boolean consultResponse = consultBl.dischargeUserByConsultId(consultId);
+        if (consultResponse){
+            response.put("message", "Patient discharged succesfully");
+        } else {
+            response.put("message", "Patient not discharged");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

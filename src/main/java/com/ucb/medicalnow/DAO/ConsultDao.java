@@ -121,4 +121,17 @@ public class ConsultDao {
         }
         return consults;
     }
+
+    public Integer dischargeUserByConsultId (int consultId){
+        String query = "UPDATE consult\n" +
+                "SET status = 0\n" +
+                "WHERE consult_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{consultId});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
 }

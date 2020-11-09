@@ -64,4 +64,15 @@ public class ConsultBl {
         Integer doctorId = doctorDao.returnDoctorIdByUserId(userId);
         return this.consultDao.returnAllConsultsByDoctorId(doctorId);
     }
+
+    public Boolean dischargeUserByConsultId (int consultId){
+        Boolean consultResponse = null;
+        Integer result = consultDao.dischargeUserByConsultId(consultId);
+        if (result > 0){
+            consultResponse = true;
+        } else {
+            consultResponse = false;
+        }
+        return consultResponse;
+    }
 }

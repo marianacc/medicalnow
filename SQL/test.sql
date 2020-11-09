@@ -141,6 +141,10 @@ AND per.status = 1
 AND p.status = 1
 AND usr.status = 1;
 
+UPDATE consult
+SET status = 0
+WHERE consult_id = 3;
+
 
 SELECT pre.prescription_id, med_his.diagnosis, per.first_name, per.first_surname, pre.prescription_date\n" +
                         "FROM prescription pre\n" +

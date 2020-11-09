@@ -105,11 +105,10 @@ public class UserController {
                 userConfigurationModel.getEmail(), userConfigurationModel.getPassword(), userId);
         if (registryUpdated == true) {
             response.put("Message", "Patient updated succesfully");
-            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             response.put("Message", "Error. The patient wasn't updated");
-            return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
         }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }*/
 }
 
