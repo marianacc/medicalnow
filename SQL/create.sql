@@ -320,3 +320,5 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (
 
 -- PARA CORRER
 ALTER TABLE laboratory ADD COLUMN name varchar(100);
+
+ALTER TABLE prescription MODIFY COLUMN description varchar(300);

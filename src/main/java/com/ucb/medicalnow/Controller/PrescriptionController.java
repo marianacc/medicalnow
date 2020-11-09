@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class PrescriptionController {
 
     private PrescriptionBl prescriptionBl;
-/*
+
     @Value("${medicalnow.security.secretJwt}")
     private String secretJwt;
 
@@ -30,7 +30,7 @@ public class PrescriptionController {
     public PrescriptionController (PrescriptionBl prescriptionBl) { this.prescriptionBl = prescriptionBl; }
 
     @RequestMapping(
-            value="{userId}",
+            value = "{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<PrescriptionModel>> returnAllPrescriptionsByUserId (@RequestHeader("Authorization") String authorization,
@@ -48,6 +48,7 @@ public class PrescriptionController {
         return new ResponseEntity<>(this.prescriptionBl.returnAllPrescriptionsByUserId(userId), HttpStatus.OK);
     }
 
+    /*
     @RequestMapping(
             value="{prescriptionId}/detail",
             method = RequestMethod.GET,

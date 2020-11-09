@@ -120,6 +120,47 @@ AND doc.status = 1
 AND per.status = 1
 AND usr.status = 1;
 
+SELECT pre.prescription_id, mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, DATE(pre.tx_date)
+FROM prescription pre
+    JOIN consult con on pre.consult_id = con.consult_id
+        JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+            JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+                JOIN specialty spe on ds.specialty_id = spe.specialty_id
+                    JOIN doctor doc on ds.doctor_id = doc.doctor_id
+                        JOIN person per on doc.person_id = per.person_id
+                            JOIN patient p on mh.patient_id = p.patient_id
+                                JOIN user usr on usr.user_id = p.user_id
+AND usr.user_id = ?
+AND pre.status = 1
+AND con.status = 1
+AND mh.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND doc.status = 1
+AND per.status = 1
+AND p.status = 1
+AND usr.status = 1;
+
+
+SELECT pre.prescription_id, med_his.diagnosis, per.first_name, per.first_surname, pre.prescription_date\n" +
+                        "FROM prescription pre\n" +
+                        "    JOIN medical_history med_his on pre.medical_history_id = med_his.medical_history_id\n" +
+                        "        JOIN consult con on med_his.medical_history_id = con.medical_history_id\n" +
+                        "            JOIN doctor_specialty doc_spec on con.doctor_specialty_id = doc_spec.doctor_specialty_id\n" +
+                        "                JOIN doctor doc on doc_spec.doctor_id = doc.doctor_id\n" +
+                        "                    JOIN person per on doc.person_id = per.person_id\n" +
+                        "                        JOIN patient pat on con.patient_id = pat.patient_id\n" +
+                        "                            JOIN user usr on pat.user_id = usr.user_id\n" +
+                        "WHERE usr.user_id = ?\n" +
+                        "AND pre.status = 1\n" +
+                        "AND med_his.status = 1\n" +
+                        "AND doc_spec.status = 1\n" +
+                        "AND doc.status = 1\n" +
+                        "AND per.status = 1\n" +
+                        "AND pat.status = 1\n" +
+                        "AND usr.status = 1;
+
+
 FROM role rol
     JOIN user_role ur on rol.role_id = ur.role_id
         JOIN user usr on ur.user_id = usr.user_id

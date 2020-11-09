@@ -1,7 +1,7 @@
 ### Todas las prescripciones de un paciente
 
-GET http://localhost:8008/api/v1/prescription/16
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTk4ODh9.cui-Pmr9AtO35rRWfMwqjm9f8q9_oPiCMaIeVCqJvR0
+GET http://localhost:8008/api/v1/prescription/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg5MDU4MX0.NERd8oRNaPGrlintCFqcyZ63vsoH_jhFeviiQSJfWfQ
 Content-Type: application/json
 Accept: application/json
 
