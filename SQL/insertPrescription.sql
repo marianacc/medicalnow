@@ -1,5 +1,5 @@
 INSERT INTO prescription (consult_id, description, status, tx_id, tx_username, tx_host, tx_date)
-VALUES (1, 'Tomar una pastilla cada 8 horas por 5 dias.', 1, 0, 'root', '127.0.0.1', now());
+VALUES (1, 'Tomar antibioticos por 1 semanas.', 1, 0, 'root', '127.0.0.1', now());
 
 INSERT INTO prescription (consult_id, description, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (2, 'Usar mentisan.', 1, 0, 'root', '127.0.0.1', now());

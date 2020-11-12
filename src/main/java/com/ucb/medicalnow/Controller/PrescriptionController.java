@@ -20,7 +20,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("api/v1/prescription")
 public class PrescriptionController {
-/*
+
     private PrescriptionBl prescriptionBl;
 
     @Value("${medicalnow.security.secretJwt}")
@@ -35,6 +35,7 @@ public class PrescriptionController {
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<PrescriptionModel>> returnAllPrescriptionsByUserId (@RequestHeader("Authorization") String authorization,
                                                                                         @PathVariable("userId") Integer userId){
+        // *********
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -45,6 +46,7 @@ public class PrescriptionController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
+        // *********
         return new ResponseEntity<>(this.prescriptionBl.returnAllPrescriptionsByUserId(userId), HttpStatus.OK);
     }
 

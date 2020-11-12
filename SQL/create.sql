@@ -87,6 +87,7 @@ CREATE TABLE doctor_specialty (
 CREATE TABLE laboratory (
                             laboratory_id int NOT NULL AUTO_INCREMENT,
                             consult_id int NOT NULL,
+                            name varchar (50) NOT NULL,
                             `order` varchar(200) NOT NULL,
                             status int NOT NULL,
                             tx_id int NOT NULL,
@@ -338,3 +339,5 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (
     REFERENCES user (user_id);
 
 -- End of file.
+
+-- ALTER TABLE laboratory ADD COLUMN name varchar(50);

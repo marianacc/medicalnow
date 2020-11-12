@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("api/v1/laboratory")
 public class LaboratoryController {
-/*
+
     private LaboratoryBl laboratoryBl;
 
     @Value("${medicalnow.security.secretJwt}")
@@ -33,6 +33,8 @@ public class LaboratoryController {
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<LaboratoryOrderModel>> returnAllLaboratoriesByUserId (@RequestHeader("Authorization") String authorization,
                                                                                            @PathVariable("userId") Integer userId){
+
+        // ********
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -43,6 +45,8 @@ public class LaboratoryController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
+        // ********
+
         return new ResponseEntity<>(this.laboratoryBl.returnAllLaboratoriesByUserId(userId), HttpStatus.OK);
-    }*/
+    }
 }
