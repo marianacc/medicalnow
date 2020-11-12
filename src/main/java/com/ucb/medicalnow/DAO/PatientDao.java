@@ -18,13 +18,14 @@ public class PatientDao {
     @Autowired
     public PatientDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Integer inserNewPatient (int personId, int userId) {
-        String query = "INSERT INTO patient (person_id, user_id, gender, height, weight, blood_group, status, tx_id, tx_username, tx_host, tx_date)\n" +
-                        "VALUES (?, ?, '-', 0, 0, '-', 1, 0, 'root', '127.0.0.1', now());";
+    public Integer insertNewPatient (int personId, int userId) {
+        String query = "INSERT INTO patient (person_id, user_id, gender, height, weight, blood_group, temperature, pressure, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, '-', '0.0', '0.0', '-', '0.0', '0.0', 1, 0, 'root', '127.0.0.1', now());";
         Integer result = null;
         try {
             result = jdbcTemplate.update(query, new Object[]{personId, userId});
         } catch (Exception e) {
+            System.out.print(e);
             throw new RuntimeException();
         }
         return result;
@@ -87,19 +88,30 @@ public class PatientDao {
         return patientName;
     }
 
-
- /*
-    public Integer updatePatient (Double weight, Double height, int patientId){
+    public Integer updateMedicalDataByPatientId (Double weight, Double height, String bloodGroup, Double temperature, String pressure, int patientId){
         String query = "UPDATE patient\n" +
-                        "SET weight = ?, height = ?\n" +
-                        "WHERE patient_id = ?\n" +
-                        "AND patient.status = 1;";
+                "SET weight = ?, height = ?, blood_group = ?, temperature = ?, pressure = ?\n" +
+                "WHERE patient_id = ?\n" +
+                "AND status = 1;";
         Integer result = null;
         try {
-            result = jdbcTemplate.update(query, new Object[]{weight, height, patientId});
+            result = jdbcTemplate.update(query, new Object[]{weight, height, bloodGroup, temperature, pressure, patientId});
         } catch (Exception e) {
             throw new RuntimeException();
         }
         return result;
-    }*/
+    }
+
+    public Integer insertNewAllergyByPatientId (int patientId, String description) {
+        String query = "INSERT INTO allergy (patient_id, description, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, 1, 0, 'root', '127.0.0.1', now());";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{patientId, description});
+        } catch (Exception e) {
+            System.out.print(e);
+            throw new RuntimeException();
+        }
+        return result;
+    }
 }

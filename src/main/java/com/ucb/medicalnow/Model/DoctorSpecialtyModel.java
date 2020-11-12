@@ -1,5 +1,7 @@
 package com.ucb.medicalnow.Model;
 
+import java.sql.Time;
+
 public class DoctorSpecialtyModel {
 
     private Integer doctorSpecialtyId;
@@ -7,25 +9,34 @@ public class DoctorSpecialtyModel {
     private String firstName;
     private String firstSurname;
     private String secondSurname;
+    private Integer price;
+    private Time fromTime;
+    private Time toTime;
     private Double qualification;
 
     public DoctorSpecialtyModel() {
     }
 
-    public DoctorSpecialtyModel(Integer doctorSpecialtyId, char firstLetter, String firstName, String firstSurname, String secondSurname, Double qualification) {
+    public DoctorSpecialtyModel(Integer doctorSpecialtyId, char firstLetter, String firstName, String firstSurname, String secondSurname, Integer price, Time fromTime, Time toTime, Double qualification) {
         this.doctorSpecialtyId = doctorSpecialtyId;
         this.firstLetter = firstLetter;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
+        this.price = price;
+        this.fromTime = fromTime;
+        this.toTime = toTime;
         this.qualification = qualification;
     }
 
-    public DoctorSpecialtyModel(Integer doctorSpecialtyId, String firstName, String firstSurname, String secondSurname, Double qualification) {
+    public DoctorSpecialtyModel(Integer doctorSpecialtyId, String firstName, String firstSurname, String secondSurname, Integer price, Time fromTime, Time toTime, Double qualification) {
         this.doctorSpecialtyId = doctorSpecialtyId;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
+        this.price = price;
+        this.fromTime = fromTime;
+        this.toTime = toTime;
         this.qualification = qualification;
     }
 
@@ -69,6 +80,30 @@ public class DoctorSpecialtyModel {
         this.secondSurname = secondSurname;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Time getFromTime() {
+        return fromTime;
+    }
+
+    public void setFromTime(Time fromTime) {
+        this.fromTime = fromTime;
+    }
+
+    public Time getToTime() {
+        return toTime;
+    }
+
+    public void setToTime(Time toTime) {
+        this.toTime = toTime;
+    }
+
     public Double getQualification() {
         return qualification;
     }
@@ -85,7 +120,11 @@ public class DoctorSpecialtyModel {
                 ", firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
+                ", price=" + price +
+                ", fromTime=" + fromTime +
+                ", toTime=" + toTime +
                 ", qualification=" + qualification +
                 '}';
     }
 }
+

@@ -87,6 +87,3 @@ values (30, 30, 1, 0, 'root', '127.0.0.1', now());
 
 insert into doctor (user_id, person_id, status, tx_id, tx_username, tx_host, tx_date)
 values (31, 31, 1, 0, 'root', '127.0.0.1', now());
-
-insert into doctor (user_id, person_id, status, tx_id, tx_username, tx_host, tx_date)
-values (32, 32, 1, 0, 'root', '127.0.0.1', now());

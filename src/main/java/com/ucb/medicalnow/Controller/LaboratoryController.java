@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("api/v1/laboratory")
 public class LaboratoryController {
-
+/*
     private LaboratoryBl laboratoryBl;
 
     @Value("${medicalnow.security.secretJwt}")
@@ -44,5 +44,5 @@ public class LaboratoryController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.laboratoryBl.returnAllLaboratoriesByUserId(userId), HttpStatus.OK);
-    }
+    }*/
 }

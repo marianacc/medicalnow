@@ -1,8 +1,8 @@
 ### Lista todas las consultas del paciente
-
+### GET http://localhost:8008/api/v1/consults/patient/{userId}
 
 GET http://localhost:8008/api/v1/consults/patient/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg0OTc2Nn0.zdNNGEW4L_oj7MlC2aIlguL88Us6Zfwwqpa67kt_ddE
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
 Content-Type: application/json
 Accept: application/json
 
@@ -11,9 +11,10 @@ Accept: application/json
 }
 
 ### Lista todas las consultas del doctor
+### GET http://localhost:8008/api/v1/consults/doctor/{userId}
 
-GET http://localhost:8008/api/v1/consults/doctor/2
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg1NTEwNH0.E-o_At0grje5J-0sx0SETVFI6n7c6ossz9iaOO2qyKI
+GET http://localhost:8008/api/v1/consults/doctor/25
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
 Content-Type: application/json
 Accept: application/json
 
@@ -22,9 +23,10 @@ Accept: application/json
 }
 
 ### Dar de alta a un paciente
+### GET http://localhost:8008/api/v1/consults/discharge/{consultId}
 
-GET http://localhost:8008/api/v1/consults/discharge/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg5MTc4NX0.OG6S-a2iX0Fnsmx_DUqge2Of2qLZ88gvYSzD4rIo8xw
+POST http://localhost:8008/api/v1/consults/discharge/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
 Content-Type: application/json
 Accept: application/json
 

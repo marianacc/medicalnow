@@ -1,11 +1,24 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2020-11-06 19:38:48.897
+-- Last modification date: 2020-11-11 23:32:33.123
 
 -- tables
+-- Table: allergy
+CREATE TABLE allergy (
+                         allergies_id int NOT NULL AUTO_INCREMENT,
+                         patient_id int NOT NULL,
+                         description varchar(300) NOT NULL,
+                         status int NOT NULL,
+                         tx_id int NOT NULL,
+                         tx_username varchar(100) NOT NULL,
+                         tx_host varchar(100) NOT NULL,
+                         tx_date timestamp NOT NULL,
+                         CONSTRAINT allergy_pk PRIMARY KEY (allergies_id)
+);
+
 -- Table: background
 CREATE TABLE background (
                             background_id int NOT NULL AUTO_INCREMENT,
-                            medical_history_id int NOT NULL,
+                            patient_id int NOT NULL,
                             description varchar(300) NOT NULL,
                             status int NOT NULL,
                             tx_id int NOT NULL,
@@ -59,6 +72,9 @@ CREATE TABLE doctor_specialty (
                                   doctor_specialty_id int NOT NULL AUTO_INCREMENT,
                                   specialty_id int NOT NULL,
                                   doctor_id int NOT NULL,
+                                  price int NOT NULL,
+                                  from_time time NOT NULL,
+                                  to_time time NOT NULL,
                                   status int NOT NULL,
                                   tx_id int NOT NULL,
                                   tx_username varchar(100) NOT NULL,
@@ -78,7 +94,7 @@ CREATE TABLE laboratory (
                             tx_host varchar(100) NOT NULL,
                             tx_date timestamp NOT NULL,
                             CONSTRAINT laboratory_pk PRIMARY KEY (laboratory_id)
-)
+) COMMENT 'La his';
 
 -- Table: medical_history
 CREATE TABLE medical_history (
@@ -99,9 +115,11 @@ CREATE TABLE patient (
                          person_id int NOT NULL,
                          user_id int NOT NULL,
                          gender varchar(10) NOT NULL,
-                         height double(2,2) NOT NULL,
-                         weight double(2,2) NOT NULL,
+                         height double(4,2) NOT NULL,
+                         weight double(4,2) NOT NULL,
                          blood_group varchar(10) NOT NULL,
+                         temperature double(4,2) NOT NULL,
+                         pressure varchar(10) NOT NULL,
                          status int NOT NULL,
                          tx_id int NOT NULL,
                          tx_username varchar(100) NOT NULL,
@@ -239,9 +257,13 @@ CREATE TABLE user_role (
 ALTER TABLE product ADD CONSTRAINT Product_prescription FOREIGN KEY Product_prescription (prescription_id)
     REFERENCES prescription (prescription_id);
 
--- Reference: background_medical_history (table: background)
-ALTER TABLE background ADD CONSTRAINT background_medical_history FOREIGN KEY background_medical_history (medical_history_id)
-    REFERENCES medical_history (medical_history_id);
+-- Reference: allergy_patient (table: allergy)
+ALTER TABLE allergy ADD CONSTRAINT allergy_patient FOREIGN KEY allergy_patient (patient_id)
+    REFERENCES patient (patient_id);
+
+-- Reference: background_patient (table: background)
+ALTER TABLE background ADD CONSTRAINT background_patient FOREIGN KEY background_patient (patient_id)
+    REFERENCES patient (patient_id);
 
 -- Reference: consult_medical_history (table: consult)
 ALTER TABLE consult ADD CONSTRAINT consult_medical_history FOREIGN KEY consult_medical_history (medical_history_id)
@@ -316,9 +338,3 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (
     REFERENCES user (user_id);
 
 -- End of file.
-
-
--- PARA CORRER
-ALTER TABLE laboratory ADD COLUMN name varchar(100);
-
-ALTER TABLE prescription MODIFY COLUMN description varchar(300);

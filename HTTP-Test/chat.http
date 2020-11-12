@@ -1,43 +1,49 @@
-### Mostrar todos los mensajes de una consulta al paciente
-
-GET http://localhost:8008/api/v1/chat/patient/7/messages
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg1OTEzMX0.Qg3pyWjP5upU8dTdmnP6ZJ3QDumIcyiGtgNdpBZXasI
-Content-Type: application/json
-
-{
-}
-
-### Mostrar todos los mensajes de una consulta al doctor
-
-GET http://localhost:8008/api/v1/chat/doctor/7/messages
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg1OTEzMX0.Qg3pyWjP5upU8dTdmnP6ZJ3QDumIcyiGtgNdpBZXasI
-Content-Type: application/json
-
-{
-}
-
 ### Mensaje del paciente al doctor
+### POST http://localhost:8008/api/v1/chat/send/message/patient/{userId}
 
 POST http://localhost:8008/api/v1/chat/send/message/patient/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg1NTc1MX0.K8f749iOX1-Sbroyj5sNcaqllp53YqzF2Ao-IWmY9-A
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
 Content-Type: application/json
 Accept: application/json
 
 {
-  "doctorSpecialtyId": "6",
-  "message": "Doctor buenos dias, a mi hijo le dio fiebre anoche y hasta ahora no se le pasa."
+  "doctorSpecialtyId": "24",
+  "message": "Doctor buenos dias, mi hijo tiene un dolor de cabeza muy fuerte."
 }
 
 ### Mensaje del doctor al paciente
+### POST http://localhost:8008/api/v1/chat/send/message/doctor/{userId}
 
 POST http://localhost:8008/api/v1/chat/send/message/doctor/25
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDg1NjE0MX0.zgVfL4_PLNEzFdfvq31Fs1Y7m3C14diCku0QB9Ubsbg
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
 Content-Type: application/json
 Accept: application/json
 
 {
-  "consultId": "7",
+  "consultId": "1",
   "message": "Buenos dias, que temperatura tiene su hijo?"
+}
+
+### Mostrar todos los mensajes de una consulta al paciente
+### GET http://localhost:8008/api/v1/chat/patient/{consultId}/messages
+
+GET http://localhost:8008/api/v1/chat/patient/1/messages
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+Content-Type: application/json
+
+{
+
+}
+
+### Mostrar todos los mensajes de una consulta al doctor
+### GET http://localhost:8008/api/v1/chat/doctor/{consultId}/messages
+
+GET http://localhost:8008/api/v1/chat/doctor/1/messages
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+Content-Type: application/json
+
+{
+
 }
 
 ###

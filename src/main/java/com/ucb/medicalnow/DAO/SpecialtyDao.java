@@ -46,41 +46,8 @@ public class SpecialtyDao {
         return specialties;
     }
 
-    public ArrayList<DoctorSpecialtyModel> returnGeneralMedicineDoctors (){
-        String query = "SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification)\n" +
-                        "FROM person per\n" +
-                        "         JOIN doctor doc on per.person_id = doc.person_id\n" +
-                        "         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
-                        "         JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id\n" +
-                        "         JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id\n" +
-                        "WHERE doc.status = 1\n" +
-                        "  AND per.status = 1\n" +
-                        "  AND doc_spec.status = 1\n" +
-                        "  AND qua.status = 1\n" +
-                        "  AND spe.specialty_id = 4\n" +
-                        "GROUP BY doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname;";
-
-        ArrayList<DoctorSpecialtyModel> doctorSpecialty = null;
-        try{
-            doctorSpecialty = (ArrayList<DoctorSpecialtyModel>) jdbcTemplate.query(query, new Object[]{},
-                    new RowMapper<DoctorSpecialtyModel>() {
-                        @Override
-                        public DoctorSpecialtyModel mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new DoctorSpecialtyModel(resultSet.getInt(1),
-                                    resultSet.getString(2),
-                                    resultSet.getString(3),
-                                    resultSet.getString(4),
-                                    resultSet.getDouble(5));
-                        }
-                    });
-        } catch (Exception e){
-            throw new RuntimeException();
-        }
-        return doctorSpecialty;
-    }
-
     public ArrayList<DoctorSpecialtyModel> returnDoctorsBySpecialty (int specialtyId){
-        String query = "SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification)\n" +
+        String query = "SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, avg(qua.qualification)\n" +
                         "FROM person per\n" +
                         "         JOIN doctor doc on per.person_id = doc.person_id\n" +
                         "         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
@@ -103,7 +70,10 @@ public class SpecialtyDao {
                                     resultSet.getString(2),
                                     resultSet.getString(3),
                                     resultSet.getString(4),
-                                    resultSet.getDouble(5));
+                                    resultSet.getInt(5),
+                                    resultSet.getTime(6),
+                                    resultSet.getTime(7),
+                                    resultSet.getDouble(8));
                         }
                     });
         } catch (Exception e){

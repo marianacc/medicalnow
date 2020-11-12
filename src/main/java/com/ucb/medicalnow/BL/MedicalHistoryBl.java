@@ -23,7 +23,7 @@ public class MedicalHistoryBl {
         this.patientDao = patientDao;
     }
 
-    public Map<String, Object> medicalHistoryExists(int doctorSpecialtyId, int userId){
+    public Map<String, Object> medicalHistoryExists (int doctorSpecialtyId, int userId){
         Map<String, Object> result = new HashMap();
         Boolean medicalHistoryResponse = null;
         Integer patientId = patientDao.returnPatientIdByUserId(userId);

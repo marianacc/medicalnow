@@ -88,5 +88,3 @@ values (30, 'challwellt@csmonitor.com', 'aec6a12a4f0ded02e28e1611fa0cc26a1757397
 insert into user (person_id, email, password, phone_number, profile_picture, status, tx_id, tx_username, tx_host, tx_date)
 values (31, 'ahentzer0@wisc.edu', 'aec6a12a4f0ded02e28e1611fa0cc26a1757397a6de9f67b35ef0804085daebf', '437-957-7828', 'http://dummyimage.com/227x147.png/ff4444/ffffff', 1, 0, 'root', '127.0.0.1', now());
 
-insert into user (person_id, email, password, phone_number, profile_picture, status, tx_id, tx_username, tx_host, tx_date)
-values (32, 'abcd@wisc.edu', 'aec6a12a4f0ded02e28e1611fa0cc26a1757397a6de9f67b35ef0804085daebf', '437-957-7832', 'http://dummyimage.com/227x147.png/ff4444/ffffff', 1, 0, 'root', '127.0.0.1', now());

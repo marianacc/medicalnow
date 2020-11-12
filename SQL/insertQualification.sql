@@ -88,6 +88,4 @@ values (29, 1, 5.0, 1, 0, 'root', '127.0.0.1', now());
 insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
 values (30, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 
-insert into qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)
-values (31, 1, 4.0, 1, 0, 'root', '127.0.0.1', now());
 

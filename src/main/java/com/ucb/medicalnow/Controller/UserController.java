@@ -6,9 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ucb.medicalnow.BL.RegistryBl;
 import com.ucb.medicalnow.BL.UserBl;
-import com.ucb.medicalnow.Model.NewUserModel;
-import com.ucb.medicalnow.Model.UserAvatarModel;
-import com.ucb.medicalnow.Model.UserConfigurationModel;
+import com.ucb.medicalnow.Model.*;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,17 +44,85 @@ public class UserController {
     public ResponseEntity<UserAvatarModel> returnUserNameByPatientId (@RequestHeader("Authorization") String authorization,
                                                                       @PathVariable("userId") Integer userId){
 
-        //Decodificando el token
+        // *****
+        // Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
+        // Validando si el token es bueno y de autenticación
         if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
             throw new RuntimeException("El token proporcionado no es un token de autenticación");
         }
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
+        // *****
+
         return new ResponseEntity<>(this.userBl.returnUserNameByUserId(userId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "medical_data/update/{userId}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> updateMedicalData (@RequestHeader("Authorization") String authorization,
+                                                                  @RequestBody MedicalDataModel medicalDataModel,
+                                                                  @PathVariable("userId") Integer userId) {
+        // *******
+        // Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        // Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+        // *******
+
+        Map<String, String> response = new HashMap<>();
+        Boolean patientResponse = userBl.updateMedicalData(medicalDataModel.getWeight(), medicalDataModel.getHeight(),
+                medicalDataModel.getBloodGroup(), medicalDataModel.getTemperature(), medicalDataModel.getPressure(), userId);
+        if(patientResponse){
+            response.put("response", "Medical data updated");
+        } else {
+            response.put("response", "Medical data not updated");
+        }
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "allergies/update/{userId}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> addNewAllergy (@RequestHeader("Authorization") String authorization,
+                                                              @RequestBody AllergyModel allergyModel,
+                                                              @PathVariable("userId") Integer userId) {
+        // *******
+        // Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        // Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+        // *******
+
+        Map<String, String> response = new HashMap<>();
+        Boolean patientResponse = userBl.addNewAllergy(userId, allergyModel.getDescription());
+        if(patientResponse){
+            response.put("response", "Allergy added succesfully");
+        } else {
+            response.put("response", "Allergy not added");
+        }
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /*

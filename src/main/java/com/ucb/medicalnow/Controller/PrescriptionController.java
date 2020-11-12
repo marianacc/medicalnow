@@ -20,7 +20,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("api/v1/prescription")
 public class PrescriptionController {
-
+/*
     private PrescriptionBl prescriptionBl;
 
     @Value("${medicalnow.security.secretJwt}")

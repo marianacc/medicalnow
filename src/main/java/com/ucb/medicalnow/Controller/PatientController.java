@@ -23,9 +23,6 @@ public class PatientController {
 
     private RegistryBl registryBl;
 
-    @Value("${medicalnow.security.secretJwt}")
-    private String secretJwt;
-
     @Autowired
     public PatientController (RegistryBl registryBl) {
         this.registryBl = registryBl;
@@ -35,19 +32,20 @@ public class PatientController {
             value = "registry",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map <String, String>> newPatientRegistry (@RequestBody NewUserModel newUserModel) throws ParseException {
+    public ResponseEntity<Map <String, String>> addnewPatient (@RequestBody NewUserModel newUserModel) throws ParseException {
         Map <String, String> response = new HashMap();
 
-        Boolean registryUpdated = registryBl.addNewPatient(newUserModel.getFirstName(), newUserModel.getFirstSurname(), newUserModel.getSecondSurname(),
-                newUserModel.getBirthDate(), newUserModel.getEmail(), newUserModel.getPassword(), newUserModel.getPhoneNumber());
+        Boolean registryUpdated = registryBl.addNewPatient(newUserModel.getFirstName(),
+                newUserModel.getFirstSurname(), newUserModel.getSecondSurname(), newUserModel.getBirthDate(),
+                newUserModel.getEmail(), newUserModel.getPassword(), newUserModel.getPhoneNumber());
 
         if(registryUpdated == true){
             response.put("Message","Patient added succesfully");
-            return new ResponseEntity<>(response, HttpStatus.OK);
         }
         else{
             response.put("Message","Error. The patient wasn't added");
-            return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
         }
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

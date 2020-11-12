@@ -40,6 +40,30 @@ public class UserBl {
         return userAvatarModel;
     }
 
+    public Boolean updateMedicalData (Double weight, Double height, String bloodGroup, Double temperature, String pressure, int userId){
+        Boolean medicalDataUpdated = null;
+        Integer patientId = patientDao.returnPatientIdByUserId(userId);
+        Integer patientResponse = patientDao.updateMedicalDataByPatientId(weight, height, bloodGroup, temperature, pressure, patientId);
+        if (patientResponse > 0){
+            medicalDataUpdated = true;
+        } else {
+            medicalDataUpdated = false;
+        }
+        return medicalDataUpdated;
+    }
+
+    public Boolean addNewAllergy (int userId, String description){
+        Boolean allergyUpdated = null;
+        Integer patientId = patientDao.returnPatientIdByUserId(userId);
+        Integer patientResponse = patientDao.insertNewAllergyByPatientId(patientId, description);
+        if (patientResponse > 0){
+            allergyUpdated = true;
+        } else {
+            allergyUpdated = false;
+        }
+        return allergyUpdated;
+    }
+
     /*
     public UserConfigurationModel returnUserConfigurationByUserId(int userId){
         return this.userDao.returnUserConfigurationByUserId(userId);

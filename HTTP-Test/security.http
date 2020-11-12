@@ -5,7 +5,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "acolque@gmail.com",
+  "email": "mcardozocosta@gmail.com",
   "password": "12345"
 }
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNjA0Njk3NzU0fQ.xg7VxK4AO2hcIM2d1ZBLWWvCeRCKcC4JnDbBRV50uLo"
+  "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNjA1MTM5MDYzfQ.X3aBKVOzSA6eigTOccqJ2l6ITG701X6ngMuZ2-pa9xQ"
 }
 
 ###

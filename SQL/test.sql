@@ -352,10 +352,18 @@ AND usr.status = 1;
 
 -- Actualizar datos de un paciente
 UPDATE patient
-SET weight = '', height = ''
-WHERE patient_id = 1
-AND patient.status = 1;
+SET weight = ?, height = ?, blood_group = ?, temperature = ?, pressure = ?
+WHERE patient_id = ?
+AND status = 1;
 
+SELECT mh.medical_history_id
+FROM medical_history mh
+    JOIN patient p on mh.patient_id = p.patient_id
+        JOIN user u on p.user_id = u.user_id
+WHERE u.user_id = ?
+AND mh.status = 1
+AND p.status = 1
+AND u.status = 1;
 
 -- Obtener el detalle de la prescripción
 SELECT pre.treatment_prescription, pro.product_name, pro.product_detail, pro.product_quantity

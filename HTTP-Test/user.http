@@ -1,13 +1,45 @@
 ### Obtener el avatar del usuario
+### GET http://localhost:8008/api/v1/user/{userId}
 
-GET http://localhost:8008/api/v1/user/2
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNDcwOTA4N30.sWZzgq8WrpyZMWGKVz3FQ52PNjeHN_9oYSmwgxwqaDY
+GET http://localhost:8008/api/v1/user/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
 Content-Type: application/json
 Accept: application/json
 
 {
 
 }
+
+### Actualizar los datos medicos del paciente
+### POST http://localhost:8008/api/v1/user/medical_data/update/{userId}
+
+POST http://localhost:8008/api/v1/user/medical_data/update/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+Content-Type: application/json
+Accept: application/json
+
+{
+  "weight": 51.23,
+  "height": 1.60,
+  "bloodGroup": "O neg",
+  "temperature": 46.5,
+  "pressure": "180/90"
+}
+
+### Agregar una nueva alergia
+### POST http://localhost:8008/api/v1/user/medical_data/update/{userId}
+
+POST http://localhost:8008/api/v1/user/allergies/update/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM5Nzg3fQ.JLTKYEyRc9vd-wXlzBm5O0N6k0WNALtnACScCsOWgpA
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "Alergia al mani"
+}
+
+
+
 
 ### Obtener toda la información de un usuario
 

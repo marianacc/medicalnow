@@ -28,6 +28,7 @@ public class SecurityController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> authenticate (@RequestBody CredentialModel credentialModel){
         Map tokens = securityBl.authenticate(credentialModel.getEmail(), credentialModel.getPassword());
+
         if(tokens != null){
             return new ResponseEntity<>(tokens, HttpStatus.OK);
         }

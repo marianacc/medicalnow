@@ -33,12 +33,13 @@ public class ConsultController {
     }
 
     @RequestMapping(
-            value="patient/{userId}",
+            value = "patient/{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<ConsultsPatientModel>> returnAllConsultsByPatient (@RequestHeader("Authorization") String authorization,
                                                                                 @PathVariable("userId") Integer userId) {
-        //Decodificando el token
+        // *********
+        // Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         //Validando si el token es bueno y de autenticación
@@ -48,16 +49,20 @@ public class ConsultController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
+        // *********
+
         return new ResponseEntity<>(this.consultBl.returnAllConsultsByPatientId(userId), HttpStatus.OK);
     }
 
     @RequestMapping(
-            value="doctor/{userId}",
+            value = "doctor/{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<ConsultsDoctorModel>> returnAllConsultsByDoctor (@RequestHeader("Authorization") String authorization,
                                                                                      @PathVariable("userId") Integer userId) {
-        //Decodificando el token
+
+        // *********
+        // Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         //Validando si el token es bueno y de autenticación
@@ -67,16 +72,19 @@ public class ConsultController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
+        // *********
+
         return new ResponseEntity<>(this.consultBl.returnAllConsultsByDoctorId(userId), HttpStatus.OK);
     }
 
     @RequestMapping(
             value = "discharge/{consultId}",
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> dischargeUser (@RequestHeader("Authorization") String authorization,
-                                                                         @PathVariable("consultId") Integer consultId) {
-        //Decodificando el token
+                                                              @PathVariable("consultId") Integer consultId) {
+        // ********
+        // Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         //Validando si el token es bueno y de autenticación
@@ -86,6 +94,7 @@ public class ConsultController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
+        // ********
 
         Map<String, String> response = new HashMap();
         Boolean consultResponse = consultBl.dischargeUserByConsultId(consultId);

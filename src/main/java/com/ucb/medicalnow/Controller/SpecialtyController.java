@@ -35,25 +35,9 @@ public class SpecialtyController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<SpecialtyModel>> returnAllSpecialties (@RequestHeader("Authorization") String authorization){
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.specialtyBl.returnAllSpecialties(), HttpStatus.OK);
-    }
 
-    @RequestMapping(
-            path = "general_medicine",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> returnAllGeneralMedicineDoctors (@RequestHeader("Authorization") String authorization){
-        //Decodificando el token
+        // *******
+        // Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         //Validando si el token es bueno y de autenticación
@@ -63,8 +47,9 @@ public class SpecialtyController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        Map<String, Object> result = specialtyBl.returnAllGeneralMedicineDoctors();
-        return new ResponseEntity (result, HttpStatus.OK);
+        // *******
+
+        return new ResponseEntity<>(this.specialtyBl.returnAllSpecialties(), HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -73,7 +58,8 @@ public class SpecialtyController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> returnDoctorsBySpecialty (@RequestHeader("Authorization") String authorization,
                                                                                      @PathVariable("specialtyId") Integer specialtyId){
-        //Decodificando el token
+        // *******
+        // Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         //Validando si el token es bueno y de autenticación
@@ -83,6 +69,8 @@ public class SpecialtyController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
+        // *******
+
         Map<String, Object> result = specialtyBl.returnDoctorsBySpecialty(specialtyId);
         return new ResponseEntity (result, HttpStatus.OK);
     }

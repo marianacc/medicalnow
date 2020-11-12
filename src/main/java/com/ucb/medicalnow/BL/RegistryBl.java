@@ -48,7 +48,7 @@ public class RegistryBl {
                 Integer userId = userDao.returnMaxUserId();
                 Integer userRoleResponse = userDao.insertNewUserRole(userId);
                 if (userRoleResponse > 0){
-                    Integer patientResponse = patientDao.inserNewPatient(personId, userId);
+                    Integer patientResponse = patientDao.insertNewPatient(personId, userId);
                     if (patientResponse > 0){
                         registryUpdated = true;
                     } else {
