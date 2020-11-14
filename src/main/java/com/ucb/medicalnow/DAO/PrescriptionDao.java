@@ -1,6 +1,7 @@
 package com.ucb.medicalnow.DAO;
 
 import com.ucb.medicalnow.Model.PrescriptionDetailModel;
+import com.ucb.medicalnow.Model.PrescriptionListModel;
 import com.ucb.medicalnow.Model.PrescriptionModel;
 import com.ucb.medicalnow.Model.SpecialtyModel;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,6 +18,45 @@ public class PrescriptionDao {
     private JdbcTemplate jdbcTemplate;
 
     public PrescriptionDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
+
+    public ArrayList<PrescriptionListModel> returnAllConsultsThatHavePrescriptions (int userId){
+        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date\n" +
+                "FROM consult con\n" +
+                "    JOIN prescription pre on con.consult_id = pre.consult_id\n" +
+                "        JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
+                "            JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "                JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
+                "                    JOIN doctor doc on ds.doctor_id = doc.doctor_id\n" +
+                "                        JOIN person per on doc.person_id = per.person_id\n" +
+                "                            JOIN patient pat on mh.patient_id = pat.patient_id\n" +
+                "                                JOIN user usr on pat.user_id = usr.user_id\n" +
+                "WHERE usr.user_id = ?\n" +
+                "AND con.status = 1\n" +
+                "AND pre.status = 1\n" +
+                "AND mh.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND spe.status = 1\n" +
+                "AND doc.status = 1\n" +
+                "AND per.status = 1;";
+        ArrayList<PrescriptionListModel> consultsList = null;
+        try{
+            consultsList = (ArrayList<PrescriptionListModel>) jdbcTemplate.query(query, new Object[]{userId},
+                    new RowMapper<PrescriptionListModel>() {
+                        @Override
+                        public PrescriptionListModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new PrescriptionListModel(resultSet.getInt(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4),
+                                    resultSet.getString(5),
+                                    resultSet.getDate(6));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return consultsList;
+    }
 
     public ArrayList<PrescriptionModel> returnAllPrescriptionsByUserId (int userId){
         String query = "SELECT pre.prescription_id, mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, DATE(pre.tx_date)\n" +

@@ -35,10 +35,24 @@ Accept: application/json
 }
 
 ### Añadir el diagnostico de un paciente
+### POST http://localhost:8008/api/v1/consults/add/diagnosis/{consultId}
+
+POST http://localhost:8008/api/v1/consults/add/diagnosis/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0OTM0fQ.ibW4vCmSKudMoc6BDGmC6C_-a_WWWCXATwbkMKDmdS4
+Content-Type: application/json
+Accept: application/json
+
+{
+  "diagnosis":"El paciente tiene..."
+}
+
+###
+
+### Diagnóstico de un paciente según su consultId
 ### GET http://localhost:8008/api/v1/consults/diagnosis/{consultId}
 
 GET http://localhost:8008/api/v1/consults/diagnosis/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MzkwNDExfQ.cqeTEzToYIVJ-0gIlEeTfHp9oMcSGo-atmLE3qE_tlo
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0OTM0fQ.ibW4vCmSKudMoc6BDGmC6C_-a_WWWCXATwbkMKDmdS4
 Content-Type: application/json
 Accept: application/json
 

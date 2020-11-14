@@ -1,8 +1,20 @@
+### Todas las consultas que tienen prescripciones
+### GET http://localhost:8008/api/v1/prescription/consults/{userId}
+
+GET http://localhost:8008/api/v1/prescription/consults/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0NzAzfQ.xwnvlsgRwJ6tLUQWm80-QFXFUxtvt7wFTPTPKyW-ZHw
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
 ### Todas las prescripciones de un paciente
 ### GET http://localhost:8008/api/v1/prescription/{userId}
 
 GET http://localhost:8008/api/v1/prescription/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MzkyMjU3fQ.wRkuE7LKbqonoItitZO4U5ulYC3jLhxQZbkRjHUY7Ec
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0NzAzfQ.xwnvlsgRwJ6tLUQWm80-QFXFUxtvt7wFTPTPKyW-ZHw
 Content-Type: application/json
 Accept: application/json
 

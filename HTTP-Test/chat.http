@@ -2,13 +2,13 @@
 ### POST http://localhost:8008/api/v1/chat/send/message/patient/{userId}
 
 POST http://localhost:8008/api/v1/chat/send/message/patient/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0MTMwfQ.2H9gJsGnye7EB7h0qTzN6PND1f1_EcxB8ufKXwUa91U
 Content-Type: application/json
 Accept: application/json
 
 {
-  "doctorSpecialtyId": "24",
-  "message": "Doctor buenos dias, mi hijo tiene un dolor de cabeza muy fuerte."
+  "doctorSpecialtyId": "1",
+  "message": "Doctor buenos dias, estoy con alergia al gluten ultimamente, que me recomienda hacer?"
 }
 
 ### Mensaje del doctor al paciente
@@ -27,8 +27,8 @@ Accept: application/json
 ### Mostrar todos los mensajes de una consulta al paciente
 ### GET http://localhost:8008/api/v1/chat/patient/{consultId}/messages
 
-GET http://localhost:8008/api/v1/chat/patient/1/messages
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+GET http://localhost:8008/api/v1/chat/patient/2/messages
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0MTMwfQ.2H9gJsGnye7EB7h0qTzN6PND1f1_EcxB8ufKXwUa91U
 Content-Type: application/json
 
 {

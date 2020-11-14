@@ -5,6 +5,7 @@ import com.ucb.medicalnow.DAO.ConsultDao;
 import com.ucb.medicalnow.DAO.MedicalHistoryDao;
 import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.DAO.SpecialtyDao;
+import com.ucb.medicalnow.Model.DiagnosisModel;
 import com.ucb.medicalnow.Model.MedicalHistoryDetailModel;
 import com.ucb.medicalnow.Model.MedicalHistoryListModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,7 @@ public class MedicalHistoryBl {
     public Map<String, Object> returnMedicalHistoryDetail (int medicalHistoryId){
         Map<String, Object> result = new HashMap();
         MedicalHistoryDetailModel medicalHistoryDetailModel = medicalHistoryDao.returnMedicalHistoryDetailByMedicalHistoryId(medicalHistoryId);
-        String diagnosis = consultDao.returnDiagnosisByConsultId(medicalHistoryId);
+        DiagnosisModel diagnosis = consultDao.returnDiagnosisByConsultId(medicalHistoryId);
         result.put("patient_data", medicalHistoryDetailModel);
         result.put("diagnosis", diagnosis);
         return result;

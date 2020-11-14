@@ -2,6 +2,7 @@ package com.ucb.medicalnow.DAO;
 
 import com.ucb.medicalnow.Model.ConsultsDoctorModel;
 import com.ucb.medicalnow.Model.ConsultsPatientModel;
+import com.ucb.medicalnow.Model.DiagnosisModel;
 import com.ucb.medicalnow.Model.DoctorSpecialtyModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -135,13 +136,13 @@ public class ConsultDao {
         return result;
     }
 
-    public String returnDiagnosisByConsultId (int consultId){
+    public DiagnosisModel returnDiagnosisByConsultId (int consultId){
         String query = "SELECT diagnosis\n" +
                 "FROM consult con\n" +
                 "WHERE consult_id = ?;";
-        String diagnosis = null;
+        DiagnosisModel diagnosis = null;
         try {
-            diagnosis = jdbcTemplate.queryForObject(query, new Object[]{consultId}, String.class);
+            diagnosis = jdbcTemplate.queryForObject(query, new Object[]{consultId}, DiagnosisModel.class);
         } catch (Exception e) {
             throw new RuntimeException();
         }

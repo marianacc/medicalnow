@@ -141,8 +141,8 @@ public class ConsultController {
             value = "diagnosis/{consultId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> returnDiagnosis (@RequestHeader("Authorization") String authorization,
-                                                   @PathVariable("consultId") Integer consultId) {
+    public ResponseEntity<DiagnosisModel> returnDiagnosis (@RequestHeader("Authorization") String authorization,
+                                                            @PathVariable("consultId") Integer consultId) {
         // ********
         // Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -156,7 +156,6 @@ public class ConsultController {
         verifier.verify(tokenJwt);
         // ********
 
-        String diagnosis = consultBl.returnDiagnosisByConsultId(consultId);
-        return new ResponseEntity<>(diagnosis, HttpStatus.OK);
+        return new ResponseEntity<>(consultBl.returnDiagnosisByConsultId(consultId), HttpStatus.OK);
     }
 }
