@@ -1,7 +1,7 @@
 package com.ucb.medicalnow.BL;
 
 import com.ucb.medicalnow.DAO.*;
-import com.ucb.medicalnow.Model.ConversationModel;
+import com.ucb.medicalnow.Model.ChatModel;
 import com.ucb.medicalnow.Model.DoctorNameModel;
 import com.ucb.medicalnow.Model.PatientNameModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class ConversationBl {
     }
 
     public Map<String, Object> returnPatientConversationByConsultId (int consultId){
-        ArrayList<ConversationModel> conversation = conversationDao.returnConversationByConsultId(consultId);
+        ArrayList<ChatModel> conversation = conversationDao.returnConversationByConsultId(consultId);
         for (int i = 0; i<conversation.size(); i++){
             int roleId = userDao.findRoleIdByUserId(conversation.get(i).getRoleId());
             conversation.get(i).setRoleId(roleId);
@@ -52,7 +52,7 @@ public class ConversationBl {
     }
 
     public Map<String, Object> returnDoctorConversationByConsultId (int consultId){
-        ArrayList<ConversationModel> conversation = conversationDao.returnConversationByConsultId(consultId);
+        ArrayList<ChatModel> conversation = conversationDao.returnConversationByConsultId(consultId);
         for (int i = 0; i<conversation.size(); i++){
             int roleId = userDao.findRoleIdByUserId(conversation.get(i).getRoleId());
             conversation.get(i).setRoleId(roleId);

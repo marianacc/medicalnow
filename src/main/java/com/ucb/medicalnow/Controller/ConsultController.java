@@ -7,6 +7,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ucb.medicalnow.BL.ConsultBl;
 import com.ucb.medicalnow.Model.ConsultsDoctorModel;
 import com.ucb.medicalnow.Model.ConsultsPatientModel;
+import com.ucb.medicalnow.Model.DiagnosisModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -104,5 +105,58 @@ public class ConsultController {
             response.put("message", "Patient not discharged");
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "add/diagnosis/{consultId}",
+            method = RequestMethod.POST,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> addDiagnosis (@RequestHeader("Authorization") String authorization,
+                                                             @PathVariable("consultId") Integer consultId,
+                                                             @RequestBody DiagnosisModel diagnosisModel) {
+        // ********
+        // Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+        // ********
+
+        Map<String, String> response = new HashMap();
+        Boolean consultResponse = consultBl.addDiagnosisByConsultId(diagnosisModel.getDiagnosis(), consultId);
+        if (consultResponse){
+            response.put("message", "Diagnosis added succesfully");
+        } else {
+            response.put("message", "Diagnosis not added");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "diagnosis/{consultId}",
+            method = RequestMethod.GET,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> returnDiagnosis (@RequestHeader("Authorization") String authorization,
+                                                   @PathVariable("consultId") Integer consultId) {
+        // ********
+        // Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+        // ********
+
+        String diagnosis = consultBl.returnDiagnosisByConsultId(consultId);
+        return new ResponseEntity<>(diagnosis, HttpStatus.OK);
     }
 }

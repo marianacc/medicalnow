@@ -50,12 +50,11 @@ public class PrescriptionController {
         return new ResponseEntity<>(this.prescriptionBl.returnAllPrescriptionsByUserId(userId), HttpStatus.OK);
     }
 
-    /*
     @RequestMapping(
-            value="{prescriptionId}/detail",
+            value = "{prescriptionId}/detail",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<PrescriptionDetailModel>> returnPrescriptionDetailByPresctiptionId (@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<PrescriptionDetailModel> returnPrescriptionDetailByPresctiptionId (@RequestHeader("Authorization") String authorization,
                                                                                                         @PathVariable("prescriptionId") Integer prescriptionId){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -68,5 +67,5 @@ public class PrescriptionController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
         return new ResponseEntity<>(this.prescriptionBl.returnPrescriptionDetailByPresctiptionId(prescriptionId), HttpStatus.OK);
-    }*/
+    }
 }

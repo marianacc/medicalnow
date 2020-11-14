@@ -1,0 +1,26 @@
+### Todos los laboratorios de un paciente
+### GET http://localhost:8008/api/v1/medical_history/list/all/{userId}
+
+GET http://localhost:8008/api/v1/medical_history/list/all/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzg4MDg0fQ.J7VEF8HKfheJwwO9aVpmO2fVBqJPfs_vFLB4OeQrZZg
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Todos los laboratorios de un paciente
+### GET http://localhost:8008/api/v1/medical_history/list/all/{userId}
+
+GET http://localhost:8008/api/v1/medical_history/detail/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzg5MjMyfQ.1yQmlfS5uzrGmfLQKybobm7_HtxhTf0GMOq0EjZ_Tto
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+###
+

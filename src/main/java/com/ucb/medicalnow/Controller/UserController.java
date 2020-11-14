@@ -93,38 +93,6 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @RequestMapping(
-            value = "allergies/update/{userId}",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> addNewAllergy (@RequestHeader("Authorization") String authorization,
-                                                              @RequestBody AllergyModel allergyModel,
-                                                              @PathVariable("userId") Integer userId) {
-        // *******
-        // Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        // Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        // *******
-
-        Map<String, String> response = new HashMap<>();
-        Boolean patientResponse = userBl.addNewAllergy(userId, allergyModel.getDescription());
-        if(patientResponse){
-            response.put("response", "Allergy added succesfully");
-        } else {
-            response.put("response", "Allergy not added");
-        }
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
     /*
     @RequestMapping(
             value = "{userId}/config",

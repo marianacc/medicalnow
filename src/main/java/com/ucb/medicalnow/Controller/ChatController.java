@@ -7,7 +7,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ucb.medicalnow.BL.ConsultBl;
 import com.ucb.medicalnow.BL.ConversationBl;
 import com.ucb.medicalnow.BL.MedicalHistoryBl;
-import com.ucb.medicalnow.Model.ConsultIdModel;
 import com.ucb.medicalnow.Model.DoctorMessageModel;
 import com.ucb.medicalnow.Model.PatientMessageModel;
 import org.springframework.beans.factory.annotation.Autowired;

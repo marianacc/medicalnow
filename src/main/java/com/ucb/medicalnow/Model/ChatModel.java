@@ -1,14 +1,14 @@
 package com.ucb.medicalnow.Model;
 
-public class ConversationModel {
+public class ChatModel {
 
     private Integer roleId;
     private String message;
 
-    public ConversationModel() {
+    public ChatModel() {
     }
 
-    public ConversationModel(Integer roleId, String message) {
+    public ChatModel(Integer roleId, String message) {
         this.roleId = roleId;
         this.message = message;
     }

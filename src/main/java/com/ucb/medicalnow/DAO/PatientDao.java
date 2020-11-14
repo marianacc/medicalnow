@@ -101,17 +101,4 @@ public class PatientDao {
         }
         return result;
     }
-
-    public Integer insertNewAllergyByPatientId (int patientId, String description) {
-        String query = "INSERT INTO allergy (patient_id, description, status, tx_id, tx_username, tx_host, tx_date)\n" +
-                "VALUES (?, ?, 1, 0, 'root', '127.0.0.1', now());";
-        Integer result = null;
-        try {
-            result = jdbcTemplate.update(query, new Object[]{patientId, description});
-        } catch (Exception e) {
-            System.out.print(e);
-            throw new RuntimeException();
-        }
-        return result;
-    }
 }

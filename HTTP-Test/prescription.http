@@ -2,7 +2,7 @@
 ### GET http://localhost:8008/api/v1/prescription/{userId}
 
 GET http://localhost:8008/api/v1/prescription/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTQ2NDI0fQ.Q1tiQHa7XvACvIS-LB819PufswDGhrj6bvDQfDon2Ic
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MzkyMjU3fQ.wRkuE7LKbqonoItitZO4U5ulYC3jLhxQZbkRjHUY7Ec
 Content-Type: application/json
 Accept: application/json
 
@@ -11,9 +11,10 @@ Accept: application/json
 }
 
 ### Los detalles de la prescripcion de un paciente
+### GET http://localhost:8008/api/v1/prescription/{prescriptionId}/detail
 
 GET http://localhost:8008/api/v1/prescription/1/detail
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ0NTk4ODh9.cui-Pmr9AtO35rRWfMwqjm9f8q9_oPiCMaIeVCqJvR0
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MzkyMjU3fQ.wRkuE7LKbqonoItitZO4U5ulYC3jLhxQZbkRjHUY7Ec
 Content-Type: application/json
 Accept: application/json
 

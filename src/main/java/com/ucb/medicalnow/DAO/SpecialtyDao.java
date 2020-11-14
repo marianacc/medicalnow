@@ -23,11 +23,11 @@ public class SpecialtyDao {
 
     public ArrayList<SpecialtyModel> returnAllSpecialties(){
         String query = "SELECT sp.specialty_id, sp.name, count(doc_sp.specialty_id), sp.image\n" +
-                        "FROM specialty sp \n" +
-                        "    JOIN doctor_specialty doc_sp on sp.specialty_id = doc_sp.specialty_id\n" +
-                        "WHERE sp.status = 1\n" +
-                        "and doc_sp.status = 1\n" +
-                        "GROUP BY sp.name, doc_sp.specialty_id, sp.image;";
+                "FROM specialty sp \n" +
+                "    JOIN doctor_specialty doc_sp on sp.specialty_id = doc_sp.specialty_id\n" +
+                "WHERE sp.status = 1\n" +
+                "and doc_sp.status = 1\n" +
+                "GROUP BY sp.name, doc_sp.specialty_id, sp.image;";
         ArrayList<SpecialtyModel> specialties = null;
         try{
             specialties = (ArrayList<SpecialtyModel>) jdbcTemplate.query(query, new Object[]{},
@@ -47,18 +47,19 @@ public class SpecialtyDao {
     }
 
     public ArrayList<DoctorSpecialtyModel> returnDoctorsBySpecialty (int specialtyId){
-        String query = "SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, avg(qua.qualification)\n" +
-                        "FROM person per\n" +
-                        "         JOIN doctor doc on per.person_id = doc.person_id\n" +
-                        "         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
-                        "         JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id\n" +
-                        "         JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id\n" +
-                        "WHERE doc.status = 1\n" +
-                        "  AND per.status = 1\n" +
-                        "  AND doc_spec.status = 1\n" +
-                        "  AND qua.status = 1\n" +
-                        "  AND spe.specialty_id = ?\n" +
-                        "GROUP BY doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname;";
+        String query = "SELECT doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, avg(qua.qualification), doc.doctor_id\n" +
+                "FROM person per\n" +
+                "    JOIN doctor doc on per.person_id = doc.person_id\n" +
+                "        JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
+                "            JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id\n" +
+                "                JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id\n" +
+                "WHERE doc.status = 1\n" +
+                "AND per.status = 1\n" +
+                "AND doc_spec.status = 1\n" +
+                "AND qua.status = 1\n" +
+                "AND spe.specialty_id = ?\n" +
+                "GROUP BY doc_spec.doctor_specialty_id, spe.name, per.first_name, per.first_surname, per.second_surname, qua.qualification\n" +
+                "ORDER BY qua.qualification desc;";
 
         ArrayList<DoctorSpecialtyModel> doctorSpecialty = null;
         try{

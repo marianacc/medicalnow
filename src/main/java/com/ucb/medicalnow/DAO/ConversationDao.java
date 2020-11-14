@@ -1,7 +1,6 @@
 package com.ucb.medicalnow.DAO;
 
-import com.ucb.medicalnow.Model.ConversationModel;
-import com.ucb.medicalnow.Model.DoctorSpecialtyModel;
+import com.ucb.medicalnow.Model.ChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 
 @Service
@@ -32,20 +30,20 @@ public class ConversationDao {
         return result;
     }
 
-    public ArrayList<ConversationModel> returnConversationByConsultId (int consultId){
+    public ArrayList<ChatModel> returnConversationByConsultId (int consultId){
         String query = "SELECT conv.tx_id, conv.message\n" +
                 "FROM conversation conv\n" +
                 "    JOIN consult cons on conv.consult_id = cons.consult_id\n" +
                 "WHERE conv.consult_id = ?\n" +
                 "AND conv.status = 1\n" +
                 "AND cons.status = 1;";
-        ArrayList<ConversationModel> conversation = null;
+        ArrayList<ChatModel> conversation = null;
         try{
-            conversation = (ArrayList<ConversationModel>) jdbcTemplate.query(query, new Object[]{consultId},
-                    new RowMapper<ConversationModel>() {
+            conversation = (ArrayList<ChatModel>) jdbcTemplate.query(query, new Object[]{consultId},
+                    new RowMapper<ChatModel>() {
                         @Override
-                        public ConversationModel mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new ConversationModel(resultSet.getInt(1),
+                        public ChatModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new ChatModel(resultSet.getInt(1),
                                     resultSet.getString(2));
                         }
                     });

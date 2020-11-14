@@ -75,4 +75,19 @@ public class ConsultBl {
         }
         return consultResponse;
     }
+
+    public Boolean addDiagnosisByConsultId (String diagnosis, int consultId){
+        Boolean consultResponse = null;
+        Integer result = consultDao.addDiagnosisByConsultId(diagnosis, consultId);
+        if (result > 0){
+            consultResponse = true;
+        } else {
+            consultResponse = false;
+        }
+        return consultResponse;
+    }
+
+    public String returnDiagnosisByConsultId (int consultId){
+        return this.consultDao.returnDiagnosisByConsultId(consultId);
+    }
 }

@@ -19,7 +19,7 @@ public class PrescriptionBl {
         return this.prescriptionDao.returnAllPrescriptionsByUserId(userId);
     }
 
-/*    public ArrayList<PrescriptionDetailModel> returnPrescriptionDetailByPresctiptionId (int prescriptionId){
+    public PrescriptionDetailModel returnPrescriptionDetailByPresctiptionId (int prescriptionId){
         return this.prescriptionDao.returnPrescriptionDetailByPresctiptionId(prescriptionId);
-    }*/
+    }
 }

@@ -7,6 +7,60 @@ AND usr.user_id = 1
 AND rol.status = 1
 AND urol.status = 1;
 
+-- Todas las historias médicas de un paciente
+SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(c.tx_date), c.status
+FROM medical_history mh
+    JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+        JOIN specialty spe on ds.specialty_id = spe.specialty_id
+            JOIN doctor doc on ds.doctor_id = doc.doctor_id
+                JOIN person per on doc.person_id = per.person_id
+                    JOIN consult c on mh.medical_history_id = c.medical_history_id
+                        JOIN patient p on mh.patient_id = p.patient_id
+                            JOIN user usr on p.user_id = usr.user_id
+WHERE usr.user_id = 1
+AND mh.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND doc.status = 1
+AND per.status = 1
+AND c.status = 1
+AND p.status = 1
+AND usr.status = 1
+GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, c.status;
+
+-- Mostrar el contenido dentro de una historia médica
+
+SELECT per.first_name, per.first_surname, per.second_surname, per.birthdate, usr.phone_number, usr.email, con.diagnosis
+FROM person per
+    JOIN user usr on per.person_id = usr.person_id
+        JOIN patient pat on usr.user_id = pat.user_id
+            JOIN medical_history mh on pat.patient_id = mh.patient_id
+                JOIN consult con on mh.medical_history_id = con.medical_history_id
+WHERE mh.medical_history_id = 1
+AND per.status = 1
+AND usr.status = 1
+AND per.status = 1
+AND pat.status = 1
+AND mh.status = 1
+AND con.status = 1;
+
+-- Actualizar el diagnostico en una consulta
+UPDATE consult
+SET diagnosis = ?
+WHERE consult_id = ?;
+
+-- Seleccionar el diagnostico segun un id de consulta
+SELECT diagnosis
+FROM consult
+WHERE consult_id = ?;
+
+
+-- Seleccionar el diagnositco segun el medicalHistoryId
+SELECT con.diagnosis
+FROM consult con
+    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+WHERE con.consult_id = 1;
+
 -- Verificar si el paciente tiene un historial medico con el doctor de la especialidad
 SELECT COUNT(med.medical_history_id)
 FROM medical_history med
@@ -66,6 +120,28 @@ AND doc.status = 1
 AND per.status = 1
 AND pat.status = 1
 GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;
+
+
+-- Seleccionar todas las historias clinicas del paciente
+SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, MIN(mh.tx_date), con.status
+FROM medical_history mh
+    JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+        JOIN specialty s on ds.specialty_id = s.specialty_id
+            JOIN doctor d on ds.doctor_id = d.doctor_id
+                JOIN person per on d.person_id = per.person_id
+                    JOIN consult con on mh.medical_history_id = con.medical_history_id
+                        JOIN patient pat on mh.patient_id = pat.patient_id
+                            JOIN user usr on pat.user_id = usr.user_id
+WHERE usr.user_id = 1
+AND mh.status = 1
+AND ds.status = 1
+AND s.status = 1
+AND per.status = 1
+AND pat.status = 1
+AND usr.status = 1
+GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, con.status;
+
+
 
 -- Seleccionar todas las consultas por doctor
 SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, MIN(con.tx_date)
@@ -229,7 +305,21 @@ GROUP BY sp.specialty_name, doc_sp.specialty_id, sp.specialty_image;
 
 -- Seleccionar los doctores por especialidad
 
-SELECT spe.specialty_name, per.first_name, per.first_surname, per.second_surname, avg(qua.qualification), doc.doctor_id
+SELECT  doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, avg(qua.qualification)\n" +
+                        "FROM person per\n" +
+                        "         JOIN doctor doc on per.person_id = doc.person_id\n" +
+                        "         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id\n" +
+                        "         JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id\n" +
+                        "         JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id\n" +
+                        "WHERE doc.status = 1\n" +
+                        "  AND per.status = 1\n" +
+                        "  AND doc_spec.status = 1\n" +
+                        "  AND qua.status = 1\n" +
+                        "  AND spe.specialty_id = ?\n" +
+                        "GROUP BY doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname" +
+                        "ORDER BY avg(qua.qualification);
+
+SELECT doc_spec.doctor_specialty_id, spe.name, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, avg(qua.qualification), doc.doctor_id
 FROM person per
     JOIN doctor doc on per.person_id = doc.person_id
         JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id
@@ -240,7 +330,8 @@ AND per.status = 1
 AND doc_spec.status = 1
 AND qua.status = 1
 AND spe.specialty_id = 2
-GROUP BY doc.doctor_id, per.first_name, per.first_surname, per.second_surname;
+GROUP BY doc_spec.doctor_specialty_id, spe.name, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, qua.qualification, doc.doctor_id
+ORDER BY qua.qualification desc;
 
 -- Devolver el Id segun un email y contraseña
 SELECT user_id FROM user WHERE email = 'ahentzer0@wisc.edu' and password = '12345';

@@ -52,18 +52,6 @@ public class UserBl {
         return medicalDataUpdated;
     }
 
-    public Boolean addNewAllergy (int userId, String description){
-        Boolean allergyUpdated = null;
-        Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        Integer patientResponse = patientDao.insertNewAllergyByPatientId(patientId, description);
-        if (patientResponse > 0){
-            allergyUpdated = true;
-        } else {
-            allergyUpdated = false;
-        }
-        return allergyUpdated;
-    }
-
     /*
     public UserConfigurationModel returnUserConfigurationByUserId(int userId){
         return this.userDao.returnUserConfigurationByUserId(userId);

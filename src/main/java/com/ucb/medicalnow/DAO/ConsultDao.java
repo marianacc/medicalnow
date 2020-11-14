@@ -134,4 +134,30 @@ public class ConsultDao {
         }
         return result;
     }
+
+    public String returnDiagnosisByConsultId (int consultId){
+        String query = "SELECT diagnosis\n" +
+                "FROM consult con\n" +
+                "WHERE consult_id = ?;";
+        String diagnosis = null;
+        try {
+            diagnosis = jdbcTemplate.queryForObject(query, new Object[]{consultId}, String.class);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return diagnosis;
+    }
+
+    public Integer addDiagnosisByConsultId (String diagnosis, int consultId){
+        String query = "UPDATE consult\n" +
+                "SET diagnosis = ?\n" +
+                "WHERE consult_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{diagnosis, consultId});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
 }

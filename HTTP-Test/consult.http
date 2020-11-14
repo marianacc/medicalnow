@@ -26,7 +26,19 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/consults/discharge/{consultId}
 
 POST http://localhost:8008/api/v1/consults/discharge/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MzkwNDExfQ.cqeTEzToYIVJ-0gIlEeTfHp9oMcSGo-atmLE3qE_tlo
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Añadir el diagnostico de un paciente
+### GET http://localhost:8008/api/v1/consults/diagnosis/{consultId}
+
+GET http://localhost:8008/api/v1/consults/diagnosis/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MzkwNDExfQ.cqeTEzToYIVJ-0gIlEeTfHp9oMcSGo-atmLE3qE_tlo
 Content-Type: application/json
 Accept: application/json
 
