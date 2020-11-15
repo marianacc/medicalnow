@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/prescription")
@@ -52,11 +53,11 @@ public class PrescriptionController {
     }
 
     @RequestMapping(
-            value = "{userId}",
+            value = "{consultId}/all",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<PrescriptionModel>> returnAllPrescriptionsByUserId (@RequestHeader("Authorization") String authorization,
-                                                                                        @PathVariable("userId") Integer userId){
+    public ResponseEntity<Map<String, Object>> returnAllPrescriptionsByConsultId (@RequestHeader("Authorization") String authorization,
+                                                                                  @PathVariable("consultId") Integer consultId){
         // *********
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
@@ -69,15 +70,15 @@ public class PrescriptionController {
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
         // *********
-        return new ResponseEntity<>(this.prescriptionBl.returnAllPrescriptionsByUserId(userId), HttpStatus.OK);
+        return new ResponseEntity<>(this.prescriptionBl.returnAllPrescriptionsByConsultId(consultId), HttpStatus.OK);
     }
 
     @RequestMapping(
             value = "{prescriptionId}/detail",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PrescriptionDetailModel> returnPrescriptionDetailByPresctiptionId (@RequestHeader("Authorization") String authorization,
-                                                                                                        @PathVariable("prescriptionId") Integer prescriptionId){
+    public ResponseEntity<Map<String, Object>> returnPrescriptionDetail (@RequestHeader("Authorization") String authorization,
+                                                                                         @PathVariable("prescriptionId") Integer prescriptionId){
         //Decodificando el token
         String tokenJwt = authorization.substring(7);
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
@@ -88,6 +89,7 @@ public class PrescriptionController {
         Algorithm algorithm = Algorithm.HMAC256(secretJwt);
         JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
         verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.prescriptionBl.returnPrescriptionDetailByPresctiptionId(prescriptionId), HttpStatus.OK);
+
+        return new ResponseEntity<>(this.prescriptionBl.returnPrescriptionDetailByPrescriptionId(prescriptionId), HttpStatus.OK);
     }
 }

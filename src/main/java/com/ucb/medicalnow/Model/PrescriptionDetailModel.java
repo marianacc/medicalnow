@@ -2,7 +2,6 @@ package com.ucb.medicalnow.Model;
 
 public class PrescriptionDetailModel {
 
-    private String description;
     private String productName;
     private String productDetail;
     private String productQtty;
@@ -10,19 +9,10 @@ public class PrescriptionDetailModel {
     public PrescriptionDetailModel() {
     }
 
-    public PrescriptionDetailModel(String description, String productName, String productDetail, String productQtty) {
-        this.description = description;
+    public PrescriptionDetailModel(String productName, String productDetail, String productQtty) {
         this.productName = productName;
         this.productDetail = productDetail;
         this.productQtty = productQtty;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getProductName() {
@@ -52,8 +42,7 @@ public class PrescriptionDetailModel {
     @Override
     public String toString() {
         return "PrescriptionDetailModel{" +
-                "description='" + description + '\'' +
-                ", productName='" + productName + '\'' +
+                "productName='" + productName + '\'' +
                 ", productDetail='" + productDetail + '\'' +
                 ", productQtty='" + productQtty + '\'' +
                 '}';

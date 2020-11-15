@@ -72,9 +72,28 @@ AND mh.status = 1
 AND ds.status = 1
 AND spe.status = 1
 AND doc.status = 1
-AND per.status = 1;
+AND per.status = 1
+GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;
+
+SELECT pre.prescription_id, con.tx_date
+FROM prescription pre
+    JOIN consult con on pre.consult_id = con.consult_id
+WHERE con.consult_id = ?
+AND pre.status = 1
+AND con.status = 1;
 
 
+-- Seleccionar el nombre de la especialidad dependiendo de la consulta
+SELECT spe.name
+FROM specialty spe
+    JOIN doctor_specialty ds on spe.specialty_id = ds.specialty_id
+        JOIN medical_history mh on ds.doctor_specialty_id = mh.doctor_specialty_id
+            JOIN consult c on mh.medical_history_id = c.medical_history_id
+WHERE c.consult_id = ?
+AND spe.status = 1
+AND ds.status = 1
+AND mh.status = 1
+AND c.status = 1;
 
 -- Seleccionar el diagnositco segun el medicalHistoryId
 SELECT con.diagnosis
@@ -478,12 +497,20 @@ AND p.status = 1
 AND u.status = 1;
 
 -- Obtener el detalle de la prescripción
-SELECT pre.treatment_prescription, pro.product_name, pro.product_detail, pro.product_quantity
-FROM prescription pre
-    JOIN product pro on pre.prescription_id = pro.prescription_id
+SELECT pro.product_name, pro.product_detail, pro.product_quantity
+FROM product pro
+    JOIN prescription pre on pro.prescription_id = pre.prescription_id
 WHERE pre.prescription_id = 1
 AND pre.status = 1
 AND pro.status = 1;
+
+
+-- Obtener la descripción de la prescripción
+SELECT description
+FROM prescription
+WHERE prescription_id = 1
+AND status = 1;
+
 
 -- Verificar si el userId tiene un historial medico o no
 SELECT med.medical_history_id

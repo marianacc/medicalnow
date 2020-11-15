@@ -2,7 +2,7 @@
 ### GET http://localhost:8008/api/v1/prescription/consults/{userId}
 
 GET http://localhost:8008/api/v1/prescription/consults/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0NzAzfQ.xwnvlsgRwJ6tLUQWm80-QFXFUxtvt7wFTPTPKyW-ZHw
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NDAzMTI3fQ.7fK4tluuSUHmPjJQ_jo0HmlBGOTci4GePE06m5ku0Qs
 Content-Type: application/json
 Accept: application/json
 
@@ -10,11 +10,11 @@ Accept: application/json
 
 }
 
-### Todas las prescripciones de un paciente
-### GET http://localhost:8008/api/v1/prescription/{userId}
+### Todas las prescripciones de una consulta
+### GET http://localhost:8008/api/v1/prescription/{consultId}/all
 
-GET http://localhost:8008/api/v1/prescription/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0NzAzfQ.xwnvlsgRwJ6tLUQWm80-QFXFUxtvt7wFTPTPKyW-ZHw
+GET http://localhost:8008/api/v1/prescription/1/all
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NDAzMTI3fQ.7fK4tluuSUHmPjJQ_jo0HmlBGOTci4GePE06m5ku0Qs
 Content-Type: application/json
 Accept: application/json
 
@@ -26,7 +26,7 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/prescription/{prescriptionId}/detail
 
 GET http://localhost:8008/api/v1/prescription/1/detail
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MzkyMjU3fQ.wRkuE7LKbqonoItitZO4U5ulYC3jLhxQZbkRjHUY7Ec
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NDAzMTI3fQ.7fK4tluuSUHmPjJQ_jo0HmlBGOTci4GePE06m5ku0Qs
 Content-Type: application/json
 Accept: application/json
 

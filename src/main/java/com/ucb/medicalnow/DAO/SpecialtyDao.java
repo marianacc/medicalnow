@@ -96,4 +96,24 @@ public class SpecialtyDao {
         }
         return specialtyName;
     }
+
+    public String returnSpecialtyIdByConsultId (int consultId){
+        String query = "SELECT spe.name\n" +
+                "FROM specialty spe\n" +
+                "    JOIN doctor_specialty ds on spe.specialty_id = ds.specialty_id\n" +
+                "        JOIN medical_history mh on ds.doctor_specialty_id = mh.doctor_specialty_id\n" +
+                "            JOIN consult c on mh.medical_history_id = c.medical_history_id\n" +
+                "WHERE c.consult_id = ?\n" +
+                "AND spe.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND mh.status = 1\n" +
+                "AND c.status = 1;";
+        String specialtyName = null;
+        try {
+            specialtyName = jdbcTemplate.queryForObject(query, new Object[]{consultId}, String.class);
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return specialtyName;
+    }
 }
