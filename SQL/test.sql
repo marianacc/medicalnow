@@ -522,6 +522,20 @@ AND med.status = 1
 AND pat.status = 1
 AND usr.status = 1;
 
+-- Seleccionar los datos para la pantalla del pago
+SELECT per.first_name, per.first_surname, per.second_surname, spe.name, avg(qua.qualification), ds.price
+FROM person per
+    JOIN doctor doc on per.person_id = doc.person_id
+        JOIN doctor_specialty ds on doc.doctor_id = ds.doctor_id
+            JOIN specialty spe on ds.specialty_id = spe.specialty_id
+                JOIN qualification qua on ds.doctor_specialty_id = qua.doctor_specialty_id
+WHERE ds.doctor_specialty_id = ?
+AND per.status = 1
+and doc.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND qua.status = 1;
+
 SELECT MAX(medical_history_id) from medical_history where medical_history.status = 1;
 
 -- Obtener el id de la especialidad del doctor

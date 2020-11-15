@@ -6,6 +6,7 @@ import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.Model.ConsultsDoctorModel;
 import com.ucb.medicalnow.Model.ConsultsPatientModel;
 import com.ucb.medicalnow.Model.DiagnosisModel;
+import com.ucb.medicalnow.Model.PaymentModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,5 +91,9 @@ public class ConsultBl {
 
     public DiagnosisModel returnDiagnosisByConsultId (int consultId){
         return this.consultDao.returnDiagnosisByConsultId(consultId);
+    }
+
+    public PaymentModel returnInfoForPayment (int doctosSpecialtyId){
+        return this.consultDao.returnInfoByDoctorSpecialtyId(doctosSpecialtyId);
     }
 }

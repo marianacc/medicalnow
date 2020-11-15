@@ -1,9 +1,6 @@
 package com.ucb.medicalnow.DAO;
 
-import com.ucb.medicalnow.Model.ConsultsDoctorModel;
-import com.ucb.medicalnow.Model.ConsultsPatientModel;
-import com.ucb.medicalnow.Model.DiagnosisModel;
-import com.ucb.medicalnow.Model.DoctorSpecialtyModel;
+import com.ucb.medicalnow.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -160,5 +157,38 @@ public class ConsultDao {
             throw new RuntimeException();
         }
         return result;
+    }
+
+    public PaymentModel returnInfoByDoctorSpecialtyId (int doctorSpecialtyId){
+        String query = "SELECT per.first_name, per.first_surname, per.second_surname, spe.name, avg(qua.qualification), ds.price\n" +
+                "FROM person per\n" +
+                "    JOIN doctor doc on per.person_id = doc.person_id\n" +
+                "        JOIN doctor_specialty ds on doc.doctor_id = ds.doctor_id\n" +
+                "            JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
+                "                JOIN qualification qua on ds.doctor_specialty_id = qua.doctor_specialty_id\n" +
+                "WHERE ds.doctor_specialty_id = ?\n" +
+                "AND per.status = 1\n" +
+                "and doc.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND spe.status = 1\n" +
+                "AND qua.status = 1;";
+        PaymentModel paymentInfo = null;
+        try{
+            paymentInfo = (PaymentModel) jdbcTemplate.queryForObject(query, new Object[]{doctorSpecialtyId},
+                    new RowMapper<PaymentModel>() {
+                        @Override
+                        public PaymentModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new PaymentModel(resultSet.getString(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4),
+                                    resultSet.getDouble(5),
+                                    resultSet.getInt(6));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return paymentInfo;
     }
 }

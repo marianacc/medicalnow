@@ -88,6 +88,64 @@ values ('Joscelin', 'Morrilly', 'La Torre', '2020/11/16', 1, 0, 'root', '127.0.0
 insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
 values ('Kariotta', 'Duck', 'Burkert', '2020/10/16', 1, 0, 'root', '127.0.0.1', now());
 
+-- Personas para doctores que atienden las consultas rápidas
 
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Lotte', 'Brunke', 'Shaughnessy', '1991-02-17', 1, 0, 'root', '127.0.0.1', now());
 
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Jaquelyn', 'Tomadoni', 'Lanchberry', '2012-02-16', 1, 0, 'root', '127.0.0.1', now());
 
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Romona', 'Rosenzveig', 'Balding', '2001-11-25', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Carmelina', 'Annice', 'Strevens', '2001-01-25', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Rheba', 'Schlagtmans', 'MacCaull', '2014-10-10', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Konstantine', 'Flanigan', 'Alloway', '2003-05-17', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Margareta', 'Siddeley', 'Dibdin', '2005-06-20', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Vinni', 'Cuddehay', 'Hearne', '2012-10-24', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Cale', 'Gullifant', 'Ruddlesden', '2010-08-03', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Shena', 'Limeburner', 'Bellringer', '2008-03-08', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Cassy', 'Goodee', 'Whitaker', '2009-11-28', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Pooh', 'Hammill', 'Beaconsall', '2004-08-16', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Winifield', 'Moverley', 'Echlin', '2003-06-02', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Nert', 'Awde', 'Youens', '2009-01-10', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Salomon', 'Yeliashev', 'Brettle', '1995-04-27', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Ambrosi', 'Ramsell', 'Pridie', '2013-05-21', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Matilde', 'Wilcot', 'Billings', '2012-05-31', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Hayes', 'Whitehead', 'Balshaw', '1994-12-11', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Stanly', 'Vaggs', 'Sleeny', '1991-12-11', 1, 0, 'root', '127.0.0.1', now());
+
+insert into person (first_name, first_surname, second_surname, birthdate, status, tx_id, tx_username, tx_host, tx_date)
+values ('Catherina', 'Tribble', 'Streetley', '1992-03-28', 1, 0, 'root', '127.0.0.1', now());

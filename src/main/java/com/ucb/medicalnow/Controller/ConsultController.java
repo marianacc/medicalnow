@@ -8,6 +8,7 @@ import com.ucb.medicalnow.BL.ConsultBl;
 import com.ucb.medicalnow.Model.ConsultsDoctorModel;
 import com.ucb.medicalnow.Model.ConsultsPatientModel;
 import com.ucb.medicalnow.Model.DiagnosisModel;
+import com.ucb.medicalnow.Model.PaymentModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -157,5 +158,27 @@ public class ConsultController {
         // ********
 
         return new ResponseEntity<>(consultBl.returnDiagnosisByConsultId(consultId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "{doctorSpecialtyId}/payment",
+            method = RequestMethod.GET,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PaymentModel> returnInfoForPayment (@RequestHeader("Authorization") String authorization,
+                                                              @PathVariable("doctorSpecialtyId") Integer doctorSpecialtyId) {
+        // ********
+        // Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+        // ********
+
+        return new ResponseEntity<>(consultBl.returnInfoForPayment(doctorSpecialtyId), HttpStatus.OK);
     }
 }

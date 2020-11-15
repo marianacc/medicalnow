@@ -46,13 +46,23 @@ Accept: application/json
   "diagnosis":"El paciente tiene..."
 }
 
-###
-
 ### Diagnóstico de un paciente según su consultId
 ### GET http://localhost:8008/api/v1/consults/diagnosis/{consultId}
 
 GET http://localhost:8008/api/v1/consults/diagnosis/1
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0OTM0fQ.ibW4vCmSKudMoc6BDGmC6C_-a_WWWCXATwbkMKDmdS4
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Datos del doctor para el pago
+### GET http://localhost:8008/api/v1/consults/{doctorSpecialtyId}/payment
+
+GET http://localhost:8008/api/v1/consults/1/payment
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NDA1MDM4fQ.QtDVyq-v5QNYgv7SGLYVFLXqBNe0C4g27-7kM9ZHnDI
 Content-Type: application/json
 Accept: application/json
 
