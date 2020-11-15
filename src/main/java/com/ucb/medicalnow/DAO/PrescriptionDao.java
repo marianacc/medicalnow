@@ -82,16 +82,16 @@ public class PrescriptionDao {
         return prescriptions;
     }
 
-    public PrescriptionDetailModel returnPrescriptionDetailByPresctiptionId (int prescriptionId){
+    public ArrayList<PrescriptionDetailModel> returnPrescriptionDetailByPresctiptionId (int prescriptionId){
         String query = "SELECT pro.product_name, pro.product_detail, pro.product_quantity\n" +
                 "FROM product pro\n" +
                 "    JOIN prescription pre on pro.prescription_id = pre.prescription_id\n" +
                 "WHERE pre.prescription_id = ?\n" +
                 "AND pre.status = 1\n" +
                 "AND pro.status = 1;";
-        PrescriptionDetailModel prescriptionDetail = null;
+        ArrayList<PrescriptionDetailModel> prescriptionDetail = null;
         try{
-            prescriptionDetail = (PrescriptionDetailModel) jdbcTemplate.queryForObject(query, new Object[]{prescriptionId},
+            prescriptionDetail = (ArrayList<PrescriptionDetailModel>) jdbcTemplate.query(query, new Object[]{prescriptionId},
                     new RowMapper<PrescriptionDetailModel>() {
                         @Override
                         public PrescriptionDetailModel mapRow(ResultSet resultSet, int i) throws SQLException {

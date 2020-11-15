@@ -38,7 +38,7 @@ public class PrescriptionBl {
 
     public Map<String, Object> returnPrescriptionDetailByPrescriptionId (int prescriptionId){
         Map<String, Object> result = new HashMap();
-        PrescriptionDetailModel detail = prescriptionDao.returnPrescriptionDetailByPresctiptionId(prescriptionId);
+        ArrayList<PrescriptionDetailModel> detail = prescriptionDao.returnPrescriptionDetailByPresctiptionId(prescriptionId);
         String description = prescriptionDao.returnDescriptionByPrescriptionId(prescriptionId);
         result.put("prescription_detail", detail);
         result.put("description", description);
