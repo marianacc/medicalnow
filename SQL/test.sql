@@ -522,6 +522,11 @@ AND med.status = 1
 AND pat.status = 1
 AND usr.status = 1;
 
+-- Retornar el maximo id de las prescripciones
+SELECT MAX(prescription_id)
+FROM prescription
+WHERE consult_id = ?;
+
 -- Seleccionar los datos para la pantalla del pago
 SELECT per.first_name, per.first_surname, per.second_surname, spe.name, avg(qua.qualification), ds.price
 FROM person per

@@ -96,4 +96,15 @@ public class ConsultBl {
     public PaymentModel returnInfoForPayment (int doctosSpecialtyId){
         return this.consultDao.returnInfoByDoctorSpecialtyId(doctosSpecialtyId);
     }
+
+    public Boolean addImageToConsult (int consultId, String image){
+        Boolean consultResponse = null;
+        Integer result = consultDao.addImageToConsult(consultId, image);
+        if (result > 0){
+            consultResponse = true;
+        } else {
+            consultResponse = false;
+        }
+        return consultResponse;
+    }
 }

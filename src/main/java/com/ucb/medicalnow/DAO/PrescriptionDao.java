@@ -2,8 +2,7 @@ package com.ucb.medicalnow.DAO;
 
 import com.ucb.medicalnow.Model.PrescriptionDetailModel;
 import com.ucb.medicalnow.Model.PrescriptionListModel;
-import com.ucb.medicalnow.Model.PrescriptionModel;
-import com.ucb.medicalnow.Model.SpecialtyModel;
+import com.ucb.medicalnow.Model.PrescriptionDateListModel;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -59,20 +58,20 @@ public class PrescriptionDao {
         return consultsList;
     }
 
-    public ArrayList<PrescriptionModel> returnAllPrescriptionsByConsultId (int consultId){
+    public ArrayList<PrescriptionDateListModel> returnAllPrescriptionsByConsultId (int consultId){
         String query = "SELECT pre.prescription_id, con.tx_date\n" +
                 "FROM prescription pre\n" +
                 "    JOIN consult con on pre.consult_id = con.consult_id\n" +
                 "WHERE con.consult_id = ?\n" +
                 "AND pre.status = 1\n" +
                 "AND con.status = 1;";
-        ArrayList<PrescriptionModel> prescriptions = null;
+        ArrayList<PrescriptionDateListModel> prescriptions = null;
         try{
-            prescriptions = (ArrayList<PrescriptionModel>) jdbcTemplate.query(query, new Object[]{consultId},
-                    new RowMapper<PrescriptionModel>() {
+            prescriptions = (ArrayList<PrescriptionDateListModel>) jdbcTemplate.query(query, new Object[]{consultId},
+                    new RowMapper<PrescriptionDateListModel>() {
                         @Override
-                        public PrescriptionModel mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new PrescriptionModel(resultSet.getInt(1),
+                        public PrescriptionDateListModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new PrescriptionDateListModel(resultSet.getInt(1),
                                     resultSet.getDate(2));
                         }
                     });
@@ -119,5 +118,43 @@ public class PrescriptionDao {
             throw new RuntimeException();
         }
         return description;
+    }
+
+    public Integer addNewPrescription (int consultId, String description){
+        String query = "INSERT INTO prescription (consult_id, description, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, 1, 0, 'root', '127.0.0.1', now());";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{consultId, description});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
+    public Integer returnMaxPrescriptionId (int consultId){
+        String query = "SELECT MAX(prescription_id)\n" +
+                "FROM prescription\n" +
+                "WHERE consult_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.queryForObject(query, new Object[]{consultId}, Integer.class);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
+    public Integer insertNewProductsByPrescriptionId (int prescriptionId, String productName, String productDetail, String productQtty){
+        String query = "INSERT INTO product (prescription_id, product_name, product_detail, product_quantity, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, ?, ?, 1, 0, 'root', '127.0.0.1', now());";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{prescriptionId, productName, productDetail, productQtty});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+
     }
 }

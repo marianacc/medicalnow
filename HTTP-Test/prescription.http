@@ -35,3 +35,26 @@ Accept: application/json
 }
 
 ###
+
+POST http://localhost:8008/api/v1/prescription/1/add/detail
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NjM5MzM5fQ.ocnz1DPm7WsLgaMgAAYqYvhw7wvR_YzTu29fxZGlEHs
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "Debe hacer dieta una semana. No comer gluten. Debe tomar las pastillas recetadas por una semana.",
+  "content": [
+    {
+    "productName": "Glutagen",
+    "productDetail": "Tomar una pastilla cada 8 horas",
+    "productQtty": "10 pastillas"
+  },
+  {
+    "productName": "Paracetamol",
+    "productDetail": "Tomar en caso de dolor de cabeza, una cada dia.",
+    "productQtty": "5 pastillas."
+  }
+  ]
+}
+
+###

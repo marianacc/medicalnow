@@ -2,10 +2,9 @@ package com.ucb.medicalnow.BL;
 
 import com.ucb.medicalnow.DAO.PrescriptionDao;
 import com.ucb.medicalnow.DAO.SpecialtyDao;
-import com.ucb.medicalnow.Model.LaboratoryOrderModel;
 import com.ucb.medicalnow.Model.PrescriptionDetailModel;
 import com.ucb.medicalnow.Model.PrescriptionListModel;
-import com.ucb.medicalnow.Model.PrescriptionModel;
+import com.ucb.medicalnow.Model.PrescriptionDateListModel;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class PrescriptionBl {
 
     public Map<String, Object> returnAllPrescriptionsByConsultId (int consultId) {
         Map<String, Object> result = new HashMap();
-        ArrayList<PrescriptionModel> prescriptions = prescriptionDao.returnAllPrescriptionsByConsultId(consultId);
+        ArrayList<PrescriptionDateListModel> prescriptions = prescriptionDao.returnAllPrescriptionsByConsultId(consultId);
         String specialtyName = specialtyDao.returnSpecialtyIdByConsultId(consultId);
         result.put("specialty_name", specialtyName);
         result.put("content", prescriptions);
@@ -43,5 +42,25 @@ public class PrescriptionBl {
         result.put("prescription_detail", detail);
         result.put("description", description);
         return result;
+    }
+
+    public Boolean addPrescriptionDetail (int consultId, String description, ArrayList<PrescriptionDetailModel> prescriptionDetail){
+        Boolean prescriptionUpdated = null;
+        Integer prescriptionResult = prescriptionDao.addNewPrescription(consultId, description);
+        if (prescriptionResult>0)
+        {
+            Integer prescriptionId = prescriptionDao.returnMaxPrescriptionId(consultId);
+            for (int i = 0; i<prescriptionDetail.size(); i++){
+                Integer productsResult = prescriptionDao.insertNewProductsByPrescriptionId(prescriptionId, prescriptionDetail.get(i).getProductName(),
+                        prescriptionDetail.get(i).getProductDetail(), prescriptionDetail.get(i).getProductQtty());
+
+                if (productsResult>0){
+                    prescriptionUpdated = true;
+                } else {
+                    prescriptionUpdated = false;
+                }
+            }
+        }
+        return prescriptionUpdated;
     }
 }

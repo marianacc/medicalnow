@@ -1,41 +1,41 @@
 package com.ucb.medicalnow.Model;
 
-import java.sql.Date;
+import java.util.ArrayList;
 
 public class PrescriptionModel {
 
-    private Integer prescriptionId;
-    private Date prescriptionDate;
+    private String description;
+    private ArrayList<PrescriptionDetailModel> content;
 
     public PrescriptionModel() {
     }
 
-    public PrescriptionModel(Integer prescriptionId, Date prescriptionDate) {
-        this.prescriptionId = prescriptionId;
-        this.prescriptionDate = prescriptionDate;
+    public PrescriptionModel(String description, ArrayList<PrescriptionDetailModel> content) {
+        this.description = description;
+        this.content = content;
     }
 
-    public Integer getPrescriptionId() {
-        return prescriptionId;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPrescriptionId(Integer prescriptionId) {
-        this.prescriptionId = prescriptionId;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Date getPrescriptionDate() {
-        return prescriptionDate;
+    public ArrayList<PrescriptionDetailModel> getContent() {
+        return content;
     }
 
-    public void setPrescriptionDate(Date prescriptionDate) {
-        this.prescriptionDate = prescriptionDate;
+    public void setContent(ArrayList<PrescriptionDetailModel> content) {
+        this.content = content;
     }
 
     @Override
     public String toString() {
         return "PrescriptionModel{" +
-                "prescriptionId=" + prescriptionId +
-                ", prescriptionDate=" + prescriptionDate +
+                "description='" + description + '\'' +
+                ", content=" + content +
                 '}';
     }
 }

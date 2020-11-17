@@ -5,10 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ucb.medicalnow.BL.ConsultBl;
-import com.ucb.medicalnow.Model.ConsultsDoctorModel;
-import com.ucb.medicalnow.Model.ConsultsPatientModel;
-import com.ucb.medicalnow.Model.DiagnosisModel;
-import com.ucb.medicalnow.Model.PaymentModel;
+import com.ucb.medicalnow.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -161,7 +158,7 @@ public class ConsultController {
     }
 
     @RequestMapping(
-            value = "{doctorSpecialtyId}/payment",
+            value = "{doctorSpecialtyId}/payment/info",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PaymentModel> returnInfoForPayment (@RequestHeader("Authorization") String authorization,
@@ -180,5 +177,35 @@ public class ConsultController {
         // ********
 
         return new ResponseEntity<>(consultBl.returnInfoForPayment(doctorSpecialtyId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "add/image/{consultId}",
+            method = RequestMethod.POST,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> returnInfoForPayment (@RequestHeader("Authorization") String authorization,
+                                                              @PathVariable("consultId") Integer consultId,
+                                                              @RequestBody ImageModel imageModel) {
+        // ********
+        // Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
+        // ********
+
+        Map<String, String> response = new HashMap();
+        Boolean consultResponse = consultBl.addImageToConsult(consultId, imageModel.getImage());
+        if (consultResponse){
+            response.put("message", "Image added succesfully");
+        } else {
+            response.put("message", "Image not added");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

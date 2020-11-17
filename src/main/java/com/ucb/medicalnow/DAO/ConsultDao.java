@@ -191,4 +191,17 @@ public class ConsultDao {
         }
         return paymentInfo;
     }
+
+    public Integer addImageToConsult(int consultId, String image){
+        String query = "INSERT INTO resource (consult_id, image, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, 1, 0, 'root', '127.0.0.1', now());";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{consultId, image});
+        } catch (Exception e) {
+            System.out.print(e);
+            throw new RuntimeException();
+        }
+        return result;
+    }
 }

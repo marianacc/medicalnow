@@ -70,4 +70,17 @@ Accept: application/json
 
 }
 
+### Datos del doctor para el pago
+### POST http://localhost:8008/api/v1/consults/add/image/{consultId}
+
+POST http://localhost:8008/api/v1/consults/add/image/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NjQ1NjM1fQ.Jsjk6nF8Liv8i2f1eGGoc9e17wf0nULNWjIiyr3RtPo
+Content-Type: application/json
+Accept: application/json
+
+{
+  "image": "/image/dolor.jpg"
+}
+
 ###
+
