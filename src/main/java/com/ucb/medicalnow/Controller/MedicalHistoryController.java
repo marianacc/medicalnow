@@ -1,22 +1,17 @@
 package com.ucb.medicalnow.Controller;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ucb.medicalnow.BL.LaboratoryBl;
 import com.ucb.medicalnow.BL.MedicalHistoryBl;
-import com.ucb.medicalnow.Model.MedicalDataModel;
-import com.ucb.medicalnow.Model.MedicalHistoryDetailModel;
+import com.ucb.medicalnow.BL.PrescriptionBl;
+import com.ucb.medicalnow.BL.SecurityBl;
 import com.ucb.medicalnow.Model.MedicalHistoryListModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -24,14 +19,18 @@ import java.util.Map;
 public class MedicalHistoryController {
 
     private MedicalHistoryBl medicalHistoryBl;
+    private SecurityBl securityBl;
+    private LaboratoryBl laboratoryBl;
+    private PrescriptionBl prescriptionBl;
 
     @Autowired
-    public MedicalHistoryController(MedicalHistoryBl medicalHistoryBl) {
+    public MedicalHistoryController(MedicalHistoryBl medicalHistoryBl, SecurityBl securityBl, LaboratoryBl laboratoryBl, PrescriptionBl prescriptionBl) {
         this.medicalHistoryBl = medicalHistoryBl;
+        this.securityBl = securityBl;
+        this.laboratoryBl = laboratoryBl;
+        this.prescriptionBl = prescriptionBl;
     }
 
-    @Value("${medicalnow.security.secretJwt}")
-    private String secretJwt;
 
     @RequestMapping(
             value = "list/all/{userId}",
@@ -40,18 +39,7 @@ public class MedicalHistoryController {
     public ResponseEntity<ArrayList<MedicalHistoryListModel>> returnAllMedicalHistory(@RequestHeader("Authorization") String authorization,
                                                                                               @PathVariable("userId") Integer userId){
 
-        //********
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        //********
+        securityBl.validateToken(authorization);
 
         return new ResponseEntity<>(this.medicalHistoryBl.returnAllMedicalHistory(userId), HttpStatus.OK);
     }
@@ -63,19 +51,7 @@ public class MedicalHistoryController {
     public ResponseEntity<Map<String, Object>> returnMedicalHistoryDetail(@RequestHeader("Authorization") String authorization,
                                                                                 @PathVariable("medicalHistoryId") Integer medicalHistoryId){
 
-        //********
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        //********
-
+        securityBl.validateToken(authorization);
         return new ResponseEntity<>(this.medicalHistoryBl.returnMedicalHistoryDetail(medicalHistoryId), HttpStatus.OK);
     }
 }

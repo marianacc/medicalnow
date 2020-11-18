@@ -28,14 +28,18 @@ public class SecurityController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> authenticate (@RequestBody CredentialModel credentialModel){
         Map tokens = securityBl.authenticate(credentialModel.getEmail(), credentialModel.getPassword());
-
         if(tokens != null){
-            return new ResponseEntity<>(tokens, HttpStatus.OK);
+            Map<String,Object> response = new HashMap();
+            response.put("Message", "Authentication OK");
+            response.put("authentication", tokens.get("authentication"));
+            response.put("refresh", tokens.get("refresh"));
+            response.put("userId", tokens.get("userId"));
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
         else{
-            Map <String,Object> response = new HashMap();
-            response.put("Message","User or password invalid");
-            return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
+            Map<String,Object> response = new HashMap();
+            response.put("Message", "User or password invalid");
+            return new ResponseEntity<>(response,HttpStatus.FORBIDDEN);
         }
     }
 
@@ -45,7 +49,12 @@ public class SecurityController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> authenticate (@RequestBody TokenRefreshModel tokenRefreshModel){
-        Map tokens = securityBl.refresh(tokenRefreshModel);
-        return new ResponseEntity (tokens, HttpStatus.OK);
+        Map<String,String> tokens = securityBl.refresh(tokenRefreshModel);
+        Map<String,String> response= new HashMap<>();
+        response.put("Message","Authentication OK");
+        response.put("authentication", tokens.get("authentication"));
+        response.put("refresh", tokens.get("refresh"));
+        response.put("userId", tokens.get("userId"));
+        return new ResponseEntity (response, HttpStatus.OK);
     }
 }

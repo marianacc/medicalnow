@@ -1,34 +1,9 @@
-### Mensaje del paciente al doctor
-### POST http://localhost:8008/api/v1/chat/send/message/patient/{userId}
-
-POST http://localhost:8008/api/v1/chat/send/message/patient/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0MTMwfQ.2H9gJsGnye7EB7h0qTzN6PND1f1_EcxB8ufKXwUa91U
-Content-Type: application/json
-Accept: application/json
-
-{
-  "doctorSpecialtyId": "1",
-  "message": "Doctor buenos dias, estoy con alergia al gluten ultimamente, que me recomienda hacer?"
-}
-
-### Mensaje del doctor al paciente
-### POST http://localhost:8008/api/v1/chat/send/message/doctor/{userId}
-
-POST http://localhost:8008/api/v1/chat/send/message/doctor/25
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
-Content-Type: application/json
-Accept: application/json
-
-{
-  "consultId": "1",
-  "message": "Buenos dias, que temperatura tiene su hijo?"
-}
-
 ### Mostrar todos los mensajes de una consulta al paciente
 ### GET http://localhost:8008/api/v1/chat/patient/{consultId}/messages
+### NADA CAMBIO
 
-GET http://localhost:8008/api/v1/chat/patient/2/messages
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzk0MTMwfQ.2H9gJsGnye7EB7h0qTzN6PND1f1_EcxB8ufKXwUa91U
+GET http://localhost:8008/api/v1/chat/patient/4/messages
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMxNTMzfQ.ZhS9CRZZKVPhTb3h5XA7x8YdMv7btv6bDQV4sMW_fWo
 Content-Type: application/json
 
 {
@@ -37,13 +12,29 @@ Content-Type: application/json
 
 ### Mostrar todos los mensajes de una consulta al doctor
 ### GET http://localhost:8008/api/v1/chat/doctor/{consultId}/messages
+### NADA CAMBIO
 
-GET http://localhost:8008/api/v1/chat/doctor/1/messages
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+GET http://localhost:8008/api/v1/chat/doctor/4/messages
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMxNTMzfQ.ZhS9CRZZKVPhTb3h5XA7x8YdMv7btv6bDQV4sMW_fWo
 Content-Type: application/json
 
 {
 
+}
+
+### Mensaje del paciente al doctor
+### ANTES HABÍA UN POST PARA EL PACIENTE Y OTRO PARA EL DOCTOR. AHORA SOLO HAY UNO
+### Se usa MessageModel
+### POST http://localhost:8008/api/v1/chat/send/message/{userId}
+
+POST http://localhost:8008/api/v1/chat/send/message/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMxNTMzfQ.ZhS9CRZZKVPhTb3h5XA7x8YdMv7btv6bDQV4sMW_fWo
+Content-Type: application/json
+Accept: application/json
+
+{
+  "consultId": "4",
+  "message": "Doctor buenos dias, me duele mucho el pecho y tengo taquicardias desde anoche."
 }
 
 ###

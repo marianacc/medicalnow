@@ -16,7 +16,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNjA1MTM5MDYzfQ.X3aBKVOzSA6eigTOccqJ2l6ITG701X6ngMuZ2-pa9xQ"
+  "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNjA1NjY4MjE2fQ.fCYNbKPEFuXORZH0_I9Lyeb2VvBin5JQS2BVbZJrMvI"
 }
 
 ###

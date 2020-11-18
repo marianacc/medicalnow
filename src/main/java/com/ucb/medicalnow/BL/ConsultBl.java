@@ -3,8 +3,7 @@ package com.ucb.medicalnow.BL;
 import com.ucb.medicalnow.DAO.ConsultDao;
 import com.ucb.medicalnow.DAO.DoctorDao;
 import com.ucb.medicalnow.DAO.PatientDao;
-import com.ucb.medicalnow.Model.ConsultsDoctorModel;
-import com.ucb.medicalnow.Model.ConsultsPatientModel;
+import com.ucb.medicalnow.Model.ConsultModel;
 import com.ucb.medicalnow.Model.DiagnosisModel;
 import com.ucb.medicalnow.Model.PaymentModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,83 +27,50 @@ public class ConsultBl {
         this.doctorDao = doctorDao;
     }
 
-    public Map<String, Object> consultExists(int medicalHistoryId){
-        Map<String, Object> result = new HashMap();
-        Boolean consultResponse = null;
-        Long consultId = consultDao.returnConsultId(medicalHistoryId);
-        if (consultId == null){
-            consultResponse = false;
-        } else {
-            consultResponse = true;
+    public Integer createNewConsult(int medicalHistoryId){
+        Integer consultId = null;
+        Integer newConsultResponse = consultDao.createNewConsult(medicalHistoryId);
+        if (newConsultResponse > 0){
+            consultId = consultDao.returnConsultId(medicalHistoryId);
         }
-        result.put("id", consultId);
-        result.put("exists", consultResponse);
-        return result;
+        return consultId;
     }
 
-    public Boolean createNewConsult (int medicalHistoryId){
-        Boolean consultResponse = null;
-        Integer result = consultDao.createNewConsult(medicalHistoryId);
-        if (result > 0){
-            consultResponse = true;
+    public ArrayList<ConsultModel> returnAllConsultsByPatient(int userId){
+        return this.consultDao.returnAllConsultsByPatient(userId);
+    }
+
+    public ArrayList<ConsultModel> returnAllConsultsByDoctor (int userId){
+        return this.consultDao.returnAllConsultsByDoctor(userId);
+    }
+
+    public Boolean dischargeUserByConsultId(int consultId){
+        Boolean registryUpdated = null;
+        Integer dischargeUserResponse = consultDao.dischargeUserByConsultId(consultId);
+        if (dischargeUserResponse > 0){
+            registryUpdated = true;
         } else {
-            consultResponse = false;
+            registryUpdated = false;
         }
-        return consultResponse;
+        return registryUpdated;
     }
 
-    public Long returnConsultId (int medicalHistory){
-        return this.consultDao.returnConsultId(medicalHistory);
-    }
-
-    public ArrayList<ConsultsPatientModel> returnAllConsultsByPatientId (int userId){
-        Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        return this.consultDao.returnAllConsultsByPatientId(patientId);
-    }
-
-    public ArrayList<ConsultsDoctorModel> returnAllConsultsByDoctorId (int userId){
-        Integer doctorId = doctorDao.returnDoctorIdByUserId(userId);
-        return this.consultDao.returnAllConsultsByDoctorId(doctorId);
-    }
-
-    public Boolean dischargeUserByConsultId (int consultId){
-        Boolean consultResponse = null;
-        Integer result = consultDao.dischargeUserByConsultId(consultId);
-        if (result > 0){
-            consultResponse = true;
+    public Boolean addDiagnosisByConsult(String diagnosis, int consultId){
+        Boolean registryUpdated = null;
+        Integer diagnosisResponse = consultDao.addDiagnosisByConsult(diagnosis, consultId);
+        if (diagnosisResponse > 0){
+            registryUpdated = true;
         } else {
-            consultResponse = false;
+            registryUpdated = false;
         }
-        return consultResponse;
+        return registryUpdated;
     }
 
-    public Boolean addDiagnosisByConsultId (String diagnosis, int consultId){
-        Boolean consultResponse = null;
-        Integer result = consultDao.addDiagnosisByConsultId(diagnosis, consultId);
-        if (result > 0){
-            consultResponse = true;
-        } else {
-            consultResponse = false;
-        }
-        return consultResponse;
+    public DiagnosisModel returnDiagnosisByConsult(int consultId){
+        return this.consultDao.returnDiagnosisByConsult(consultId);
     }
 
-    public DiagnosisModel returnDiagnosisByConsultId (int consultId){
-        return this.consultDao.returnDiagnosisByConsultId(consultId);
-    }
-
-    public PaymentModel returnInfoForPayment (int doctosSpecialtyId){
-        return this.consultDao.returnInfoByDoctorSpecialtyId(doctosSpecialtyId);
-    }
-
-    public Boolean addImageToConsult (int consultId, String image){
-        Boolean consultResponse = null;
-        Integer result = consultDao.addImageToConsult(consultId, image);
-        if (result > 0){
-            consultResponse = true;
-        } else {
-            consultResponse = false;
-        }
-        return consultResponse;
+    public PaymentModel returnInfoForPayment(int doctorSpecialtyId){
+        return this.consultDao.returnInfoByDoctorSpecialty(doctorSpecialtyId);
     }
 }

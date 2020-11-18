@@ -1,8 +1,7 @@
 package com.ucb.medicalnow.BL;
 
 import com.ucb.medicalnow.DAO.LaboratoryDao;
-import com.ucb.medicalnow.Model.LaboratoryOrderModel;
-import com.ucb.medicalnow.Model.SpecialtyModel;
+import com.ucb.medicalnow.Model.LaboratoryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ public class LaboratoryBl {
     @Autowired
     public LaboratoryBl (LaboratoryDao laboratoryDao) {this.laboratoryDao = laboratoryDao; }
 
-    public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByUserId(int userId) {
-        return this.laboratoryDao.returnAllLaboratoriesByUserId(userId);
+    public ArrayList<LaboratoryModel> returnAllLaboratoriesByUser(int userId) {
+        return this.laboratoryDao.returnAllLaboratoriesByUser(userId);
     }
 }

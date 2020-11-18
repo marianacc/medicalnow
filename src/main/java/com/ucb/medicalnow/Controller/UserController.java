@@ -1,23 +1,14 @@
 package com.ucb.medicalnow.Controller;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.ucb.medicalnow.BL.RegistryBl;
+import com.ucb.medicalnow.BL.SecurityBl;
 import com.ucb.medicalnow.BL.UserBl;
 import com.ucb.medicalnow.Model.*;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,39 +16,43 @@ import java.util.Map;
 @RequestMapping("api/v1/user")
 public class UserController {
 
-    private RegistryBl registryBl;
     private UserBl userBl;
-
-    @Value("${medicalnow.security.secretJwt}")
-    private String secretJwt;
+    private SecurityBl securityBl;
 
     @Autowired
-    public UserController (RegistryBl registryBl, UserBl userBl) {
-        this.registryBl = registryBl;
+    public UserController (UserBl userBl, SecurityBl securityBl) {
         this.userBl = userBl;
+        this.securityBl = securityBl;
+    }
+
+    @RequestMapping(
+            value = "patient/registry",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map <String, String>> addNewPatient(@RequestBody UserDataModel userDataModel) {
+        Boolean registryUpdated = userBl.addNewPatient(userDataModel.getFirstName(), userDataModel.getFirstSurname(),
+                userDataModel.getSecondSurname(), userDataModel.getBirthDate(), userDataModel.getEmail(),
+                userDataModel.getPassword(), userDataModel.getPhoneNumber());
+
+        Map <String, String> response = new HashMap();
+        if(registryUpdated == true){
+            response.put("Message","Patient added succesfully");
+        }
+        else{
+            response.put("Message","Error. The patient wasn't added");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(
             value = "{userId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserAvatarModel> returnUserNameByPatientId (@RequestHeader("Authorization") String authorization,
-                                                                      @PathVariable("userId") Integer userId){
+    public ResponseEntity<UserAvatarModel> returnAvatarByUser(@RequestHeader("Authorization") String authorization,
+                                                              @PathVariable("userId") Integer userId){
 
-        // *****
-        // Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        // Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        // *****
-
-        return new ResponseEntity<>(this.userBl.returnUserNameByUserId(userId), HttpStatus.OK);
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.userBl.returnAvatarByUser(userId), HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -68,81 +63,52 @@ public class UserController {
     public ResponseEntity<Map<String, String>> updateMedicalData (@RequestHeader("Authorization") String authorization,
                                                                   @RequestBody MedicalDataModel medicalDataModel,
                                                                   @PathVariable("userId") Integer userId) {
-        // *******
-        // Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        // Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        // *******
+        securityBl.validateToken(authorization);
+
+        Boolean registryUpdated = userBl.updateMedicalData(userId, medicalDataModel.getWeight(), medicalDataModel.getHeight(),
+                medicalDataModel.getBloodGroup(), medicalDataModel.getTemperature(), medicalDataModel.getPressure());
 
         Map<String, String> response = new HashMap<>();
-        Boolean patientResponse = userBl.updateMedicalData(medicalDataModel.getWeight(), medicalDataModel.getHeight(),
-                medicalDataModel.getBloodGroup(), medicalDataModel.getTemperature(), medicalDataModel.getPressure(), userId);
-        if(patientResponse){
+        if(registryUpdated){
             response.put("response", "Medical data updated");
         } else {
-            response.put("response", "Medical data not updated");
+            response.put("response", "Error. Medical data not updated");
         }
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    /*
+
     @RequestMapping(
             value = "{userId}/config",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserConfigurationModel> returnUserConfigurationByUserId(@RequestHeader("Authorization") String authorization,
-                                                                                             @PathVariable("userId") Integer userId){
+    public ResponseEntity<UserDataModel> returnUserData(@RequestHeader("Authorization") String authorization,
+                                                                 @PathVariable("userId") Integer userId){
 
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        return new ResponseEntity<>(this.userBl.returnUserConfigurationByUserId(userId), HttpStatus.OK);
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.userBl.returnUserInformation(userId), HttpStatus.OK);
     }
 
     @RequestMapping(
             value = "{userId}/config/update",
-            method = RequestMethod.PUT,
+            method = RequestMethod.PATCH,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> updateConfigurationById(@RequestHeader("Authorization") String authorization,
-                                                                       @PathVariable("userId") Integer userId,
-                                                                       @RequestBody UserConfigurationModel userConfigurationModel) {
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if (!"AUTHN".equals(decodedJWT.getClaim("type").asString())) {
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
+    public ResponseEntity<Map<String, String>> updateUserData(@RequestHeader("Authorization") String authorization,
+                                                              @PathVariable("userId") Integer userId,
+                                                              @RequestBody UserDataModel userDataModel) {
+        securityBl.validateToken(authorization);
+
+        Boolean registryUpdated = userBl.updateDataByUser(userId, userDataModel.getFirstName(),
+                userDataModel.getFirstSurname(), userDataModel.getSecondSurname(), userDataModel.getBirthDate(),
+                userDataModel.getEmail(), userDataModel.getPassword(), userDataModel.getPhoneNumber());
 
         Map<String, String> response = new HashMap();
-        Boolean registryUpdated = userBl.updateConfigurationByUserId(userConfigurationModel.getFirstName(), userConfigurationModel.getFirstSurname(),
-                userConfigurationModel.getSecondSurname(), userConfigurationModel.getPhoneNumber(), userConfigurationModel.getBirthDate(),
-                userConfigurationModel.getWeight(), userConfigurationModel.getHeight(), userConfigurationModel.getCity(),
-                userConfigurationModel.getEmail(), userConfigurationModel.getPassword(), userId);
         if (registryUpdated == true) {
-            response.put("Message", "Patient updated succesfully");
+            response.put("Message", "User data updated succesfully");
         } else {
-            response.put("Message", "Error. The patient wasn't updated");
+            response.put("Message", "Error. User data wasn't updated");
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
+    }
 }
 

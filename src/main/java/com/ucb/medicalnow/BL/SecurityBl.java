@@ -34,26 +34,25 @@ public class SecurityBl {
     @Autowired
     public SecurityBl (UserDao userDao) { this.userDao = userDao; }
 
-    public Map authenticate (String username, String password){
-        Map result = new HashMap<>();
-        // Función para aplicar el salt y la función hash a la contraseña
+    public Map<String, String> authenticate (String username, String password){
+        Map<String, String> result = new HashMap<>();
+        // Para aplicar la función hash + salt
         String sha256hex= Hashing.sha256()
                 .hashString(password+salt, StandardCharsets.UTF_8)
                 .toString();
         Integer userId = userDao.findUserByEmailAndPassword(username,sha256hex);
         if(userId != null){
-            result.put("authentication",generateJwt(userId,10,"AUTHN", userDao.findRoleByUserId(userId)));
+            result.put("authentication", generateJwt(userId,10,"AUTHN", userDao.findRoleByUser(userId)));
             result.put("refresh", generateJwt(userId, 20, "REFRESH", null));
             result.put("userId", userId.toString());
-            result.put("message", "Authentication OK");
             return result;
         }else{
             return null;
         }
     }
 
-    public Map refresh (TokenRefreshModel tokenRefreshModel){
-        Map result = new HashMap<>();
+    public Map<String,String> refresh (TokenRefreshModel tokenRefreshModel){
+        Map<String,String> result = new HashMap<>();
         String tokenJwt = tokenRefreshModel.getRefreshToken();
         DecodedJWT decodedJWT = JWT.decode(tokenJwt);
         String userId = decodedJWT.getSubject();
@@ -67,22 +66,21 @@ public class SecurityBl {
                 .build();
         verifier.verify(tokenJwt);
         Integer userIdAsInt = Integer.parseInt(userId);
-        result.put("authentication",generateJwt(Integer.parseInt(userId),1,"AUTHN", userDao.findRoleByUserId(userIdAsInt)));
+        result.put("authentication",generateJwt(Integer.parseInt(userId),1,"AUTHN", userDao.findRoleByUser(userIdAsInt)));
         result.put("refresh",generateJwt(Integer.parseInt(userId),2,"REFRESH", null));
-        result.put("message", "Authentication OK");
         result.put("userId", userId);
         return result;
     }
 
-    private String generateJwt(int userId, int minutes, String type, String role){
+    private String generateJwt (int userId, int minutes, String type, String role){
         LocalDateTime expiresAt = LocalDateTime.now(ZoneId.systemDefault()).plusMinutes(minutes);
-        String token =null;
+        String token = null;
         try{
             Algorithm algorithm = Algorithm.HMAC256(secretJwt);
             if(role!=null){
                 token = JWT.create()
                         .withIssuer("Medicalnow")
-                        .withClaim("type",type)
+                        .withClaim("type", type)
                         .withClaim("role", role)
                         .withSubject(Integer.toString(userId))
                         .withExpiresAt(Date.from(expiresAt.atZone(ZoneId.systemDefault()).toInstant()))
@@ -91,15 +89,27 @@ public class SecurityBl {
             }else{
                 token = JWT.create()
                         .withIssuer("Medicalnow")
-                        .withClaim("type",type)
+                        .withClaim("type", type)
                         .withSubject(Integer.toString(userId))
                         .withExpiresAt(Date.from(expiresAt.atZone(ZoneId.systemDefault()).toInstant()))
                         .sign(algorithm);
             }
-
         }catch (JWTCreationException exception){
             throw new RuntimeException(exception);
         }
         return token;
+    }
+
+    public void validateToken (String authorization){
+        // Decodificando el token
+        String tokenJwt = authorization.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
+        //Validando si el token es bueno y de autenticación
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
+            throw new RuntimeException("El token proporcionado no es un token de autenticación");
+        }
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
+        verifier.verify(tokenJwt);
     }
 }

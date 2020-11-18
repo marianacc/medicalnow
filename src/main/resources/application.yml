@@ -16,4 +16,3 @@ medicalnow:
   security:
     salt: qwertyuiop
     secretJwt: 1234567890
-

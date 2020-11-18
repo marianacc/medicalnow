@@ -2,7 +2,7 @@ package com.ucb.medicalnow.Model;
 
 import java.sql.Date;
 
-public class NewUserModel {
+public class UserDataModel {
 
     private String firstName;
     private String firstSurname;
@@ -12,10 +12,10 @@ public class NewUserModel {
     private String password;
     private String phoneNumber;
 
-    public NewUserModel() {
+    public UserDataModel() {
     }
 
-    public NewUserModel(String firstName, String firstSurname, String secondSurname, Date birthDate, String email, String password, String phoneNumber) {
+    public UserDataModel(String firstName, String firstSurname, String secondSurname, Date birthDate, String email, String password, String phoneNumber) {
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;

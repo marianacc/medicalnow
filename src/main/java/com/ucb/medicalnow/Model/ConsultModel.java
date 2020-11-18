@@ -2,43 +2,41 @@ package com.ucb.medicalnow.Model;
 
 import java.sql.Date;
 
-public class LaboratoryOrderModel {
+public class ConsultModel {
 
-    private Integer laboratoryId;
-    private String laboratoryName;
+    private Integer consultId;
     private String firstName;
     private String firstSurname;
     private String secondSurname;
     private String specialtyName;
-    private Date orderDate;
+    private Date startDate;
 
-    public LaboratoryOrderModel() {
+    public ConsultModel() {
     }
 
-    public LaboratoryOrderModel(Integer laboratoryId, String laboratoryName, String firstName, String firstSurname, String secondSurname, String specialtyName, Date orderDate) {
-        this.laboratoryId = laboratoryId;
-        this.laboratoryName = laboratoryName;
+    public ConsultModel(Integer consultId, String firstName, String firstSurname, String secondSurname, String specialtyName, Date startDate) {
+        this.consultId = consultId;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
         this.specialtyName = specialtyName;
-        this.orderDate = orderDate;
+        this.startDate = startDate;
     }
 
-    public Integer getLaboratoryId() {
-        return laboratoryId;
+    public ConsultModel(Integer consultId, String firstName, String firstSurname, String secondSurname, Date startDate) {
+        this.consultId = consultId;
+        this.firstName = firstName;
+        this.firstSurname = firstSurname;
+        this.secondSurname = secondSurname;
+        this.startDate = startDate;
     }
 
-    public void setLaboratoryId(Integer laboratoryId) {
-        this.laboratoryId = laboratoryId;
+    public Integer getConsultId() {
+        return consultId;
     }
 
-    public String getLaboratoryName() {
-        return laboratoryName;
-    }
-
-    public void setLaboratoryName(String laboratoryName) {
-        this.laboratoryName = laboratoryName;
+    public void setConsultId(Integer consultId) {
+        this.consultId = consultId;
     }
 
     public String getFirstName() {
@@ -73,24 +71,23 @@ public class LaboratoryOrderModel {
         this.specialtyName = specialtyName;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     @Override
     public String toString() {
-        return "LaboratoryOrderModel{" +
-                "laboratoryId=" + laboratoryId +
-                ", laboratoryName='" + laboratoryName + '\'' +
+        return "ConsultsPatientModel{" +
+                "consultId=" + consultId +
                 ", firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
                 ", specialtyName='" + specialtyName + '\'' +
-                ", orderDate=" + orderDate +
+                ", startDate=" + startDate +
                 '}';
     }
 }

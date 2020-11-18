@@ -1,14 +1,14 @@
 package com.ucb.medicalnow.Model;
 
-public class DoctorMessageModel {
+public class MessageModel {
 
     private Integer consultId;
     private String message;
 
-    public DoctorMessageModel() {
+    public MessageModel() {
     }
 
-    public DoctorMessageModel(Integer consultId, String message) {
+    public MessageModel(Integer consultId, String message) {
         this.consultId = consultId;
         this.message = message;
     }

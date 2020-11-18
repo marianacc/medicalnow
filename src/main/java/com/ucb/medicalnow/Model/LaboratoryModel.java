@@ -2,33 +2,43 @@ package com.ucb.medicalnow.Model;
 
 import java.sql.Date;
 
-public class ConsultsPatientModel {
+public class LaboratoryModel {
 
-    private Integer consultId;
+    private Integer laboratoryId;
+    private String laboratoryName;
     private String firstName;
     private String firstSurname;
     private String secondSurname;
     private String specialtyName;
-    private Date startDate;
+    private Date orderDate;
 
-    public ConsultsPatientModel() {
+    public LaboratoryModel() {
     }
 
-    public ConsultsPatientModel(Integer consultId, String firstName, String firstSurname, String secondSurname, String specialtyName, Date startDate) {
-        this.consultId = consultId;
+    public LaboratoryModel(Integer laboratoryId, String laboratoryName, String firstName, String firstSurname, String secondSurname, String specialtyName, Date orderDate) {
+        this.laboratoryId = laboratoryId;
+        this.laboratoryName = laboratoryName;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
         this.specialtyName = specialtyName;
-        this.startDate = startDate;
+        this.orderDate = orderDate;
     }
 
-    public Integer getConsultId() {
-        return consultId;
+    public Integer getLaboratoryId() {
+        return laboratoryId;
     }
 
-    public void setConsultId(Integer consultId) {
-        this.consultId = consultId;
+    public void setLaboratoryId(Integer laboratoryId) {
+        this.laboratoryId = laboratoryId;
+    }
+
+    public String getLaboratoryName() {
+        return laboratoryName;
+    }
+
+    public void setLaboratoryName(String laboratoryName) {
+        this.laboratoryName = laboratoryName;
     }
 
     public String getFirstName() {
@@ -63,23 +73,24 @@ public class ConsultsPatientModel {
         this.specialtyName = specialtyName;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     @Override
     public String toString() {
-        return "ConsultsPatientModel{" +
-                "consultId=" + consultId +
+        return "LaboratoryOrderModel{" +
+                "laboratoryId=" + laboratoryId +
+                ", laboratoryName='" + laboratoryName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
                 ", specialtyName='" + specialtyName + '\'' +
-                ", startDate=" + startDate +
+                ", orderDate=" + orderDate +
                 '}';
     }
 }

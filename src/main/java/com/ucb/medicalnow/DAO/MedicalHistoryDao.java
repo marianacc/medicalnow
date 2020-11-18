@@ -20,19 +20,20 @@ public class MedicalHistoryDao {
     @Autowired
     public MedicalHistoryDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Long returnMedicalHistoryId(int patientId, int doctorSpecialtyId) {
+    public Integer returnMedicalHistoryId(int patientId, int doctorSpecialtyId) {
         String query = "SELECT med.medical_history_id\n" +
                 "FROM medical_history med\n" +
                 "    JOIN patient pat on med.patient_id = pat.patient_id\n" +
-                "         JOIN doctor_specialty ds on med.doctor_specialty_id = ds.doctor_specialty_id\n" +
-                "WHERE pat.patient_id = ?\n" +
-                "  AND ds.doctor_specialty_id = ?\n" +
-                "  AND med.status = 1\n" +
-                "  AND pat.status = 1\n" +
-                "  AND ds.status = 1;";
-        Long medicalHistoryId = null;
+                "        JOIN user usr on pat.user_id = usr.user_id\n" +
+                "           JOIN doctor_specialty ds on med.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "WHERE usr.user_id = ?\n" +
+                "AND ds.doctor_specialty_id = ?\n" +
+                "AND med.status = 1\n" +
+                "AND pat.status = 1\n" +
+                "AND ds.status = 1;";
+        Integer medicalHistoryId = null;
         try {
-            medicalHistoryId = jdbcTemplate.queryForObject(query, new Object[]{patientId, doctorSpecialtyId}, Long.class);
+            medicalHistoryId = jdbcTemplate.queryForObject(query, new Object[]{patientId, doctorSpecialtyId}, Integer.class);
         } catch (Exception e) {
             medicalHistoryId = null;
         }
@@ -50,6 +51,14 @@ public class MedicalHistoryDao {
         }
         return result;
     }
+
+
+
+
+
+
+
+
 
     public ArrayList<MedicalHistoryListModel> returnAllMedicalHistoryByUserId(int userId) {
         String query = "SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(c.tx_date), c.status\n" +

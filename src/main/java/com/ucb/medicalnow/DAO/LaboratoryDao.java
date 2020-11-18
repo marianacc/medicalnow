@@ -1,7 +1,6 @@
 package com.ucb.medicalnow.DAO;
 
-import com.ucb.medicalnow.Model.LaboratoryOrderModel;
-import com.ucb.medicalnow.Model.SpecialtyModel;
+import com.ucb.medicalnow.Model.LaboratoryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,7 +18,7 @@ public class LaboratoryDao {
     @Autowired
     public LaboratoryDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public ArrayList<LaboratoryOrderModel> returnAllLaboratoriesByUserId (int userId){
+    public ArrayList<LaboratoryModel> returnAllLaboratoriesByUser(int userId){
         String query = "SELECT lab.laboratory_id, lab.name, per.first_name, per.first_surname, per.second_surname, spe.name, DATE(lab.tx_date)\n" +
                 "FROM laboratory lab\n" +
                 "    JOIN consult con on lab.consult_id = con.consult_id\n" +
@@ -39,14 +38,13 @@ public class LaboratoryDao {
                 "AND doc.status = 1\n" +
                 "AND per.status = 1\n" +
                 "AND usr.status = 1;";
-
-        ArrayList<LaboratoryOrderModel> laboratories = null;
+        ArrayList<LaboratoryModel> laboratories = null;
         try{
-            laboratories = (ArrayList<LaboratoryOrderModel>) jdbcTemplate.query(query, new Object[]{userId},
-                    new RowMapper<LaboratoryOrderModel>() {
+            laboratories = (ArrayList<LaboratoryModel>) jdbcTemplate.query(query, new Object[]{userId},
+                    new RowMapper<LaboratoryModel>() {
                         @Override
-                        public LaboratoryOrderModel mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new LaboratoryOrderModel(resultSet.getInt(1),
+                        public LaboratoryModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new LaboratoryModel(resultSet.getInt(1),
                                     resultSet.getString(2),
                                     resultSet.getString(3),
                                     resultSet.getString(4),

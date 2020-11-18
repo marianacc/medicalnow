@@ -46,7 +46,21 @@ public class SpecialtyDao {
         return specialties;
     }
 
-    public ArrayList<DoctorSpecialtyModel> returnDoctorsBySpecialty (int specialtyId){
+    public String returnSpecialtyName(int specialtyId){
+        String query = "SELECT name\n" +
+                "FROM specialty\n" +
+                "WHERE specialty_id = ?\n" +
+                "AND status = 1;";
+        String specialtyName = null;
+        try {
+            specialtyName = jdbcTemplate.queryForObject(query, new Object[]{specialtyId}, String.class);
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return specialtyName;
+    }
+
+    public ArrayList<DoctorSpecialtyModel> returnDoctorsBySpecialty(int specialtyId){
         String query = "SELECT doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, avg(qua.qualification), doc.doctor_id\n" +
                 "FROM person per\n" +
                 "    JOIN doctor doc on per.person_id = doc.person_id\n" +
@@ -60,7 +74,6 @@ public class SpecialtyDao {
                 "AND spe.specialty_id = ?\n" +
                 "GROUP BY doc_spec.doctor_specialty_id, spe.name, per.first_name, per.first_surname, per.second_surname, qua.qualification\n" +
                 "ORDER BY qua.qualification desc;";
-
         ArrayList<DoctorSpecialtyModel> doctorSpecialty = null;
         try{
             doctorSpecialty = (ArrayList<DoctorSpecialtyModel>) jdbcTemplate.query(query, new Object[]{specialtyId},
@@ -83,19 +96,7 @@ public class SpecialtyDao {
         return doctorSpecialty;
     }
 
-    public String returnSpecialtyNameBySpecialtyId (int specialtyId){
-        String query = "SELECT name\n" +
-                "FROM specialty\n" +
-                "WHERE specialty_id = ?\n" +
-                "AND status = 1;";
-        String specialtyName = null;
-        try {
-            specialtyName = jdbcTemplate.queryForObject(query, new Object[]{specialtyId}, String.class);
-        } catch (Exception e){
-            throw new RuntimeException();
-        }
-        return specialtyName;
-    }
+    //////////////////////////
 
     public String returnSpecialtyIdByConsultId (int consultId){
         String query = "SELECT spe.name\n" +

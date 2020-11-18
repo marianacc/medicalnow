@@ -1,10 +1,8 @@
 package com.ucb.medicalnow.BL;
 
-import com.ucb.medicalnow.Controller.PatientController;
 import com.ucb.medicalnow.DAO.ConsultDao;
 import com.ucb.medicalnow.DAO.MedicalHistoryDao;
 import com.ucb.medicalnow.DAO.PatientDao;
-import com.ucb.medicalnow.DAO.SpecialtyDao;
 import com.ucb.medicalnow.Model.DiagnosisModel;
 import com.ucb.medicalnow.Model.MedicalHistoryDetailModel;
 import com.ucb.medicalnow.Model.MedicalHistoryListModel;
@@ -29,35 +27,33 @@ public class MedicalHistoryBl {
         this.consultDao = consultDao;
     }
 
-    public Map<String, Object> medicalHistoryExists (int doctorSpecialtyId, int userId){
-        Map<String, Object> result = new HashMap();
-        Boolean medicalHistoryResponse = null;
-        Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        Long medicalHistoryId = medicalHistoryDao.returnMedicalHistoryId(patientId, doctorSpecialtyId);
+    public Integer searchMedicalHistory(int userId, int doctorSpecialtyId){
+        Integer medicalHistoryId = medicalHistoryDao.returnMedicalHistoryId(userId, doctorSpecialtyId);
         if (medicalHistoryId == null){
-            medicalHistoryResponse = false;
-        } else {
-            medicalHistoryResponse = true;
+            Integer medicalHistoryResponse = createMedicalHistory(userId, doctorSpecialtyId);
+            if (medicalHistoryResponse > 0){
+                medicalHistoryId = medicalHistoryDao.returnMedicalHistoryId(userId, doctorSpecialtyId);
+            }
         }
-        result.put("id", medicalHistoryId);
-        result.put("exists", medicalHistoryResponse);
-        return result;
+        return medicalHistoryId;
     }
 
-    public Boolean createMedicalHistory (int userId, int doctorSpecialtyId) {
-        Boolean medicalHistoryUpdated = null;
-        Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        Integer medicalHistoryResponse = medicalHistoryDao.createMedicalHistory(patientId, doctorSpecialtyId);
-        if(medicalHistoryResponse>0){
-            medicalHistoryUpdated = true;
-        } else {
-            medicalHistoryUpdated = false;
-        }
-        return medicalHistoryUpdated;
+    public Integer createMedicalHistory (int userId, int doctorSpecialtyId) {
+        Integer patientId = patientDao.returnPatientIdByUser(userId);
+        return this.medicalHistoryDao.createMedicalHistory(patientId, doctorSpecialtyId);
     }
 
-    public Long returnMedicalHistoryId (int doctorSpecialtyId, int userId){
-        Integer patientId = patientDao.returnPatientIdByUserId(userId);
+
+
+
+
+
+
+
+
+
+    public Integer returnMedicalHistoryId (int doctorSpecialtyId, int userId){
+        Integer patientId = patientDao.returnPatientIdByUser(userId);
         return this.medicalHistoryDao.returnMedicalHistoryId(patientId, doctorSpecialtyId);
     }
 
@@ -68,7 +64,7 @@ public class MedicalHistoryBl {
     public Map<String, Object> returnMedicalHistoryDetail (int medicalHistoryId){
         Map<String, Object> result = new HashMap();
         MedicalHistoryDetailModel medicalHistoryDetailModel = medicalHistoryDao.returnMedicalHistoryDetailByMedicalHistoryId(medicalHistoryId);
-        DiagnosisModel diagnosis = consultDao.returnDiagnosisByConsultId(medicalHistoryId);
+        DiagnosisModel diagnosis = consultDao.returnDiagnosisByConsult(medicalHistoryId);
         result.put("patient_data", medicalHistoryDetailModel);
         result.put("diagnosis", diagnosis);
         return result;

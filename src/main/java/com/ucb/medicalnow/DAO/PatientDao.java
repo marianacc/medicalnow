@@ -18,7 +18,7 @@ public class PatientDao {
     @Autowired
     public PatientDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Integer insertNewPatient (int personId, int userId) {
+    public Integer addNewPatient (int personId, int userId) {
         String query = "INSERT INTO patient (person_id, user_id, gender, height, weight, blood_group, temperature, pressure, status, tx_id, tx_username, tx_host, tx_date)\n" +
                 "VALUES (?, ?, '-', '0.0', '0.0', '-', '0.0', '0.0', 1, 0, 'root', '127.0.0.1', now());";
         Integer result = null;
@@ -31,18 +31,7 @@ public class PatientDao {
         return result;
     }
 
-    public Integer returnMaxUserId (){
-        String query = "SELECT MAX(patient_id) FROM patient WHERE status = 1;";
-        Integer patientId = null;
-        try {
-            patientId = jdbcTemplate.queryForObject(query, new Object[]{}, Integer.class);
-        } catch (Exception e){
-            throw new RuntimeException();
-        }
-        return patientId;
-    }
-
-    public Integer returnPatientIdByUserId (int userId) {
+    public Integer returnPatientIdByUser(int userId) {
         String query = "SELECT pat.patient_id\n" +
                 "FROM patient pat\n" +
                 "         JOIN user usr on pat.user_id = usr.user_id\n" +
@@ -58,6 +47,21 @@ public class PatientDao {
         return patientId;
     }
 
+    public Integer updateMedicalDataByPatient(Double weight, Double height, String bloodGroup, Double temperature, String pressure, int patientId){
+        String query = "UPDATE patient\n" +
+                "SET weight = ?, height = ?, blood_group = ?, temperature = ?, pressure = ?\n" +
+                "WHERE patient_id = ?\n" +
+                "AND status = 1;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{weight, height, bloodGroup, temperature, pressure, patientId});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
+    ///////
     public PatientNameModel returnPatientNameByConsultId (int consultId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
                 "FROM person per\n" +
@@ -86,19 +90,5 @@ public class PatientDao {
             throw new RuntimeException();
         }
         return patientName;
-    }
-
-    public Integer updateMedicalDataByPatientId (Double weight, Double height, String bloodGroup, Double temperature, String pressure, int patientId){
-        String query = "UPDATE patient\n" +
-                "SET weight = ?, height = ?, blood_group = ?, temperature = ?, pressure = ?\n" +
-                "WHERE patient_id = ?\n" +
-                "AND status = 1;";
-        Integer result = null;
-        try {
-            result = jdbcTemplate.update(query, new Object[]{weight, height, bloodGroup, temperature, pressure, patientId});
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-        return result;
     }
 }

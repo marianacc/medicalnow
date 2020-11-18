@@ -5,15 +5,13 @@ import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.DAO.PersonDao;
 import com.ucb.medicalnow.DAO.UserDao;
 import com.ucb.medicalnow.Model.UserAvatarModel;
-import com.ucb.medicalnow.Model.UserConfigurationModel;
-import org.apache.catalina.User;
+import com.ucb.medicalnow.Model.UserDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class UserBl {
@@ -32,51 +30,79 @@ public class UserBl {
         this.patientDao = patientDao;
     }
 
-    public UserAvatarModel returnUserNameByUserId(int userId){
-        UserAvatarModel userAvatarModel = userDao.returnUserNameByUserId(userId);
+    public Boolean addNewPatient(String firstName, String firstSurname, String secondSurname, Date birthDate,
+                                  String email, String password, String phoneNumber) {
+
+        Boolean registryUpdated = null;
+
+        Integer addNewPersonResponse = personDao.addNewPerson(firstName, firstSurname, secondSurname, birthDate);
+        if (addNewPersonResponse > 0){
+            Integer personId = personDao.returnMaxPersonId();
+            String sha256hex = hash256toPassword(password);
+            Integer addNewUserResponse = userDao.addNewUser(personId, email, sha256hex, phoneNumber);
+            if (addNewUserResponse > 0){
+                Integer userId = userDao.returnMaxUserId();
+                Integer addNewUserRoleResponse = userDao.addNewUserRole(userId);
+                if (addNewUserRoleResponse > 0){
+                    Integer addNewPatientResponse = patientDao.addNewPatient(personId, userId);
+                    if (addNewPatientResponse > 0){
+                        registryUpdated = true;
+                    } else {
+                        registryUpdated = false;
+                    }
+                }
+            }
+        }
+        return registryUpdated;
+    }
+
+    public UserAvatarModel returnAvatarByUser(int userId){
+        UserAvatarModel userAvatarModel = userDao.returnUserNameByUser(userId);
         String firstName = userAvatarModel.getFirstName();
         char firstLetter = firstName.charAt(0);
         userAvatarModel.setFirstLetter(firstLetter);
         return userAvatarModel;
     }
 
-    public Boolean updateMedicalData (Double weight, Double height, String bloodGroup, Double temperature, String pressure, int userId){
-        Boolean medicalDataUpdated = null;
-        Integer patientId = patientDao.returnPatientIdByUserId(userId);
-        Integer patientResponse = patientDao.updateMedicalDataByPatientId(weight, height, bloodGroup, temperature, pressure, patientId);
-        if (patientResponse > 0){
-            medicalDataUpdated = true;
+    public Boolean updateMedicalData(int userId, Double weight, Double height, String bloodGroup, Double temperature, String pressure){
+        Boolean registryUpdated = null;
+        Integer patientId = patientDao.returnPatientIdByUser(userId);
+        Integer medicalDataUpdateResponse = patientDao.updateMedicalDataByPatient(weight, height, bloodGroup, temperature, pressure, patientId);
+        if (medicalDataUpdateResponse > 0){
+            registryUpdated = true;
         } else {
-            medicalDataUpdated = false;
+            registryUpdated = false;
         }
-        return medicalDataUpdated;
+        return registryUpdated;
     }
 
-    /*
-    public UserConfigurationModel returnUserConfigurationByUserId(int userId){
-        return this.userDao.returnUserConfigurationByUserId(userId);
+    public UserDataModel returnUserInformation(int userId){
+        return this.userDao.returnUserInformationByUser(userId);
     }
 
-    public Boolean updateConfigurationByUserId (String firstName, String firstSurname, String secondSurname, String phoneNumber, Date birthDate, Double weight, Double height, String city, String email, String password, int userId){
-        Boolean configUpdated = null;
-        // Agregarle la Salt y aplicar el algoritmo hash256 a la contraseña para guardarla en la base de datos
-        String sha256hex= Hashing.sha256()
-                .hashString(password+salt, StandardCharsets.UTF_8)
-                .toString();
-        Integer personId = personDao.returnPersonIdByUserId(userId);
-        Integer personResponse = personDao.updatePerson(firstName, firstSurname, secondSurname, birthDate, city, personId);
-        if (personResponse > 0){
-            Integer userResponse = userDao.updateUser(email, sha256hex, phoneNumber, userId);
-            if (userResponse > 0){
-                Integer patientId = patientDao.returnPatientIdByUserId(userId);
-                Integer patientResponse = patientDao.updatePatient(weight, height, patientId);
-                if (patientResponse > 0){
-                    configUpdated = true;
-                } else {
-                    configUpdated = false;
-                }
+    public Boolean updateDataByUser(int userId, String firstName, String firstSurname, String secondSurname,
+                                    Date birthDate, String email, String password,String phoneNumber){
+        Boolean registryUpdated = null;
+
+        Integer personId = personDao.returnPersonIdByUser(userId);
+        Integer updatePersonResponse = personDao.updatePersonData(firstName, firstSurname, secondSurname, birthDate, personId);
+        if (updatePersonResponse > 0){
+            String sha256hex = hash256toPassword(password);
+            Integer updateUserResponse = userDao.updateUserData(email, sha256hex, phoneNumber, userId);
+            if (updateUserResponse > 0){
+                registryUpdated = true;
+            } else {
+                registryUpdated = false;
             }
         }
-        return configUpdated;
-    }*/
+        return registryUpdated;
+    }
+
+    public String hash256toPassword(String password){
+        // Se aplica la función hash 256+salt a la contraseña para guardarla en la base de datos
+        String sha256hex = Hashing.sha256()
+                .hashString(password+salt, StandardCharsets.UTF_8)
+                .toString();
+        return sha256hex;
+    }
 }

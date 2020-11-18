@@ -1,7 +1,8 @@
 ### Obtiene todas las especialidades
+### NO CAMBIO NADA
 
 GET http://localhost:8008/api/v1/specialties
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzg1NzM2fQ.ukl8_oo2GAtgVZctxlDFDdLaCbQWz9zaf5c5PhYygY8
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzE3OTIzfQ.LQsLs8Ly2HTXts3YZ1kXkIGq-6vttStVz7occvVHs3U
 Content-Type: application/json
 Accept: application/json
 
@@ -9,11 +10,12 @@ Accept: application/json
 
 }
 
-### Todos los doctores de una especialidad
+### Obtiene todos los doctores de una especialidad
 ### GET http://localhost:8008/api/v1/specialties/{specialtyId}
+### NO CAMBIO NADA
 
 GET http://localhost:8008/api/v1/specialties/3
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzg2NDExfQ.6YC7QOMXQ44a_rjoqJGNostTgbWuCVPkVjDrrGyMRMM
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzE3OTIzfQ.LQsLs8Ly2HTXts3YZ1kXkIGq-6vttStVz7occvVHs3U
 Content-Type: application/json
 Accept: application/json
 

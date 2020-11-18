@@ -11,26 +11,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Service
-public class ConversationDao {
+public class ChatDao {
 
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public ConversationDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
+    public ChatDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Integer addMessageToConversation (int consultId, String message, int userId){
-        String query = "INSERT INTO conversation (consult_id, message, status, tx_id, tx_username, tx_host, tx_date)\n" +
-                "VALUES (?, ?, 1, ?, 'root', '127.0.0.1', now());";
-        Integer result = null;
-        try {
-            result = jdbcTemplate.update(query, new Object[]{consultId, message, userId});
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-        return result;
-    }
-
-    public ArrayList<ChatModel> returnConversationByConsultId (int consultId){
+    public ArrayList<ChatModel> returnChatByConsult(int consultId){
         String query = "SELECT conv.tx_id, conv.message\n" +
                 "FROM conversation conv\n" +
                 "    JOIN consult cons on conv.consult_id = cons.consult_id\n" +
@@ -48,8 +36,20 @@ public class ConversationDao {
                         }
                     });
         } catch (Exception e){
-            throw new RuntimeException();
+            conversation = null;
         }
         return conversation;
+    }
+
+    public Integer addMessageToChat(int consultId, String message, int userId){
+        String query = "INSERT INTO conversation (consult_id, message, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, 1, ?, 'root', '127.0.0.1', now());";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{consultId, message, userId});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
     }
 }

@@ -4,8 +4,8 @@ import java.sql.Time;
 
 public class DoctorSpecialtyModel {
 
-    private Integer doctorSpecialtyId;
     private char firstLetter;
+    private Integer doctorSpecialtyId;
     private String firstName;
     private String firstSurname;
     private String secondSurname;

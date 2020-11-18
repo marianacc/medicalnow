@@ -1,6 +1,5 @@
 package com.ucb.medicalnow.Model;
 
-import java.sql.Date;
 
 public class SpecialtyModel {
 

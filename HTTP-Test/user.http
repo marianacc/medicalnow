@@ -1,8 +1,27 @@
+### Registrar a un paciente
+### NUEVO MODELO PatientDataModel
+### NUEVO PATH POST http://localhost:8008/api/v1/user/patient/registry
+
+POST http://localhost:8008/api/v1/user/patient/registry
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Camila",
+  "firstSurname": "Gardeazabal",
+  "secondSurname": "Cruz",
+  "birthDate": "1998-01-13",
+  "email": "cgardea@gmail.com",
+  "password": "12345",
+  "phoneNumber": "77862116"
+}
+
+### NO CAMBIO NADA
 ### Obtener el avatar del usuario
 ### GET http://localhost:8008/api/v1/user/{userId}
 
 GET http://localhost:8008/api/v1/user/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzEyNjQxfQ.xis8nUiBu3HqUPDh9Z44-v_FWTnexpnbwv3QyT2IFgA
 Content-Type: application/json
 Accept: application/json
 
@@ -10,11 +29,12 @@ Accept: application/json
 
 }
 
+### NO CAMBIO NADA
 ### Actualizar los datos medicos del paciente
 ### POST http://localhost:8008/api/v1/user/medical_data/update/{userId}
 
-POST http://localhost:8008/api/v1/user/medical_data/update/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM4NzMyfQ.wD2HcorhBJqMHkblVpY8iQcNISEm9m57gxbrYUM2YCs
+POST http://localhost:8008/api/v1/user/medical_data/update/32
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzEzNDY4fQ.p0kAKyPo77vzQSu48aJaEiM7thMtUVArPF0rPE_sBok
 Content-Type: application/json
 Accept: application/json
 
@@ -26,25 +46,12 @@ Accept: application/json
   "pressure": "180/90"
 }
 
-### Agregar una nueva alergia
-### POST http://localhost:8008/api/v1/user/medical_data/update/{userId}
-
-POST http://localhost:8008/api/v1/user/allergies/update/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1MTM5Nzg3fQ.JLTKYEyRc9vd-wXlzBm5O0N6k0WNALtnACScCsOWgpA
-Content-Type: application/json
-Accept: application/json
-
-{
-  "description": "Alergia al mani"
-}
-
-
-
-
 ### Obtener toda la información de un usuario
+### USA EL MODELO UserDataModel
+### GET http://localhost:8008/api/v1/user/{userId}/config
 
-GET http://localhost:8008/api/v1/user/16/config
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1NTE4OTd9.JHwgq2HyxR-aXnBJSocbzIQysxestOE_SGCR9Hgqgr0
+GET http://localhost:8008/api/v1/user/1/config
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzE2MDQ0fQ.NympQsMAa0aoD_kXZr9zqRaDkA9NqvgJQQ6isAmeqOU
 Content-Type: application/json
 Accept: application/json
 
@@ -52,24 +59,24 @@ Accept: application/json
 
 }
 
-###
+### Actualizar la información del usuario
+### CAMBIO DE PUT A PATCH
+### USA EL MODELO UserDataModel
+### PATCH http://localhost:8008/api/v1/user/{userId}/config/update
 
-PUT http://localhost:8008/api/v1/user/17/config/update
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJTRU5EX1BIT1RPUyJdLCJzdWIiOiIyOSIsImlzcyI6Ik1lZGljYWxub3ciLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE2MDQ1NTE4OTd9.JHwgq2HyxR-aXnBJSocbzIQysxestOE_SGCR9Hgqgr0
+PATCH http://localhost:8008/api/v1/user/1/config/update
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzE3OTIzfQ.LQsLs8Ly2HTXts3YZ1kXkIGq-6vttStVz7occvVHs3U
 Content-Type: application/json
 Accept: application/json
 
 {
-  "firstName": "Brenda",
-  "firstSurname": "Roman",
-  "secondSurname": "Alban",
-  "phoneNumber": "770-152-7782",
-  "birthDate": "2020-10-18",
-  "weight": 70.63,
-  "height": 1.71,
-  "city": "La Paz",
-  "email": "radmansf@ted.com",
-  "password": "12345"
+  "firstName": "Mariana",
+  "firstSurname": "Cardozo",
+  "secondSurname": "Costa",
+  "birthDate": "1998-05-30",
+  "email": "mcardozocosta@gmail.com",
+  "password": "12345",
+  "phoneNumber": "77784124"
 }
 
 ###
