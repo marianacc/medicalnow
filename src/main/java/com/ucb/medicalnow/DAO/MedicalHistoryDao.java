@@ -52,15 +52,7 @@ public class MedicalHistoryDao {
         return result;
     }
 
-
-
-
-
-
-
-
-
-    public ArrayList<MedicalHistoryListModel> returnAllMedicalHistoryByUserId(int userId) {
+    public ArrayList<MedicalHistoryListModel> returnAllMedicalHistory(int userId) {
         String query = "SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(c.tx_date), c.status\n" +
                 "FROM medical_history mh\n" +
                 "    JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
@@ -101,7 +93,7 @@ public class MedicalHistoryDao {
         return medicalHistoryList;
     }
 
-    public MedicalHistoryDetailModel returnMedicalHistoryDetailByMedicalHistoryId(int medicalHistoryId) {
+    public MedicalHistoryDetailModel returnMedicalHistoryDetail(int medicalHistoryId) {
         String query = "SELECT per.first_name, per.first_surname, per.second_surname, per.birthdate, usr.phone_number, usr.email\n" +
                 "FROM person per\n" +
                 "    JOIN user usr on per.person_id = usr.person_id\n" +

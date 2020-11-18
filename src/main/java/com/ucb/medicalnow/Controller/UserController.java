@@ -56,6 +56,16 @@ public class UserController {
     }
 
     @RequestMapping(
+            value = "medical_data/{userId}",
+            method = RequestMethod.GET,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MedicalDataModel> returnMedicalData (@RequestHeader("Authorization") String authorization,
+                                                                  @PathVariable("userId") Integer userId) {
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.userBl.returnMedicalData(userId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
             value = "medical_data/update/{userId}",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,

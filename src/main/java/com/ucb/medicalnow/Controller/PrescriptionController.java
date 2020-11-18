@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ucb.medicalnow.BL.PrescriptionBl;
+import com.ucb.medicalnow.BL.SecurityBl;
 import com.ucb.medicalnow.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,31 +23,21 @@ import java.util.Map;
 public class PrescriptionController {
 
     private PrescriptionBl prescriptionBl;
-
-    @Value("${medicalnow.security.secretJwt}")
-    private String secretJwt;
+    private SecurityBl securityBl;
 
     @Autowired
-    public PrescriptionController (PrescriptionBl prescriptionBl) { this.prescriptionBl = prescriptionBl; }
+    public PrescriptionController (PrescriptionBl prescriptionBl, SecurityBl securityBl) {
+        this.prescriptionBl = prescriptionBl;
+        this.securityBl = securityBl;
+    }
 
     @RequestMapping(
-            value = "consults/prescription/{userId}",
+            value = "consults/{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<PrescriptionListModel>> returnAllConsultsWithPrescriptions(@RequestHeader("Authorization") String authorization,
                                                                                                @PathVariable("userId") Integer userId){
-        // *********
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        // *********
+        securityBl.validateToken(authorization);
         return new ResponseEntity<>(this.prescriptionBl.returnAllConsultsWithPrescriptions(userId), HttpStatus.OK);
     }
 
@@ -54,41 +45,20 @@ public class PrescriptionController {
             value = "{consultId}/all",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> returnAllPrescriptionsByConsultId (@RequestHeader("Authorization") String authorization,
-                                                                                  @PathVariable("consultId") Integer consultId){
-        // *********
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-        // *********
-        return new ResponseEntity<>(this.prescriptionBl.returnAllPrescriptionsByConsultId(consultId), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> returnAllPrescriptionsByConsult(@RequestHeader("Authorization") String authorization,
+                                                                               @PathVariable("consultId") Integer consultId){
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.prescriptionBl.returnAllPrescriptionsByConsult(consultId), HttpStatus.OK);
     }
 
     @RequestMapping(
             value = "{prescriptionId}/detail",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> returnPrescriptionDetail (@RequestHeader("Authorization") String authorization,
-                                                                                         @PathVariable("prescriptionId") Integer prescriptionId){
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
-
-        return new ResponseEntity<>(this.prescriptionBl.returnPrescriptionDetailByPrescriptionId(prescriptionId), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> returnPrescriptionDetail(@RequestHeader("Authorization") String authorization,
+                                                                        @PathVariable("prescriptionId") Integer prescriptionId){
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.prescriptionBl.returnPrescriptionDetail(prescriptionId), HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -96,18 +66,9 @@ public class PrescriptionController {
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> addPrescriptionDetail (@RequestHeader("Authorization") String authorization,
-                                       @PathVariable("consultId") Integer consultId,
-                                       @RequestBody PrescriptionModel prescriptionModel){
-        //Decodificando el token
-        String tokenJwt = authorization.substring(7);
-        DecodedJWT decodedJWT = JWT.decode(tokenJwt);
-        //Validando si el token es bueno y de autenticación
-        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString())){
-            throw new RuntimeException("El token proporcionado no es un token de autenticación");
-        }
-        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer("Medicalnow").build();
-        verifier.verify(tokenJwt);
+                                                                      @PathVariable("consultId") Integer consultId,
+                                                                      @RequestBody PrescriptionModel prescriptionModel){
+        securityBl.validateToken(authorization);
 
         Map<String, String> response = new HashMap<>();
         Boolean prescriptionUpdated = prescriptionBl.addPrescriptionDetail(consultId, prescriptionModel.getDescription(), prescriptionModel.getContent());

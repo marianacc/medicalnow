@@ -47,7 +47,7 @@ public class ConsultDao {
     }
 
     public ArrayList<ConsultModel> returnAllConsultsByPatient (int userId){
-        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date)\n" +
+        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date), con.status\n" +
                 "FROM consult con\n" +
                 "    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
                 "        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
@@ -77,7 +77,8 @@ public class ConsultDao {
                                     resultSet.getString(3),
                                     resultSet.getString(4),
                                     resultSet.getString(5),
-                                    resultSet.getDate(6));
+                                    resultSet.getDate(6),
+                                    resultSet.getInt(7));
                         }
                     });
         } catch (Exception e){
@@ -87,7 +88,7 @@ public class ConsultDao {
     }
 
     public ArrayList<ConsultModel> returnAllConsultsByDoctor(int userId){
-        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, MIN(con.tx_date)\n" +
+        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, MIN(con.tx_date), con.status\n" +
                 "FROM consult con\n" +
                 "    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
                 "        JOIN patient pat on mh.patient_id = pat.patient_id\n" +
@@ -114,7 +115,8 @@ public class ConsultDao {
                                     resultSet.getString(2),
                                     resultSet.getString(3),
                                     resultSet.getString(4),
-                                    resultSet.getDate(5));
+                                    resultSet.getDate(5),
+                                    resultSet.getInt(6));
                         }
                     });
         } catch (Exception e){

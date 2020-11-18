@@ -31,7 +31,7 @@ public class ChatBl {
         Map <String, Object> response = new HashMap<>();
         ArrayList<ChatModel> chat = setRoleByUser(consultId);
         if(chat != null){
-            DoctorNameModel doctorName = doctorDao.returnDoctorAndSpecialtyNameByConsultId(consultId);
+            DoctorNameModel doctorName = doctorDao.returnDoctorSpecialtyNameByConsult(consultId);
             response.put("content", chat);
             response.put("doctorInfo", doctorName);
         }
@@ -42,7 +42,7 @@ public class ChatBl {
         Map <String, Object> response = new HashMap<>();
         ArrayList<ChatModel> chat = setRoleByUser(consultId);
         if(chat != null){
-            PatientNameModel patientName = patientDao.returnPatientNameByConsultId(consultId);
+            PatientNameModel patientName = patientDao.returnPatientNameByConsult(consultId);
             response.put("content", chat);
             response.put("patientInfo", patientName);
         }

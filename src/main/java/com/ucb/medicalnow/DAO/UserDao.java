@@ -150,8 +150,6 @@ public class UserDao {
         return result;
     }
 
-    //////////////
-
     public int findRoleIdByUserId(int userId){
         String query = "SELECT rol.role_id\n" +
                 "FROM role rol\n" +

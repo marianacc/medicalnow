@@ -1,6 +1,5 @@
 ### Registrar a un paciente
-### NUEVO MODELO PatientDataModel
-### NUEVO PATH POST http://localhost:8008/api/v1/user/patient/registry
+### http://localhost:8008/api/v1/user/patient/registry
 
 POST http://localhost:8008/api/v1/user/patient/registry
 Content-Type: application/json
@@ -16,7 +15,6 @@ Accept: application/json
   "phoneNumber": "77862116"
 }
 
-### NO CAMBIO NADA
 ### Obtener el avatar del usuario
 ### GET http://localhost:8008/api/v1/user/{userId}
 
@@ -29,7 +27,18 @@ Accept: application/json
 
 }
 
-### NO CAMBIO NADA
+### Obtener los datos médicos del paciente
+### POST http://localhost:8008/api/v1/user/medical_data/{userId}
+
+GET http://localhost:8008/api/v1/user/medical_data/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM3OTA1fQ.dQhjdyohOT44mNysHEHehq36vyhjIeSF1JS_e9hRlmc
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
 ### Actualizar los datos medicos del paciente
 ### POST http://localhost:8008/api/v1/user/medical_data/update/{userId}
 
@@ -47,7 +56,6 @@ Accept: application/json
 }
 
 ### Obtener toda la información de un usuario
-### USA EL MODELO UserDataModel
 ### GET http://localhost:8008/api/v1/user/{userId}/config
 
 GET http://localhost:8008/api/v1/user/1/config
@@ -60,8 +68,6 @@ Accept: application/json
 }
 
 ### Actualizar la información del usuario
-### CAMBIO DE PUT A PATCH
-### USA EL MODELO UserDataModel
 ### PATCH http://localhost:8008/api/v1/user/{userId}/config/update
 
 PATCH http://localhost:8008/api/v1/user/1/config/update

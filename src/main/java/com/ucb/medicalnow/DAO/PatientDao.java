@@ -1,7 +1,9 @@
 package com.ucb.medicalnow.DAO;
 
 import com.ucb.medicalnow.Model.DoctorNameModel;
+import com.ucb.medicalnow.Model.MedicalDataModel;
 import com.ucb.medicalnow.Model.PatientNameModel;
+import com.ucb.medicalnow.Model.UserDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -47,6 +49,32 @@ public class PatientDao {
         return patientId;
     }
 
+    public MedicalDataModel returnMedicalDataByPatient (int userId){
+        String query = "SELECT pat.weight, pat.height, pat.blood_group, pat.temperature, pat.pressure\n" +
+                "FROM patient pat\n" +
+                "    JOIN user usr on pat.user_id = usr.user_id\n" +
+                "WHERE usr.user_id = ?\n" +
+                "AND pat.status = 1\n" +
+                "AND usr.status = 1;";
+        MedicalDataModel userData = null;
+        try{
+            userData = (MedicalDataModel) jdbcTemplate.queryForObject(query, new Object[]{userId},
+                    new RowMapper<MedicalDataModel>() {
+                        @Override
+                        public MedicalDataModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new MedicalDataModel(resultSet.getDouble(1),
+                                    resultSet.getDouble(2),
+                                    resultSet.getString(3),
+                                    resultSet.getDouble(4),
+                                    resultSet.getString(5));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return userData;
+    }
+
     public Integer updateMedicalDataByPatient(Double weight, Double height, String bloodGroup, Double temperature, String pressure, int patientId){
         String query = "UPDATE patient\n" +
                 "SET weight = ?, height = ?, blood_group = ?, temperature = ?, pressure = ?\n" +
@@ -61,8 +89,7 @@ public class PatientDao {
         return result;
     }
 
-    ///////
-    public PatientNameModel returnPatientNameByConsultId (int consultId){
+    public PatientNameModel returnPatientNameByConsult(int consultId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
                 "FROM person per\n" +
                 "    JOIN user usr on per.person_id = usr.person_id\n" +

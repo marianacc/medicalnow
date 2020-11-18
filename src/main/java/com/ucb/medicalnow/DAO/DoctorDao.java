@@ -17,23 +17,7 @@ public class DoctorDao {
     @Autowired
     public DoctorDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public Integer returnDoctorIdByUserId (int userId) {
-        String query = "SELECT doc.doctor_id\n" +
-                "FROM doctor doc\n" +
-                "        JOIN user usr on doc.user_id = usr.user_id\n" +
-                "WHERE usr.user_id = ?\n" +
-                "AND doc.status = 1\n" +
-                "AND usr.status = 1;";
-        Integer doctorId = null;
-        try {
-            doctorId = jdbcTemplate.queryForObject(query, new Object[]{userId}, Integer.class);
-        } catch (Exception e){
-            throw new RuntimeException();
-        }
-        return doctorId;
-    }
-
-    public DoctorNameModel returnDoctorAndSpecialtyNameByConsultId (int consultId){
+    public DoctorNameModel returnDoctorSpecialtyNameByConsult (int consultId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname, s.name, ds.doctor_specialty_id\n" +
                 "FROM person per\n" +
                 "    JOIN doctor doc on per.person_id = doc.person_id\n" +

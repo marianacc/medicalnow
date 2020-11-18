@@ -4,6 +4,7 @@ import com.google.common.hash.Hashing;
 import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.DAO.PersonDao;
 import com.ucb.medicalnow.DAO.UserDao;
+import com.ucb.medicalnow.Model.MedicalDataModel;
 import com.ucb.medicalnow.Model.UserAvatarModel;
 import com.ucb.medicalnow.Model.UserDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,8 @@ public class UserBl {
         userAvatarModel.setFirstLetter(firstLetter);
         return userAvatarModel;
     }
+
+    public MedicalDataModel returnMedicalData(int userId){ return this.patientDao.returnMedicalDataByPatient(userId); }
 
     public Boolean updateMedicalData(int userId, Double weight, Double height, String bloodGroup, Double temperature, String pressure){
         Boolean registryUpdated = null;

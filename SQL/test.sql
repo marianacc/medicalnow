@@ -1,3 +1,12 @@
+-- Obtener datos medicos del paciente
+SELECT pat.weight, pat.height, pat.blood_group, pat.temperature, pat.pressure
+FROM patient pat
+    JOIN user usr on pat.user_id = usr.user_id
+WHERE usr.user_id = ?
+AND pat.status = 1
+AND usr.status = 1;
+
+
 -- Verificar si la historia medica tiene id o no
 SELECT med.medical_history_id
 FROM medical_history med

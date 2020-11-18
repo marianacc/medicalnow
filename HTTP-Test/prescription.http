@@ -1,8 +1,8 @@
-### Todas las consultas que tienen prescripciones
+### Obtiene todas las consultas que tienen prescripciones
 ### GET http://localhost:8008/api/v1/prescription/consults/{userId}
 
 GET http://localhost:8008/api/v1/prescription/consults/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NDAzMTI3fQ.7fK4tluuSUHmPjJQ_jo0HmlBGOTci4GePE06m5ku0Qs
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM4NDg5fQ.cuO5um24ML9dcBZu9ZafLVUBs8dsUxvIO6IhlRYsoEw
 Content-Type: application/json
 Accept: application/json
 
@@ -10,11 +10,11 @@ Accept: application/json
 
 }
 
-### Todas las prescripciones de una consulta
+### Obtiene todas las prescripciones de una consulta
 ### GET http://localhost:8008/api/v1/prescription/{consultId}/all
 
 GET http://localhost:8008/api/v1/prescription/1/all
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NDAzMTI3fQ.7fK4tluuSUHmPjJQ_jo0HmlBGOTci4GePE06m5ku0Qs
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM4NDg5fQ.cuO5um24ML9dcBZu9ZafLVUBs8dsUxvIO6IhlRYsoEw
 Content-Type: application/json
 Accept: application/json
 
@@ -22,11 +22,11 @@ Accept: application/json
 
 }
 
-### Los detalles de la prescripcion de un paciente
+### Obtiene los detalles de la prescripcion de un paciente
 ### GET http://localhost:8008/api/v1/prescription/{prescriptionId}/detail
 
 GET http://localhost:8008/api/v1/prescription/1/detail
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NDAzODExfQ.CelOulYLEigD39KtViSCoNWSn1FWzyok5mR0aoqEX6s
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM4NDg5fQ.cuO5um24ML9dcBZu9ZafLVUBs8dsUxvIO6IhlRYsoEw
 Content-Type: application/json
 Accept: application/json
 
@@ -34,10 +34,11 @@ Accept: application/json
 
 }
 
-###
+### Agrega descripción y productos a una prescripción
+### POST http://localhost:8008/api/v1/prescription/4/add/detail
 
-POST http://localhost:8008/api/v1/prescription/1/add/detail
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NjM5MzM5fQ.ocnz1DPm7WsLgaMgAAYqYvhw7wvR_YzTu29fxZGlEHs
+POST http://localhost:8008/api/v1/prescription/4/add/detail
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM4NDg5fQ.cuO5um24ML9dcBZu9ZafLVUBs8dsUxvIO6IhlRYsoEw
 Content-Type: application/json
 Accept: application/json
 

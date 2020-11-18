@@ -1,32 +1,4 @@
 ### Todos los laboratorios de un paciente
-### CAMBIO EL PATH A GET http://localhost:8008/api/v1/medical_history/laboratories/1
-### LaboratoryOrderModel a LaboratoryListModel
-
-GET http://localhost:8008/api/v1/medical_history/laboratories/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzE4NzA4fQ.05v8sUeqJ1Z94a3k5Hfig6RiTBPe_sTpC-lyYQCwqTY
-Content-Type: application/json
-Accept: application/json
-
-{
-
-}
-
-### Todas las consultas que tienen prescripciones
-### GET http://localhost:8008/api/v1/prescription/consults/{userId}
-
-GET http://localhost:8008/api/v1/medical_history/consults/prescription/{userId}
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NDAzMTI3fQ.7fK4tluuSUHmPjJQ_jo0HmlBGOTci4GePE06m5ku0Qs
-Content-Type: application/json
-Accept: application/json
-
-{
-
-}
-
-
-
-
-### Todos los laboratorios de un paciente
 ### GET http://localhost:8008/api/v1/medical_history/list/all/{userId}
 
 GET http://localhost:8008/api/v1/medical_history/list/all/1

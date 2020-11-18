@@ -1,6 +1,5 @@
-### Mostrar todos los mensajes de una consulta al paciente
+### Mostrar los mensajes PACIENTE
 ### GET http://localhost:8008/api/v1/chat/patient/{consultId}/messages
-### NADA CAMBIO
 
 GET http://localhost:8008/api/v1/chat/patient/4/messages
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMxNTMzfQ.ZhS9CRZZKVPhTb3h5XA7x8YdMv7btv6bDQV4sMW_fWo
@@ -10,7 +9,7 @@ Content-Type: application/json
 
 }
 
-### Mostrar todos los mensajes de una consulta al doctor
+### Mostrar los mensajes DOCTOR
 ### GET http://localhost:8008/api/v1/chat/doctor/{consultId}/messages
 ### NADA CAMBIO
 
@@ -23,8 +22,6 @@ Content-Type: application/json
 }
 
 ### Mensaje del paciente al doctor
-### ANTES HABÍA UN POST PARA EL PACIENTE Y OTRO PARA EL DOCTOR. AHORA SOLO HAY UNO
-### Se usa MessageModel
 ### POST http://localhost:8008/api/v1/chat/send/message/{userId}
 
 POST http://localhost:8008/api/v1/chat/send/message/1

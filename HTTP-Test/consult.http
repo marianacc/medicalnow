@@ -1,6 +1,5 @@
 ### Datos del doctor para el pago
 ### GET http://localhost:8008/api/v1/consult/{doctorSpecialtyId}/payment
-## NO CAMBIO EN NADA
 
 GET http://localhost:8008/api/v1/consult/1/payment/info
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMzMTI4fQ.ARbBqohwzlzMSBhYUCFFnBD4ntjvX6ndNbFmoEpcItg
@@ -12,8 +11,6 @@ Accept: application/json
 }
 
 ### Crea una consulta
-### CAMBIO EL PATH A CONSULT EN VEZ DE CONSULTS
-### Se creo DoctorSpecialtyIdModel
 ### POST http://localhost:8008/api/v1/consult/new/{userId}
 
 POST http://localhost:8008/api/v1/consult/new/1
@@ -27,10 +24,9 @@ Accept: application/json
 
 ### Obtiene todas las consultas del paciente
 ### GET http://localhost:8008/api/v1/consult/patient/{userId}
-### Se usa el modelo ConsultModel
 
 GET http://localhost:8008/api/v1/consult/patient/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMzMTI4fQ.ARbBqohwzlzMSBhYUCFFnBD4ntjvX6ndNbFmoEpcItg
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM2NDQ3fQ.VYZtflYgBzpUU3ggBFLcZDLgIyPVUoWtmOwLzgOiZDk
 Content-Type: application/json
 Accept: application/json
 
@@ -40,10 +36,9 @@ Accept: application/json
 
 ### Lista todas las consultas del doctor
 ### GET http://localhost:8008/api/v1/consult/doctor/{userId}
-### Se usa el modelo ConsultModel
 
 GET http://localhost:8008/api/v1/consult/doctor/2
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMzMTI4fQ.ARbBqohwzlzMSBhYUCFFnBD4ntjvX6ndNbFmoEpcItg
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM2NDQ3fQ.VYZtflYgBzpUU3ggBFLcZDLgIyPVUoWtmOwLzgOiZDk
 Content-Type: application/json
 Accept: application/json
 
@@ -53,7 +48,6 @@ Accept: application/json
 
 ### Dar de alta a un paciente
 ### GET http://localhost:8008/api/v1/consult/discharge/{consultId}
-### NO CAMBIO
 
 POST http://localhost:8008/api/v1/consult/discharge/1
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMzMTI4fQ.ARbBqohwzlzMSBhYUCFFnBD4ntjvX6ndNbFmoEpcItg
@@ -66,7 +60,6 @@ Accept: application/json
 
 ### Añadir el diagnostico de un paciente
 ### POST http://localhost:8008/api/v1/consults/add/diagnosis/{consultId}
-## NO CAMBIO EN NADA
 
 POST http://localhost:8008/api/v1/consult/add/diagnosis/4
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMzMTI4fQ.ARbBqohwzlzMSBhYUCFFnBD4ntjvX6ndNbFmoEpcItg
@@ -77,9 +70,9 @@ Accept: application/json
   "diagnosis":"El paciente tiene arritmias cardiacas."
 }
 
-### Diagnóstico de un paciente según su consultId
+### Obtener el diagnóstico de un paciente
 ### GET http://localhost:8008/api/v1/consult/diagnosis/{consultId}
-## NO CAMBIO EN NADA
+
 
 GET http://localhost:8008/api/v1/consult/diagnosis/4
 Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMzMTI4fQ.ARbBqohwzlzMSBhYUCFFnBD4ntjvX6ndNbFmoEpcItg

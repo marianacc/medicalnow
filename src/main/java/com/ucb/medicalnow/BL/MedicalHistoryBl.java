@@ -38,33 +38,19 @@ public class MedicalHistoryBl {
         return medicalHistoryId;
     }
 
-    public Integer createMedicalHistory (int userId, int doctorSpecialtyId) {
+    public Integer createMedicalHistory(int userId, int doctorSpecialtyId) {
         Integer patientId = patientDao.returnPatientIdByUser(userId);
         return this.medicalHistoryDao.createMedicalHistory(patientId, doctorSpecialtyId);
     }
 
-
-
-
-
-
-
-
-
-
-    public Integer returnMedicalHistoryId (int doctorSpecialtyId, int userId){
-        Integer patientId = patientDao.returnPatientIdByUser(userId);
-        return this.medicalHistoryDao.returnMedicalHistoryId(patientId, doctorSpecialtyId);
+    public ArrayList<MedicalHistoryListModel> returnAllMedicalHistory(int userId){
+        return this.medicalHistoryDao.returnAllMedicalHistory(userId);
     }
 
-    public ArrayList<MedicalHistoryListModel> returnAllMedicalHistory (int userId){
-        return this.medicalHistoryDao.returnAllMedicalHistoryByUserId(userId);
-    }
-
-    public Map<String, Object> returnMedicalHistoryDetail (int medicalHistoryId){
-        Map<String, Object> result = new HashMap();
-        MedicalHistoryDetailModel medicalHistoryDetailModel = medicalHistoryDao.returnMedicalHistoryDetailByMedicalHistoryId(medicalHistoryId);
+    public Map<String, Object> returnMedicalHistoryDetail(int medicalHistoryId){
+        MedicalHistoryDetailModel medicalHistoryDetailModel = medicalHistoryDao.returnMedicalHistoryDetail(medicalHistoryId);
         DiagnosisModel diagnosis = consultDao.returnDiagnosisByConsult(medicalHistoryId);
+        Map<String, Object> result = new HashMap();
         result.put("patient_data", medicalHistoryDetailModel);
         result.put("diagnosis", diagnosis);
         return result;

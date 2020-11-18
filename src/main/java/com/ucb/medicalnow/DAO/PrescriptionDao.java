@@ -18,7 +18,7 @@ public class PrescriptionDao {
 
     public PrescriptionDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public ArrayList<PrescriptionListModel> returnAllConsultsThatHavePrescriptions (int userId){
+    public ArrayList<PrescriptionListModel> returnAllConsultsWithPrescriptions(int userId){
         String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date\n" +
                 "FROM consult con\n" +
                 "    JOIN prescription pre on con.consult_id = pre.consult_id\n" +
@@ -58,7 +58,7 @@ public class PrescriptionDao {
         return consultsList;
     }
 
-    public ArrayList<PrescriptionDateListModel> returnAllPrescriptionsByConsultId (int consultId){
+    public ArrayList<PrescriptionDateListModel> returnAllPrescriptionsByConsult(int consultId){
         String query = "SELECT pre.prescription_id, con.tx_date\n" +
                 "FROM prescription pre\n" +
                 "    JOIN consult con on pre.consult_id = con.consult_id\n" +
@@ -81,7 +81,7 @@ public class PrescriptionDao {
         return prescriptions;
     }
 
-    public ArrayList<PrescriptionDetailModel> returnPrescriptionDetailByPresctiptionId (int prescriptionId){
+    public ArrayList<PrescriptionDetailModel> returnPrescriptionDetail(int prescriptionId){
         String query = "SELECT pro.product_name, pro.product_detail, pro.product_quantity\n" +
                 "FROM product pro\n" +
                 "    JOIN prescription pre on pro.prescription_id = pre.prescription_id\n" +
@@ -103,21 +103,6 @@ public class PrescriptionDao {
             throw new RuntimeException();
         }
         return prescriptionDetail;
-    }
-
-
-    public String returnDescriptionByPrescriptionId (int prescriptionId){
-        String query = "SELECT description\n" +
-                "FROM prescription\n" +
-                "WHERE prescription_id = ?\n" +
-                "AND status = 1;";
-        String description = null;
-        try {
-            description = jdbcTemplate.queryForObject(query, new Object[]{prescriptionId}, String.class);
-        } catch (Exception e){
-            throw new RuntimeException();
-        }
-        return description;
     }
 
     public Integer addNewPrescription (int consultId, String description){
@@ -155,6 +140,19 @@ public class PrescriptionDao {
             throw new RuntimeException();
         }
         return result;
+    }
 
+    public String returnDescriptionByPrescription(int prescriptionId){
+        String query = "SELECT description\n" +
+                "FROM prescription\n" +
+                "WHERE prescription_id = ?\n" +
+                "AND status = 1;";
+        String description = null;
+        try {
+            description = jdbcTemplate.queryForObject(query, new Object[]{prescriptionId}, String.class);
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return description;
     }
 }

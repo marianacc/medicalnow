@@ -20,27 +20,21 @@ public class MedicalHistoryController {
 
     private MedicalHistoryBl medicalHistoryBl;
     private SecurityBl securityBl;
-    private LaboratoryBl laboratoryBl;
-    private PrescriptionBl prescriptionBl;
 
     @Autowired
-    public MedicalHistoryController(MedicalHistoryBl medicalHistoryBl, SecurityBl securityBl, LaboratoryBl laboratoryBl, PrescriptionBl prescriptionBl) {
+    public MedicalHistoryController(MedicalHistoryBl medicalHistoryBl, SecurityBl securityBl) {
         this.medicalHistoryBl = medicalHistoryBl;
         this.securityBl = securityBl;
-        this.laboratoryBl = laboratoryBl;
-        this.prescriptionBl = prescriptionBl;
     }
-
 
     @RequestMapping(
             value = "list/all/{userId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<MedicalHistoryListModel>> returnAllMedicalHistory(@RequestHeader("Authorization") String authorization,
-                                                                                              @PathVariable("userId") Integer userId){
+                                                                                      @PathVariable("userId") Integer userId){
 
         securityBl.validateToken(authorization);
-
         return new ResponseEntity<>(this.medicalHistoryBl.returnAllMedicalHistory(userId), HttpStatus.OK);
     }
 
@@ -49,9 +43,10 @@ public class MedicalHistoryController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> returnMedicalHistoryDetail(@RequestHeader("Authorization") String authorization,
-                                                                                @PathVariable("medicalHistoryId") Integer medicalHistoryId){
+                                                                          @PathVariable("medicalHistoryId") Integer medicalHistoryId){
 
         securityBl.validateToken(authorization);
+        // TODO Agregar toda la descripcion que pidio el doctor
         return new ResponseEntity<>(this.medicalHistoryBl.returnMedicalHistoryDetail(medicalHistoryId), HttpStatus.OK);
     }
 }

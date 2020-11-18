@@ -96,9 +96,7 @@ public class SpecialtyDao {
         return doctorSpecialty;
     }
 
-    //////////////////////////
-
-    public String returnSpecialtyIdByConsultId (int consultId){
+    public String returnSpecialtyIdByConsult(int consultId){
         String query = "SELECT spe.name\n" +
                 "FROM specialty spe\n" +
                 "    JOIN doctor_specialty ds on spe.specialty_id = ds.specialty_id\n" +
