@@ -2,10 +2,12 @@
 ### GET http://localhost:8008/api/v1/laboratories/{userId}
 
 GET http://localhost:8008/api/v1/laboratories/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzE4NzA4fQ.05v8sUeqJ1Z94a3k5Hfig6RiTBPe_sTpC-lyYQCwqTY
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzQ0MDUzfQ._4DKFf-1L7v0qgdq5XaLp9VqVKysXGhT3DkhTOSheWU
 Content-Type: application/json
 Accept: application/json
 
 {
 
 }
+
+###

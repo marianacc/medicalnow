@@ -27,7 +27,7 @@ public class LaboratoryController {
     }
 
     @RequestMapping(
-            value = "list/all/{userId}",
+            value = "{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<LaboratoryModel>> returnAllLaboratoriesByPatient(@RequestHeader("Authorization") String authorization,
