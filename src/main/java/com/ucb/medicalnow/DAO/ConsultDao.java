@@ -65,7 +65,8 @@ public class ConsultDao {
                 "AND per.status = 1\n" +
                 "AND pat.status = 1\n" +
                 "AND usr.status = 1\n" +
-                "AND con.status != 0\n" +
+                "AND con.status = 1\n" +
+                "OR con.status = 2\n" +
                 "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;";
         ArrayList<ConsultModel> consults = null;
         try{

@@ -93,20 +93,12 @@ public class MedicalHistoryDao {
     }
 
     public ArrayList<MedicalHistoryDateListModel> returnConsultsByMedicalHistory(int medicalHistoryId) {
-        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date), con.status\n" +
+        String query = "SELECT con.consult_id, MIN(con.tx_date), con.status\n" +
                 "FROM consult con\n" +
                 "    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
-                "        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
-                "            JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
-                "                JOIN doctor d on ds.doctor_id = d.doctor_id\n" +
-                "                    JOIN person per on d.person_id = per.person_id\n" +
                 "WHERE mh.medical_history_id = ?\n" +
                 "AND mh.status = 1\n" +
-                "AND ds.status = 1\n" +
-                "AND spe.status = 1\n" +
-                "AND d.status = 1\n" +
-                "AND per.status = 1\n" +
-                "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name;";
+                "GROUP BY con.consult_id";
         ArrayList<MedicalHistoryDateListModel> consults = null;
         try {
             consults = (ArrayList<MedicalHistoryDateListModel>) jdbcTemplate.query(query, new Object[]{medicalHistoryId},
@@ -114,12 +106,8 @@ public class MedicalHistoryDao {
                         @Override
                         public MedicalHistoryDateListModel mapRow(ResultSet resultSet, int i) throws SQLException {
                             return new MedicalHistoryDateListModel(resultSet.getInt(1),
-                                    resultSet.getString(2),
-                                    resultSet.getString(3),
-                                    resultSet.getString(4),
-                                    resultSet.getString(5),
-                                    resultSet.getDate(6),
-                                    resultSet.getInt(7));
+                                    resultSet.getDate(2),
+                                    resultSet.getInt(3));
                         }
                     });
         } catch (Exception e) {

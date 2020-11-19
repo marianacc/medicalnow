@@ -19,6 +19,13 @@ public class DoctorNameModel {
         this.doctorSpecialtyId = doctorSpecialtyId;
     }
 
+    public DoctorNameModel(String firstName, String firstSurname, String secondSurname, String specialtyName) {
+        this.firstName = firstName;
+        this.firstSurname = firstSurname;
+        this.secondSurname = secondSurname;
+        this.specialtyName = specialtyName;
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -1,3 +1,13 @@
+SELECT spe.name
+FROM specialty spe
+    JOIN doctor_specialty ds on spe.specialty_id = ds.specialty_id
+        JOIN medical_history mh on ds.doctor_specialty_id = mh.doctor_specialty_id
+WHERE mh.medical_history_id = ?
+AND spe.status = 1
+AND ds.status = 1
+AND mh.status = 1;
+
+
 -- Seleccionar todas las prescripciones de la consulta
 SELECT pre.prescription_id
 FROM prescription pre

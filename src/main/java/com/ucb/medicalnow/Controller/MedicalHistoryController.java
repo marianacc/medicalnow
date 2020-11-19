@@ -43,8 +43,8 @@ public class MedicalHistoryController {
             value = "{medicalHistoryId}/all/consults",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<MedicalHistoryDateListModel>> returnAllConsultsByMedicalHistory(@RequestHeader("Authorization") String authorization,
-                                                                                                    @PathVariable("medicalHistoryId") Integer medicalHistoryId){
+    public ResponseEntity<Map<String, Object>> returnAllConsultsByMedicalHistory(@RequestHeader("Authorization") String authorization,
+                                                                                 @PathVariable("medicalHistoryId") Integer medicalHistoryId){
 
         securityBl.validateToken(authorization);
         return new ResponseEntity<>(this.medicalHistoryBl.returnConsultsByMedicalHistory(medicalHistoryId), HttpStatus.OK);

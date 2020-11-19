@@ -1,13 +1,7 @@
 package com.ucb.medicalnow.BL;
 
-import com.ucb.medicalnow.DAO.ConsultDao;
-import com.ucb.medicalnow.DAO.MedicalHistoryDao;
-import com.ucb.medicalnow.DAO.PatientDao;
-import com.ucb.medicalnow.DAO.PrescriptionDao;
-import com.ucb.medicalnow.Model.DiagnosisModel;
-import com.ucb.medicalnow.Model.MedicalHistoryDateListModel;
-import com.ucb.medicalnow.Model.MedicalHistoryDetailModel;
-import com.ucb.medicalnow.Model.MedicalHistoryListModel;
+import com.ucb.medicalnow.DAO.*;
+import com.ucb.medicalnow.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +17,15 @@ public class MedicalHistoryBl {
     private PatientDao patientDao;
     private ConsultDao consultDao;
     private PrescriptionDao prescriptionDao;
+    private DoctorDao doctorDao;
 
     @Autowired
-    public MedicalHistoryBl (MedicalHistoryDao medicalHistoryDao, PatientDao patientDao, ConsultDao consultDao, PrescriptionDao prescriptionDao) {
+    public MedicalHistoryBl (MedicalHistoryDao medicalHistoryDao, PatientDao patientDao, ConsultDao consultDao, PrescriptionDao prescriptionDao, DoctorDao doctorDao) {
         this.medicalHistoryDao = medicalHistoryDao;
         this.patientDao = patientDao;
         this.consultDao = consultDao;
         this.prescriptionDao = prescriptionDao;
+        this.doctorDao = doctorDao;
     }
 
     public Integer searchMedicalHistory(int userId, int doctorSpecialtyId){
@@ -52,8 +48,13 @@ public class MedicalHistoryBl {
         return this.medicalHistoryDao.returnAllMedicalHistory(userId);
     }
 
-    public ArrayList<MedicalHistoryDateListModel> returnConsultsByMedicalHistory (int medicalHistoryId){
-        return this.medicalHistoryDao.returnConsultsByMedicalHistory(medicalHistoryId);
+    public Map<String, Object> returnConsultsByMedicalHistory (int medicalHistoryId){
+        ArrayList<MedicalHistoryDateListModel> medicalHistoryDateList = medicalHistoryDao.returnConsultsByMedicalHistory(medicalHistoryId);
+        DoctorNameModel doctorNameModel = doctorDao.returnDoctorSpecialtyNameByMedicalHistory(medicalHistoryId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("content", medicalHistoryDateList);
+        response.put("doctorInfo", doctorNameModel);
+        return response;
     }
 
     public Map<String, Object> returnMedicalHistoryDetailByConsult(int consultId){

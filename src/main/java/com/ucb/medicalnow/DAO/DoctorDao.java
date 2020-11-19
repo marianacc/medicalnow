@@ -50,4 +50,35 @@ public class DoctorDao {
         }
         return doctorAndSpecialtyName;
     }
+
+    public DoctorNameModel returnDoctorSpecialtyNameByMedicalHistory (int medicalHistoryId){
+        String query = "SELECT per.first_name, per.first_surname, per.second_surname, s.name\n" +
+                "FROM person per\n" +
+                "    JOIN doctor doc on per.person_id = doc.person_id\n" +
+                "        JOIN doctor_specialty ds on doc.doctor_id = ds.doctor_id\n" +
+                "            JOIN specialty s on ds.specialty_id = s.specialty_id\n" +
+                "                JOIN medical_history mh on ds.doctor_specialty_id = mh.doctor_specialty_id\n" +
+                "WHERE mh.medical_history_id = ?\n" +
+                "AND per.status = 1\n" +
+                "AND doc.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND s.status = 1\n" +
+                "AND mh.status = 1\n";
+        DoctorNameModel doctorSpecialtyName = null;
+        try{
+            doctorSpecialtyName = (DoctorNameModel) jdbcTemplate.queryForObject(query, new Object[]{medicalHistoryId},
+                    new RowMapper<DoctorNameModel>() {
+                        @Override
+                        public DoctorNameModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new DoctorNameModel(resultSet.getString(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return doctorSpecialtyName;
+    }
 }
