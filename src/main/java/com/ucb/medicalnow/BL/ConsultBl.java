@@ -16,15 +16,11 @@ import java.util.Map;
 @Service
 public class ConsultBl {
 
-    private PatientDao patientDao;
     private ConsultDao consultDao;
-    private DoctorDao doctorDao;
 
     @Autowired
-    public ConsultBl (PatientDao patientDao, ConsultDao consultDao, DoctorDao doctorDao){
-        this.patientDao = patientDao;
+    public ConsultBl (ConsultDao consultDao){
         this.consultDao = consultDao;
-        this.doctorDao = doctorDao;
     }
 
     public Integer createNewConsult(int medicalHistoryId){
@@ -66,7 +62,7 @@ public class ConsultBl {
         return registryUpdated;
     }
 
-    public DiagnosisModel returnDiagnosisByConsult(int consultId){
+    public String returnDiagnosisByConsult(int consultId){
         return this.consultDao.returnDiagnosisByConsult(consultId);
     }
 

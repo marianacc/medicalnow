@@ -2,33 +2,35 @@ package com.ucb.medicalnow.Model;
 
 import java.sql.Date;
 
-public class MedicalHistoryListModel {
+public class MedicalHistoryDateListModel {
 
-    private Integer medicalHistoryId;
+    private Integer consultId;
     private String firstName;
     private String firstSurname;
     private String secondSurname;
     private String specialtyName;
     private Date startDate;
+    private Integer status;
 
-    public MedicalHistoryListModel() {
+    public MedicalHistoryDateListModel() {
     }
 
-    public MedicalHistoryListModel(Integer medicalHistoryId, String firstName, String firstSurname, String secondSurname, String specialtyName, Date startDate) {
-        this.medicalHistoryId = medicalHistoryId;
+    public MedicalHistoryDateListModel(Integer consultId, String firstName, String firstSurname, String secondSurname, String specialtyName, Date startDate, Integer status) {
+        this.consultId = consultId;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
         this.specialtyName = specialtyName;
         this.startDate = startDate;
+        this.status = status;
     }
 
-    public Integer getMedicalHistoryId() {
-        return medicalHistoryId;
+    public Integer getConsultId() {
+        return consultId;
     }
 
-    public void setMedicalHistoryId(Integer medicalHistoryId) {
-        this.medicalHistoryId = medicalHistoryId;
+    public void setConsultId(Integer consultId) {
+        this.consultId = consultId;
     }
 
     public String getFirstName() {
@@ -59,8 +61,8 @@ public class MedicalHistoryListModel {
         return specialtyName;
     }
 
-    public void setSpecialtyName(String specialtyName) {
-        this.specialtyName = specialtyName;
+    public void setSpecialtyName(String specialtyId) {
+        this.specialtyName = specialtyId;
     }
 
     public Date getStartDate() {
@@ -71,15 +73,24 @@ public class MedicalHistoryListModel {
         this.startDate = startDate;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "MedicalHistoryListModel{" +
-                "medicalHistoryId=" + medicalHistoryId +
+        return "MedicalHistoryDateListModel{" +
+                "consultId=" + consultId +
                 ", firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
-                ", specialtyName='" + specialtyName + '\'' +
+                ", specialtyId='" + specialtyName + '\'' +
                 ", startDate=" + startDate +
+                ", status=" + status +
                 '}';
     }
 }

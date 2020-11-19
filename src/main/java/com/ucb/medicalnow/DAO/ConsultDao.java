@@ -65,6 +65,7 @@ public class ConsultDao {
                 "AND per.status = 1\n" +
                 "AND pat.status = 1\n" +
                 "AND usr.status = 1\n" +
+                "AND con.status != 0\n" +
                 "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;";
         ArrayList<ConsultModel> consults = null;
         try{
@@ -151,13 +152,13 @@ public class ConsultDao {
         return result;
     }
 
-    public DiagnosisModel returnDiagnosisByConsult(int consultId){
+    public String returnDiagnosisByConsult(int consultId){
         String query = "SELECT diagnosis\n" +
                 "FROM consult con\n" +
                 "WHERE consult_id = ?;";
-        DiagnosisModel diagnosis = null;
+        String diagnosis = null;
         try {
-            diagnosis = jdbcTemplate.queryForObject(query, new Object[]{consultId}, DiagnosisModel.class);
+            diagnosis = jdbcTemplate.queryForObject(query, new Object[]{consultId}, String.class);
         } catch (Exception e) {
             throw new RuntimeException();
         }

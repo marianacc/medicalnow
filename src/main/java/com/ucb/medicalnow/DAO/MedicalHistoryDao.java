@@ -1,6 +1,7 @@
 package com.ucb.medicalnow.DAO;
 
 import com.ucb.medicalnow.Model.DoctorSpecialtyModel;
+import com.ucb.medicalnow.Model.MedicalHistoryDateListModel;
 import com.ucb.medicalnow.Model.MedicalHistoryDetailModel;
 import com.ucb.medicalnow.Model.MedicalHistoryListModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class MedicalHistoryDao {
     }
 
     public ArrayList<MedicalHistoryListModel> returnAllMedicalHistory(int userId) {
-        String query = "SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(c.tx_date), c.status\n" +
+        String query = "SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(c.tx_date)\n" +
                 "FROM medical_history mh\n" +
                 "    JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
                 "        JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
@@ -82,42 +83,77 @@ public class MedicalHistoryDao {
                                     resultSet.getString(3),
                                     resultSet.getString(4),
                                     resultSet.getString(5),
-                                    resultSet.getDate(6),
-                                    resultSet.getInt(7));
+                                    resultSet.getDate(6));
                         }
                     });
         } catch (Exception e) {
-            System.out.print(e);
             throw new RuntimeException();
         }
         return medicalHistoryList;
     }
 
-    public MedicalHistoryDetailModel returnMedicalHistoryDetail(int medicalHistoryId) {
-        String query = "SELECT per.first_name, per.first_surname, per.second_surname, per.birthdate, usr.phone_number, usr.email\n" +
+    public ArrayList<MedicalHistoryDateListModel> returnConsultsByMedicalHistory(int medicalHistoryId) {
+        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date), con.status\n" +
+                "FROM consult con\n" +
+                "    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
+                "        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "            JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
+                "                JOIN doctor d on ds.doctor_id = d.doctor_id\n" +
+                "                    JOIN person per on d.person_id = per.person_id\n" +
+                "WHERE mh.medical_history_id = ?\n" +
+                "AND mh.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND spe.status = 1\n" +
+                "AND d.status = 1\n" +
+                "AND per.status = 1\n" +
+                "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name;";
+        ArrayList<MedicalHistoryDateListModel> consults = null;
+        try {
+            consults = (ArrayList<MedicalHistoryDateListModel>) jdbcTemplate.query(query, new Object[]{medicalHistoryId},
+                    new RowMapper<MedicalHistoryDateListModel>() {
+                        @Override
+                        public MedicalHistoryDateListModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new MedicalHistoryDateListModel(resultSet.getInt(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4),
+                                    resultSet.getString(5),
+                                    resultSet.getDate(6),
+                                    resultSet.getInt(7));
+                        }
+                    });
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return consults;
+    }
+
+    public MedicalHistoryDetailModel returnMedicalHistoryDetailByConsult(int consultId) {
+        String query = "SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, per.birthdate, usr.phone_number, usr.email\n" +
                 "FROM person per\n" +
                 "    JOIN user usr on per.person_id = usr.person_id\n" +
                 "        JOIN patient pat on usr.user_id = pat.user_id\n" +
                 "            JOIN medical_history mh on pat.patient_id = mh.patient_id\n" +
-                "WHERE mh.medical_history_id = ?\n" +
+                "                JOIN consult con on mh.medical_history_id = con.medical_history_id\n" +
+                "WHERE con.consult_id = ?\n" +
                 "AND per.status = 1\n" +
                 "AND usr.status = 1\n" +
-                "AND per.status = 1\n" +
                 "AND pat.status = 1\n" +
-                "AND mh.status = 1\n;";
+                "AND mh.status = 1;";
 
         MedicalHistoryDetailModel medicalHistoryDetail = null;
         try {
-            medicalHistoryDetail = (MedicalHistoryDetailModel) jdbcTemplate.queryForObject(query, new Object[]{medicalHistoryId},
+            medicalHistoryDetail = (MedicalHistoryDetailModel) jdbcTemplate.queryForObject(query, new Object[]{consultId},
                     new RowMapper<MedicalHistoryDetailModel>() {
                         @Override
                         public MedicalHistoryDetailModel mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new MedicalHistoryDetailModel(resultSet.getString(1),
+                            return new MedicalHistoryDetailModel(resultSet.getInt(1),
                                     resultSet.getString(2),
                                     resultSet.getString(3),
-                                    resultSet.getDate(4),
-                                    resultSet.getString(5),
-                                    resultSet.getString(6));
+                                    resultSet.getString(4),
+                                    resultSet.getDate(5),
+                                    resultSet.getString(6),
+                                    resultSet.getString(7));
                         }
                     });
         } catch (Exception e) {

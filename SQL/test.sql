@@ -1,13 +1,40 @@
-SELECT med.medical_history_id\n" +
-                "FROM medical_history med\n" +
-                "    JOIN patient pat on med.patient_id = pat.patient_id\n" +
-                "        JOIN user usr on pat.user_id = usr.user_id\n" +
-                "           JOIN doctor_specialty ds on med.doctor_specialty_id = ds.doctor_specialty_id\n" +
-                "WHERE usr.user_id = ?\n" +
-                "AND ds.doctor_specialty_id = ?\n" +
-                "AND med.status = 1\n" +
-                "AND pat.status = 1\n" +
-                "AND ds.status = 1;
+-- Seleccionar todas las prescripciones de la consulta
+SELECT pre.prescription_id
+FROM prescription pre
+    JOIN consult c on pre.consult_id = c.consult_id
+WHERE c.consult_id = ?
+AND pre.status = 1;
+
+
+
+-- Los datos para la historia medica del paciente
+SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, per.birthdate, usr.phone_number, usr.email
+FROM person per
+    JOIN user usr on per.person_id = usr.person_id
+        JOIN patient pat on usr.user_id = pat.user_id
+            JOIN medical_history mh on pat.patient_id = mh.patient_id
+                JOIN consult con on mh.medical_history_id = con.medical_history_id
+WHERE con.consult_id = ?
+AND per.status = 1
+AND usr.status = 1
+AND pat.status = 1
+AND mh.status = 1;
+
+-- Seleccionar las fechas de las consultas por historial medico
+SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date), con.status
+FROM consult con
+    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+            JOIN specialty spe on ds.specialty_id = spe.specialty_id
+                JOIN doctor d on ds.doctor_id = d.doctor_id
+                    JOIN person per on d.person_id = per.person_id
+WHERE mh.medical_history_id = ?
+AND mh.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND d.status = 1
+AND per.status = 1
+GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name;
 
 
 -- Obtener datos medicos del paciente

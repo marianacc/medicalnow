@@ -1,8 +1,8 @@
-### Todos los laboratorios de un paciente
+### Obtiene todas las historias medicas de un paciente
 ### GET http://localhost:8008/api/v1/medical_history/list/all/{userId}
 
 GET http://localhost:8008/api/v1/medical_history/list/all/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzUxMjAzfQ.SdnSRE2klB_smS8n_yhTGF2v2--pwZfPIU1X7fTuLQI
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzUzMTAyfQ.aaGkPhrrd0ryuOGMczqpUt0VPNXy3epDXVmgb7Ce4n4
 Content-Type: application/json
 Accept: application/json
 
@@ -10,11 +10,23 @@ Accept: application/json
 
 }
 
-### Todos los laboratorios de un paciente
-### GET http://localhost:8008/api/v1/medical_history/list/all/{userId}
+### Obtiene todas las consultas de una historia médica
+### GET http://localhost:8008/api/v1/medical_history/{medicalHistoryId}/all/consults
 
-GET http://localhost:8008/api/v1/medical_history/detail/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1Mzg5MjMyfQ.1yQmlfS5uzrGmfLQKybobm7_HtxhTf0GMOq0EjZ_Tto
+GET http://localhost:8008/api/v1/medical_history/1/all/consults
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzUzMTAyfQ.aaGkPhrrd0ryuOGMczqpUt0VPNXy3epDXVmgb7Ce4n4
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Detalle de una consulta
+### GET http://localhost:8008/api/v1/medical_history/{consultId}/detail
+
+GET http://localhost:8008/api/v1/medical_history/1/detail
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzU0NzI2fQ.GonF6J4iNyLXEi7xYzcx1XCMdd3QvLLeLYRUGUjsxfY
 Content-Type: application/json
 Accept: application/json
 

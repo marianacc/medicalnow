@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class MedicalHistoryDetailModel {
 
+    private Integer medicalHistoryId;
     private String firstName;
     private String firstSurname;
     private String secondSurname;
@@ -14,13 +15,22 @@ public class MedicalHistoryDetailModel {
     public MedicalHistoryDetailModel() {
     }
 
-    public MedicalHistoryDetailModel(String firstName, String firstSurname, String secondSurname, Date birthDate, String phoneNumber, String email) {
+    public MedicalHistoryDetailModel(Integer medicalHistoryId, String firstName, String firstSurname, String secondSurname, Date birthDate, String phoneNumber, String email) {
+        this.medicalHistoryId = medicalHistoryId;
         this.firstName = firstName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Integer getMedicalHistoryId() {
+        return medicalHistoryId;
+    }
+
+    public void setMedicalHistoryId(Integer medicalHistoryId) {
+        this.medicalHistoryId = medicalHistoryId;
     }
 
     public String getFirstName() {
@@ -74,7 +84,8 @@ public class MedicalHistoryDetailModel {
     @Override
     public String toString() {
         return "MedicalHistoryDetailModel{" +
-                "firstName='" + firstName + '\'' +
+                "medicalHistoryId=" + medicalHistoryId +
+                ", firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
                 ", birthDate=" + birthDate +

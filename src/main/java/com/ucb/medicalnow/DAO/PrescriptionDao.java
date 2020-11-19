@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -154,5 +155,26 @@ public class PrescriptionDao {
             throw new RuntimeException();
         }
         return description;
+    }
+
+    public ArrayList<Integer> returnPrescriptionIdByConsult(int consultId){
+        String query = "SELECT pre.prescription_id\n" +
+                "FROM prescription pre\n" +
+                "    JOIN consult c on pre.consult_id = c.consult_id\n" +
+                "WHERE c.consult_id = ?\n" +
+                "AND pre.status = 1;";
+        ArrayList<Integer> prescriptionIdList = null;
+        try {
+            prescriptionIdList = (ArrayList<Integer>) jdbcTemplate.query(query, new Object[]{consultId},
+                    new RowMapper<Integer>() {
+                        @Override
+                        public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new Integer(resultSet.getString(1));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return prescriptionIdList;
     }
 }

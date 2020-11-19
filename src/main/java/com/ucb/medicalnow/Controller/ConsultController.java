@@ -127,8 +127,8 @@ public class ConsultController {
             value = "diagnosis/{consultId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DiagnosisModel> showDiagnosis(@RequestHeader("Authorization") String authorization,
-                                                          @PathVariable("consultId") Integer consultId) {
+    public ResponseEntity<String> showDiagnosis(@RequestHeader("Authorization") String authorization,
+                                                @PathVariable("consultId") Integer consultId) {
         securityBl.validateToken(authorization);
         return new ResponseEntity<>(consultBl.returnDiagnosisByConsult(consultId), HttpStatus.OK);
     }
