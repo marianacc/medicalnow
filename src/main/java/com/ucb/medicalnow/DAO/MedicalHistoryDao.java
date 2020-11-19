@@ -68,7 +68,6 @@ public class MedicalHistoryDao {
                 "AND spe.status = 1\n" +
                 "AND doc.status = 1\n" +
                 "AND per.status = 1\n" +
-                "AND c.status = 1\n" +
                 "AND p.status = 1\n" +
                 "AND usr.status = 1\n" +
                 "GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, c.status;";
@@ -88,6 +87,7 @@ public class MedicalHistoryDao {
                         }
                     });
         } catch (Exception e) {
+            System.out.print(e);
             throw new RuntimeException();
         }
         return medicalHistoryList;

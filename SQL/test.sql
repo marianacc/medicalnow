@@ -1,3 +1,15 @@
+SELECT med.medical_history_id\n" +
+                "FROM medical_history med\n" +
+                "    JOIN patient pat on med.patient_id = pat.patient_id\n" +
+                "        JOIN user usr on pat.user_id = usr.user_id\n" +
+                "           JOIN doctor_specialty ds on med.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "WHERE usr.user_id = ?\n" +
+                "AND ds.doctor_specialty_id = ?\n" +
+                "AND med.status = 1\n" +
+                "AND pat.status = 1\n" +
+                "AND ds.status = 1;
+
+
 -- Obtener datos medicos del paciente
 SELECT pat.weight, pat.height, pat.blood_group, pat.temperature, pat.pressure
 FROM patient pat
@@ -52,9 +64,10 @@ AND ds.status = 1
 AND spe.status = 1
 AND doc.status = 1
 AND per.status = 1
-AND c.status = 1
 AND p.status = 1
 AND usr.status = 1
+AND c.status = 1
+OR c.status = 0
 GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, c.status;
 
 -- Mostrar el contenido dentro de una historia médica
