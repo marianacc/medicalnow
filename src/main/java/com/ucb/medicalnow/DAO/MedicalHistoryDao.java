@@ -71,7 +71,7 @@ public class MedicalHistoryDao {
                 "AND per.status = 1\n" +
                 "AND p.status = 1\n" +
                 "AND usr.status = 1\n" +
-                "GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, c.status;";
+                "GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name;";
         ArrayList<MedicalHistoryListModel> medicalHistoryList = null;
         try {
             medicalHistoryList = (ArrayList<MedicalHistoryListModel>) jdbcTemplate.query(query, new Object[]{userId},
