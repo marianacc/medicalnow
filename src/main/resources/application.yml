@@ -11,6 +11,10 @@ spring:
     password: 12345678
     hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 medicalnow:
   security:
