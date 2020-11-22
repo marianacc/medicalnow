@@ -85,7 +85,10 @@ public class ChatController {
             value = "image/upload",
             method = RequestMethod.POST,
             consumes =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity.BodyBuilder uplaodImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
+    public ResponseEntity.BodyBuilder uplaodImage(@RequestHeader("Authorization") String authorization,
+                                                  @RequestParam("imageFile") MultipartFile file) throws IOException {
+        securityBl.validateToken(authorization);
+
         System.out.println("Original Image Byte Size - " + file.getBytes().length);
         ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
                 compressBytes(file.getBytes()));
@@ -97,7 +100,10 @@ public class ChatController {
             value = "image/get/{imageName}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ImageModel getImage(@PathVariable("imageName") String imageName) throws IOException {
+    public ImageModel getImage(@RequestHeader("Authorization") String authorization,
+                               @PathVariable("imageName") String imageName) throws IOException {
+        securityBl.validateToken(authorization);
+
         final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
         ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
                 decompressBytes(retrievedImage.get().getPicByte()));
