@@ -127,9 +127,61 @@ public class ConsultController {
             value = "diagnosis/{consultId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> showDiagnosis(@RequestHeader("Authorization") String authorization,
-                                                @PathVariable("consultId") Integer consultId) {
+    public ResponseEntity<DiagnosisModel> showDiagnosis(@RequestHeader("Authorization") String authorization,
+                                                        @PathVariable("consultId") Integer consultId) {
         securityBl.validateToken(authorization);
         return new ResponseEntity<>(consultBl.returnDiagnosisByConsult(consultId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "add/qualification/{consultId}",
+            method = RequestMethod.POST,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> addQualification(@RequestHeader("Authorization") String authorization,
+                                                                @PathVariable("consultId") Integer consultId,
+                                                                @RequestBody QualificationModel qualificationModel) {
+        securityBl.validateToken(authorization);
+
+        Map<String, String> response = new HashMap();
+        Boolean qualificationResponse = consultBl.addQualificationByConsult(consultId, qualificationModel.getQualification());
+        if (qualificationResponse){
+            Boolean consultResponse = consultBl.storeConsult(consultId);
+            if (consultResponse){
+                response.put("message", "Qualification added succesfully");
+            } else {
+                response.put("message", "Consult not stored");
+            }
+        } else {
+            response.put("message", "Qualification not added");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "activate/{consultId}",
+            method = RequestMethod.POST,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> activateConsult(@RequestHeader("Authorization") String authorization,
+                                                               @PathVariable("consultId") Integer consultId) {
+        securityBl.validateToken(authorization);
+
+        Map<String, String> response = new HashMap();
+        Boolean consultActivatedResponse = consultBl.activateConsult(consultId);
+        if (consultActivatedResponse){
+            response.put("message", "Consult activated succesfully");
+        } else {
+            response.put("message", "Consult not activated");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "{userId}/stored/consults",
+            method = RequestMethod.GET,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArrayList<StoredConsultModel>> returnAllStoredConsults(@RequestHeader("Authorization") String authorization,
+                                                                                 @PathVariable("userId") Integer userId) {
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(consultBl.returnAllStoredConsults(userId), HttpStatus.OK);
     }
 }

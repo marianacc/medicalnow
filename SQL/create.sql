@@ -342,10 +342,11 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (
 
 -- ALTER TABLE laboratory ADD COLUMN name varchar(50);
 
+DROP TABLE image_table;
 
 create table image_table (
                              id int PRIMARY KEY,
                              name varchar(100),
                              type varchar(100),
-                             picByte varchar(200)
+                             pic_byte longblob
 );

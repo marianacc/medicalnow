@@ -129,7 +129,7 @@ public class ConsultDao {
 
     public Integer dischargeUserByConsultId(int consultId){
         String query = "UPDATE consult\n" +
-                "SET status = 0\n" +
+                "SET status = 2\n" +
                 "WHERE consult_id = ?;";
         Integer result = null;
         try {
@@ -153,13 +153,13 @@ public class ConsultDao {
         return result;
     }
 
-    public String returnDiagnosisByConsult(int consultId){
+    public DiagnosisModel returnDiagnosisByConsult(int consultId){
         String query = "SELECT diagnosis\n" +
                 "FROM consult con\n" +
                 "WHERE consult_id = ?;";
-        String diagnosis = null;
+        DiagnosisModel diagnosis = null;
         try {
-            diagnosis = jdbcTemplate.queryForObject(query, new Object[]{consultId}, String.class);
+            diagnosis = jdbcTemplate.queryForObject(query, new Object[]{consultId}, DiagnosisModel.class);
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -197,5 +197,84 @@ public class ConsultDao {
             throw new RuntimeException();
         }
         return paymentInfo;
+    }
+
+    public Integer addQualificationByConsult(int doctorSpecialtyId, int patientId, int qualification){
+        String query = "INSERT INTO qualification (doctor_specialty_id, patient_id, qualification, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, ?, 1, 0, 'root', '127.0.0.1', now());";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{doctorSpecialtyId, patientId, qualification});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
+    public Integer storeConsult(int consultId){
+        String query = "UPDATE consult\n" +
+                "SET status = 0\n" +
+                "WHERE consult_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{consultId});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
+    public Integer activateConsult(int consultId){
+        String query = "UPDATE consult\n" +
+                "SET status = 1\n" +
+                "WHERE consult_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{consultId});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
+    public ArrayList<StoredConsultModel> returnAllStoredConsults(int userId){
+        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date), MAX(con.tx_date)\n" +
+                "FROM consult con\n" +
+                "    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
+                "        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "            JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
+                "                JOIN doctor d on ds.doctor_id = d.doctor_id\n" +
+                "                    JOIN user usr on d.user_id = usr.user_id\n" +
+                "                        JOIN patient pat on mh.patient_id = pat.patient_id\n" +
+                "                            JOIN person per on pat.person_id = per.person_id\n" +
+                "WHERE usr.user_id = ?\n" +
+                "AND mh.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND spe.status = 1\n" +
+                "AND d.status = 1\n" +
+                "AND usr.status = 1\n" +
+                "AND con.status = 0\n" +
+                "AND pat.status = 1\n" +
+                "AND per.status = 1\n" +
+                "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name;";
+        ArrayList<StoredConsultModel> storedConsultModel = null;
+        try{
+            storedConsultModel = (ArrayList<StoredConsultModel>) jdbcTemplate.query(query, new Object[]{userId},
+                    new RowMapper<StoredConsultModel>() {
+                        @Override
+                        public StoredConsultModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new StoredConsultModel(resultSet.getInt(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4),
+                                    resultSet.getString(5),
+                                    resultSet.getDate(6),
+                                    resultSet.getDate(7));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return storedConsultModel;
     }
 }

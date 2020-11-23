@@ -115,4 +115,21 @@ public class SpecialtyDao {
         }
         return specialtyName;
     }
+
+    public Integer returnDoctorSpecialtyIdByConsult(int consultId){
+        String query = "SELECT mh.doctor_specialty_id\n" +
+                "FROM medical_history mh\n" +
+                "            JOIN consult con on mh.medical_history_id = con.medical_history_id\n" +
+                "WHERE con.consult_id = ?\n" +
+                "AND mh.status = 1\n" +
+                "AND con.status = 2;";
+        Integer doctorSpecialtyId = null;
+        try {
+            doctorSpecialtyId = jdbcTemplate.queryForObject(query, new Object[]{consultId}, Integer.class);
+        } catch (Exception e){
+            System.out.print(e);
+            throw new RuntimeException();
+        }
+        return doctorSpecialtyId;
+    }
 }

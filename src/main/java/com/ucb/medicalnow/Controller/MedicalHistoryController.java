@@ -29,25 +29,47 @@ public class MedicalHistoryController {
     }
 
     @RequestMapping(
-            value = "list/all/{userId}",
+            value = "patient/list/all/{userId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<MedicalHistoryListModel>> returnAllMedicalHistoryByUser(@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<ArrayList<MedicalHistoryListModel>> returnAllMedicalHistoryForPatient(@RequestHeader("Authorization") String authorization,
                                                                                             @PathVariable("userId") Integer userId){
 
         securityBl.validateToken(authorization);
-        return new ResponseEntity<>(this.medicalHistoryBl.returnAllMedicalHistory(userId), HttpStatus.OK);
+        return new ResponseEntity<>(this.medicalHistoryBl.returnAllMedicalHistoryForPatient(userId), HttpStatus.OK);
     }
 
     @RequestMapping(
-            value = "{medicalHistoryId}/all/consults",
+            value = "doctor/list/all/{userId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> returnAllConsultsByMedicalHistory(@RequestHeader("Authorization") String authorization,
-                                                                                 @PathVariable("medicalHistoryId") Integer medicalHistoryId){
+    public ResponseEntity<ArrayList<MedicalHistoryListModel>> returnAllMedicalHistoryForDoctor(@RequestHeader("Authorization") String authorization,
+                                                                                               @PathVariable("userId") Integer userId){
 
         securityBl.validateToken(authorization);
-        return new ResponseEntity<>(this.medicalHistoryBl.returnConsultsByMedicalHistory(medicalHistoryId), HttpStatus.OK);
+        return new ResponseEntity<>(this.medicalHistoryBl.returnAllMedicalHistoryForDoctor(userId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "patient/{medicalHistoryId}/all/consults",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Object>> returnAllConsultsByMedicalHistoryForPatient(@RequestHeader("Authorization") String authorization,
+                                                                                            @PathVariable("medicalHistoryId") Integer medicalHistoryId){
+
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.medicalHistoryBl.returnConsultsByMedicalHistoryForPatient(medicalHistoryId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "doctor/{medicalHistoryId}/all/consults",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Object>> returnAllConsultsByMedicalHistoryForDoctor(@RequestHeader("Authorization") String authorization,
+                                                                                          @PathVariable("medicalHistoryId") Integer medicalHistoryId){
+
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.medicalHistoryBl.returnConsultsByMedicalHistoryForDoctor(medicalHistoryId), HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -58,8 +80,6 @@ public class MedicalHistoryController {
                                                                                    @PathVariable("consultId") Integer consultId){
 
         securityBl.validateToken(authorization);
-
-        // TODO Agregar toda la descripcion que pidio el doctor
         return new ResponseEntity<>(this.medicalHistoryBl.returnMedicalHistoryDetailByConsult(consultId), HttpStatus.OK);
     }
 }

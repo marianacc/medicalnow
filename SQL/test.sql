@@ -1,3 +1,26 @@
+-- Obtener las consultas archivadas
+SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date), MAX(con.tx_date)
+FROM consult con
+    JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+        JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+            JOIN specialty spe on ds.specialty_id = spe.specialty_id
+                JOIN doctor d on ds.doctor_id = d.doctor_id
+                    JOIN user usr on d.user_id = usr.user_id
+                        JOIN patient pat on mh.patient_id = pat.patient_id
+                            JOIN person per on pat.person_id = per.person_id
+WHERE usr.user_id = ?
+AND mh.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND d.status = 1
+AND usr.status = 1
+AND con.status = 0
+AND pat.status = 1
+AND per.status = 1
+GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name;
+
+
+
 SELECT spe.name
 FROM specialty spe
     JOIN doctor_specialty ds on spe.specialty_id = ds.specialty_id
@@ -6,6 +29,26 @@ WHERE mh.medical_history_id = ?
 AND spe.status = 1
 AND ds.status = 1
 AND mh.status = 1;
+
+-- Selecciona a la especialidad - doctor de la consulta a ser calificada
+SELECT ds.doctor_specialty_id
+FROM doctor_specialty ds
+    JOIN medical_history mh on ds.doctor_specialty_id = mh.doctor_specialty_id
+            JOIN consult con on mh.medical_history_id = con.medical_history_id
+WHERE con.consult_id = ?
+AND ds.status = 1
+AND mh.status = 1
+AND con.status = 2;
+
+-- Selecciona el paciente de la consulta a ser calificada
+SELECT pat.patient_id
+FROM patient pat
+    JOIN medical_history mh on pat.patient_id = mh.patient_id
+        JOIN consult con on mh.medical_history_id = con.medical_history_id
+WHERE con.consult_id = ?
+AND mh.status = 1
+AND pat.status = 1
+AND con.status = 2;
 
 
 -- Seleccionar todas las prescripciones de la consulta
@@ -103,6 +146,28 @@ AND doc.status = 1
 AND per.status = 1
 AND p.status = 1
 AND usr.status = 1
+AND c.status = 1
+OR c.status = 0
+GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, c.status;
+
+-- Todas las historias medicas de un doctor
+SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(c.tx_date), c.status
+FROM medical_history mh
+    JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+        JOIN specialty spe on ds.specialty_id = spe.specialty_id
+            JOIN doctor doc on ds.doctor_id = doc.doctor_id
+                JOIN user u on doc.user_id = u.user_id
+                    JOIN patient p on mh.patient_id = p.patient_id
+                        JOIN person per on p.person_id = per.person_id
+                            JOIN consult c on mh.medical_history_id = c.medical_history_id
+WHERE u.user_id = 25
+AND mh.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND doc.status = 1
+AND u.status = 1
+AND p.status = 1
+AND per.status = 1
 AND c.status = 1
 OR c.status = 0
 GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, c.status;

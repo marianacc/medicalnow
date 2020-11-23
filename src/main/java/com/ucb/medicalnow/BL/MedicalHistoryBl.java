@@ -44,11 +44,15 @@ public class MedicalHistoryBl {
         return this.medicalHistoryDao.createMedicalHistory(patientId, doctorSpecialtyId);
     }
 
-    public ArrayList<MedicalHistoryListModel> returnAllMedicalHistory(int userId){
-        return this.medicalHistoryDao.returnAllMedicalHistory(userId);
+    public ArrayList<MedicalHistoryListModel> returnAllMedicalHistoryForPatient(int userId){
+        return this.medicalHistoryDao.returnAllMedicalHistoryForPatient(userId);
     }
 
-    public Map<String, Object> returnConsultsByMedicalHistory (int medicalHistoryId){
+    public ArrayList<MedicalHistoryListModel> returnAllMedicalHistoryForDoctor(int userId){
+        return this.medicalHistoryDao.returnAllMedicalHistoryForDoctor(userId);
+    }
+
+    public Map<String, Object> returnConsultsByMedicalHistoryForPatient(int medicalHistoryId){
         ArrayList<MedicalHistoryDateListModel> medicalHistoryDateList = medicalHistoryDao.returnConsultsByMedicalHistory(medicalHistoryId);
         DoctorNameModel doctorNameModel = doctorDao.returnDoctorSpecialtyNameByMedicalHistory(medicalHistoryId);
         Map<String, Object> response = new HashMap<>();
@@ -57,9 +61,18 @@ public class MedicalHistoryBl {
         return response;
     }
 
+    public Map<String, Object> returnConsultsByMedicalHistoryForDoctor(int medicalHistoryId){
+        ArrayList<MedicalHistoryDateListModel> medicalHistoryDateList = medicalHistoryDao.returnConsultsByMedicalHistory(medicalHistoryId);
+        PatientNameModel patientNameModel = patientDao.returnPatientByMedicalHistory(medicalHistoryId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("content", medicalHistoryDateList);
+        response.put("patientInfo", patientNameModel);
+        return response;
+    }
+
     public Map<String, Object> returnMedicalHistoryDetailByConsult(int consultId){
         MedicalHistoryDetailModel medicalHistoryDetailModel = medicalHistoryDao.returnMedicalHistoryDetailByConsult(consultId);
-        String diagnosis = consultDao.returnDiagnosisByConsult(consultId);
+        DiagnosisModel diagnosis = consultDao.returnDiagnosisByConsult(consultId);
         ArrayList<Integer> prescriptionIdList = prescriptionDao.returnPrescriptionIdByConsult(consultId);
         Map<String, Object> result = new HashMap();
         result.put("patient_data", medicalHistoryDetailModel);

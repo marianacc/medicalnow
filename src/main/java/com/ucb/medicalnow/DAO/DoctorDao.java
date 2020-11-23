@@ -51,7 +51,7 @@ public class DoctorDao {
         return doctorAndSpecialtyName;
     }
 
-    public DoctorNameModel returnDoctorSpecialtyNameByMedicalHistory (int medicalHistoryId){
+    public DoctorNameModel returnDoctorSpecialtyNameByMedicalHistory(int medicalHistoryId){
         String query = "SELECT per.first_name, per.first_surname, per.second_surname, s.name\n" +
                 "FROM person per\n" +
                 "    JOIN doctor doc on per.person_id = doc.person_id\n" +

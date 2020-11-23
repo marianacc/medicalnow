@@ -1,8 +1,6 @@
 package com.ucb.medicalnow.Controller;
 
-import com.ucb.medicalnow.BL.ConsultBl;
 import com.ucb.medicalnow.BL.ChatBl;
-import com.ucb.medicalnow.BL.MedicalHistoryBl;
 import com.ucb.medicalnow.BL.SecurityBl;
 import com.ucb.medicalnow.Interfaces.ImageRepository;
 import com.ucb.medicalnow.Model.ImageModel;
@@ -66,8 +64,8 @@ public class ChatController {
             method = RequestMethod.POST,
             produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> addMessage(@RequestHeader("Authorization") String authorization,
-                           @PathVariable("userId") Integer userId,
-                           @RequestBody MessageModel messageModel) {
+                                                          @PathVariable("userId") Integer userId,
+                                                          @RequestBody MessageModel messageModel) {
 
         securityBl.validateToken(authorization);
 
@@ -81,10 +79,7 @@ public class ChatController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @RequestMapping(
-            value = "image/upload",
-            method = RequestMethod.POST,
-            consumes =  MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/upload")
     public ResponseEntity.BodyBuilder uplaodImage(@RequestHeader("Authorization") String authorization,
                                                   @RequestParam("imageFile") MultipartFile file) throws IOException {
         securityBl.validateToken(authorization);
@@ -96,12 +91,10 @@ public class ChatController {
         return ResponseEntity.status(HttpStatus.OK);
     }
 
-    @RequestMapping(
-            value = "image/get/{imageName}",
-            method = RequestMethod.GET,
-            produces =  MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = { "/get/{imageName}" })
     public ImageModel getImage(@RequestHeader("Authorization") String authorization,
-                               @PathVariable("imageName") String imageName) throws IOException {
+                                @PathVariable("imageName") String imageName) throws IOException {
+
         securityBl.validateToken(authorization);
 
         final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
@@ -109,7 +102,6 @@ public class ChatController {
                 decompressBytes(retrievedImage.get().getPicByte()));
         return img;
     }
-
 
     /// TODO mover a la logica de negocio
     // compress the image bytes before storing it in the database

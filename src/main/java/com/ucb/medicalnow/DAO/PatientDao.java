@@ -118,4 +118,47 @@ public class PatientDao {
         }
         return patientName;
     }
+
+    public Integer returnPatientIdByConsult(int consultId){
+        String query = "SELECT pat.patient_id\n" +
+                "FROM patient pat\n" +
+                "    JOIN medical_history mh on pat.patient_id = mh.patient_id\n" +
+                "        JOIN consult con on mh.medical_history_id = con.medical_history_id\n" +
+                "WHERE con.consult_id = ?\n" +
+                "AND mh.status = 1\n" +
+                "AND pat.status = 1\n" +
+                "AND con.status = 2;";
+        Integer patientId = null;
+        try {
+            patientId = jdbcTemplate.queryForObject(query, new Object[]{consultId}, Integer.class);
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return patientId;
+    }
+
+    public PatientNameModel returnPatientByMedicalHistory(int medicalHistoryId){
+        String query = "SELECT per.first_name, per.first_surname, per.second_surname\n" +
+                "FROM person per\n" +
+                "    JOIN patient pat on per.person_id = pat.person_id\n" +
+                "       JOIN medical_history mh on pat.patient_id = mh.patient_id\n" +
+                "WHERE mh.medical_history_id = ?\n" +
+                "AND per.status = 1\n" +
+                "AND mh.status = 1\n";
+        PatientNameModel patientNameModel = null;
+        try{
+            patientNameModel = (PatientNameModel) jdbcTemplate.queryForObject(query, new Object[]{medicalHistoryId},
+                    new RowMapper<PatientNameModel>() {
+                        @Override
+                        public PatientNameModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new PatientNameModel(resultSet.getString(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return patientNameModel;
+    }
 }

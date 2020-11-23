@@ -83,5 +83,44 @@ Accept: application/json
 
 }
 
-###
+### Registrar la calificación dada por un paciente
+### POST http://localhost:8008/api/v1/consult/add/qualification/{consultId}
 
+
+POST http://localhost:8008/api/v1/consult/add/qualification/2
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2MDc5OTk5fQ.QhuyLt8M3rUXKEhVMUpbuq0nwvXee2GK25t9qR5AsUY
+Content-Type: application/json
+Accept: application/json
+
+{
+  "qualification": 4
+}
+
+### StoredConsultModel
+### Devolver todas las consultas archivadas de un doctor
+### GET http://localhost:8008/api/v1/consult/{userId}/stored/consults
+
+
+GET http://localhost:8008/api/v1/consult/25/stored/consults
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2MDkzNjE0fQ.LQclPcvXDHjHbID24LsIBRCZbLKs_lvXErCkJn4Lcws
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Registrar la calificación dada por un paciente
+### POST http://localhost:8008/api/v1/consult/add/qualification/{consultId}
+
+
+POST http://localhost:8008/api/v1/consult/activate/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2MDgwMzgzfQ.x6cMIAkj51_UclN0TFMDrYBvr_FllmkCmC49P0RpD7w
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+###
