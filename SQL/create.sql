@@ -348,9 +348,9 @@ ALTER TABLE resource CHANGE `image` `name` varchar(100);
 ALTER TABLE resource ADD COLUMN type varchar(100);
 ALTER TABLE resource ADD COLUMN pic_byte longblob;
 
-/*create table image_table (
-                             id int PRIMARY KEY,
+create table image_table (
+                             id int AUTO_INCREMENT PRIMARY KEY,
                              name varchar(100),
                              type varchar(100),
                              pic_byte longblob
-);*/
+);

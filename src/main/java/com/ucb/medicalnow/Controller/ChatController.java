@@ -4,7 +4,6 @@ import com.ucb.medicalnow.BL.ChatBl;
 import com.ucb.medicalnow.BL.SecurityBl;
 import com.ucb.medicalnow.Interfaces.ImageRepository;
 import com.ucb.medicalnow.Model.ImageModel;
-import com.ucb.medicalnow.Model.ImageModelTry;
 import com.ucb.medicalnow.Model.MessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -80,12 +78,14 @@ public class ChatController {
     @Autowired
     ImageRepository imageRepository;
 
-    @PostMapping("image/upload")
+    @PostMapping("{consultId}/image/upload")
     public ResponseEntity.BodyBuilder uplaodImage(@RequestHeader("Authorization") String authorization,
+                                                  @PathVariable("consultId") Integer consultId,
                                                   @RequestParam("imageFile") MultipartFile file) throws IOException {
         securityBl.validateToken(authorization);
+
         System.out.println("Original Image Byte Size - " + file.getBytes().length);
-        ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
+        ImageModel img = new ImageModel(consultId, file.getOriginalFilename(), file.getContentType(),
                 compressBytes(file.getBytes()));
         imageRepository.save(img);
         return ResponseEntity.status(HttpStatus.OK);
