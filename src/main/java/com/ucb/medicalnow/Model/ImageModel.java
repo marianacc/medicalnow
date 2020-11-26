@@ -1,6 +1,9 @@
 package com.ucb.medicalnow.Model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "resource")
 public class ImageModel {
@@ -23,7 +26,6 @@ public class ImageModel {
     }
 
 
-
     @Id
     @Column(name = "resource_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +44,22 @@ public class ImageModel {
     //which is more than the default length for picByte column
     @Column(name = "picByte", length = 1000)
     private byte[] picByte;
+
+    @Column(name = "status")
+    private Integer status = 1;
+
+    @Column(name = "tx_id")
+    private Integer txId = 0;
+
+    @Column(name = "tx_username")
+    private String txUsername = "root";
+
+    @Column(name = "tx_host")
+    private String txHost = "127.0.0.1";
+
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    @Column(name = "tx_date")
+    private Timestamp txDate = timestamp;
 
     public Integer getConsultId() {
         return consultId;
