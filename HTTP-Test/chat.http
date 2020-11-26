@@ -34,4 +34,16 @@ Accept: application/json
   "message": "Doctor buenos dias, me duele mucho el pecho y tengo taquicardias desde anoche."
 }
 
+### Obtener la imagen
+### POST http://localhost:8008/api/v1/chat/send/message/{userId}
+
+POST http://localhost:8008/api/v1/chat/get/{imageName}
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMxNTMzfQ.ZhS9CRZZKVPhTb3h5XA7x8YdMv7btv6bDQV4sMW_fWo
+Content-Type: application/json
+Accept: application/json
+
+{
+  "imageName": "4"
+}
+
 ###

@@ -1,3 +1,20 @@
+SELECT conv.tx_id, conv.message, res.resource_id, res.consult_id, res.type, res.pic_byte
+FROM conversation conv
+         JOIN consult cons on conv.consult_id = cons.consult_id
+            JOIN resource res on cons.consult_id = res.consult_id
+WHERE conv.consult_id = 1
+AND conv.status = 1
+AND cons.status = 1
+AND res.status = 1
+group by res.resource_id;
+
+-- Obtener la imagen
+SELECT resource_id, consult_id, type, pic_byte
+FROM resource
+WHERE name = ?
+AND status = 1;
+
+
 -- Obtener las consultas archivadas
 SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(con.tx_date), MAX(con.tx_date)
 FROM consult con
@@ -347,13 +364,6 @@ WHERE usr.user_id = ?
   AND doc.status = 1
   AND usr.status = 1
 GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, con.tx_date;
-
-SELECT conv.tx_id, conv.message
-FROM conversation conv
-    JOIN consult cons on conv.consult_id = cons.consult_id
-WHERE conv.consult_id = 7
-AND conv.status = 1
-AND cons.status = 1;
 
 SELECT rol.role_id
 FROM role rol
