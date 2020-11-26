@@ -1,3 +1,99 @@
+UPDATE doctor_specialty
+SET price = ?, from_time = ?, to_time = ?
+WHERE doctor_id = ?;
+
+
+SELECT d.doctor_id
+FROM doctor d
+    JOIN user u on d.user_id = u.user_id
+WHERE u.user_id = ?
+AND u.status = 1
+AND d.status = 1;
+
+
+SELECT ds.price, ds.from_time, ds.to_time
+FROM doctor_specialty ds
+    JOIN doctor d on ds.doctor_id = d.doctor_id
+        JOIN user u on d.user_id = u.user_id
+WHERE u.user_id = ?
+AND ds.status = 1
+AND d.status = 1
+AND u.status = 1;
+
+-- Seleccionar doctor id y la especialidad que se cambio
+SELECT doc.doctor_id, s.name
+FROM doctor doc
+    JOIN doctor_specialty ds on doc.doctor_id = ds.doctor_id
+        JOIN specialty s on ds.specialty_id = s.specialty_id
+            JOIN user u on doc.user_id = u.user_id
+                JOIN user_role ur on u.user_id = ur.user_id
+                    JOIN role r on ur.role_id = r.role_id
+WHERE r.role_id = 4;
+
+-- Seleccionar todas las especialidades
+SELECT sp.specialty_id, sp.name, count(doc_sp.specialty_id), sp.image
+FROM specialty sp
+    JOIN doctor_specialty doc_sp on sp.specialty_id = doc_sp.specialty_id
+        JOIN doctor d on doc_sp.doctor_id = d.doctor_id
+            JOIN user u on d.user_id = u.user_id
+                JOIN user_role ur on u.user_id = ur.user_id
+                    JOIN role r on ur.role_id = r.role_id
+WHERE sp.status = 1
+AND doc_sp.status = 1
+AND d.status = 1
+AND u.status = 1
+AND ur.status = 1
+AND r.status = 1
+AND r.role_name = 'DOCTOR'
+GROUP BY sp.name, doc_sp.specialty_id, sp.image;
+
+-- Seleccionar todas las especialidades gratuitas
+SELECT sp.specialty_id, sp.name, count(doc_sp.specialty_id), sp.image
+FROM specialty sp
+         JOIN doctor_specialty doc_sp on sp.specialty_id = doc_sp.specialty_id
+         JOIN doctor d on doc_sp.doctor_id = d.doctor_id
+         JOIN user u on d.user_id = u.user_id
+         JOIN user_role ur on u.user_id = ur.user_id
+         JOIN role r on ur.role_id = r.role_id
+WHERE sp.status = 1
+  AND doc_sp.status = 1
+  AND d.status = 1
+  AND u.status = 1
+  AND ur.status = 1
+  AND r.status = 1
+  AND r.role_name = 'DOCTOR_FREE'
+GROUP BY sp.name, doc_sp.specialty_id, sp.image;
+
+-- Obtener todos los nombres de las imágenes de una consulta
+SELECT res.name
+FROM resource res
+    JOIN consult c on res.consult_id = c.consult_id
+WHERE c.consult_id = ?
+AND res.status = 1
+AND c.status = 1;
+
+-- Seleccionar todos los doctores por especialidad
+SELECT doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, avg(qua.qualification), doc.doctor_id
+FROM person per
+    JOIN doctor doc on per.person_id = doc.person_id
+        JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id
+            JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id
+                JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id
+                    JOIN user u on doc.user_id = u.user_id
+                        JOIN user_role ur on u.user_id = ur.user_id
+                            JOIN role r on ur.role_id = r.role_id
+WHERE spe.specialty_id = ?
+AND per.status = 1
+AND doc.status = 1
+AND doc_spec.status = 1
+AND qua.status = 1
+AND u.status = 1
+AND ur.status = 1
+AND r.status = 1
+AND r.role_name = 'DOCTOR_FREE'
+GROUP BY doc_spec.doctor_specialty_id, spe.name, per.first_name, per.first_surname, per.second_surname, qua.qualification
+ORDER BY qua.qualification desc;
+
 SELECT conv.tx_id, conv.message, res.resource_id, res.consult_id, res.type, res.pic_byte
 FROM conversation conv
          JOIN consult cons on conv.consult_id = cons.consult_id
@@ -173,16 +269,14 @@ FROM medical_history mh
     JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
         JOIN specialty spe on ds.specialty_id = spe.specialty_id
             JOIN doctor doc on ds.doctor_id = doc.doctor_id
-                JOIN user u on doc.user_id = u.user_id
-                    JOIN patient p on mh.patient_id = p.patient_id
+                JOIN patient p on mh.patient_id = p.patient_id
                         JOIN person per on p.person_id = per.person_id
                             JOIN consult c on mh.medical_history_id = c.medical_history_id
-WHERE u.user_id = 25
+WHERE doc.user_id = 25
 AND mh.status = 1
 AND ds.status = 1
 AND spe.status = 1
 AND doc.status = 1
-AND u.status = 1
 AND p.status = 1
 AND per.status = 1
 AND c.status = 1

@@ -24,13 +24,13 @@ Content-Type: application/json
 ### Mensaje del paciente al doctor
 ### POST http://localhost:8008/api/v1/chat/send/message/{userId}
 
-POST http://localhost:8008/api/v1/chat/send/message/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMxNTMzfQ.ZhS9CRZZKVPhTb3h5XA7x8YdMv7btv6bDQV4sMW_fWo
+POST http://localhost:8008/api/v1/chat/send/message/32
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDIyOTA4fQ.cy9QTkV5z8YDvqOAdX3vkU2-haUe9Ew1OPj52lQ2JE4
 Content-Type: application/json
 Accept: application/json
 
 {
-  "consultId": "4",
+  "consultId": "9",
   "message": "Doctor buenos dias, me duele mucho el pecho y tengo taquicardias desde anoche."
 }
 

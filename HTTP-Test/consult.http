@@ -1,8 +1,8 @@
 ### Datos del doctor para el pago
-### GET http://localhost:8008/api/v1/consult/{doctorSpecialtyId}/payment
+### GET http://localhost:8008/api/v1/consult/{doctorSpecialtyId}/payment/info
 
-GET http://localhost:8008/api/v1/consult/1/payment/info
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMzMTI4fQ.ARbBqohwzlzMSBhYUCFFnBD4ntjvX6ndNbFmoEpcItg
+GET http://localhost:8008/api/v1/consult/3/payment/info
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI0OTc3fQ.58JbkK5LEWw7k-UiucwxHXkRFZCPmPq1xxKlHMLLfv8
 Content-Type: application/json
 Accept: application/json
 
@@ -13,13 +13,13 @@ Accept: application/json
 ### Crea una consulta
 ### POST http://localhost:8008/api/v1/consult/new/{userId}
 
-POST http://localhost:8008/api/v1/consult/new/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzMwNDAwfQ.wzoxfCYL5ERuViPPouKItCjeBOSJn2C5Nra-aB4GDII
+POST http://localhost:8008/api/v1/consult/new/32
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDIyOTA4fQ.cy9QTkV5z8YDvqOAdX3vkU2-haUe9Ew1OPj52lQ2JE4
 Content-Type: application/json
 Accept: application/json
 
 {
-  "doctorSpecialtyId": "22"
+  "doctorSpecialtyId": "24"
 }
 
 ### Obtiene todas las consultas del paciente
@@ -37,8 +37,8 @@ Accept: application/json
 ### Lista todas las consultas del doctor
 ### GET http://localhost:8008/api/v1/consult/doctor/{userId}
 
-GET http://localhost:8008/api/v1/consult/doctor/2
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM2NDQ3fQ.VYZtflYgBzpUU3ggBFLcZDLgIyPVUoWtmOwLzgOiZDk
+GET http://localhost:8008/api/v1/consult/doctor/25
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDIyOTA4fQ.cy9QTkV5z8YDvqOAdX3vkU2-haUe9Ew1OPj52lQ2JE4
 Content-Type: application/json
 Accept: application/json
 
@@ -102,7 +102,7 @@ Accept: application/json
 
 
 GET http://localhost:8008/api/v1/consult/25/stored/consults
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2MDkzNjE0fQ.LQclPcvXDHjHbID24LsIBRCZbLKs_lvXErCkJn4Lcws
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDIyOTA4fQ.cy9QTkV5z8YDvqOAdX3vkU2-haUe9Ew1OPj52lQ2JE4
 Content-Type: application/json
 Accept: application/json
 

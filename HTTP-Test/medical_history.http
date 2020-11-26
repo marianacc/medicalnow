@@ -2,7 +2,7 @@
 ### GET http://localhost:8008/api/v1/medical_history/list/all/{userId}
 
 GET http://localhost:8008/api/v1/medical_history/patient/list/all/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2MDgwMzgzfQ.x6cMIAkj51_UclN0TFMDrYBvr_FllmkCmC49P0RpD7w
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDIxNjAxfQ.oa-AHl2SwVATeSJcjCCflzyl_m-xfuSgJU1ZXc-Y2zY
 Content-Type: application/json
 Accept: application/json
 
@@ -14,7 +14,7 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/medical_history/list/all/{userId}
 
 GET http://localhost:8008/api/v1/medical_history/doctor/list/all/25
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2MDkxNjUzfQ.Qdala5tOqwi2U0v_50NkphUjC9qbn8Xz5uIg8_r6OHI
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDIyOTA4fQ.cy9QTkV5z8YDvqOAdX3vkU2-haUe9Ew1OPj52lQ2JE4
 Content-Type: application/json
 Accept: application/json
 

@@ -1,9 +1,11 @@
 package com.ucb.medicalnow.BL;
 
 import com.google.common.hash.Hashing;
+import com.ucb.medicalnow.DAO.DoctorDao;
 import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.DAO.PersonDao;
 import com.ucb.medicalnow.DAO.UserDao;
+import com.ucb.medicalnow.Model.DoctorInfoModel;
 import com.ucb.medicalnow.Model.MedicalDataModel;
 import com.ucb.medicalnow.Model.UserAvatarModel;
 import com.ucb.medicalnow.Model.UserDataModel;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.Time;
 import java.util.Date;
 
 @Service
@@ -20,15 +23,17 @@ public class UserBl {
     private UserDao userDao;
     private PersonDao personDao;
     private PatientDao patientDao;
+    private DoctorDao doctorDao;
 
     @Value("${medicalnow.security.salt}")
     private String salt;
 
     @Autowired
-    public UserBl (UserDao userDao, PersonDao personDao, PatientDao patientDao) {
+    public UserBl (UserDao userDao, PersonDao personDao, PatientDao patientDao, DoctorDao doctorDao) {
         this.userDao = userDao;
         this.personDao = personDao;
         this.patientDao = patientDao;
+        this.doctorDao = doctorDao;
     }
 
     public Boolean addNewPatient(String firstName, String firstSurname, String secondSurname, Date birthDate,
@@ -107,5 +112,21 @@ public class UserBl {
                 .hashString(password+salt, StandardCharsets.UTF_8)
                 .toString();
         return sha256hex;
+    }
+
+    public DoctorInfoModel returnDoctorInfo(int userId){
+        return this.doctorDao.returnDoctorInfo(userId);
+    }
+
+    public Boolean updateDoctorInfo(int price, Time fromTime, Time toTime, int userId){
+        Integer doctorId = doctorDao.returnDoctorIdByUser(userId);
+        Integer doctorInfoResponse = doctorDao.updateDoctorInfo(price, fromTime, toTime, doctorId);
+        Boolean registryUpdated = null;
+        if (doctorInfoResponse>0){
+            registryUpdated = true;
+        } else {
+            registryUpdated = false;
+        }
+        return registryUpdated;
     }
 }

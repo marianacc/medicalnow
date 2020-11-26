@@ -1,7 +1,18 @@
 ### Obtiene todas las especialidades
 
 GET http://localhost:8008/api/v1/specialties
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzE3OTIzfQ.LQsLs8Ly2HTXts3YZ1kXkIGq-6vttStVz7occvVHs3U
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI0MzA3fQ.zLsGjlGsKMiHgJkAMnPxlDbcotVyAIObrRKM04y_JUk
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Obtiene todas las especialidades gratis
+
+GET http://localhost:8008/api/v1/specialties/free
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI0MzA3fQ.zLsGjlGsKMiHgJkAMnPxlDbcotVyAIObrRKM04y_JUk
 Content-Type: application/json
 Accept: application/json
 
@@ -13,7 +24,19 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/specialties/{specialtyId}
 
 GET http://localhost:8008/api/v1/specialties/3
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzE3OTIzfQ.LQsLs8Ly2HTXts3YZ1kXkIGq-6vttStVz7occvVHs3U
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI0MzA3fQ.zLsGjlGsKMiHgJkAMnPxlDbcotVyAIObrRKM04y_JUk
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Obtiene todos los doctores gratuitos de una especialidad
+### GET http://localhost:8008/api/v1/specialties/free/{specialtyId}
+
+GET http://localhost:8008/api/v1/specialties/free/4
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI0MzA3fQ.zLsGjlGsKMiHgJkAMnPxlDbcotVyAIObrRKM04y_JUk
 Content-Type: application/json
 Accept: application/json
 

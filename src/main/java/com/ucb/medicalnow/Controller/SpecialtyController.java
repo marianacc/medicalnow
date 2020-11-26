@@ -42,6 +42,15 @@ public class SpecialtyController {
     }
 
     @RequestMapping(
+            path = "free",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArrayList<SpecialtyModel>> returnFreeSpecialties (@RequestHeader("Authorization") String authorization){
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.specialtyBl.returnFreeSpecialties(), HttpStatus.OK);
+    }
+
+    @RequestMapping(
             path = "{specialtyId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,6 +58,17 @@ public class SpecialtyController {
                                                                          @PathVariable("specialtyId") Integer specialtyId){
         securityBl.validateToken(authorization);
         Map<String, Object> specialtiesList = specialtyBl.returnDoctorsBySpecialty(specialtyId);
+        return new ResponseEntity (specialtiesList, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            path = "free/{specialtyId}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Object>> returnFreeDoctorsBySpecialty (@RequestHeader("Authorization") String authorization,
+                                                                             @PathVariable("specialtyId") Integer specialtyId){
+        securityBl.validateToken(authorization);
+        Map<String, Object> specialtiesList = specialtyBl.returnFreeDoctorsBySpecialty(specialtyId);
         return new ResponseEntity (specialtiesList, HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.ucb.medicalnow.DAO;
 
+import com.ucb.medicalnow.Model.DoctorInfoModel;
 import com.ucb.medicalnow.Model.DoctorNameModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 
 @Service
 public class DoctorDao {
@@ -80,5 +82,60 @@ public class DoctorDao {
             throw new RuntimeException();
         }
         return doctorSpecialtyName;
+    }
+
+    public DoctorInfoModel returnDoctorInfo(int userId){
+        String query = "SELECT ds.price, ds.from_time, ds.to_time\n" +
+                "FROM doctor_specialty ds\n" +
+                "    JOIN doctor d on ds.doctor_id = d.doctor_id\n" +
+                "        JOIN user u on d.user_id = u.user_id\n" +
+                "WHERE u.user_id = ?\n" +
+                "AND ds.status = 1\n" +
+                "AND d.status = 1\n" +
+                "AND u.status = 1;";
+        DoctorInfoModel doctorInfo = null;
+        try{
+            doctorInfo = (DoctorInfoModel) jdbcTemplate.queryForObject(query, new Object[]{userId},
+                    new RowMapper<DoctorInfoModel>() {
+                        @Override
+                        public DoctorInfoModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new DoctorInfoModel(resultSet.getInt(1),
+                                    resultSet.getTime(2),
+                                    resultSet.getTime(3));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return doctorInfo;
+    }
+
+    public Integer returnDoctorIdByUser(int userId){
+        String query = "SELECT d.doctor_id\n" +
+                "FROM doctor d\n" +
+                "    JOIN user u on d.user_id = u.user_id\n" +
+                "WHERE u.user_id = ?\n" +
+                "AND u.status = 1\n" +
+                "AND d.status = 1;";
+        Integer doctorId = null;
+        try {
+            doctorId = jdbcTemplate.queryForObject(query, new Object[]{userId}, Integer.class);
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return doctorId;
+    }
+
+    public Integer updateDoctorInfo(int price, Time fromTime, Time toTime, int doctorId){
+        String query = "UPDATE doctor_specialty\n" +
+                "SET price = ?, from_time = ?, to_time = ?\n" +
+                "WHERE doctor_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{price, fromTime, toTime, doctorId});
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return result;
     }
 }

@@ -52,4 +52,26 @@ public class ChatDao {
         }
         return result;
     }
+
+    public ArrayList<String> returnAllImageNames(int consultId){
+        String query = "SELECT res.name\n" +
+                "FROM resource res\n" +
+                "    JOIN consult c on res.consult_id = c.consult_id\n" +
+                "WHERE c.consult_id = ?\n" +
+                "AND res.status = 1\n" +
+                "AND c.status = 1;";
+        ArrayList<String> imageNamesList = null;
+        try{
+            imageNamesList = (ArrayList<String>) jdbcTemplate.query(query, new Object[]{consultId},
+                    new RowMapper<String>() {
+                        @Override
+                        public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new String(resultSet.getString(1));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return imageNamesList;
+    }
 }

@@ -76,4 +76,8 @@ public class ChatBl {
         }
         return conversationResponse;
     }
+
+    public ArrayList<String> returnAllImageNames(int consultId){
+        return this.chatDao.returnAllImageNames(consultId);
+    }
 }

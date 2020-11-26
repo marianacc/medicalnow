@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -100,6 +101,22 @@ public class ChatController {
         ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
                 decompressBytes(retrievedImage.get().getPicByte()));
         return img;
+    }
+
+    @GetMapping(path = { "{consultId}/get/images" })
+    public ArrayList<ImageModel> getImagesByConsultId(@RequestHeader("Authorization") String authorization,
+                                           @PathVariable("consultId") Integer consultId) throws IOException {
+
+        securityBl.validateToken(authorization);
+        ArrayList<String> imageNameList = chatBl.returnAllImageNames(consultId);
+        ArrayList<ImageModel> images = null;
+        for (int i=0; i<imageNameList.size(); i++){
+            final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageNameList.get(i));
+            ImageModel image = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
+                    decompressBytes(retrievedImage.get().getPicByte()));
+            images.add(image);
+        }
+        return images;
     }
 
     // compress the image bytes before storing it in the database

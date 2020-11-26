@@ -24,9 +24,28 @@ public class SpecialtyBl {
         return this.specialtyDao.returnAllSpecialties();
     }
 
+    public ArrayList<SpecialtyModel> returnFreeSpecialties () {
+        return this.specialtyDao.returnFreeSpecialties();
+    }
+
     public Map<String, Object> returnDoctorsBySpecialty (int specialtyId) {
         String specialtyName = specialtyDao.returnSpecialtyName(specialtyId);
         ArrayList<DoctorSpecialtyModel> doctorSpecialties = specialtyDao.returnDoctorsBySpecialty(specialtyId);
+        for (int i=0; i<doctorSpecialties.size(); i++){
+            DoctorSpecialtyModel doctorSpecialtyModel = doctorSpecialties.get(i);
+            String firstName = doctorSpecialtyModel.getFirstName();
+            char firstLetter = firstName.charAt(0);
+            doctorSpecialtyModel.setFirstLetter(firstLetter);
+        }
+        Map<String, Object> result = new HashMap<>();
+        result.put("body", doctorSpecialties);
+        result.put("specialtyName", specialtyName);
+        return result;
+    }
+
+    public Map<String, Object> returnFreeDoctorsBySpecialty(int specialtyId) {
+        String specialtyName = specialtyDao.returnSpecialtyName(specialtyId);
+        ArrayList<DoctorSpecialtyModel> doctorSpecialties = specialtyDao.returnFreeDoctorsBySpecialty(specialtyId);
         for (int i=0; i<doctorSpecialties.size(); i++){
             DoctorSpecialtyModel doctorSpecialtyModel = doctorSpecialties.get(i);
             String firstName = doctorSpecialtyModel.getFirstName();

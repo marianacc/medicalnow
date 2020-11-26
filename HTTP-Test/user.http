@@ -85,4 +85,33 @@ Accept: application/json
   "phoneNumber": "77784124"
 }
 
+### Obtener la información del doctor
+### GET http://localhost:8008/api/v1/user/{userId}/doctor/info
+### DoctorInfoModel
+
+GET http://localhost:8008/api/v1/user/3/doctor/info
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI2NjQ5fQ.qRHn28r6__pDrCaTfuUW4yM9F8a3I0vM5NToS3wx2h0
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Actualizar la información del doctor
+### POST http://localhost:8008/api/v1/user/{userId}/update/doctor/info
+### DoctorInfoModel
+
+POST http://localhost:8008/api/v1/user/3/update/doctor/info
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI2NjQ5fQ.qRHn28r6__pDrCaTfuUW4yM9F8a3I0vM5NToS3wx2h0
+Content-Type: application/json
+Accept: application/json
+
+{
+  "price": 100,
+  "fromTime": "08:00:00",
+  "toTime": "12:00:00"
+
+}
+
 ###

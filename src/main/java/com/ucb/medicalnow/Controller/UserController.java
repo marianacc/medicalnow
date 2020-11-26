@@ -120,5 +120,37 @@ public class UserController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @RequestMapping(
+            value = "{userId}/doctor/info",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public DoctorInfoModel returnDoctorInfo(@RequestHeader("Authorization") String authorization,
+                                            @PathVariable("userId") Integer userId) {
+
+        securityBl.validateToken(authorization);
+        return this.userBl.returnDoctorInfo(userId);
+    }
+
+    @RequestMapping(
+            value = "{userId}/update/doctor/info",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> returnDoctorInfo(@RequestHeader("Authorization") String authorization,
+                                                                @PathVariable("userId") Integer userId,
+                                                                @RequestBody DoctorInfoModel doctorInfoModel) {
+
+        securityBl.validateToken(authorization);
+
+        Boolean registryUpdated = userBl.updateDoctorInfo(doctorInfoModel.getPrice(), doctorInfoModel.getFromTime(), doctorInfoModel.getToTime(), userId);
+
+        Map<String, String> response = new HashMap();
+        if (registryUpdated == true) {
+            response.put("Message", "Doctor info updated succesfully");
+        } else {
+            response.put("Message", "Error. Doctor info wasn't updated");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
 
