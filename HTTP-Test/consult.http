@@ -13,8 +13,8 @@ Accept: application/json
 ### Crea una consulta
 ### POST http://localhost:8008/api/v1/consult/new/{userId}
 
-POST http://localhost:8008/api/v1/consult/new/32
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDIyOTA4fQ.cy9QTkV5z8YDvqOAdX3vkU2-haUe9Ew1OPj52lQ2JE4
+POST http://localhost:8008/api/v1/consult/new/33
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI4MDcxfQ.WdtTqPwwbcnXCtTpsqp13EXtZoyb9fv4Lwxt_h0CGL0
 Content-Type: application/json
 Accept: application/json
 

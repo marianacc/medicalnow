@@ -6,13 +6,13 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "firstName": "Camila",
-  "firstSurname": "Gardeazabal",
-  "secondSurname": "Cruz",
+  "firstName": "Natalia",
+  "firstSurname": "Bruzonic",
+  "secondSurname": "Mostajo",
   "birthDate": "1998-01-13",
-  "email": "cgardea@gmail.com",
+  "email": "nbruz@gmail.com",
   "password": "12345",
-  "phoneNumber": "77862116"
+  "phoneNumber": "7728122"
 }
 
 ### Obtener el avatar del usuario

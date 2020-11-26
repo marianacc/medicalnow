@@ -14,7 +14,7 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/medical_history/list/all/{userId}
 
 GET http://localhost:8008/api/v1/medical_history/doctor/list/all/25
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDIyOTA4fQ.cy9QTkV5z8YDvqOAdX3vkU2-haUe9Ew1OPj52lQ2JE4
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI4MzUwfQ.dePzCDcDRy9MnexNjqV1GAjrvTEnuSYCHF2hon0ejpM
 Content-Type: application/json
 Accept: application/json
 
@@ -37,8 +37,8 @@ Accept: application/json
 ### Obtiene todas las consultas de una historia médica para el doctor
 ### GET http://localhost:8008/api/v1/medical_history/doctor/{medicalHistoryId}/all/consults
 
-GET http://localhost:8008/api/v1/medical_history/doctor/1/all/consults
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2MDkyMTg5fQ.Y6q9e0lQh_RG79GOZh06SjwkW_z33vyUKCn40z4EupQ
+GET http://localhost:8008/api/v1/medical_history/doctor/25/all/consults
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2NDI4MTQ3fQ.n5-lLEQbBIaNpKCHSsTsO_0S5b8UEkadcJ24jOi0FcE
 Content-Type: application/json
 Accept: application/json
 

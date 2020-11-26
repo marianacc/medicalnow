@@ -166,8 +166,6 @@ public class MedicalHistoryDao {
                 "AND doc.status = 1\n" +
                 "AND p.status = 1\n" +
                 "AND per.status = 1\n" +
-                "AND c.status = 1\n" +
-                "OR c.status = 0\n" +
                 "GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, c.status;";
         ArrayList<MedicalHistoryListModel> medicalHistoryList = null;
         try {
@@ -184,6 +182,7 @@ public class MedicalHistoryDao {
                         }
                     });
         } catch (Exception e) {
+            System.out.print(e);
             throw new RuntimeException();
         }
         return medicalHistoryList;

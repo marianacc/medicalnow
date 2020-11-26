@@ -12,6 +12,7 @@ public class ImageModel {
         super();
     }
 
+
     public ImageModel(Integer consultId, String name, String type, byte[] picByte) {
         this.consultId = consultId;
         this.name = name;
