@@ -77,7 +77,7 @@ public class ChatBl {
         return conversationResponse;
     }
 
-    public Boolean addImage(String originalFileName, String contentType, byte[] bytes){
+/*    public Boolean addImage(String originalFileName, String contentType, byte[] bytes){
         byte[] imageCompressed = compressBytes(bytes);
 
         // Forma 1
@@ -98,18 +98,18 @@ public class ChatBl {
     public ImageModelTry getImage(String imageName){
 
         // Forma 1
-        /*final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
+        final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
         ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
                 decompressBytes(retrievedImage.get().getPicByte()));
-        return img;*/
+        return img;
 
         // Forma 2
-        ImageModelTry imageModelTry = chatDao.findImageByName(imageName);
+        /*ImageModelTry imageModelTry = chatDao.findImageByName(imageName);
         imageModelTry.setPic_byte(decompressBytes(imageModelTry.getPic_byte()));
         return imageModelTry;
-    }
+    }*/
 
-    // compress the image bytes before storing it in the database
+  /*  // compress the image bytes before storing it in the database
     public static byte[] compressBytes(byte[] data) {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
@@ -144,5 +144,5 @@ public class ChatBl {
         } catch (DataFormatException e) {
         }
         return outputStream.toByteArray();
-    }
+    }*/
 }

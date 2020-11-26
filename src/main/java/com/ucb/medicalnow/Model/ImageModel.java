@@ -15,7 +15,7 @@ public class ImageModel {
     @Id
     @Column(name = "resource_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long resource_id;
     @Column(name = "name")
     private String name;
     @Column(name = "type")
