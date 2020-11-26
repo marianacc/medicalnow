@@ -151,7 +151,24 @@ public class MedicalHistoryDao {
     }
 
     public ArrayList<MedicalHistoryListModel> returnAllMedicalHistoryForDoctor(int userId) {
-        String query = "";
+        String query = "SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, MIN(c.tx_date), c.status\n" +
+                "FROM medical_history mh\n" +
+                "    JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "        JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
+                "            JOIN doctor doc on ds.doctor_id = doc.doctor_id\n" +
+                "                JOIN patient p on mh.patient_id = p.patient_id\n" +
+                "                        JOIN person per on p.person_id = per.person_id\n" +
+                "                            JOIN consult c on mh.medical_history_id = c.medical_history_id\n" +
+                "WHERE doc.user_id = ?\n" +
+                "AND mh.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND spe.status = 1\n" +
+                "AND doc.status = 1\n" +
+                "AND p.status = 1\n" +
+                "AND per.status = 1\n" +
+                "AND c.status = 1\n" +
+                "OR c.status = 0\n" +
+                "GROUP BY mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, spe.name, c.status;";
         ArrayList<MedicalHistoryListModel> medicalHistoryList = null;
         try {
             medicalHistoryList = (ArrayList<MedicalHistoryListModel>) jdbcTemplate.query(query, new Object[]{userId},
