@@ -2,7 +2,7 @@ package com.ucb.medicalnow.Model;
 
 import javax.persistence.*;
 @Entity
-@Table(name = "resource")
+@Table(name = "image_table")
 public class ImageModel {
     public ImageModel() {
         super();
@@ -13,9 +13,9 @@ public class ImageModel {
         this.picByte = picByte;
     }
     @Id
-    @Column(name = "resource_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long resource_id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "type")
