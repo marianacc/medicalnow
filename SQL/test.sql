@@ -1,3 +1,8 @@
+-- Seleccionar todos los laboratorios que dio un doctor
+
+
+
+
 UPDATE doctor_specialty
 SET price = ?, from_time = ?, to_time = ?
 WHERE doctor_id = ?;

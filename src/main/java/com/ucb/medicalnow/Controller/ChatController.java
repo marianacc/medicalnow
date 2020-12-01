@@ -111,7 +111,7 @@ public class ChatController {
         ArrayList<String> imageNameList = chatBl.returnAllImageNames(consultId);
         ArrayList<ImageModel> images = new ArrayList<>();
 
-        for (int i=0; i<imageNameList.size(); i++){
+/*        for (int i=0; i<imageNameList.size(); i++){
             final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageNameList.get(i));
             System.out.println(retrievedImage.get().getName());
             System.out.println(retrievedImage.get().getType());
@@ -126,7 +126,7 @@ public class ChatController {
 
             images.add(image);
         }
-
+*/
         return images;
     }
 

@@ -26,7 +26,7 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/prescription/{prescriptionId}/detail
 
 GET http://localhost:8008/api/v1/prescription/1/detail
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM4NDg5fQ.cuO5um24ML9dcBZu9ZafLVUBs8dsUxvIO6IhlRYsoEw
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODI5NTU1fQ.vYBsnuJ6DFZTyIM6Yed9nU59anI6qqlaZ6N8H70yXiM
 Content-Type: application/json
 Accept: application/json
 
@@ -38,13 +38,13 @@ Accept: application/json
 ### POST http://localhost:8008/api/v1/prescription/4/add/detail
 
 POST http://localhost:8008/api/v1/prescription/4/add/detail
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM4NDg5fQ.cuO5um24ML9dcBZu9ZafLVUBs8dsUxvIO6IhlRYsoEw
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODI5OTU2fQ.A8Mki8d9DgFdItUBWv4QtJtoJnygGA7m5x8kJqP1OzY
 Content-Type: application/json
 Accept: application/json
 
 {
   "description": "Debe hacer dieta una semana. No comer gluten. Debe tomar las pastillas recetadas por una semana.",
-  "content": [
+  "prescription_detail": [
     {
     "productName": "Glutagen",
     "productDetail": "Tomar una pastilla cada 8 horas",

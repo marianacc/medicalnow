@@ -71,7 +71,7 @@ public class PrescriptionController {
         securityBl.validateToken(authorization);
 
         Map<String, String> response = new HashMap<>();
-        Boolean prescriptionUpdated = prescriptionBl.addPrescriptionDetail(consultId, prescriptionModel.getDescription(), prescriptionModel.getContent());
+        Boolean prescriptionUpdated = prescriptionBl.addPrescriptionDetail(consultId, prescriptionModel.getDescription(), prescriptionModel.getPrescription_detail());
         if(prescriptionUpdated){
             response.put("response", "Products added succesfully");
         } else {
