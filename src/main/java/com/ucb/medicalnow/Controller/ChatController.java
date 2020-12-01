@@ -111,22 +111,23 @@ public class ChatController {
         ArrayList<String> imageNameList = chatBl.returnAllImageNames(consultId);
         ArrayList<ImageModel> images = new ArrayList<>();
 
-/*        for (int i=0; i<imageNameList.size(); i++){
+        for (int i=0; i<imageNameList.size(); i++){
+
             final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageNameList.get(i));
             System.out.println(retrievedImage.get().getName());
             System.out.println(retrievedImage.get().getType());
             System.out.println(retrievedImage.get().getPicByte());
 
-            ImageModel image = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
+/*            ImageModel image = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
                     decompressBytes(retrievedImage.get().getPicByte()));
 
             System.out.println(image.getName());
             System.out.println(image.getType());
             System.out.println(image.getPicByte());
 
-            images.add(image);
+            images.add(image);*/
         }
-*/
+
         return images;
     }
 
