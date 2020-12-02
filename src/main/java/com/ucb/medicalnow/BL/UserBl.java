@@ -161,4 +161,12 @@ public class UserBl {
         }
         return registryUpdated;
     }
+
+    public ArrayList<String> returnAllergies(int userId){
+        return this.patientDao.returnAllergies(userId);
+    }
+
+    public ArrayList<String> returnBackground(int userId){
+        return this.patientDao.returnBackground(userId);
+    }
 }

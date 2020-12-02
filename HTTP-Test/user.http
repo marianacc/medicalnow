@@ -140,4 +140,30 @@ Accept: application/json
   "description": ["Arritmia", "Diabetes"]
 }
 
+### Obtener las alergias
+### GET http://localhost:8008/api/v1/user/{userId}/allergies
+### ArrayList<String>
+
+GET http://localhost:8008/api/v1/user/1/allergies
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODc0NTQ3fQ.-ERwZJv1rl2JCjFT55TmupuJlfGWRmIYVvz7MxPJwg0
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Obtener las alergias
+### GET http://localhost:8008/api/v1/user/{userId}/background
+### ArrayList<String>
+
+GET http://localhost:8008/api/v1/user/1/background
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODc0NTQ3fQ.-ERwZJv1rl2JCjFT55TmupuJlfGWRmIYVvz7MxPJwg0
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
 ###

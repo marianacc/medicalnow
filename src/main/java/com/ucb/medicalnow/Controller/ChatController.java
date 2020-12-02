@@ -80,7 +80,7 @@ public class ChatController {
     ImageRepository imageRepository;
 
     @PostMapping("{consultId}/image/upload")
-    public ResponseEntity.BodyBuilder uplaodImage(@RequestHeader("Authorization") String authorization,
+    public ResponseEntity.BodyBuilder uploadImage(@RequestHeader("Authorization") String authorization,
                                                   @PathVariable("consultId") Integer consultId,
                                                   @RequestParam("imageFile") MultipartFile file) throws IOException {
         securityBl.validateToken(authorization);
@@ -92,42 +92,20 @@ public class ChatController {
         return ResponseEntity.status(HttpStatus.OK);
     }
 
-    @GetMapping(path = { "/get/{imageName}" })
-    public ImageModel getImage(@RequestHeader("Authorization") String authorization,
-                               @PathVariable("imageName") String imageName) throws IOException {
-
-        securityBl.validateToken(authorization);
-        final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
-        ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
-                decompressBytes(retrievedImage.get().getPicByte()));
-        return img;
-    }
-
     @GetMapping(path = { "{consultId}/get/images" })
     public ArrayList<ImageModel> getImagesByConsultId(@RequestHeader("Authorization") String authorization,
-                                           @PathVariable("consultId") Integer consultId) throws IOException {
+                                                      @PathVariable("consultId") Integer consultId) throws IOException {
 
         securityBl.validateToken(authorization);
         ArrayList<String> imageNameList = chatBl.returnAllImageNames(consultId);
         ArrayList<ImageModel> images = new ArrayList<>();
 
         for (int i=0; i<imageNameList.size(); i++){
-
             final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageNameList.get(i));
-            System.out.println(retrievedImage.get().getName());
-            System.out.println(retrievedImage.get().getType());
-            System.out.println(retrievedImage.get().getPicByte());
-
-/*            ImageModel image = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
+            ImageModel image = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
                     decompressBytes(retrievedImage.get().getPicByte()));
-
-            System.out.println(image.getName());
-            System.out.println(image.getType());
-            System.out.println(image.getPicByte());
-
-            images.add(image);*/
+            images.add(image);
         }
-
         return images;
     }
 

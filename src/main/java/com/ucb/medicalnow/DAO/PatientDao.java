@@ -1,9 +1,6 @@
 package com.ucb.medicalnow.DAO;
 
-import com.ucb.medicalnow.Model.DoctorNameModel;
-import com.ucb.medicalnow.Model.MedicalDataModel;
-import com.ucb.medicalnow.Model.PatientNameModel;
-import com.ucb.medicalnow.Model.UserDataModel;
+import com.ucb.medicalnow.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @Service
 public class PatientDao {
@@ -210,5 +208,53 @@ public class PatientDao {
             throw new RuntimeException();
         }
         return result;
+    }
+
+    public ArrayList<String> returnBackground(int userId){
+        String query = "SELECT b.description\n" +
+                "FROM background b\n" +
+                "    JOIN patient p on b.patient_id = p.patient_id\n" +
+                "        JOIN user u on p.user_id = u.user_id\n" +
+                "WHERE u.user_id = ?\n" +
+                "AND b.status = 1\n" +
+                "AND p.status = 1\n" +
+                "AND u.status = 1;";
+        ArrayList<String> background = null;
+        try{
+            background = (ArrayList<String>) jdbcTemplate.query(query, new Object[]{userId},
+                    new RowMapper<String>() {
+                        @Override
+                        public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new String(resultSet.getString(1));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return background;
+    }
+
+    public ArrayList<String> returnAllergies(int userId){
+        String query = "SELECT a.description\n" +
+                "FROM allergy a\n" +
+                "    JOIN patient p on a.patient_id = p.patient_id\n" +
+                "        JOIN user u on p.user_id = u.user_id\n" +
+                "WHERE u.user_id = ?\n" +
+                "AND a.status = 1\n" +
+                "AND p.status = 1\n" +
+                "AND u.status = 1;";
+        ArrayList<String> allergies = null;
+        try{
+            allergies = (ArrayList<String>) jdbcTemplate.query(query, new Object[]{userId},
+                    new RowMapper<String>() {
+                        @Override
+                        public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new String(resultSet.getString(1));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return allergies;
     }
 }

@@ -89,7 +89,6 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
     @RequestMapping(
             value = "{userId}/config",
             method = RequestMethod.GET,
@@ -197,6 +196,28 @@ public class UserController {
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "{userId}/allergies",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArrayList<String>> returnAllergies(@RequestHeader("Authorization") String authorization,
+                                                          @PathVariable("userId") Integer userId){
+
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.userBl.returnAllergies(userId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "{userId}/background",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArrayList<String>> returnBackground(@RequestHeader("Authorization") String authorization,
+                                                          @PathVariable("userId") Integer userId){
+
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.userBl.returnBackground(userId), HttpStatus.OK);
     }
 }
 

@@ -74,10 +74,16 @@ public class MedicalHistoryBl {
         MedicalHistoryDetailModel medicalHistoryDetailModel = medicalHistoryDao.returnMedicalHistoryDetailByConsult(consultId);
         DiagnosisModel diagnosis = consultDao.returnDiagnosisByConsult(consultId);
         ArrayList<Integer> prescriptionIdList = prescriptionDao.returnPrescriptionIdByConsult(consultId);
+
+
+
         Map<String, Object> result = new HashMap();
         result.put("patient_data", medicalHistoryDetailModel);
         result.put("diagnosis", diagnosis);
         result.put("prescriptionId", prescriptionIdList);
+/*        result.put("medical_data", );
+        result.put("allergies", );
+        result.put("background", );*/
         return result;
     }
 }
