@@ -161,4 +161,54 @@ public class PatientDao {
         }
         return patientNameModel;
     }
+
+    public Integer deleteAllergy(int patientId){
+        String query = "UPDATE allergy\n" +
+                "SET status = 0\n" +
+                "WHERE patient_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{patientId});
+        } catch (Exception e) {
+            result = null;
+        }
+        return result;
+    }
+
+    public Integer addAllergy(int patientId, String description) {
+        String query = "INSERT INTO allergy (patient_id, description, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, 1, 0, 'root', '127.0.0.1', now());";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{patientId, description});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
+    public Integer deleteBackground(int patientId){
+        String query = "UPDATE background\n" +
+                "SET status = 0\n" +
+                "WHERE patient_id = ?;";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{patientId});
+        } catch (Exception e) {
+            result = null;
+        }
+        return result;
+    }
+
+    public Integer addBackground(int patientId, String description) {
+        String query = "INSERT INTO background (patient_id, description, status, tx_id, tx_username, tx_host, tx_date)\n" +
+                "VALUES (?, ?, 1, 0, 'root', '127.0.0.1', now());";
+        Integer result = null;
+        try {
+            result = jdbcTemplate.update(query, new Object[]{patientId, description});
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
 }

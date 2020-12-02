@@ -1,4 +1,53 @@
+-- Obtener datos medicos del paciente
+SELECT pat.weight, pat.height, pat.blood_group, pat.temperature, pat.pressure
+FROM patient pat
+         JOIN user usr on pat.user_id = usr.user_id
+WHERE usr.user_id = ?
+  AND pat.status = 1
+  AND usr.status = 1;
+
+-- Obtener antecedentes del paciente
+SELECT b.description
+FROM background b
+    JOIN patient p on b.patient_id = p.patient_id
+        JOIN user u on p.user_id = u.user_id
+WHERE u.user_id = ?
+AND b.status = 1
+AND p.status = 1
+AND u.status = 1;
+
+-- Obtener alergias del paciente
+SELECT a.description
+FROM allergy a
+    JOIN patient p on a.patient_id = p.patient_id
+        JOIN user u on p.user_id = u.user_id
+WHERE u.user_id = ?
+  AND a.status = 1
+  AND p.status = 1
+  AND u.status = 1;
+
+
 -- Seleccionar todos los laboratorios que dio un doctor
+SELECT lab.laboratory_id, lab.name, per.first_name, per.first_surname, per.second_surname, s.name, DATE(lab.tx_date)
+FROM laboratory lab
+    JOIN consult c on lab.consult_id = c.consult_id
+        JOIN medical_history mh on c.medical_history_id = mh.medical_history_id
+            JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+                JOIN specialty s on ds.specialty_id = s.specialty_id
+                    JOIN doctor d on ds.doctor_id = d.doctor_id
+                        JOIN user u on d.user_id = u.user_id
+                            JOIN patient p on mh.patient_id = p.patient_id
+                                JOIN person per on p.person_id = per.person_id
+WHERE u.user_id = ?
+AND lab.status = 1
+AND c.status = 1
+AND mh.status = 1
+AND ds.status = 1
+AND s.status = 1
+AND d.status = 1
+AND u.status = 1
+AND p.status = 1
+AND per.status = 1;
 
 
 
@@ -176,7 +225,9 @@ FROM prescription pre
 WHERE c.consult_id = ?
 AND pre.status = 1;
 
-
+UPDATE allergy
+SET status = 0
+WHERE patient_id = ?;
 
 -- Los datos para la historia medica del paciente
 SELECT mh.medical_history_id, per.first_name, per.first_surname, per.second_surname, per.birthdate, usr.phone_number, usr.email
@@ -206,15 +257,6 @@ AND spe.status = 1
 AND d.status = 1
 AND per.status = 1
 GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name;
-
-
--- Obtener datos medicos del paciente
-SELECT pat.weight, pat.height, pat.blood_group, pat.temperature, pat.pressure
-FROM patient pat
-    JOIN user usr on pat.user_id = usr.user_id
-WHERE usr.user_id = ?
-AND pat.status = 1
-AND usr.status = 1;
 
 
 -- Verificar si la historia medica tiene id o no

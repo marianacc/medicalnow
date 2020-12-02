@@ -1,8 +1,20 @@
 ### Obtiene todos los laboratorios de un paciente
-### GET http://localhost:8008/api/v1/laboratories/{userId}
+### GET http://localhost:8008/api/v1/laboratories/patient/{userId}
 
-GET http://localhost:8008/api/v1/laboratories/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzQ0MDUzfQ._4DKFf-1L7v0qgdq5XaLp9VqVKysXGhT3DkhTOSheWU
+GET http://localhost:8008/api/v1/laboratories/patient/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODUxNDIwfQ.onfXXwCMP1IyRkGPuavJ6VAJOJ3d9MFUcP3zggoNO3A
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Obtiene que dio un doctor
+### GET http://localhost:8008/api/v1/laboratories/doctor/{userId}
+
+GET http://localhost:8008/api/v1/laboratories/doctor/25
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODUxNDIwfQ.onfXXwCMP1IyRkGPuavJ6VAJOJ3d9MFUcP3zggoNO3A
 Content-Type: application/json
 Accept: application/json
 

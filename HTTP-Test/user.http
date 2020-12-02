@@ -114,4 +114,30 @@ Accept: application/json
 
 }
 
+### Actualizar alergias
+### POST http://localhost:8008/api/v1/user/allergy/update/{userId}
+### DescriptionModel
+
+POST http://localhost:8008/api/v1/user/allergy/update/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODY3NzQyfQ.GEoRUs-3fG4sb1M2FGj0fRasqo2BN97hapJbrdb2r4Q
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": ["Mani", "Cebolla"]
+}
+
+### Actualizar diagnósticos previos
+### POST http://localhost:8008/api/v1/user/background/update/{userId}
+### DescriptionModel
+
+POST http://localhost:8008/api/v1/user/background/update/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODcwNzAxfQ.7UNDY_odMO99BTkJ7iLtYgCVOOmfhZ7-MTJI5a-h2yg
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": ["Arritmia", "Diabetes"]
+}
+
 ###

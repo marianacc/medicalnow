@@ -50,7 +50,7 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/medical_history/{consultId}/detail
 
 GET http://localhost:8008/api/v1/medical_history/1/detail
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2MDkyMzU5fQ.3jx2-EZ990f_OFchc2PRjx8WfMMWJ-l5WTGrXDU5IMk
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODcwNzkyfQ.Y9f3wZ3Jw5O2h0y7vC_Xf8Yj-k0o9QRnLK12ftKJuVE
 Content-Type: application/json
 Accept: application/json
 

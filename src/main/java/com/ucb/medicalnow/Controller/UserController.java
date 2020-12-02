@@ -9,7 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -150,6 +152,50 @@ public class UserController {
         } else {
             response.put("Message", "Error. Doctor info wasn't updated");
         }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "allergy/update/{userId}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> updateAllergy(@RequestHeader("Authorization") String authorization,
+                              @PathVariable("userId") Integer userId,
+                              @RequestBody DescriptionModel description) {
+
+        securityBl.validateToken(authorization);
+
+        Boolean registryUpdated = userBl.updateAllergy(userId, description.getDescription());
+
+        Map<String, String> response = new HashMap();
+        if (registryUpdated == true) {
+            response.put("Message", "Allergies updated successfully");
+        } else {
+            response.put("Message", "Error. Allergies not updated");
+        }
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "background/update/{userId}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> updateBackground(@RequestHeader("Authorization") String authorization,
+                                                                @PathVariable("userId") Integer userId,
+                                                                @RequestBody DescriptionModel description) {
+
+        securityBl.validateToken(authorization);
+
+        Boolean registryUpdated = userBl.updateBackground(userId, description.getDescription());
+
+        Map<String, String> response = new HashMap();
+        if (registryUpdated == true) {
+            response.put("Message", "Background updated successfully");
+        } else {
+            response.put("Message", "Error. Background not updated");
+        }
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

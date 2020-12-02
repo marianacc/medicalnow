@@ -5,16 +5,14 @@ import com.ucb.medicalnow.DAO.DoctorDao;
 import com.ucb.medicalnow.DAO.PatientDao;
 import com.ucb.medicalnow.DAO.PersonDao;
 import com.ucb.medicalnow.DAO.UserDao;
-import com.ucb.medicalnow.Model.DoctorInfoModel;
-import com.ucb.medicalnow.Model.MedicalDataModel;
-import com.ucb.medicalnow.Model.UserAvatarModel;
-import com.ucb.medicalnow.Model.UserDataModel;
+import com.ucb.medicalnow.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Service
@@ -126,6 +124,40 @@ public class UserBl {
             registryUpdated = true;
         } else {
             registryUpdated = false;
+        }
+        return registryUpdated;
+    }
+
+    public Boolean updateAllergy(int userId, ArrayList<String> description){
+        Integer patientId = patientDao.returnPatientIdByUser(userId);
+        Integer deleteAllergyResponse = patientDao.deleteAllergy(patientId);
+        Boolean registryUpdated = null;
+        if(deleteAllergyResponse>=0 || deleteAllergyResponse==null){
+            for(int i=0; i<description.size(); i++){
+                Integer addAllergyResponse = patientDao.addAllergy(patientId, description.get(i));
+                if (addAllergyResponse>0){
+                    registryUpdated = true;
+                } else {
+                    registryUpdated = false;
+                }
+            }
+        }
+        return registryUpdated;
+    }
+
+    public Boolean updateBackground(int userId, ArrayList<String> description){
+        Integer patientId = patientDao.returnPatientIdByUser(userId);
+        Integer deleteBackgroundResponse = patientDao.deleteBackground(patientId);
+        Boolean registryUpdated = null;
+        if(deleteBackgroundResponse>=0 || deleteBackgroundResponse==null){
+            for(int i=0; i<description.size(); i++){
+                Integer addBackgroundResponse = patientDao.addBackground(patientId, description.get(i));
+                if (addBackgroundResponse>0){
+                    registryUpdated = true;
+                } else {
+                    registryUpdated = false;
+                }
+            }
         }
         return registryUpdated;
     }
