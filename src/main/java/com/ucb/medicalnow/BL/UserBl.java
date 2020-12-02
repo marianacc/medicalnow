@@ -170,9 +170,9 @@ public class UserBl {
     }
 
     public DescriptionModel returnBackground(int userId){
-        ArrayList<String> allergies = patientDao.returnBackground(userId);
+        ArrayList<String> background = patientDao.returnBackground(userId);
         DescriptionModel description = new DescriptionModel();
-        description.setDescription(allergies);
+        description.setDescription(background);
         return description;
     }
 }

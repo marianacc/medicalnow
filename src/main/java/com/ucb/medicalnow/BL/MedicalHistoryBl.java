@@ -18,14 +18,16 @@ public class MedicalHistoryBl {
     private ConsultDao consultDao;
     private PrescriptionDao prescriptionDao;
     private DoctorDao doctorDao;
+    private UserDao userDao;
 
     @Autowired
-    public MedicalHistoryBl (MedicalHistoryDao medicalHistoryDao, PatientDao patientDao, ConsultDao consultDao, PrescriptionDao prescriptionDao, DoctorDao doctorDao) {
+    public MedicalHistoryBl (MedicalHistoryDao medicalHistoryDao, PatientDao patientDao, ConsultDao consultDao, PrescriptionDao prescriptionDao, DoctorDao doctorDao, UserDao userDao) {
         this.medicalHistoryDao = medicalHistoryDao;
         this.patientDao = patientDao;
         this.consultDao = consultDao;
         this.prescriptionDao = prescriptionDao;
         this.doctorDao = doctorDao;
+        this.userDao = userDao;
     }
 
     public Integer searchMedicalHistory(int userId, int doctorSpecialtyId){
@@ -74,16 +76,26 @@ public class MedicalHistoryBl {
         MedicalHistoryDetailModel medicalHistoryDetailModel = medicalHistoryDao.returnMedicalHistoryDetailByConsult(consultId);
         DiagnosisModel diagnosis = consultDao.returnDiagnosisByConsult(consultId);
         ArrayList<Integer> prescriptionIdList = prescriptionDao.returnPrescriptionIdByConsult(consultId);
+        Integer userId = userDao.findUserIdByConsult(consultId);
+        MedicalDataModel medicalDataModel = patientDao.returnMedicalDataByPatient(userId);
 
+        // Para las alergias
+        ArrayList<String> allergies = patientDao.returnAllergies(userId);
+        DescriptionModel descriptionAllergies = new DescriptionModel();
+        descriptionAllergies.setDescription(allergies);
 
+        // Para los diagnosticos previos
+        ArrayList<String> background = patientDao.returnBackground(userId);
+        DescriptionModel descriptionBackground = new DescriptionModel();
+        descriptionBackground.setDescription(background);
 
         Map<String, Object> result = new HashMap();
         result.put("patient_data", medicalHistoryDetailModel);
         result.put("diagnosis", diagnosis);
         result.put("prescriptionId", prescriptionIdList);
-/*        result.put("medical_data", );
-        result.put("allergies", );
-        result.put("background", );*/
+        result.put("medical_data", medicalDataModel);
+        result.put("allergies", descriptionAllergies);
+        result.put("background", descriptionBackground);
         return result;
     }
 }

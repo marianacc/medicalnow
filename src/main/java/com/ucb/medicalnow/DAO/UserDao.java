@@ -168,6 +168,26 @@ public class UserDao {
         }
         return role;
     }
+
+    public int findUserIdByConsult(int userId){
+        String query = "SELECT u.user_id\n" +
+                "FROM user u\n" +
+                "    JOIN patient p on u.user_id = p.user_id\n" +
+                "        JOIN medical_history mh on p.patient_id = mh.patient_id\n" +
+                "            JOIN consult c on mh.medical_history_id = c.medical_history_id\n" +
+                "WHERE c.consult_id = ?\n" +
+                "AND u.status = 1\n" +
+                "AND p.status = 1\n" +
+                "AND c.status = 1;";
+        Integer role = null;
+        try {
+            role = jdbcTemplate.queryForObject(query, new Object[]{userId}, Integer.class);
+        }
+        catch (Exception exception){
+            throw new RuntimeException(exception);
+        }
+        return role;
+    }
 }
 
 

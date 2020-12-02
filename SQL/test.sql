@@ -1,3 +1,14 @@
+SELECT u.user_id
+FROM user u
+    JOIN patient p on u.user_id = p.user_id
+        JOIN medical_history mh on p.patient_id = mh.patient_id
+            JOIN consult c on mh.medical_history_id = c.medical_history_id
+WHERE c.consult_id = ?
+AND u.status = 1
+AND p.status = 1
+AND c.status = 1;
+
+
 -- Obtener datos medicos del paciente
 SELECT pat.weight, pat.height, pat.blood_group, pat.temperature, pat.pressure
 FROM patient pat
