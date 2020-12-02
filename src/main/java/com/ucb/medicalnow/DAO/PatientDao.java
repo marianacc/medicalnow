@@ -249,10 +249,11 @@ public class PatientDao {
                     new RowMapper<String>() {
                         @Override
                         public String mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new String(resultSet.getString(1));
+                            return new String (resultSet.getString(1));
                         }
                     });
         } catch (Exception e){
+            System.out.print(e);
             throw new RuntimeException();
         }
         return allergies;

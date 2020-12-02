@@ -162,11 +162,17 @@ public class UserBl {
         return registryUpdated;
     }
 
-    public ArrayList<String> returnAllergies(int userId){
-        return this.patientDao.returnAllergies(userId);
+    public DescriptionModel returnAllergies(int userId){
+        ArrayList<String> allergies = patientDao.returnAllergies(userId);
+        DescriptionModel description = new DescriptionModel();
+        description.setDescription(allergies);
+        return description;
     }
 
-    public ArrayList<String> returnBackground(int userId){
-        return this.patientDao.returnBackground(userId);
+    public DescriptionModel returnBackground(int userId){
+        ArrayList<String> allergies = patientDao.returnBackground(userId);
+        DescriptionModel description = new DescriptionModel();
+        description.setDescription(allergies);
+        return description;
     }
 }

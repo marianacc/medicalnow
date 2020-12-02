@@ -202,7 +202,7 @@ public class UserController {
             value = "{userId}/allergies",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<String>> returnAllergies(@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<DescriptionModel> returnAllergies(@RequestHeader("Authorization") String authorization,
                                                           @PathVariable("userId") Integer userId){
 
         securityBl.validateToken(authorization);
@@ -213,7 +213,7 @@ public class UserController {
             value = "{userId}/background",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<String>> returnBackground(@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<DescriptionModel> returnBackground(@RequestHeader("Authorization") String authorization,
                                                           @PathVariable("userId") Integer userId){
 
         securityBl.validateToken(authorization);
