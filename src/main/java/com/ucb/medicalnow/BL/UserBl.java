@@ -128,14 +128,13 @@ public class UserBl {
         return registryUpdated;
     }
 
-    public Boolean updateAllergy(int userId, ArrayList<Object> description){
+    public Boolean updateAllergy(int userId, ArrayList<DescriptionDetailModel> descriptionDetail){
         Integer patientId = patientDao.returnPatientIdByUser(userId);
         Integer deleteAllergyResponse = patientDao.deleteAllergy(patientId);
         Boolean registryUpdated = null;
         if(deleteAllergyResponse>=0 || deleteAllergyResponse==null){
-            for(int i=0; i<description.size(); i++){
-                String descriptionAllergies = String.valueOf(description.get(i));
-                Integer addAllergyResponse = patientDao.addAllergy(patientId, descriptionAllergies);
+            for(int i=0; i<descriptionDetail.size(); i++){
+                Integer addAllergyResponse = patientDao.addAllergy(patientId, descriptionDetail.get(i).getDescription());
                 if (addAllergyResponse>0){
                     registryUpdated = true;
                 } else {
@@ -146,14 +145,13 @@ public class UserBl {
         return registryUpdated;
     }
 
-    public Boolean updateBackground(int userId, ArrayList<Object> description){
+    public Boolean updateBackground(int userId, ArrayList<DescriptionDetailModel> descriptionDetail){
         Integer patientId = patientDao.returnPatientIdByUser(userId);
         Integer deleteBackgroundResponse = patientDao.deleteBackground(patientId);
         Boolean registryUpdated = null;
         if(deleteBackgroundResponse>=0 || deleteBackgroundResponse==null){
-            for(int i=0; i<description.size(); i++){
-                String descriptionBackground = String.valueOf(description.get(i));
-                Integer addBackgroundResponse = patientDao.addBackground(patientId, descriptionBackground);
+            for(int i=0; i<descriptionDetail.size(); i++){
+                Integer addBackgroundResponse = patientDao.addBackground(patientId, descriptionDetail.get(i).getDescription());
                 if (addBackgroundResponse>0){
                     registryUpdated = true;
                 } else {
@@ -165,16 +163,16 @@ public class UserBl {
     }
 
     public DescriptionModel returnAllergies(int userId){
-        ArrayList<Object> allergies = patientDao.returnAllergies(userId);
+        ArrayList<DescriptionDetailModel> allergies = patientDao.returnAllergies(userId);
         DescriptionModel description = new DescriptionModel();
-        description.setDescription(allergies);
+        description.setDetail(allergies);
         return description;
     }
 
     public DescriptionModel returnBackground(int userId){
-        ArrayList<Object> background = patientDao.returnBackground(userId);
+        ArrayList<DescriptionDetailModel> background = patientDao.returnBackground(userId);
         DescriptionModel description = new DescriptionModel();
-        description.setDescription(background);
+        description.setDetail(background);
         return description;
     }
 }

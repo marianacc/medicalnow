@@ -80,14 +80,14 @@ public class MedicalHistoryBl {
         MedicalDataModel medicalDataModel = patientDao.returnMedicalDataByPatient(userId);
 
         // Para las alergias
-        ArrayList<Object> allergies = patientDao.returnAllergies(userId);
+        ArrayList<DescriptionDetailModel> allergies = patientDao.returnAllergies(userId);
         DescriptionModel descriptionAllergies = new DescriptionModel();
-        descriptionAllergies.setDescription(allergies);
+        descriptionAllergies.setDetail(allergies);
 
         // Para los diagnosticos previos
-        ArrayList<Object> background = patientDao.returnBackground(userId);
+        ArrayList<DescriptionDetailModel> background = patientDao.returnBackground(userId);
         DescriptionModel descriptionBackground = new DescriptionModel();
-        descriptionBackground.setDescription(background);
+        descriptionBackground.setDetail(background);
 
         Map<String, Object> result = new HashMap();
         result.put("patient_data", medicalHistoryDetailModel);

@@ -164,7 +164,7 @@ public class UserController {
 
         securityBl.validateToken(authorization);
 
-        Boolean registryUpdated = userBl.updateAllergy(userId, description.getDescription());
+        Boolean registryUpdated = userBl.updateAllergy(userId, description.getDetail());
 
         Map<String, String> response = new HashMap();
         if (registryUpdated == true) {
@@ -186,7 +186,7 @@ public class UserController {
 
         securityBl.validateToken(authorization);
 
-        Boolean registryUpdated = userBl.updateBackground(userId, description.getDescription());
+        Boolean registryUpdated = userBl.updateBackground(userId, description.getDetail());
 
         Map<String, String> response = new HashMap();
         if (registryUpdated == true) {

@@ -210,7 +210,7 @@ public class PatientDao {
         return result;
     }
 
-    public ArrayList<Object> returnBackground(int userId){
+    public ArrayList<DescriptionDetailModel> returnBackground(int userId){
         String query = "SELECT b.description\n" +
                 "FROM background b\n" +
                 "    JOIN patient p on b.patient_id = p.patient_id\n" +
@@ -219,13 +219,13 @@ public class PatientDao {
                 "AND b.status = 1\n" +
                 "AND p.status = 1\n" +
                 "AND u.status = 1;";
-        ArrayList<Object> background = null;
+        ArrayList<DescriptionDetailModel> background = null;
         try{
-            background = (ArrayList<Object>) jdbcTemplate.query(query, new Object[]{userId},
-                    new RowMapper<Object>() {
+            background = (ArrayList<DescriptionDetailModel>) jdbcTemplate.query(query, new Object[]{userId},
+                    new RowMapper<DescriptionDetailModel>() {
                         @Override
-                        public String mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new String(resultSet.getString(1));
+                        public DescriptionDetailModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new DescriptionDetailModel(resultSet.getString(1));
                         }
                     });
         } catch (Exception e){
@@ -234,7 +234,7 @@ public class PatientDao {
         return background;
     }
 
-    public ArrayList<Object> returnAllergies(int userId){
+    public ArrayList<DescriptionDetailModel> returnAllergies(int userId){
         String query = "SELECT a.description\n" +
                 "FROM allergy a\n" +
                 "    JOIN patient p on a.patient_id = p.patient_id\n" +
@@ -243,13 +243,13 @@ public class PatientDao {
                 "AND a.status = 1\n" +
                 "AND p.status = 1\n" +
                 "AND u.status = 1;";
-        ArrayList<Object> allergies = null;
+        ArrayList<DescriptionDetailModel> allergies = null;
         try{
-            allergies = (ArrayList<Object>) jdbcTemplate.query(query, new Object[]{userId},
-                    new RowMapper<Object>() {
+            allergies = (ArrayList<DescriptionDetailModel>) jdbcTemplate.query(query, new Object[]{userId},
+                    new RowMapper<DescriptionDetailModel>() {
                         @Override
-                        public String mapRow(ResultSet resultSet, int i) throws SQLException {
-                            return new String (resultSet.getString(1));
+                        public DescriptionDetailModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new DescriptionDetailModel (resultSet.getString(1));
                         }
                     });
         } catch (Exception e){

@@ -119,12 +119,12 @@ Accept: application/json
 ### DescriptionModel
 
 POST http://localhost:8008/api/v1/user/allergy/update/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODc3NzkxfQ.abvBZ27RZQZ6eyAsxJGvluWzWcys9HTSrUcBSSLcSW0
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTM4OTQyfQ.7p14MtfVYCrATeOU0rvkEJ3civf6ubcdj4iPl3Q5D_k
 Content-Type: application/json
 Accept: application/json
 
 {
-  "description": [
+  "detail": [
     { "description":  "Mani" },
     { "description":  "Cebolla" }
   ]
@@ -135,12 +135,12 @@ Accept: application/json
 ### DescriptionModel
 
 POST http://localhost:8008/api/v1/user/background/update/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODc3NzkxfQ.abvBZ27RZQZ6eyAsxJGvluWzWcys9HTSrUcBSSLcSW0
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTM4OTQyfQ.7p14MtfVYCrATeOU0rvkEJ3civf6ubcdj4iPl3Q5D_k
 Content-Type: application/json
 Accept: application/json
 
 {
-  "description": [
+  "detail": [
     { "description":  "Taquicardia" },
     { "description":  "Hipertension" }
   ]
@@ -151,7 +151,7 @@ Accept: application/json
 ### ArrayList<String>
 
 GET http://localhost:8008/api/v1/user/1/allergies
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODc3NzkxfQ.abvBZ27RZQZ6eyAsxJGvluWzWcys9HTSrUcBSSLcSW0
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTM4OTQyfQ.7p14MtfVYCrATeOU0rvkEJ3civf6ubcdj4iPl3Q5D_k
 Content-Type: application/json
 Accept: application/json
 
@@ -164,7 +164,7 @@ Accept: application/json
 ### ArrayList<String>
 
 GET http://localhost:8008/api/v1/user/1/background
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODc3NzkxfQ.abvBZ27RZQZ6eyAsxJGvluWzWcys9HTSrUcBSSLcSW0
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTM4OTQyfQ.7p14MtfVYCrATeOU0rvkEJ3civf6ubcdj4iPl3Q5D_k
 Content-Type: application/json
 Accept: application/json
 

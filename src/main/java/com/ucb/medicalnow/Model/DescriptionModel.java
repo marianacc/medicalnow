@@ -4,27 +4,27 @@ import java.util.ArrayList;
 
 public class DescriptionModel {
 
-    private ArrayList<Object> description;
+    private ArrayList<DescriptionDetailModel> detail;
 
     public DescriptionModel() {
     }
 
-    public DescriptionModel(ArrayList<Object> description) {
-        this.description = description;
+    public DescriptionModel(ArrayList<DescriptionDetailModel> detail) {
+        this.detail = detail;
     }
 
-    public ArrayList<Object> getDescription() {
-        return description;
+    public ArrayList<DescriptionDetailModel> getDetail() {
+        return detail;
     }
 
-    public void setDescription(ArrayList<Object> description) {
-        this.description = description;
+    public void setDetail(ArrayList<DescriptionDetailModel> detail) {
+        this.detail = detail;
     }
 
     @Override
     public String toString() {
         return "DescriptionModel{" +
-                "description=" + description +
+                "detail=" + detail +
                 '}';
     }
 }
