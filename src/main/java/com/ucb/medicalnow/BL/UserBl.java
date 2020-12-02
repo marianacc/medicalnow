@@ -128,13 +128,14 @@ public class UserBl {
         return registryUpdated;
     }
 
-    public Boolean updateAllergy(int userId, ArrayList<String> description){
+    public Boolean updateAllergy(int userId, ArrayList<Object> description){
         Integer patientId = patientDao.returnPatientIdByUser(userId);
         Integer deleteAllergyResponse = patientDao.deleteAllergy(patientId);
         Boolean registryUpdated = null;
         if(deleteAllergyResponse>=0 || deleteAllergyResponse==null){
             for(int i=0; i<description.size(); i++){
-                Integer addAllergyResponse = patientDao.addAllergy(patientId, description.get(i));
+                String descriptionAllergies = String.valueOf(description.get(i));
+                Integer addAllergyResponse = patientDao.addAllergy(patientId, descriptionAllergies);
                 if (addAllergyResponse>0){
                     registryUpdated = true;
                 } else {
@@ -145,13 +146,14 @@ public class UserBl {
         return registryUpdated;
     }
 
-    public Boolean updateBackground(int userId, ArrayList<String> description){
+    public Boolean updateBackground(int userId, ArrayList<Object> description){
         Integer patientId = patientDao.returnPatientIdByUser(userId);
         Integer deleteBackgroundResponse = patientDao.deleteBackground(patientId);
         Boolean registryUpdated = null;
         if(deleteBackgroundResponse>=0 || deleteBackgroundResponse==null){
             for(int i=0; i<description.size(); i++){
-                Integer addBackgroundResponse = patientDao.addBackground(patientId, description.get(i));
+                String descriptionBackground = String.valueOf(description.get(i));
+                Integer addBackgroundResponse = patientDao.addBackground(patientId, descriptionBackground);
                 if (addBackgroundResponse>0){
                     registryUpdated = true;
                 } else {
@@ -163,14 +165,14 @@ public class UserBl {
     }
 
     public DescriptionModel returnAllergies(int userId){
-        ArrayList<String> allergies = patientDao.returnAllergies(userId);
+        ArrayList<Object> allergies = patientDao.returnAllergies(userId);
         DescriptionModel description = new DescriptionModel();
         description.setDescription(allergies);
         return description;
     }
 
     public DescriptionModel returnBackground(int userId){
-        ArrayList<String> background = patientDao.returnBackground(userId);
+        ArrayList<Object> background = patientDao.returnBackground(userId);
         DescriptionModel description = new DescriptionModel();
         description.setDescription(background);
         return description;

@@ -159,8 +159,8 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, String>> updateAllergy(@RequestHeader("Authorization") String authorization,
-                              @PathVariable("userId") Integer userId,
-                              @RequestBody DescriptionModel description) {
+                                                             @PathVariable("userId") Integer userId,
+                                                             @RequestBody DescriptionModel description) {
 
         securityBl.validateToken(authorization);
 
