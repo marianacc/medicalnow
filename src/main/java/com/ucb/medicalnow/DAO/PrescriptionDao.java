@@ -101,7 +101,7 @@ public class PrescriptionDao {
         return consultsList;
     }
 
-    public ArrayList<PrescriptionDateListModel> returnAllPrescriptionsByConsult(int consultId){
+    public ArrayList<PrescriptionDateListModel> returnPrescriptions(int consultId){
         String query = "SELECT pre.prescription_id, con.tx_date\n" +
                 "FROM prescription pre\n" +
                 "    JOIN consult con on pre.consult_id = con.consult_id\n" +

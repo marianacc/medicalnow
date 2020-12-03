@@ -55,8 +55,8 @@ public class PrescriptionController {
             value = "{consultId}/all",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> returnAllPrescriptionsByConsult(@RequestHeader("Authorization") String authorization,
-                                                                               @PathVariable("consultId") Integer consultId){
+    public ResponseEntity<Map<String, Object>> returnPrescriptions(@RequestHeader("Authorization") String authorization,
+                                                                   @PathVariable("consultId") Integer consultId){
         securityBl.validateToken(authorization);
         return new ResponseEntity<>(this.prescriptionBl.returnAllPrescriptionsByConsult(consultId), HttpStatus.OK);
     }

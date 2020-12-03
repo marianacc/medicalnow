@@ -1,8 +1,20 @@
-### Obtiene todas las consultas que tienen prescripciones
-### GET http://localhost:8008/api/v1/prescription/consults/{userId}
+### Obtiene todas las consultas que tienen prescripciones para pacientes
+### GET http://localhost:8008/api/v1/prescription/patient/consults/{userId}
 
-GET http://localhost:8008/api/v1/prescription/consults/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTUyNDg3fQ.INwTCl0BcFLfqMfWfYHxW4f7iWr0Yds2o4Ye5NsOntA
+GET http://localhost:8008/api/v1/prescription/patient/consults/1
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTU3NDUxfQ.Ifqf137ZAOxa9_sPF8DASkthx8TZ-hZTOwnww_i77YY
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+### Obtiene todas las consultas que dio un doctor
+### GET http://localhost:8008/api/v1/prescription/patient/consults/{userId}
+
+GET http://localhost:8008/api/v1/prescription/doctor/consults/25
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTU3NDUxfQ.Ifqf137ZAOxa9_sPF8DASkthx8TZ-hZTOwnww_i77YY
 Content-Type: application/json
 Accept: application/json
 
@@ -14,7 +26,7 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/prescription/{consultId}/all
 
 GET http://localhost:8008/api/v1/prescription/1/all
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTUyNDg3fQ.INwTCl0BcFLfqMfWfYHxW4f7iWr0Yds2o4Ye5NsOntA
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTU3NDUxfQ.Ifqf137ZAOxa9_sPF8DASkthx8TZ-hZTOwnww_i77YY
 Content-Type: application/json
 Accept: application/json
 
@@ -26,7 +38,7 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/prescription/{prescriptionId}/detail
 
 GET http://localhost:8008/api/v1/prescription/1/detail
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODI5NTU1fQ.vYBsnuJ6DFZTyIM6Yed9nU59anI6qqlaZ6N8H70yXiM
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTU3NDUxfQ.Ifqf137ZAOxa9_sPF8DASkthx8TZ-hZTOwnww_i77YY
 Content-Type: application/json
 Accept: application/json
 
