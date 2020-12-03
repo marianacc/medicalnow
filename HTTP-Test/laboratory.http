@@ -1,8 +1,8 @@
 ### Obtiene todos los laboratorios de un paciente
 ### GET http://localhost:8008/api/v1/laboratories/patient/{userId}
 
-GET http://localhost:8008/api/v1/laboratories/patient/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2ODUxNDIwfQ.onfXXwCMP1IyRkGPuavJ6VAJOJ3d9MFUcP3zggoNO3A
+GET http://localhost:8008/api/v1/laboratories/patient/32
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNzAwNjUyN30.oxB-pNUbK2MZgf4bEFK4vnHHgX1YC4wr7O6OY-vwnQo
 Content-Type: application/json
 Accept: application/json
 

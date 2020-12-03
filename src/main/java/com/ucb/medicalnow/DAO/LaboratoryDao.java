@@ -31,7 +31,6 @@ public class LaboratoryDao {
                 "                                JOIN user usr on p.user_id = usr.user_id\n" +
                 "WHERE usr.user_id = ?\n" +
                 "AND lab.status = 1\n" +
-                "AND con.status = 1\n" +
                 "AND mh.status = 1\n" +
                 "AND ds.status = 1\n" +
                 "AND spe.status = 1\n" +

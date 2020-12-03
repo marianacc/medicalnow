@@ -48,7 +48,7 @@ public class PatientDao {
     }
 
     public MedicalDataModel returnMedicalDataByPatient (int userId){
-        String query = "SELECT pat.weight, pat.height, pat.blood_group, pat.temperature, pat.pressure\n" +
+        String query = "SELECT pat.height, pat.weight, pat.blood_group, pat.temperature, pat.pressure\n" +
                 "FROM patient pat\n" +
                 "    JOIN user usr on pat.user_id = usr.user_id\n" +
                 "WHERE usr.user_id = ?\n" +
@@ -75,7 +75,7 @@ public class PatientDao {
 
     public Integer updateMedicalDataByPatient(Double weight, Double height, String bloodGroup, Double temperature, String pressure, int patientId){
         String query = "UPDATE patient\n" +
-                "SET weight = ?, height = ?, blood_group = ?, temperature = ?, pressure = ?\n" +
+                "SET height = ?, weight = ?, blood_group = ?, temperature = ?, pressure = ?\n" +
                 "WHERE patient_id = ?\n" +
                 "AND status = 1;";
         Integer result = null;

@@ -6,11 +6,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "firstName": "Natalia",
-  "firstSurname": "Bruzonic",
-  "secondSurname": "Mostajo",
+  "firstName": "Mariana",
+  "firstSurname": "Cardozo",
+  "secondSurname": "Costa",
   "birthDate": "1998-01-13",
-  "email": "nbruz@gmail.com",
+  "email": "mcardozo@gmail.com",
   "password": "12345",
   "phoneNumber": "7728122"
 }
@@ -30,8 +30,8 @@ Accept: application/json
 ### Obtener los datos médicos del paciente
 ### POST http://localhost:8008/api/v1/user/medical_data/{userId}
 
-GET http://localhost:8008/api/v1/user/medical_data/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM3OTA1fQ.dQhjdyohOT44mNysHEHehq36vyhjIeSF1JS_e9hRlmc
+GET http://localhost:8008/api/v1/user/medical_data/32
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNzAwNjg4Mn0.TcQ7aCSjr2rlv88FaUEDnfX1_foOuKy3YvqIoK4gIuM
 Content-Type: application/json
 Accept: application/json
 
