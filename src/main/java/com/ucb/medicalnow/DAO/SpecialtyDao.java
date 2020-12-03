@@ -88,7 +88,7 @@ public class SpecialtyDao {
                 "AND ur.status = 1\n" +
                 "AND r.status = 1\n" +
                 "AND r.role_name = 'DOCTOR'\n" +
-                "GROUP BY doc_spec.doctor_specialty_id, spe.name, per.first_name, per.first_surname, per.second_surname, qua.qualification\n" +
+                "GROUP BY doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, qua.qualification\n" +
                 "ORDER BY qua.qualification desc;";
         ArrayList<DoctorSpecialtyModel> doctorSpecialty = null;
         try{
@@ -202,7 +202,7 @@ public class SpecialtyDao {
                 "AND ur.status = 1\n" +
                 "AND r.status = 1\n" +
                 "AND r.role_name = 'DOCTOR_FREE'\n" +
-                "GROUP BY doc_spec.doctor_specialty_id, spe.name, per.first_name, per.first_surname, per.second_surname, qua.qualification\n" +
+                "GROUP BY doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, qua.qualification\n" +
                 "ORDER BY qua.qualification desc;";
         ArrayList<DoctorSpecialtyModel> freeDoctorSpecialty = null;
         try{

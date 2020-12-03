@@ -22,8 +22,12 @@ public class PrescriptionBl {
         this.specialtyDao = specialtyDao;
     }
 
-    public ArrayList<PrescriptionListModel> returnAllConsultsWithPrescriptions(int userId) {
-        return this.prescriptionDao.returnAllConsultsWithPrescriptions(userId);
+    public ArrayList<PrescriptionListModel> returnConsultsForPatient(int userId) {
+        return this.prescriptionDao.returnConsultsForPatient(userId);
+    }
+
+    public ArrayList<PrescriptionListModel> returnConsultsForDoctor(int userId) {
+        return this.prescriptionDao.returnConsultsForDoctor(userId);
     }
 
     public Map<String, Object> returnAllPrescriptionsByConsult(int consultId) {

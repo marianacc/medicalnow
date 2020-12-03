@@ -2,7 +2,7 @@
 ### GET http://localhost:8008/api/v1/prescription/consults/{userId}
 
 GET http://localhost:8008/api/v1/prescription/consults/1
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM4NDg5fQ.cuO5um24ML9dcBZu9ZafLVUBs8dsUxvIO6IhlRYsoEw
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTUyNDg3fQ.INwTCl0BcFLfqMfWfYHxW4f7iWr0Yds2o4Ye5NsOntA
 Content-Type: application/json
 Accept: application/json
 
@@ -14,7 +14,7 @@ Accept: application/json
 ### GET http://localhost:8008/api/v1/prescription/{consultId}/all
 
 GET http://localhost:8008/api/v1/prescription/1/all
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzM4NDg5fQ.cuO5um24ML9dcBZu9ZafLVUBs8dsUxvIO6IhlRYsoEw
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA2OTUyNDg3fQ.INwTCl0BcFLfqMfWfYHxW4f7iWr0Yds2o4Ye5NsOntA
 Content-Type: application/json
 Accept: application/json
 

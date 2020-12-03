@@ -138,26 +138,26 @@ AND res.status = 1
 AND c.status = 1;
 
 -- Seleccionar todos los doctores por especialidad
-SELECT doc_spec.doctor_specialty_id, per.first_name, per.first_surname, per.second_surname, doc_spec.price, doc_spec.from_time, doc_spec.to_time, avg(qua.qualification), doc.doctor_id
-FROM person per
-    JOIN doctor doc on per.person_id = doc.person_id
-        JOIN doctor_specialty doc_spec on doc.doctor_id = doc_spec.doctor_id
-            JOIN qualification qua on doc_spec.doctor_specialty_id = qua.doctor_specialty_id
-                JOIN specialty spe on spe.specialty_id = doc_spec.specialty_id
-                    JOIN user u on doc.user_id = u.user_id
+SELECT ds.doctor_specialty_id, p.first_name, p.first_surname, p.second_surname, ds.price, ds.from_time, ds.to_time, avg(q.qualification), d.doctor_id
+FROM doctor_specialty ds
+    JOIN doctor d on ds.doctor_id = d.doctor_id
+        JOIN person p on d.person_id = p.person_id
+            JOIN specialty s on ds.specialty_id = s.specialty_id
+                JOIN qualification q on ds.doctor_specialty_id = q.doctor_specialty_id
+                    JOIN user u on d.user_id = u.user_id
                         JOIN user_role ur on u.user_id = ur.user_id
                             JOIN role r on ur.role_id = r.role_id
-WHERE spe.specialty_id = ?
-AND per.status = 1
-AND doc.status = 1
-AND doc_spec.status = 1
-AND qua.status = 1
+WHERE ds.specialty_id = ?
+AND d.status = 1
+AND p.status = 1
+AND s.status = 1
+AND q.status = 1
 AND u.status = 1
 AND ur.status = 1
 AND r.status = 1
 AND r.role_name = 'DOCTOR_FREE'
-GROUP BY doc_spec.doctor_specialty_id, spe.name, per.first_name, per.first_surname, per.second_surname, qua.qualification
-ORDER BY qua.qualification desc;
+GROUP BY ds.doctor_specialty_id, p.first_name, p.first_surname, p.second_surname, ds.price, ds.from_time, ds.to_time, d.doctor_id, q.qualification
+ORDER BY q.qualification desc;
 
 SELECT conv.tx_id, conv.message, res.resource_id, res.consult_id, res.type, res.pic_byte
 FROM conversation conv
@@ -385,6 +385,29 @@ AND mh.status = 1
 AND ds.status = 1
 AND spe.status = 1
 AND doc.status = 1
+AND per.status = 1
+GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;
+
+-- Seleccionar todas las consultas del paciente que tienen prescripciones
+SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date
+FROM consult con
+    JOIN prescription pre on con.consult_id = pre.consult_id
+        JOIN medical_history mh on con.medical_history_id = mh.medical_history_id
+            JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id
+                JOIN specialty spe on ds.specialty_id = spe.specialty_id
+                    JOIN doctor doc on ds.doctor_id = doc.doctor_id
+                        JOIN user u on doc.user_id = u.user_id
+                            JOIN patient p on mh.patient_id = p.patient_id
+                                JOIN person per on p.person_id = per.person_id
+WHERE u.user_id = ?
+AND con.status = 1
+AND pre.status = 1
+AND mh.status = 1
+AND ds.status = 1
+AND spe.status = 1
+AND doc.status = 1
+AND u.status = 1
+AND p.status = 1
 AND per.status = 1
 GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;
 

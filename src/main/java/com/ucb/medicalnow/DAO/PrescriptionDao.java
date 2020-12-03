@@ -19,7 +19,7 @@ public class PrescriptionDao {
 
     public PrescriptionDao (JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
-    public ArrayList<PrescriptionListModel> returnAllConsultsWithPrescriptions(int userId){
+    public ArrayList<PrescriptionListModel> returnConsultsForPatient(int userId){
         String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date\n" +
                 "FROM consult con\n" +
                 "    JOIN prescription pre on con.consult_id = pre.consult_id\n" +
@@ -37,6 +37,48 @@ public class PrescriptionDao {
                 "AND ds.status = 1\n" +
                 "AND spe.status = 1\n" +
                 "AND doc.status = 1\n" +
+                "AND per.status = 1\n" +
+                "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;";
+        ArrayList<PrescriptionListModel> consultsList = null;
+        try{
+            consultsList = (ArrayList<PrescriptionListModel>) jdbcTemplate.query(query, new Object[]{userId},
+                    new RowMapper<PrescriptionListModel>() {
+                        @Override
+                        public PrescriptionListModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new PrescriptionListModel(resultSet.getInt(1),
+                                    resultSet.getString(2),
+                                    resultSet.getString(3),
+                                    resultSet.getString(4),
+                                    resultSet.getString(5),
+                                    resultSet.getDate(6));
+                        }
+                    });
+        } catch (Exception e){
+            throw new RuntimeException();
+        }
+        return consultsList;
+    }
+
+    public ArrayList<PrescriptionListModel> returnConsultsForDoctor(int userId){
+        String query = "SELECT con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date\n" +
+                "FROM consult con\n" +
+                "    JOIN prescription pre on con.consult_id = pre.consult_id\n" +
+                "        JOIN medical_history mh on con.medical_history_id = mh.medical_history_id\n" +
+                "            JOIN doctor_specialty ds on mh.doctor_specialty_id = ds.doctor_specialty_id\n" +
+                "                JOIN specialty spe on ds.specialty_id = spe.specialty_id\n" +
+                "                    JOIN doctor doc on ds.doctor_id = doc.doctor_id\n" +
+                "                        JOIN user u on doc.user_id = u.user_id\n" +
+                "                            JOIN patient p on mh.patient_id = p.patient_id\n" +
+                "                                JOIN person per on p.person_id = per.person_id\n" +
+                "WHERE u.user_id = ?\n" +
+                "AND con.status = 1\n" +
+                "AND pre.status = 1\n" +
+                "AND mh.status = 1\n" +
+                "AND ds.status = 1\n" +
+                "AND spe.status = 1\n" +
+                "AND doc.status = 1\n" +
+                "AND u.status = 1\n" +
+                "AND p.status = 1\n" +
                 "AND per.status = 1\n" +
                 "GROUP BY con.consult_id, per.first_name, per.first_surname, per.second_surname, spe.name, con.tx_date;";
         ArrayList<PrescriptionListModel> consultsList = null;

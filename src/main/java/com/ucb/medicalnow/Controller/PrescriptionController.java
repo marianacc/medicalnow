@@ -32,13 +32,23 @@ public class PrescriptionController {
     }
 
     @RequestMapping(
-            value = "consults/{userId}",
+            value = "patient/consults/{userId}",
             method = RequestMethod.GET,
             produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<PrescriptionListModel>> returnAllConsultsWithPrescriptions(@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<ArrayList<PrescriptionListModel>> returnConsultsForPatient(@RequestHeader("Authorization") String authorization,
                                                                                                @PathVariable("userId") Integer userId){
         securityBl.validateToken(authorization);
-        return new ResponseEntity<>(this.prescriptionBl.returnAllConsultsWithPrescriptions(userId), HttpStatus.OK);
+        return new ResponseEntity<>(this.prescriptionBl.returnConsultsForPatient(userId), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "doctor/consults/{userId}",
+            method = RequestMethod.GET,
+            produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArrayList<PrescriptionListModel>> returnConsultsForDoctor(@RequestHeader("Authorization") String authorization,
+                                                                                               @PathVariable("userId") Integer userId){
+        securityBl.validateToken(authorization);
+        return new ResponseEntity<>(this.prescriptionBl.returnConsultsForDoctor(userId), HttpStatus.OK);
     }
 
     @RequestMapping(
