@@ -138,7 +138,7 @@ AND res.status = 1
 AND c.status = 1;
 
 -- Seleccionar todos los doctores por especialidad
-SELECT ds.doctor_specialty_id, p.first_name, p.first_surname, p.second_surname, ds.price, ds.from_time, ds.to_time, avg(q.qualification), d.doctor_id
+SELECT ds.doctor_specialty_id, p.first_name, p.first_surname, p.second_surname, ds.price, ds.from_time, ds.to_time, AVG(q.qualification), d.doctor_id
 FROM doctor_specialty ds
     JOIN doctor d on ds.doctor_id = d.doctor_id
         JOIN person p on d.person_id = p.person_id
