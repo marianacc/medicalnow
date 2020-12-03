@@ -80,7 +80,7 @@ public class PatientDao {
                 "AND status = 1;";
         Integer result = null;
         try {
-            result = jdbcTemplate.update(query, new Object[]{weight, height, bloodGroup, temperature, pressure, patientId});
+            result = jdbcTemplate.update(query, new Object[]{height, weight, bloodGroup, temperature, pressure, patientId});
         } catch (Exception e) {
             throw new RuntimeException();
         }

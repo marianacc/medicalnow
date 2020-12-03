@@ -31,7 +31,7 @@ Accept: application/json
 ### POST http://localhost:8008/api/v1/user/medical_data/{userId}
 
 GET http://localhost:8008/api/v1/user/medical_data/32
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNzAwNjg4Mn0.TcQ7aCSjr2rlv88FaUEDnfX1_foOuKy3YvqIoK4gIuM
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNzAwNzIxNn0.4ACjVroUm9enIzz2vHmN7nu0C31xjB4hHLcZzYt003M
 Content-Type: application/json
 Accept: application/json
 
@@ -43,13 +43,13 @@ Accept: application/json
 ### POST http://localhost:8008/api/v1/user/medical_data/update/{userId}
 
 POST http://localhost:8008/api/v1/user/medical_data/update/32
-Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlBBVElFTlQiLCJpc3MiOiJNZWRpY2Fsbm93IiwidHlwZSI6IkFVVEhOIiwiZXhwIjoxNjA1NzEzNDY4fQ.p0kAKyPo77vzQSu48aJaEiM7thMtUVArPF0rPE_sBok
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMyIsInJvbGUiOiJQQVRJRU5UIiwiaXNzIjoiTWVkaWNhbG5vdyIsInR5cGUiOiJBVVRITiIsImV4cCI6MTYwNzAwNzIxNn0.4ACjVroUm9enIzz2vHmN7nu0C31xjB4hHLcZzYt003M
 Content-Type: application/json
 Accept: application/json
 
 {
-  "weight": 51.23,
-  "height": 1.60,
+  "height": 160,
+  "weight": 50,
   "bloodGroup": "O neg",
   "temperature": 46.5,
   "pressure": "180/90"
